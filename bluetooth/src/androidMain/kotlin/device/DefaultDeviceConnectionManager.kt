@@ -188,13 +188,14 @@ internal actual class DefaultDeviceConnectionManager(
 
     actual override suspend fun didStartPerformingAction(action: DeviceAction) {
         currentAction = action
+        val readyGatt = gatt.await()
         val succeeded = when (action) {
-            is DeviceAction.Read.Characteristic -> gatt.await().readCharacteristic(action.characteristic.wrapper)
-            is DeviceAction.Read.Descriptor -> gatt.await().readDescriptor(action.descriptor.wrapper)
-            is DeviceAction.Write.Characteristic -> writeCharacteristic(action.characteristic, action.newValue)
-            is DeviceAction.Write.Descriptor -> writeDescriptor(action.descriptor, action.newValue)
-            is DeviceAction.Notification.Enable -> setNotification(action.characteristic, true)
-            is DeviceAction.Notification.Disable -> setNotification(action.characteristic, false)
+            is DeviceAction.Read.Characteristic -> readyGatt.readCharacteristic(action.characteristic.wrapper)
+            is DeviceAction.Read.Descriptor -> readyGatt.readDescriptor(action.descriptor.wrapper)
+            is DeviceAction.Write.Characteristic -> readyGatt.writeCharacteristic(action.characteristic, action.newValue)
+            is DeviceAction.Write.Descriptor -> readyGatt.writeDescriptor(action.descriptor, action.newValue)
+            is DeviceAction.Notification.Enable -> readyGatt.setNotification(action.characteristic, true)
+            is DeviceAction.Notification.Disable -> readyGatt.setNotification(action.characteristic, false)
         }
 
         // Action Failed
@@ -217,21 +218,21 @@ internal actual class DefaultDeviceConnectionManager(
         }
     }
 
-    private suspend fun writeCharacteristic(characteristic: Characteristic, value: ByteArray): Boolean = gatt.await().writeCharacteristic(characteristic.wrapper, value)
+    private fun BluetoothGattWrapper.writeCharacteristic(characteristic: Characteristic, value: ByteArray): Boolean = writeCharacteristic(characteristic.wrapper, value)
 
-    private suspend fun writeDescriptor(descriptor: Descriptor, value: ByteArray): Boolean {
+    private fun BluetoothGattWrapper.writeDescriptor(descriptor: Descriptor, value: ByteArray): Boolean {
         descriptor.wrapper.updateValue(value)
-        return gatt.await().writeDescriptor(descriptor.wrapper, value)
+        return writeDescriptor(descriptor.wrapper, value)
     }
 
-    private suspend fun setNotification(characteristic: Characteristic, enable: Boolean): Boolean {
+    private fun BluetoothGattWrapper.setNotification(characteristic: Characteristic, enable: Boolean): Boolean {
         val uuid = characteristic.uuid.uuidString
         if (enable) {
             notifyingCharacteristics[uuid] = characteristic
         } else {
             notifyingCharacteristics.remove(uuid)
         }
-        if (!gatt.await().setCharacteristicNotification(characteristic.wrapper, enable)) {
+        if (!setCharacteristicNotification(characteristic.wrapper, enable)) {
             return false
         }
 
@@ -248,7 +249,7 @@ internal actual class DefaultDeviceConnectionManager(
         return if (writeValue != null) {
             characteristic.descriptors.firstOrNull { it.uuid == CLIENT_CONFIGURATION }?.let { descriptor ->
                 descriptor.wrapper.updateValue(writeValue)
-                gatt.await().writeDescriptor(descriptor.wrapper, writeValue)
+                writeDescriptor(descriptor.wrapper, writeValue)
             } ?: false
         } else {
             e {
