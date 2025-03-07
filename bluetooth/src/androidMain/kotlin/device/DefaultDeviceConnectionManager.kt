@@ -19,7 +19,18 @@ package com.splendo.kaluga.bluetooth.device
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGatt.GATT_CONNECTION_CONGESTED
+import android.bluetooth.BluetoothGatt.GATT_CONNECTION_TIMEOUT
+import android.bluetooth.BluetoothGatt.GATT_FAILURE
+import android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION
+import android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_AUTHORIZATION
+import android.bluetooth.BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION
+import android.bluetooth.BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH
+import android.bluetooth.BluetoothGatt.GATT_INVALID_OFFSET
+import android.bluetooth.BluetoothGatt.GATT_READ_NOT_PERMITTED
+import android.bluetooth.BluetoothGatt.GATT_REQUEST_NOT_SUPPORTED
 import android.bluetooth.BluetoothGatt.GATT_SUCCESS
+import android.bluetooth.BluetoothGatt.GATT_WRITE_NOT_PERMITTED
 import android.bluetooth.BluetoothGattCallback
 import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattCharacteristic.PROPERTY_INDICATE
@@ -35,8 +46,13 @@ import com.splendo.kaluga.bluetooth.Descriptor
 import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.UUID
 import com.splendo.kaluga.bluetooth.containsAnyOf
+import com.splendo.kaluga.bluetooth.extensions.printableString
 import com.splendo.kaluga.bluetooth.uuidString
+import com.splendo.kaluga.logging.Logger
+import com.splendo.kaluga.logging.RestrictedLogLevel
+import com.splendo.kaluga.logging.RestrictedLogger
 import com.splendo.kaluga.logging.e
+import com.splendo.kaluga.logging.info
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -61,13 +77,19 @@ internal actual class DefaultDeviceConnectionManager(
     override val coroutineContext: CoroutineContext = coroutineScope.coroutineContext
 
     private var gatt: CompletableDeferred<BluetoothGattWrapper> = CompletableDeferred()
-    private val callback = object : BluetoothGattCallback() {
+
+    private inner class Callback(private val logger: Logger = RestrictedLogger(RestrictedLogLevel.None)) : BluetoothGattCallback() {
+        private fun log(message: () -> String) {
+            logger.info("BluetoothGattCallback") { "${message()} on ${Thread.currentThread()}" }
+        }
 
         override fun onReadRemoteRssi(gatt: BluetoothGatt?, rssi: Int, status: Int) {
+            log { "onReadRemoteRssi rssi $rssi status ${status.gattStatusAsString}" }
             handleNewRssi(rssi)
         }
 
         override fun onMtuChanged(gatt: BluetoothGatt?, mtu: Int, status: Int) {
+            log { "onMtuChanged mtu $mtu status ${status.gattStatusAsString}" }
             if (status == GATT_SUCCESS) {
                 handleNewMtu(mtu)
             }
@@ -77,18 +99,24 @@ internal actual class DefaultDeviceConnectionManager(
         override fun onCharacteristicRead(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?, status: Int) {
             characteristic ?: return
             @Suppress("DEPRECATION")
-            updateCharacteristic(characteristic, characteristic.value, status)
+            val value = characteristic.value
+            log { "onCharacteristicRead[DEP] characteristic ${characteristic.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            updateCharacteristic(characteristic, value, status)
         }
 
-        override fun onCharacteristicRead(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray, status: Int) =
+        override fun onCharacteristicRead(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray, status: Int) {
+            log { "onCharacteristicRead characteristic ${characteristic.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
             updateCharacteristic(characteristic, value, status)
+        }
 
         override fun onCharacteristicWrite(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?, status: Int) {
             characteristic ?: return
+            log { "onCharacteristicWrite characteristic ${characteristic.uuid} status ${status.gattStatusAsString}" }
             handleUpdatedCharacteristic(characteristic.uuid, succeeded = status == GATT_SUCCESS)
         }
 
         override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
+            log { "onServicesDiscovered status ${status.gattStatusAsString}" }
             launch {
                 val services = gatt?.services?.map { DefaultGattServiceWrapper(it) } ?: emptyList()
                 handleDiscoverCompleted(services)
@@ -99,23 +127,33 @@ internal actual class DefaultDeviceConnectionManager(
         override fun onCharacteristicChanged(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?) {
             characteristic ?: return
             @Suppress("DEPRECATION")
-            updateCharacteristic(characteristic, characteristic.value, status = GATT_SUCCESS)
+            val value = characteristic.value
+            log { "onCharacteristicChanged[DEP] characteristic ${characteristic.uuid} value ${value.printableString}" }
+            updateCharacteristic(characteristic, value, status = GATT_SUCCESS)
         }
 
-        override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray) =
+        override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray) {
+            log { "onCharacteristicChanged[DEP] characteristic ${characteristic.uuid} value ${value.printableString}" }
             updateCharacteristic(characteristic, value, status = GATT_SUCCESS)
+        }
 
         @Suppress("OVERRIDE_DEPRECATION")
         override fun onDescriptorRead(gatt: BluetoothGatt?, descriptor: BluetoothGattDescriptor?, status: Int) {
             descriptor ?: return
             @Suppress("DEPRECATION")
-            updateDescriptor(descriptor, descriptor.value, status)
+            val value = descriptor.value
+            log { "onDescriptorRead[DEP] descriptor ${descriptor.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            updateDescriptor(descriptor, value, status)
         }
 
-        override fun onDescriptorRead(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, status: Int, value: ByteArray) = updateDescriptor(descriptor, value, status)
+        override fun onDescriptorRead(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, status: Int, value: ByteArray) {
+            log { "onDescriptorRead descriptor ${descriptor.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            updateDescriptor(descriptor, value, status)
+        }
 
         override fun onDescriptorWrite(gatt: BluetoothGatt?, descriptor: BluetoothGattDescriptor?, status: Int) {
             descriptor ?: return
+            log { "onDescriptorWrite descriptor ${descriptor.uuid} status ${status.gattStatusAsString}" }
             val succeeded = status == GATT_SUCCESS
             // Notification enable/disable done by client configuration descriptor write
             if (descriptor.uuid == CLIENT_CONFIGURATION && currentAction is DeviceAction.Notification) {
@@ -125,6 +163,7 @@ internal actual class DefaultDeviceConnectionManager(
         }
 
         override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
+            log { "onConnectionStateChange status ${status.gattStatusAsString} newState ${newState.connectionStateAsString}" }
             lastKnownState = newState
             launch {
                 when (newState) {
@@ -153,7 +192,7 @@ internal actual class DefaultDeviceConnectionManager(
     @SuppressLint("MissingPermission")
     actual override fun connect() {
         when {
-            !gatt.isCompleted -> gatt.complete(deviceWrapper.connectGatt(context, false, callback))
+            !gatt.isCompleted -> gatt.complete(deviceWrapper.connectGatt(context, false, Callback()))
             lastKnownState == BluetoothProfile.STATE_CONNECTED -> handleConnect()
             !gatt.getCompleted().connect() -> handleDisconnect { closeGatt() }
             else -> {}
@@ -273,4 +312,28 @@ internal actual class DefaultDeviceConnectionManager(
             it.wrapper.updateValue(value)
         }
     }
+}
+
+private val Int.gattStatusAsString get() = when (this) {
+    GATT_SUCCESS -> "SUCCESS"
+    GATT_READ_NOT_PERMITTED -> "ERROR_READ_NOT_PERMITTED"
+    GATT_WRITE_NOT_PERMITTED -> "ERROR_WRITE_NOT_PERMITTED"
+    GATT_INSUFFICIENT_AUTHENTICATION -> "ERROR_INSUFFICIENT_AUTHENTICATION"
+    GATT_REQUEST_NOT_SUPPORTED -> "ERROR_REQUEST_NOT_SUPPORTED"
+    GATT_INSUFFICIENT_ENCRYPTION -> "ERROR_INSUFFICIENT_ENCRYPTION"
+    GATT_INVALID_OFFSET -> "ERROR_INVALID_OFFSET"
+    GATT_INSUFFICIENT_AUTHORIZATION -> "ERROR_INSUFFICIENT_AUTHORIZATION"
+    GATT_INVALID_ATTRIBUTE_LENGTH -> "ERROR_INVALID_ATTRIBUTE_LENGTH"
+    GATT_CONNECTION_CONGESTED -> "ERROR_CONNECTION_CONGESTED"
+    GATT_CONNECTION_TIMEOUT -> "ERROR_CONNECTION_TIMEOUT"
+    GATT_FAILURE -> "ERROR_FAILURE"
+    else -> "ERROR_OTHER($this)"
+}
+
+private val Int.connectionStateAsString get() = when (this) {
+    BluetoothProfile.STATE_CONNECTED -> "CONNECTED"
+    BluetoothProfile.STATE_CONNECTING -> "CONNECTING"
+    BluetoothProfile.STATE_DISCONNECTED -> "DISCONNECTED"
+    BluetoothProfile.STATE_DISCONNECTING -> "DISCONNECTING"
+    else -> "OTHER($this)"
 }
