@@ -522,10 +522,12 @@ public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction$Notificat
 
 public final class com/splendo/kaluga/bluetooth/device/DeviceAction$Notification$Disable : com/splendo/kaluga/bluetooth/device/DeviceAction$Notification {
 	public fun <init> (Lcom/splendo/kaluga/bluetooth/Characteristic;)V
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/splendo/kaluga/bluetooth/device/DeviceAction$Notification$Enable : com/splendo/kaluga/bluetooth/device/DeviceAction$Notification {
 	public fun <init> (Lcom/splendo/kaluga/bluetooth/Characteristic;)V
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction$Read : com/splendo/kaluga/bluetooth/device/DeviceAction {
@@ -534,11 +536,13 @@ public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction$Read : co
 public final class com/splendo/kaluga/bluetooth/device/DeviceAction$Read$Characteristic : com/splendo/kaluga/bluetooth/device/DeviceAction$Read {
 	public fun <init> (Lcom/splendo/kaluga/bluetooth/Characteristic;)V
 	public final fun getCharacteristic ()Lcom/splendo/kaluga/bluetooth/Characteristic;
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/splendo/kaluga/bluetooth/device/DeviceAction$Read$Descriptor : com/splendo/kaluga/bluetooth/device/DeviceAction$Read {
 	public fun <init> (Lcom/splendo/kaluga/bluetooth/Descriptor;)V
 	public final fun getDescriptor ()Lcom/splendo/kaluga/bluetooth/Descriptor;
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction$Write : com/splendo/kaluga/bluetooth/device/DeviceAction {
@@ -549,11 +553,13 @@ public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction$Write : c
 public final class com/splendo/kaluga/bluetooth/device/DeviceAction$Write$Characteristic : com/splendo/kaluga/bluetooth/device/DeviceAction$Write {
 	public fun <init> ([BLcom/splendo/kaluga/bluetooth/Characteristic;)V
 	public final fun getCharacteristic ()Lcom/splendo/kaluga/bluetooth/Characteristic;
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/splendo/kaluga/bluetooth/device/DeviceAction$Write$Descriptor : com/splendo/kaluga/bluetooth/device/DeviceAction$Write {
 	public fun <init> ([BLcom/splendo/kaluga/bluetooth/Descriptor;)V
 	public final fun getDescriptor ()Lcom/splendo/kaluga/bluetooth/Descriptor;
+	public fun toString ()Ljava/lang/String;
 }
 
 public abstract interface class com/splendo/kaluga/bluetooth/device/DeviceConnectionManager {

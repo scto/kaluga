@@ -38,6 +38,7 @@ import android.bluetooth.BluetoothGattCharacteristic.PROPERTY_NOTIFY
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothProfile
 import android.content.Context
+import android.os.Build
 import com.splendo.kaluga.base.ApplicationHolder
 import com.splendo.kaluga.base.utils.getCompletedOrNull
 import com.splendo.kaluga.bluetooth.Characteristic
@@ -49,20 +50,19 @@ import com.splendo.kaluga.bluetooth.containsAnyOf
 import com.splendo.kaluga.bluetooth.extensions.printableString
 import com.splendo.kaluga.bluetooth.uuidString
 import com.splendo.kaluga.logging.Logger
-import com.splendo.kaluga.logging.RestrictedLogLevel
-import com.splendo.kaluga.logging.RestrictedLogger
-import com.splendo.kaluga.logging.defaultLogger
 import com.splendo.kaluga.logging.e
 import com.splendo.kaluga.logging.info
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 internal actual class DefaultDeviceConnectionManager(
     private val context: Context,
     deviceWrapper: DeviceWrapper,
-    connectionSettings: ConnectionSettings = ConnectionSettings(),
+    private val connectionSettings: ConnectionSettings = ConnectionSettings(),
     coroutineScope: CoroutineScope,
 ) : BaseDeviceConnectionManager(deviceWrapper, connectionSettings, coroutineScope) {
 
@@ -79,9 +79,9 @@ internal actual class DefaultDeviceConnectionManager(
 
     private var gatt: CompletableDeferred<BluetoothGattWrapper> = CompletableDeferred()
 
-    private inner class Callback(private val logger: Logger = RestrictedLogger(RestrictedLogLevel.None)) : BluetoothGattCallback() {
+    private inner class Callback(private val logger: Logger) : BluetoothGattCallback() {
         private fun log(message: () -> String) {
-            logger.info("BluetoothGattCallback") { "${message()} on ${Thread.currentThread()}" }
+            logger.info("BluetoothGattCallback ${deviceWrapper.identifier.stringValue}", message = message)
         }
 
         override fun onReadRemoteRssi(gatt: BluetoothGatt?, rssi: Int, status: Int) {
@@ -193,7 +193,7 @@ internal actual class DefaultDeviceConnectionManager(
     @SuppressLint("MissingPermission")
     actual override fun connect() {
         when {
-            !gatt.isCompleted -> gatt.complete(deviceWrapper.connectGatt(context, false, Callback(defaultLogger)))
+            !gatt.isCompleted -> gatt.complete(deviceWrapper.connectGatt(context, false, Callback(connectionSettings.logger)))
             lastKnownState == BluetoothProfile.STATE_CONNECTED -> handleConnect()
             !gatt.getCompleted().connect() -> handleDisconnect { closeGatt() }
             else -> {}
@@ -201,7 +201,20 @@ internal actual class DefaultDeviceConnectionManager(
     }
 
     actual override suspend fun discoverServices() {
-        gatt.await().discoverServices()
+        fun useSamsung12Workaround(): Boolean {
+            // Note: an issue is discovered on a samsung device running os 12. when `discoverServices` called on non main thread, the command returns `true`
+            // but nothing is sent to the bluetooth device. not reproducible on samsung running os 14.
+            // Note2: including os 13 as it's not clear whether issue exists there as well
+            return Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+        }
+
+        if (useSamsung12Workaround()) {
+            withContext(Dispatchers.Main) {
+                gatt.await().discoverServices()
+            }
+        } else {
+            gatt.await().discoverServices()
+        }
     }
 
     actual override fun disconnect() {
