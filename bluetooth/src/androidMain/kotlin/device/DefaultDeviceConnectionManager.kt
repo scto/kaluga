@@ -51,6 +51,7 @@ import com.splendo.kaluga.bluetooth.uuidString
 import com.splendo.kaluga.logging.Logger
 import com.splendo.kaluga.logging.RestrictedLogLevel
 import com.splendo.kaluga.logging.RestrictedLogger
+import com.splendo.kaluga.logging.defaultLogger
 import com.splendo.kaluga.logging.e
 import com.splendo.kaluga.logging.info
 import kotlinx.coroutines.CompletableDeferred
@@ -192,7 +193,7 @@ internal actual class DefaultDeviceConnectionManager(
     @SuppressLint("MissingPermission")
     actual override fun connect() {
         when {
-            !gatt.isCompleted -> gatt.complete(deviceWrapper.connectGatt(context, false, Callback()))
+            !gatt.isCompleted -> gatt.complete(deviceWrapper.connectGatt(context, false, Callback(defaultLogger)))
             lastKnownState == BluetoothProfile.STATE_CONNECTED -> handleConnect()
             !gatt.getCompleted().connect() -> handleDisconnect { closeGatt() }
             else -> {}
