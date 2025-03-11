@@ -17,7 +17,6 @@
 
 package com.splendo.kaluga.bluetooth.device
 
-import com.splendo.kaluga.bluetooth.device.ConnectionSettings.ReconnectionSettings
 import com.splendo.kaluga.logging.Logger
 import com.splendo.kaluga.logging.RestrictedLogLevel
 import com.splendo.kaluga.logging.RestrictedLogger
@@ -27,7 +26,11 @@ import com.splendo.kaluga.logging.RestrictedLogger
  * @property reconnectionSettings the [ReconnectionSettings] to apply when reconnecting
  * @property logger the [Logger] to use for logging
  */
-data class ConnectionSettings(val reconnectionSettings: ReconnectionSettings = ReconnectionSettings.Always, val logger: Logger = RestrictedLogger(RestrictedLogLevel.None)) {
+data class ConnectionSettings(
+    val reconnectionSettings: ReconnectionSettings = ReconnectionSettings.Always,
+    val logger: Logger = RestrictedLogger(RestrictedLogLevel.None),
+    val allowLoggingSensitiveData: Boolean = false,
+) {
 
     /**
      * Behaviour to apply when a [Device] disconnects unexpectedly
