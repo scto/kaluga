@@ -79,6 +79,12 @@ internal actual class DefaultDeviceConnectionManager(
 
     private var gatt: CompletableDeferred<BluetoothGattWrapper> = CompletableDeferred()
 
+    private fun sensitive(input: String): String = if (connectionSettings.allowLoggingSensitiveData) {
+        input
+    } else {
+        "#####"
+    }
+
     private inner class Callback(private val logger: Logger) : BluetoothGattCallback() {
         private fun log(message: () -> String) {
             logger.info("BluetoothGattCallback ${deviceWrapper.identifier.stringValue}", message = message)
@@ -101,12 +107,12 @@ internal actual class DefaultDeviceConnectionManager(
             characteristic ?: return
             @Suppress("DEPRECATION")
             val value = characteristic.value
-            log { "onCharacteristicRead[DEP] characteristic ${characteristic.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            log { "onCharacteristicRead[DEP] characteristic ${characteristic.uuid} value ${sensitive(value.printableString)} status ${status.gattStatusAsString}" }
             updateCharacteristic(characteristic, value, status)
         }
 
         override fun onCharacteristicRead(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray, status: Int) {
-            log { "onCharacteristicRead characteristic ${characteristic.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            log { "onCharacteristicRead characteristic ${characteristic.uuid} value ${sensitive(value.printableString)} status ${status.gattStatusAsString}" }
             updateCharacteristic(characteristic, value, status)
         }
 
@@ -129,12 +135,12 @@ internal actual class DefaultDeviceConnectionManager(
             characteristic ?: return
             @Suppress("DEPRECATION")
             val value = characteristic.value
-            log { "onCharacteristicChanged[DEP] characteristic ${characteristic.uuid} value ${value.printableString}" }
+            log { "onCharacteristicChanged[DEP] characteristic ${characteristic.uuid} value ${sensitive(value.printableString)}" }
             updateCharacteristic(characteristic, value, status = GATT_SUCCESS)
         }
 
         override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray) {
-            log { "onCharacteristicChanged[DEP] characteristic ${characteristic.uuid} value ${value.printableString}" }
+            log { "onCharacteristicChanged[DEP] characteristic ${characteristic.uuid} value ${sensitive(value.printableString)}" }
             updateCharacteristic(characteristic, value, status = GATT_SUCCESS)
         }
 
@@ -143,12 +149,12 @@ internal actual class DefaultDeviceConnectionManager(
             descriptor ?: return
             @Suppress("DEPRECATION")
             val value = descriptor.value
-            log { "onDescriptorRead[DEP] descriptor ${descriptor.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            log { "onDescriptorRead[DEP] descriptor ${descriptor.uuid} value ${sensitive(value.printableString)} status ${status.gattStatusAsString}" }
             updateDescriptor(descriptor, value, status)
         }
 
         override fun onDescriptorRead(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, status: Int, value: ByteArray) {
-            log { "onDescriptorRead descriptor ${descriptor.uuid} value ${value.printableString} status ${status.gattStatusAsString}" }
+            log { "onDescriptorRead descriptor ${descriptor.uuid} value ${sensitive(value.printableString)} status ${status.gattStatusAsString}" }
             updateDescriptor(descriptor, value, status)
         }
 
