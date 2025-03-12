@@ -25,11 +25,12 @@ import com.splendo.kaluga.logging.RestrictedLogger
  * Settings to apply to a [Device] when connecting
  * @property reconnectionSettings the [ReconnectionSettings] to apply when reconnecting
  * @property logger the [Logger] to use for logging
+ * @property dataLogger the [Logger] to use for logging of sensitive, potentially high volume data
  */
 data class ConnectionSettings(
     val reconnectionSettings: ReconnectionSettings = ReconnectionSettings.Always,
     val logger: Logger = RestrictedLogger(RestrictedLogLevel.None),
-    val allowLoggingSensitiveData: Boolean = false,
+    val dataLogger: Logger = RestrictedLogger(RestrictedLogLevel.None),
 ) {
 
     /**
