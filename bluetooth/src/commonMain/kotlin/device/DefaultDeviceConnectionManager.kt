@@ -254,6 +254,7 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
 
     private val logTag = "Bluetooth Device ${deviceWrapper.identifier.stringValue}"
     private val logger = settings.logger
+    private val dataLogger = settings.dataLogger
 
     private val defaultReconnectionSettings = settings.reconnectionSettings
 
@@ -322,7 +323,7 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
 
     protected abstract suspend fun requestStartUnpairing()
 
-    protected open fun createService(wrapper: ServiceWrapper): Service = Service(wrapper, ::emitEvent, logTag, logger)
+    protected open fun createService(wrapper: ServiceWrapper): Service = Service(wrapper, ::emitEvent, logTag, dataLogger)
 
     final override fun handleDisconnect(onDisconnect: (suspend () -> Unit)?) {
         val currentAction = this.currentAction

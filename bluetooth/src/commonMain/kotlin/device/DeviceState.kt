@@ -43,13 +43,17 @@ sealed class DeviceAction {
          * A [DeviceAction.Read] on a [com.splendo.kaluga.bluetooth.Characteristic]
          * @property characteristic the [com.splendo.kaluga.bluetooth.Characteristic] to read the value of
          */
-        class Characteristic(val characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Read()
+        class Characteristic(val characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Read() {
+            override fun toString(): String = "DeviceAction.Read.Characteristic(${characteristic.uuid})"
+        }
 
         /**
          * A [DeviceAction.Read] on a [com.splendo.kaluga.bluetooth.Descriptor]
          * @property descriptor the [com.splendo.kaluga.bluetooth.Descriptor] to read the value of
          */
-        class Descriptor(val descriptor: com.splendo.kaluga.bluetooth.Descriptor) : Read()
+        class Descriptor(val descriptor: com.splendo.kaluga.bluetooth.Descriptor) : Read() {
+            override fun toString(): String = "DeviceAction.Read.Descriptor(${descriptor.uuid})"
+        }
     }
 
     /**
@@ -63,14 +67,18 @@ sealed class DeviceAction {
          * @param newValue the [ByteArray] to write
          * @property characteristic the [com.splendo.kaluga.bluetooth.Characteristic] to read the value of
          */
-        class Characteristic(newValue: ByteArray, val characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Write(newValue)
+        class Characteristic(newValue: ByteArray, val characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Write(newValue) {
+            override fun toString(): String = "DeviceAction.Write.Characteristic(${characteristic.uuid})"
+        }
 
         /**
          * A [DeviceAction.Write] on a [com.splendo.kaluga.bluetooth.Descriptor]
          * @param newValue the [ByteArray] to write
          * @property descriptor the [com.splendo.kaluga.bluetooth.Descriptor] to read the value of
          */
-        class Descriptor(newValue: ByteArray, val descriptor: com.splendo.kaluga.bluetooth.Descriptor) : Write(newValue)
+        class Descriptor(newValue: ByteArray, val descriptor: com.splendo.kaluga.bluetooth.Descriptor) : Write(newValue) {
+            override fun toString(): String = "DeviceAction.Write.Descriptor(${descriptor.uuid})"
+        }
     }
 
     /**
@@ -83,13 +91,17 @@ sealed class DeviceAction {
          * A [Notification] that starts notifying
          * @param characteristic the [com.splendo.kaluga.bluetooth.Characteristic] to notify
          */
-        class Enable(characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Notification(characteristic)
+        class Enable(characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Notification(characteristic) {
+            override fun toString(): String = "DeviceAction.Notification.Enable(${characteristic.uuid})"
+        }
 
         /**
          * A [Notification] that stops notifying
          * @param characteristic the [com.splendo.kaluga.bluetooth.Characteristic] to no longer notify
          */
-        class Disable(characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Notification(characteristic)
+        class Disable(characteristic: com.splendo.kaluga.bluetooth.Characteristic) : Notification(characteristic) {
+            override fun toString(): String = "DeviceAction.Notification.Disable(${characteristic.uuid})"
+        }
     }
 }
 
