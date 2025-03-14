@@ -46,3 +46,235 @@ fun <
 	factory: (Decimal, TargetUnit) -> TargetValue
 ) = unit.leftUnitPerRightReciprocalUnit(right.unit.inverse).byMultiplying(this, right, factory)
 
+@JvmName("metricAndImperialMultipliedByMetricAndImperialReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	RightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	RightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndImperial<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricMultipliedByMetricReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.Metric<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("imperialMultipliedByImperialReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	RightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.Imperial<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialMultipliedByUKImperialReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInUKImperial =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.UKImperial<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryMultipliedByUSCustomaryReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.USCustomary<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialMultipliedByMetricAndUKImperialReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	RightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUKImperial =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndUKImperial<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryMultipliedByMetricAndUSCustomaryReciprocalUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<RightReciprocalQuantity>, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightReciprocalUnit : UndefinedScientificUnit<RightReciprocalQuantity>,
+	RightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	RightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<RightReciprocalQuantity, RightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitPerRightReciprocalUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndUSCustomary<
+				LeftQuantity,
+				LeftUnit,
+				RightReciprocalQuantity,
+				RightReciprocalUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+

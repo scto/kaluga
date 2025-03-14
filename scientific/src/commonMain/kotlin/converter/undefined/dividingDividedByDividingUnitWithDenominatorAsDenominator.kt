@@ -48,3 +48,294 @@ fun <
 	factory: (Decimal, TargetUnit) -> TargetValue
 ) = unit.numerator.numeratorNumeratorUnitPerDenominatorNumeratorUnit(right.unit.numerator).byDividing(this, right, factory)
 
+@JvmName("metricAndImperialDividingDividedByMetricAndImperialDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndImperial<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricDividingDividedByMetricDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.Metric<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("imperialDividingDividedByImperialDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.Imperial<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialDividingDividedByUKImperialDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.UKImperial<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryDividingDividedByUSCustomaryDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.USCustomary<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialDividingDividedByMetricAndUKImperialDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndUKImperial<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryDividingDividedByMetricAndUSCustomaryDividingUnitWithDenominatorAsDenominator")
+infix operator fun <
+	NumeratorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorNumeratorUnit,
+	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorDenominatorAndDenominatorDenominatorUnit,
+	NumeratorUnit,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit,
+	DenominatorUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, NumeratorUnit>.div(
+	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorDenominatorAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+) where
+	NumeratorNumeratorUnit : UndefinedScientificUnit<NumeratorNumeratorQuantity>,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorDenominatorAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorDenominatorAndDenominatorDenominatorQuantity, NumeratorDenominatorAndDenominatorDenominatorUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		numeratorNumeratorUnitPerDenominatorNumeratorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndUSCustomary<
+				NumeratorNumeratorQuantity,
+				NumeratorNumeratorUnit,
+				DenominatorNumeratorQuantity,
+				DenominatorNumeratorUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+

@@ -48,3 +48,223 @@ fun <
 	factory: (Decimal, LeftNumeratorUnit) -> LeftNumeratorValue
 ) = unit.numerator.wrapped.byMultiplying(this, right, factory)
 
+@JvmName("metricAndImperialDividingWithDefinedNumeratorMultipliedByMetricAndImperialUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInMetric,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricDividingWithDefinedNumeratorMultipliedByMetricUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("imperialDividingWithDefinedNumeratorMultipliedByImperialUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialDividingWithDefinedNumeratorMultipliedByUKImperialUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryDividingWithDefinedNumeratorMultipliedByUSCustomaryUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialDividingWithDefinedNumeratorMultipliedByMetricAndUKImperialUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInMetric,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryDividingWithDefinedNumeratorMultipliedByMetricAndUSCustomaryUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit,
+	WrappedLeftNumeratorUnit,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit,
+	LeftUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) where
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInMetric,
+	LeftDenominatorAndRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("genericDividingWithDefinedNumeratorMultipliedByGenericUndefinedUnit")
+infix operator fun <
+	LeftNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftNumeratorUnit : AbstractScientificUnit<LeftNumeratorQuantity>,
+	WrappedLeftNumeratorUnit : WrappedUndefinedExtendedUnit<LeftNumeratorQuantity, LeftNumeratorUnit>,
+	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorAndRightUnit : UndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
+	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, WrappedLeftNumeratorUnit, LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>
+	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Extended<LeftNumeratorQuantity>, LeftDenominatorAndRightQuantity>, LeftUnit>.times(
+	right: UndefinedScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
+) =
+	times(right) {
+		value: Decimal,
+		unit: LeftNumeratorUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+

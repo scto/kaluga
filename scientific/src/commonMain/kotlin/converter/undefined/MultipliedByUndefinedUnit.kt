@@ -44,3 +44,209 @@ fun <
 	factory: (Decimal, TargetUnit) -> TargetValue
 ) = unit.leftUnitXRightUnit(right.unit).byMultiplying(this, right, factory)
 
+@JvmName("metricAndImperialMultipliedByMetricAndImperialUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.MetricAndImperial<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricMultipliedByMetricUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInMetric =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.Metric<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("imperialMultipliedByImperialUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.Imperial<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialMultipliedByUKImperialUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInUKImperial =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.UKImperial<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryMultipliedByUSCustomaryUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.USCustomary<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialMultipliedByMetricAndUKImperialUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUKImperial =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.MetricAndUKImperial<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryMultipliedByMetricAndUSCustomaryUndefinedUnit")
+infix operator fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit
+	> UndefinedScientificValue<LeftQuantity, LeftUnit>.times(
+	right: UndefinedScientificValue<RightQuantity, RightUnit>,
+) where
+	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedScientificUnit<RightQuantity>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	times(
+		right,
+		leftUnitXRightUnit = { x(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedMultipliedUnit.MetricAndUSCustomary<
+				LeftQuantity,
+				LeftUnit,
+				RightQuantity,
+				RightUnit
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+

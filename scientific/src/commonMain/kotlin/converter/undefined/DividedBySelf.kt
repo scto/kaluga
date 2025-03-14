@@ -46,3 +46,158 @@ fun <
 	factory: (Decimal, TargetUnit) -> TargetValue
 ) = getDimensionless().byDividing(this, right, factory)
 
+@JvmName("metricAndImperialDividedByMetricAndImperialSelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricDividedByMetricSelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("imperialDividedByImperialSelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialDividedByUKImperialSelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryDividedByUSCustomarySelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialDividedByMetricAndUKImperialSelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryDividedByMetricAndUSCustomarySelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) where
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("genericDividedByGenericSelf")
+infix operator fun <
+	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
+	NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>
+	> UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.div(
+	right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) =
+	div(
+		right,
+		getDimensionless = { One },
+	) {
+		value: Decimal,
+		unit: One
+		->
+		DefaultScientificValue(value, unit)
+	}
+
