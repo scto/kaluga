@@ -36,196 +36,194 @@ import kotlin.jvm.JvmName
 
 @JvmName("definedDividedBySelfAsDefinedSelf")
 fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit : ScientificUnit<NumeratorAndDenominatorQuantity>,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	getDimensionless: () -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit : ScientificUnit<NumeratorAndDenominatorQuantity>,
+    WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+    TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    getDimensionless: () -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byDividing(this, right, factory)
 
 @JvmName("metricAndImperialDefinedDividedByMetricAndImperialSelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("metricDefinedDividedByMetricSelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("imperialDefinedDividedByImperialSelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("ukImperialDefinedDividedByUKImperialSelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("usCustomaryDefinedDividedByUSCustomarySelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUKImperialDefinedDividedByMetricAndUKImperialSelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUSCustomaryDefinedDividedByMetricAndUSCustomarySelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit,
-	WrappedNumeratorAndDenominatorUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit,
+    WrappedNumeratorAndDenominatorUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
 ) where
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
+        NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
+        WrappedNumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+    dividedBySelfAsDefinedSelf(
+        right,
+        getDimensionless = { One },
+    ) {
+            value: Decimal,
+            unit: One,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("genericDefinedDividedByGenericSelfAsDefinedSelf")
 infix fun <
-	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>
-	> UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
-	right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
-) =
-	dividedBySelfAsDefinedSelf(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One
-		->
-		DefaultScientificValue(value, unit)
-	}
-
+    NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+    WrappedNumeratorAndDenominatorUnit : WrappedUndefinedExtendedUnit<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<UndefinedQuantityType.Extended<NumeratorAndDenominatorQuantity>, WrappedNumeratorAndDenominatorUnit>.dividedBySelfAsDefinedSelf(
+    right: ScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+) = dividedBySelfAsDefinedSelf(
+    right,
+    getDimensionless = { One },
+) {
+        value: Decimal,
+        unit: One,
+    ->
+    DefaultScientificValue(value, unit)
+}

@@ -38,230 +38,229 @@ import kotlin.jvm.JvmName
 
 @JvmName("multipliedByDefinedUnit")
 fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit : ScientificUnit<RightQuantity>,
-	WrappedRightUnit : WrappedUndefinedExtendedUnit<RightQuantity, RightUnit>,
-	TargetUnit : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, UndefinedQuantityType.Extended<RightQuantity>, WrappedRightUnit>,
-	TargetValue : UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftQuantity, UndefinedQuantityType.Extended<RightQuantity>>, TargetUnit>
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
-	rightAsUndefined: RightUnit.() -> WrappedRightUnit,
-	leftUnitXWrappedRightUnit: LeftUnit.(WrappedRightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit : ScientificUnit<RightQuantity>,
+    WrappedRightUnit : WrappedUndefinedExtendedUnit<RightQuantity, RightUnit>,
+    TargetUnit : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, UndefinedQuantityType.Extended<RightQuantity>, WrappedRightUnit>,
+    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftQuantity, UndefinedQuantityType.Extended<RightQuantity>>, TargetUnit>,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
+    rightAsUndefined: RightUnit.() -> WrappedRightUnit,
+    leftUnitXWrappedRightUnit: LeftUnit.(WrappedRightUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitXWrappedRightUnit(right.unit.rightAsUndefined()).byMultiplying(this, right, factory)
 
 @JvmName("metricAndImperialMultipliedByMetricAndImperialDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.MetricAndImperial<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.MetricAndImperial<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.MetricAndImperial<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.MetricAndImperial<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("metricMultipliedByMetricDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.Metric<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.Metric<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.Metric<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.Metric<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("imperialMultipliedByImperialDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.Imperial<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.Imperial<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.Imperial<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.Imperial<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("ukImperialMultipliedByUKImperialDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInUKImperial =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.UKImperial<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.UKImperial<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInUKImperial =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.UKImperial<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.UKImperial<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("usCustomaryMultipliedByUSCustomaryDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.USCustomary<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.USCustomary<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.USCustomary<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.USCustomary<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUKImperialMultipliedByMetricAndUKImperialDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUKImperial =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.MetricAndUKImperial<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.MetricAndUKImperial<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUKImperial =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.MetricAndUKImperial<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.MetricAndUKImperial<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUSCustomaryMultipliedByMetricAndUSCustomaryDefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit
-	> UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
-	right: ScientificValue<RightQuantity, RightUnit>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit,
+    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : AbstractScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDefinedUnit(
-		right,
-		rightAsUndefined = { asUndefined() },
-		leftUnitXWrappedRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.MetricAndUSCustomary<
-				LeftQuantity,
-				LeftUnit,
-				UndefinedQuantityType.Extended<RightQuantity>,
-				WrappedUndefinedExtendedUnit.MetricAndUSCustomary<RightQuantity, RightUnit>
-			>
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
-
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDefinedUnit(
+        right,
+        rightAsUndefined = { asUndefined() },
+        leftUnitXWrappedRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.MetricAndUSCustomary<
+                LeftQuantity,
+                LeftUnit,
+                UndefinedQuantityType.Extended<RightQuantity>,
+                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<RightQuantity, RightUnit>,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }

@@ -37,328 +37,326 @@ import kotlin.jvm.JvmName
 
 @JvmName("dividingWithMultiplyingWithDefinedRightNumeratorMultipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit : ScientificUnit<LeftNumeratorRightQuantity>,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	LeftNumeratorRightValue : ScientificValue<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
-	factory: (Decimal, LeftNumeratorRightUnit) -> LeftNumeratorRightValue
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit : ScientificUnit<LeftNumeratorRightQuantity>,
+    WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+    LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+    LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+    RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+    LeftNumeratorRightValue : ScientificValue<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    factory: (Decimal, LeftNumeratorRightUnit) -> LeftNumeratorRightValue,
 ) = unit.numerator.right.wrapped.byMultiplying(this, right, factory)
 
 @JvmName("metricAndImperialDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByMetricAndImperialDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("metricDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByMetricDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInMetric =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInMetric =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("imperialDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByImperialDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("ukImperialDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByUKImperialDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInUKImperial =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInUKImperial =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("usCustomaryDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByUSCustomaryDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUKImperialDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByMetricAndUKImperialDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUKImperial =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUKImperial =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUSCustomaryDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByMetricAndUSCustomaryDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit,
-	WrappedLeftNumeratorRightUnit,
-	LeftNumeratorUnit,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit,
-	LeftUnit,
-	RightUnit
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit,
+    WrappedLeftNumeratorRightUnit,
+    LeftNumeratorUnit,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit,
+    LeftUnit,
+    RightUnit,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
 ) where
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
-	WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
-	LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
+        LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorLeftAndRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInMetric,
+        WrappedLeftNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+        LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInMetric,
+        LeftDenominatorAndRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+        LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+            value: Decimal,
+            unit: LeftNumeratorRightUnit,
+        ->
+        DefaultScientificValue(value, unit)
+    }
 
 @JvmName("genericDividingWithMultiplyingWithDefinedRightNumeratorMultipliedByGenericDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator")
 infix fun <
-	LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
-	LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
-	WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
-	RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>
-	> UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
-	right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
-) =
-	multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
-		value: Decimal,
-		unit: LeftNumeratorRightUnit
-		->
-		DefaultScientificValue(value, unit)
-	}
-
+    LeftNumeratorLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftAndRightDenominatorUnit : UndefinedScientificUnit<LeftNumeratorLeftAndRightDenominatorQuantity>,
+    LeftNumeratorRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftNumeratorRightUnit : AbstractScientificUnit<LeftNumeratorRightQuantity>,
+    WrappedLeftNumeratorRightUnit : WrappedUndefinedExtendedUnit<LeftNumeratorRightQuantity, LeftNumeratorRightUnit>,
+    LeftNumeratorUnit : UndefinedMultipliedUnit<LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>, WrappedLeftNumeratorRightUnit>,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorAndRightNumeratorUnit : UndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+    LeftUnit : UndefinedDividedUnit<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftNumeratorUnit, LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit>,
+    RightUnit : UndefinedDividedUnit<LeftDenominatorAndRightNumeratorQuantity, LeftDenominatorAndRightNumeratorUnit, LeftNumeratorLeftAndRightDenominatorQuantity, LeftNumeratorLeftAndRightDenominatorUnit>,
+    > UndefinedScientificValue<UndefinedQuantityType.Dividing<UndefinedQuantityType.Multiplying<LeftNumeratorLeftAndRightDenominatorQuantity, UndefinedQuantityType.Extended<LeftNumeratorRightQuantity>>, LeftDenominatorAndRightNumeratorQuantity>, LeftUnit>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(
+    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<LeftDenominatorAndRightNumeratorQuantity, LeftNumeratorLeftAndRightDenominatorQuantity>, RightUnit>,
+) = multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorLeftAsDenominator(right) {
+        value: Decimal,
+        unit: LeftNumeratorRightUnit,
+    ->
+    DefaultScientificValue(value, unit)
+}
