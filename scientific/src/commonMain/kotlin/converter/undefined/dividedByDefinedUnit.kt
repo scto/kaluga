@@ -45,10 +45,223 @@ fun <
 	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<DenominatorQuantity, DenominatorUnit>,
 	TargetUnit : UndefinedDividedUnit<NumeratorQuantity, NumeratorUnit, UndefinedQuantityType.Extended<DenominatorQuantity>, WrappedDenominatorUnit>,
 	TargetValue : UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorQuantity, UndefinedQuantityType.Extended<DenominatorQuantity>>, TargetUnit>
-	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.div(
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
 	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 	denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
 	numeratorUnitPerWrappedDenominatorUnit: NumeratorUnit.(WrappedDenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue
 ) = unit.numeratorUnitPerWrappedDenominatorUnit(right.unit.denominatorAsUndefined()).byDividing(this, right, factory)
+
+@JvmName("metricAndImperialDividedByMetricAndImperialDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndImperial<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.MetricAndImperial<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricDividedByMetricDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.Metric<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.Metric<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("imperialDividedByImperialDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.Imperial<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.Imperial<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialDividedByUKImperialDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.UKImperial<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.UKImperial<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryDividedByUSCustomaryDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.USCustomary<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.USCustomary<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialDividedByMetricAndUKImperialDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndUKImperial<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.MetricAndUKImperial<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryDividedByMetricAndUSCustomaryDefinedUnit")
+infix fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit,
+	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	DenominatorUnit
+	> UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+) where
+	NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByDefinedUnit(
+		right,
+		denominatorAsUndefined = { asUndefined() },
+		numeratorUnitPerWrappedDenominatorUnit = { per(it) },
+	) {
+		value: Decimal,
+		unit: UndefinedDividedUnit.MetricAndUSCustomary<
+				NumeratorQuantity,
+				NumeratorUnit,
+				UndefinedQuantityType.Extended<DenominatorQuantity>,
+				WrappedUndefinedExtendedUnit.MetricAndUSCustomary<DenominatorQuantity, DenominatorUnit>
+			>
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
 

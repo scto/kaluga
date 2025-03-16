@@ -41,8 +41,193 @@ fun <
 	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
 	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
 	DenominatorReciprocalValue : UndefinedScientificValue<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>
-	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.div(
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
 	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
 	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue
 ) = right.unit.inverse.byDividing(this, right, factory)
+
+@JvmName("metricAndImperialDimensionlessDividedByMetricAndImperialReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricDimensionlessDividedByMetricReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("imperialDimensionlessDividedByImperialReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialDimensionlessDividedByUKImperialReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryDimensionlessDividedByUSCustomaryReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialDimensionlessDividedByMetricAndUKImperialReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryDimensionlessDividedByMetricAndUSCustomaryReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit,
+	DenominatorUnit
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) where
+	NumeratorUnit : Dimensionless,
+	NumeratorUnit : MeasurementUsage.UsedInMetric,
+	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
+	DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+	DenominatorUnit : MeasurementUsage.UsedInMetric,
+	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
+
+@JvmName("genericDimensionlessDividedByGenericReciprocalUndefinedUnit")
+infix fun <
+	NumeratorUnit : Dimensionless,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit : UndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorUnit : UndefinedReciprocalUnit<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalUndefinedUnit(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorReciprocalQuantity>, DenominatorUnit>,
+) =
+	dividedByReciprocalUndefinedUnit(right) {
+		value: Decimal,
+		unit: DenominatorReciprocalUnit
+		->
+		DefaultUndefinedScientificValue(value, unit)
+	}
 

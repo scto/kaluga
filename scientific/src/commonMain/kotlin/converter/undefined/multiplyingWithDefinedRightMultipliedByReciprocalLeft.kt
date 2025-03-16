@@ -45,8 +45,255 @@ fun <
 	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
 	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
 	LeftRightValue : ScientificValue<LeftRightQuantity, LeftRightUnit>
-	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.times(
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
 	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
 	factory: (Decimal, LeftRightUnit) -> LeftRightValue
 ) = unit.right.wrapped.byMultiplying(this, right, factory)
+
+@JvmName("metricAndImperialMultiplyingWithDefinedRightMultipliedByMetricAndImperialReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInMetric,
+	LeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricMultiplyingWithDefinedRightMultipliedByMetricReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("imperialMultiplyingWithDefinedRightMultipliedByImperialReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("ukImperialMultiplyingWithDefinedRightMultipliedByUKImperialReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInUKImperial =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("usCustomaryMultiplyingWithDefinedRightMultipliedByUSCustomaryReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUKImperialMultiplyingWithDefinedRightMultipliedByMetricAndUKImperialReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInMetric,
+	LeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUKImperial,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUKImperial,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUKImperial =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("metricAndUSCustomaryMultiplyingWithDefinedRightMultipliedByMetricAndUSCustomaryReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit,
+	WrappedLeftRightUnit,
+	LeftUnit,
+	RightUnit
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) where
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInMetric,
+	LeftLeftAndRightReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	LeftRightUnit : MeasurementUsage.UsedInMetric,
+	LeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInMetric,
+	WrappedLeftRightUnit : MeasurementUsage.UsedInUSCustomary,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	LeftUnit : MeasurementUsage.UsedInMetric,
+	LeftUnit : MeasurementUsage.UsedInUSCustomary,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>,
+	RightUnit : MeasurementUsage.UsedInMetric,
+	RightUnit : MeasurementUsage.UsedInUSCustomary =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
+
+@JvmName("genericMultiplyingWithDefinedRightMultipliedByGenericReciprocalLeft")
+infix fun <
+	LeftLeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftLeftAndRightReciprocalUnit : UndefinedScientificUnit<LeftLeftAndRightReciprocalQuantity>,
+	LeftRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+	LeftRightUnit : AbstractScientificUnit<LeftRightQuantity>,
+	WrappedLeftRightUnit : WrappedUndefinedExtendedUnit<LeftRightQuantity, LeftRightUnit>,
+	LeftUnit : UndefinedMultipliedUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit, UndefinedQuantityType.Extended<LeftRightQuantity>, WrappedLeftRightUnit>,
+	RightUnit : UndefinedReciprocalUnit<LeftLeftAndRightReciprocalQuantity, LeftLeftAndRightReciprocalUnit>
+	> UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftLeftAndRightReciprocalQuantity, UndefinedQuantityType.Extended<LeftRightQuantity>>, LeftUnit>.multipliedByReciprocalLeft(
+	right: UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftLeftAndRightReciprocalQuantity>, RightUnit>,
+) =
+	multipliedByReciprocalLeft(right) {
+		value: Decimal,
+		unit: LeftRightUnit
+		->
+		DefaultScientificValue(value, unit)
+	}
 
