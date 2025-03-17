@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -68,7 +69,7 @@ fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -97,7 +98,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -144,7 +145,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -169,7 +170,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -206,7 +207,7 @@ infix fun <
             RightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -231,7 +232,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -273,7 +274,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -298,7 +299,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -335,7 +336,7 @@ infix fun <
             RightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -360,7 +361,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -397,7 +398,7 @@ infix fun <
             RightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -422,7 +423,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -464,7 +465,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -489,7 +490,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -531,7 +532,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalSelfFlipped(
+    multipliedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -572,7 +573,7 @@ infix fun <
         LeftRightAndRightReciprocalLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalSelfFlipped(
+    >.genericMultipliedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -582,7 +583,7 @@ infix fun <
             >,
         RightUnit,
         >,
-) = multipliedByReciprocalSelfFlipped(
+) = multipliedBy(
     right,
     getDimensionless = { One },
 ) {

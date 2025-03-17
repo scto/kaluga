@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -69,7 +70,7 @@ fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -100,7 +101,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -154,7 +155,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -178,7 +179,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -220,7 +221,7 @@ infix fun <
             LeftNumeratorAndRightDenominatorUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -244,7 +245,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -292,7 +293,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -316,7 +317,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -358,7 +359,7 @@ infix fun <
             LeftNumeratorAndRightDenominatorUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -382,7 +383,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -424,7 +425,7 @@ infix fun <
             LeftNumeratorAndRightDenominatorUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -448,7 +449,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -496,7 +497,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -520,7 +521,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -568,7 +569,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightNumeratorRightUnit,
         ->
@@ -610,7 +611,7 @@ infix fun <
         LeftDenominatorAndRightNumeratorLeftQuantity,
         >,
     LeftUnit,
-    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(
+    >.genericMultipliedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Multiplying<
@@ -621,7 +622,7 @@ infix fun <
             >,
         RightUnit,
         >,
-) = multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorAsLeftAndNumeratorAsDenominator(right) {
+) = multipliedBy(right) {
         value: Decimal,
         unit: RightNumeratorRightUnit,
     ->

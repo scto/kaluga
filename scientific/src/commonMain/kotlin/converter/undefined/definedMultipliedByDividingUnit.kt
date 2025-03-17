@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -87,7 +88,7 @@ fun <
             >,
         TargetUnit,
         >,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -114,7 +115,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -144,7 +145,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },
@@ -185,7 +186,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -207,7 +208,7 @@ infix fun <
             RightDenominatorUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },
@@ -248,7 +249,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -274,7 +275,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },
@@ -315,7 +316,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -337,7 +338,7 @@ infix fun <
             RightDenominatorUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },
@@ -378,7 +379,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -400,7 +401,7 @@ infix fun <
             RightDenominatorUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },
@@ -441,7 +442,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -467,7 +468,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },
@@ -508,7 +509,7 @@ infix fun <
     RightDenominatorQuantity : UndefinedQuantityType,
     RightDenominatorUnit,
     RightUnit,
-    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByDividingUnit(
+    > ScientificValue<LeftQuantity, LeftUnit>.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             RightNumeratorQuantity,
@@ -534,7 +535,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDividingUnit(
+    multipliedBy(
         right,
         leftAsUndefined = { asUndefined() },
         wrappedLeftUnitXRightNumeratorUnit = { x(it) },

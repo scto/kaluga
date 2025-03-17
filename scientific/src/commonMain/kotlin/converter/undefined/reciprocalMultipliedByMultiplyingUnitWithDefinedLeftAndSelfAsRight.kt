@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -63,7 +64,7 @@ fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -90,7 +91,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -134,7 +135,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -155,7 +156,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -189,7 +190,7 @@ infix fun <
             LeftReciprocalAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -210,7 +211,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -249,7 +250,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -270,7 +271,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -304,7 +305,7 @@ infix fun <
             LeftReciprocalAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -325,7 +326,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -359,7 +360,7 @@ infix fun <
             LeftReciprocalAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -380,7 +381,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -419,7 +420,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -440,7 +441,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -479,7 +480,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: RightLeftUnit,
         ->
@@ -513,7 +514,7 @@ infix fun <
         LeftReciprocalAndRightRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(
+    >.genericMultipliedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -523,7 +524,7 @@ infix fun <
             >,
         RightUnit,
         >,
-) = multipliedByMultiplyingUnitWithDefinedLeftAndSelfAsRight(right) {
+) = multipliedBy(right) {
         value: Decimal,
         unit: RightLeftUnit,
     ->

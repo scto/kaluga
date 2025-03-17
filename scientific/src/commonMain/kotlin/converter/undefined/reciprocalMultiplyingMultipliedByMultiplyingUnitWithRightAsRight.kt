@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -80,7 +81,7 @@ fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -113,7 +114,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -162,7 +163,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {
@@ -196,7 +197,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -233,7 +234,7 @@ infix fun <
             LeftReciprocalRightAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {
@@ -267,7 +268,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -310,7 +311,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {
@@ -344,7 +345,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -381,7 +382,7 @@ infix fun <
             LeftReciprocalRightAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {
@@ -415,7 +416,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -452,7 +453,7 @@ infix fun <
             LeftReciprocalRightAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {
@@ -486,7 +487,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -529,7 +530,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {
@@ -563,7 +564,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithRightAsRight(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -606,7 +607,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithRightAsRight(
+    multipliedBy(
         right,
         rightLeftUnitPerLeftReciprocalLeftUnit = { per(it) },
     ) {

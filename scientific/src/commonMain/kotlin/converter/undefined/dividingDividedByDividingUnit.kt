@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -97,7 +98,7 @@ fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -135,7 +136,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -178,7 +179,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },
@@ -229,7 +230,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -260,7 +261,7 @@ infix fun <
             DenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },
@@ -311,7 +312,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -348,7 +349,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },
@@ -399,7 +400,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -430,7 +431,7 @@ infix fun <
             DenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },
@@ -481,7 +482,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -512,7 +513,7 @@ infix fun <
             DenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },
@@ -563,7 +564,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -600,7 +601,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },
@@ -651,7 +652,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnit(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             DenominatorNumeratorQuantity,
@@ -688,7 +689,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnit(
+    dividedBy(
         right,
         numeratorNumeratorUnitXDenominatorDenominatorUnit = { x(it) },
         numeratorDenominatorUnitXDenominatorDenominatorUnit = { x(it) },

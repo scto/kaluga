@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -42,7 +43,7 @@ fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.dividedBy(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -58,7 +59,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -68,7 +69,7 @@ infix fun <
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -85,7 +86,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -93,7 +94,7 @@ infix fun <
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -110,7 +111,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -119,7 +120,7 @@ infix fun <
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -136,7 +137,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -144,7 +145,7 @@ infix fun <
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -161,7 +162,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -169,7 +170,7 @@ infix fun <
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -186,7 +187,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -195,7 +196,7 @@ infix fun <
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -212,7 +213,7 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
@@ -221,7 +222,7 @@ infix fun <
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelf(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -238,12 +239,12 @@ infix fun <
     > UndefinedScientificValue<
     NumeratorAndDenominatorQuantity,
     NumeratorAndDenominatorUnit,
-    >.dividedBySelf(
+    >.genericDividedByGeneric(
     right: UndefinedScientificValue<
         NumeratorAndDenominatorQuantity,
         NumeratorAndDenominatorUnit,
         >,
-) = dividedBySelf(
+) = dividedBy(
     right,
     getDimensionless = { One },
 ) {

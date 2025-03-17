@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -73,7 +74,7 @@ fun <
             >,
         TargetUnit,
         >,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -98,7 +99,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -149,7 +150,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -171,7 +172,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -212,7 +213,7 @@ infix fun <
             RightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -234,7 +235,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -280,7 +281,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -302,7 +303,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -343,7 +344,7 @@ infix fun <
             RightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -365,7 +366,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -406,7 +407,7 @@ infix fun <
             RightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -428,7 +429,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -474,7 +475,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -496,7 +497,7 @@ infix fun <
     WrappedLeftAndRightReciprocalRightUnit,
     RightReciprocalUnit,
     RightUnit,
-    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.multipliedByReciprocalMultiplyingWithSelfAsRight(
+    > ScientificValue<LeftAndRightReciprocalRightQuantity, LeftAndRightReciprocalRightUnit>.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -542,7 +543,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalMultiplyingWithSelfAsRight(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {

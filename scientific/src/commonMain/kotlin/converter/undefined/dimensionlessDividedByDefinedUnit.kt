@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -59,7 +60,7 @@ fun <
             >,
         TargetUnit,
         >,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
     denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
     reciprocalTargetUnit: WrappedDenominatorUnit.() -> TargetUnit,
@@ -71,7 +72,7 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricAndImperialDividedByMetricAndImperial(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
@@ -82,7 +83,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },
@@ -106,14 +107,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricDividedByMetric(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },
@@ -137,7 +138,7 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.imperialDividedByImperial(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
@@ -146,7 +147,7 @@ infix fun <
         DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },
@@ -170,14 +171,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.ukImperialDividedByUKImperial(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },
@@ -201,14 +202,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.usCustomaryDividedByUSCustomary(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },
@@ -232,7 +233,7 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricAndUKImperialDividedByMetricAndUKImperial(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
@@ -241,7 +242,7 @@ infix fun <
         DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },
@@ -265,7 +266,7 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : Dimensionless,
@@ -274,7 +275,7 @@ infix fun <
         DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDefinedUnit(
+    dividedBy(
         right,
         denominatorAsUndefined = { asUndefined() },
         reciprocalTargetUnit = { reciprocal() },

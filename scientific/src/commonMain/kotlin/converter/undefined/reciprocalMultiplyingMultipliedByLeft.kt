@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -68,7 +69,7 @@ fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -93,7 +94,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -126,7 +127,7 @@ infix fun <
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -155,7 +156,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -180,7 +181,7 @@ infix fun <
             LeftReciprocalUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInMetric =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -209,7 +210,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -238,7 +239,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -267,7 +268,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -292,7 +293,7 @@ infix fun <
             LeftReciprocalUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -321,7 +322,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -346,7 +347,7 @@ infix fun <
             LeftReciprocalUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -375,7 +376,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -404,7 +405,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -433,7 +434,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByLeft(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         LeftReciprocalLeftAndRightQuantity,
         LeftReciprocalLeftAndRightUnit,
@@ -462,7 +463,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByLeft(
+    multipliedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {

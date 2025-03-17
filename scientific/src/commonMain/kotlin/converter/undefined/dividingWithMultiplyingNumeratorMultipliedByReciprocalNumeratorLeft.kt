@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -81,7 +82,7 @@ fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -114,7 +115,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -162,7 +163,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {
@@ -197,7 +198,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -233,7 +234,7 @@ infix fun <
             LeftNumeratorLeftAndRightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {
@@ -268,7 +269,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -310,7 +311,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {
@@ -345,7 +346,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -381,7 +382,7 @@ infix fun <
             LeftNumeratorLeftAndRightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {
@@ -416,7 +417,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -452,7 +453,7 @@ infix fun <
             LeftNumeratorLeftAndRightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {
@@ -487,7 +488,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -529,7 +530,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {
@@ -564,7 +565,7 @@ infix fun <
         LeftDenominatorQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalNumeratorLeft(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftNumeratorLeftAndRightReciprocalQuantity,
@@ -606,7 +607,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalNumeratorLeft(
+    multipliedBy(
         right,
         leftNumeratorRightUnitPerLeftDenominatorUnit = { per(it) },
     ) {

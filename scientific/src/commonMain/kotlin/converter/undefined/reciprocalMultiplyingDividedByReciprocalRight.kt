@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -72,7 +73,7 @@ fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -100,7 +101,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -142,7 +143,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -172,7 +173,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -204,7 +205,7 @@ infix fun <
             NumeratorReciprocalRightAndDenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -234,7 +235,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -271,7 +272,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -301,7 +302,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -333,7 +334,7 @@ infix fun <
             NumeratorReciprocalRightAndDenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -363,7 +364,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -395,7 +396,7 @@ infix fun <
             NumeratorReciprocalRightAndDenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -425,7 +426,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -462,7 +463,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -492,7 +493,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByReciprocalRight(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -529,7 +530,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalRight(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {

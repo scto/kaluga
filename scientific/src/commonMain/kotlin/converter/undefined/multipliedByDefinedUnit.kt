@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -66,7 +67,7 @@ fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.multipliedBy(
     right: ScientificValue<RightQuantity, RightUnit>,
     rightAsUndefined: RightUnit.() -> WrappedRightUnit,
     leftUnitXWrappedRightUnit: LeftUnit.(WrappedRightUnit) -> TargetUnit,
@@ -84,7 +85,7 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -95,7 +96,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },
@@ -125,14 +126,14 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.metricMultipliedByMetric(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },
@@ -162,7 +163,7 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.imperialMultipliedByImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -171,7 +172,7 @@ infix fun <
         RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },
@@ -201,14 +202,14 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.ukImperialMultipliedByUKImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },
@@ -238,14 +239,14 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.usCustomaryMultipliedByUSCustomary(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
         RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },
@@ -275,7 +276,7 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -284,7 +285,7 @@ infix fun <
         RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },
@@ -314,7 +315,7 @@ infix fun <
     > UndefinedScientificValue<
     LeftQuantity,
     LeftUnit,
-    >.multipliedByDefinedUnit(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -323,7 +324,7 @@ infix fun <
         RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDefinedUnit(
+    multipliedBy(
         right,
         rightAsUndefined = { asUndefined() },
         leftUnitXWrappedRightUnit = { x(it) },

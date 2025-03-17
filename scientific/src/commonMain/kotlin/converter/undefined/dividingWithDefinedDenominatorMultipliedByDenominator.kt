@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -64,7 +65,7 @@ fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.multipliedBy(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
     factory: (Decimal, LeftNumeratorUnit) -> LeftNumeratorValue,
 ) = unit.numerator.byMultiplying(this, right, factory)
@@ -85,7 +86,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -114,7 +115,7 @@ infix fun <
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -137,7 +138,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricMultipliedByMetric(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -158,7 +159,7 @@ infix fun <
             WrappedLeftDenominatorAndRightUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInMetric =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -181,7 +182,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.imperialMultipliedByImperial(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -206,7 +207,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -229,7 +230,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.ukImperialMultipliedByUKImperial(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -250,7 +251,7 @@ infix fun <
             WrappedLeftDenominatorAndRightUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -273,7 +274,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.usCustomaryMultipliedByUSCustomary(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -294,7 +295,7 @@ infix fun <
             WrappedLeftDenominatorAndRightUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -317,7 +318,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -342,7 +343,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -365,7 +366,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
 ) where
         LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -390,7 +391,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -423,9 +424,9 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.genericMultipliedByGeneric(
     right: ScientificValue<LeftDenominatorAndRightQuantity, LeftDenominatorAndRightUnit>,
-) = multipliedByDenominator(right) {
+) = multipliedBy(right) {
         value: Decimal,
         unit: LeftNumeratorUnit,
     ->

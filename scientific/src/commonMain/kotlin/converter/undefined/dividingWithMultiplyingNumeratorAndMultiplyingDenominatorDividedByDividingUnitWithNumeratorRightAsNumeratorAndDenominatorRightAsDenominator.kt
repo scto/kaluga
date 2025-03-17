@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -96,7 +97,7 @@ fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -138,7 +139,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -205,7 +206,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {
@@ -246,7 +247,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -297,7 +298,7 @@ infix fun <
             NumeratorDenominatorRightAndDenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {
@@ -338,7 +339,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -397,7 +398,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {
@@ -438,7 +439,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -489,7 +490,7 @@ infix fun <
             NumeratorDenominatorRightAndDenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {
@@ -530,7 +531,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -581,7 +582,7 @@ infix fun <
             NumeratorDenominatorRightAndDenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {
@@ -624,7 +625,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -683,7 +684,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {
@@ -726,7 +727,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             NumeratorNumeratorRightAndDenominatorNumeratorQuantity,
@@ -785,7 +786,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithNumeratorRightAsNumeratorAndDenominatorRightAsDenominator(
+    dividedBy(
         right,
         numeratorNumeratorLeftUnitPerNumeratorDenominatorLeftUnit = { per(it) },
     ) {

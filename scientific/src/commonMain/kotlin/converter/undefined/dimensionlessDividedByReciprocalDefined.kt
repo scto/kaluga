@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -50,7 +51,7 @@ fun <
         WrappedDenominatorReciprocalUnit,
         >,
     DenominatorReciprocalValue : ScientificValue<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -69,7 +70,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -103,7 +104,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -117,7 +118,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -143,7 +144,7 @@ infix fun <
             WrappedDenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -157,7 +158,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -187,7 +188,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -201,7 +202,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -227,7 +228,7 @@ infix fun <
             WrappedDenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -241,7 +242,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -267,7 +268,7 @@ infix fun <
             WrappedDenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -281,7 +282,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -311,7 +312,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -325,7 +326,7 @@ infix fun <
     DenominatorReciprocalUnit,
     WrappedDenominatorReciprocalUnit,
     DenominatorUnit,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -355,7 +356,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByReciprocalDefined(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorReciprocalUnit,
         ->
@@ -377,7 +378,7 @@ infix fun <
             >,
         WrappedDenominatorReciprocalUnit,
         >,
-    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.genericDividedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Extended<
@@ -386,7 +387,7 @@ infix fun <
             >,
         DenominatorUnit,
         >,
-) = dividedByReciprocalDefined(right) {
+) = dividedBy(right) {
         value: Decimal,
         unit: DenominatorReciprocalUnit,
     ->

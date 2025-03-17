@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -72,7 +73,7 @@ fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.dividedBy(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
     reciprocalTargetUnit: NumeratorDenominatorUnit.() -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
@@ -94,7 +95,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -123,7 +124,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -152,7 +153,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.metricDividedByMetric(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -173,7 +174,7 @@ infix fun <
             NumeratorDenominatorUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -202,7 +203,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.imperialDividedByImperial(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -227,7 +228,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -256,7 +257,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.ukImperialDividedByUKImperial(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -277,7 +278,7 @@ infix fun <
             NumeratorDenominatorUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -306,7 +307,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.usCustomaryDividedByUSCustomary(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -327,7 +328,7 @@ infix fun <
             NumeratorDenominatorUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -356,7 +357,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -381,7 +382,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -410,7 +411,7 @@ infix fun <
         NumeratorDenominatorQuantity,
         >,
     NumeratorUnit,
-    >.dividedByNumerator(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, NumeratorNumeratorAndDenominatorUnit>,
 ) where
         NumeratorNumeratorAndDenominatorUnit : AbstractScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
@@ -435,7 +436,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByNumerator(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {

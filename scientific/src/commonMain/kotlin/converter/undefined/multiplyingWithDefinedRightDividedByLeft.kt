@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -61,7 +62,7 @@ fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.dividedBy(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -85,7 +86,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -117,7 +118,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -140,7 +141,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -164,7 +165,7 @@ infix fun <
             WrappedNumeratorRightUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -187,7 +188,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -215,7 +216,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -238,7 +239,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -262,7 +263,7 @@ infix fun <
             WrappedNumeratorRightUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -285,7 +286,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -309,7 +310,7 @@ infix fun <
             WrappedNumeratorRightUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -332,7 +333,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -360,7 +361,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -383,7 +384,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
@@ -411,7 +412,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByLeft(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: NumeratorRightUnit,
         ->
@@ -444,12 +445,12 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedByLeft(
+    >.genericDividedByGeneric(
     right: UndefinedScientificValue<
         NumeratorLeftAndDenominatorQuantity,
         NumeratorLeftAndDenominatorUnit,
         >,
-) = dividedByLeft(right) {
+) = dividedBy(right) {
         value: Decimal,
         unit: NumeratorRightUnit,
     ->

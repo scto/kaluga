@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -77,7 +78,7 @@ fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -109,7 +110,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -166,7 +167,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -194,7 +195,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -239,7 +240,7 @@ infix fun <
             DenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -267,7 +268,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -318,7 +319,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -346,7 +347,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -391,7 +392,7 @@ infix fun <
             DenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -419,7 +420,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -464,7 +465,7 @@ infix fun <
             DenominatorReciprocalUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -492,7 +493,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -543,7 +544,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -571,7 +572,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -622,7 +623,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedBySelfFlipped(
+    dividedBy(
         right,
         getDimensionless = { One },
     ) {
@@ -672,7 +673,7 @@ infix fun <
             >,
         >,
     NumeratorUnit,
-    >.dividedBySelfFlipped(
+    >.genericDividedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             UndefinedQuantityType.Multiplying<
@@ -682,7 +683,7 @@ infix fun <
             >,
         DenominatorUnit,
         >,
-) = dividedBySelfFlipped(
+) = dividedBy(
     right,
     getDimensionless = { One },
 ) {

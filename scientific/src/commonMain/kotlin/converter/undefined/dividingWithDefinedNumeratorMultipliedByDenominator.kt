@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -61,7 +62,7 @@ fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -85,7 +86,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -117,7 +118,7 @@ infix fun <
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -140,7 +141,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -164,7 +165,7 @@ infix fun <
             LeftDenominatorAndRightUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInMetric =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -187,7 +188,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -215,7 +216,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -238,7 +239,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -262,7 +263,7 @@ infix fun <
             LeftDenominatorAndRightUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -285,7 +286,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -309,7 +310,7 @@ infix fun <
             LeftDenominatorAndRightUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -332,7 +333,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -360,7 +361,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -383,7 +384,7 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
@@ -411,7 +412,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByDenominator(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftNumeratorUnit,
         ->
@@ -444,12 +445,12 @@ infix fun <
         LeftDenominatorAndRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByDenominator(
+    >.genericMultipliedByGeneric(
     right: UndefinedScientificValue<
         LeftDenominatorAndRightQuantity,
         LeftDenominatorAndRightUnit,
         >,
-) = multipliedByDenominator(right) {
+) = multipliedBy(right) {
         value: Decimal,
         unit: LeftNumeratorUnit,
     ->

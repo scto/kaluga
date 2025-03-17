@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -58,7 +59,7 @@ fun <
         WrappedDenominatorDenominatorUnit,
         >,
     DenominatorDenominatorValue : ScientificValue<DenominatorDenominatorQuantity, DenominatorDenominatorUnit>,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -82,7 +83,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -130,7 +131,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -146,7 +147,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -184,7 +185,7 @@ infix fun <
             WrappedDenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -200,7 +201,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -243,7 +244,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -259,7 +260,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -297,7 +298,7 @@ infix fun <
             WrappedDenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -313,7 +314,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -351,7 +352,7 @@ infix fun <
             WrappedDenominatorDenominatorUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -367,7 +368,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -410,7 +411,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -426,7 +427,7 @@ infix fun <
     DenominatorDenominatorUnit,
     WrappedDenominatorDenominatorUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -469,7 +470,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+    dividedBy(right) {
             value: Decimal,
             unit: DenominatorDenominatorUnit,
         ->
@@ -500,7 +501,7 @@ infix fun <
             >,
         WrappedDenominatorDenominatorUnit,
         >,
-    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
+    > ScientificValue<NumeratorAndDenominatorNumeratorQuantity, NumeratorAndDenominatorNumeratorUnit>.genericDividedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Dividing<
             UndefinedQuantityType.Extended<
@@ -512,7 +513,7 @@ infix fun <
             >,
         DenominatorUnit,
         >,
-) = dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(right) {
+) = dividedBy(right) {
         value: Decimal,
         unit: DenominatorDenominatorUnit,
     ->

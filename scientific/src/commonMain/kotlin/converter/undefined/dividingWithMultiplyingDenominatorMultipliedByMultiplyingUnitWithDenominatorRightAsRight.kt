@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -97,7 +98,7 @@ fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -136,7 +137,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -191,7 +192,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },
@@ -237,7 +238,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -278,7 +279,7 @@ infix fun <
             LeftDenominatorRightAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },
@@ -324,7 +325,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -372,7 +373,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },
@@ -418,7 +419,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -459,7 +460,7 @@ infix fun <
             LeftDenominatorRightAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },
@@ -505,7 +506,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -546,7 +547,7 @@ infix fun <
             LeftDenominatorRightAndRightRightUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },
@@ -592,7 +593,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -640,7 +641,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },
@@ -686,7 +687,7 @@ infix fun <
             >,
         >,
     LeftUnit,
-    >.multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             RightLeftQuantity,
@@ -734,7 +735,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByMultiplyingUnitWithDenominatorRightAsRight(
+    multipliedBy(
         right,
         leftNumeratorUnitXRightLeftUnit = { x(it) },
         targetNumeratorUnitPerLeftDenominatorLeftUnit = { per(it) },

@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -70,7 +71,7 @@ fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -100,7 +101,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -139,7 +140,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {
@@ -170,7 +171,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -199,7 +200,7 @@ infix fun <
             DenominatorRightUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {
@@ -230,7 +231,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -264,7 +265,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {
@@ -295,7 +296,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -324,7 +325,7 @@ infix fun <
             DenominatorRightUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {
@@ -355,7 +356,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -384,7 +385,7 @@ infix fun <
             DenominatorRightUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {
@@ -415,7 +416,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -449,7 +450,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {
@@ -480,7 +481,7 @@ infix fun <
         NumeratorRightQuantity,
         >,
     NumeratorUnit,
-    >.dividedByMultiplyingUnitWithLeftAsLeft(
+    >.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             NumeratorLeftAndDenominatorLeftQuantity,
@@ -514,7 +515,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithLeftAsLeft(
+    dividedBy(
         right,
         numeratorRightUnitPerDenominatorRightUnit = { per(it) },
     ) {

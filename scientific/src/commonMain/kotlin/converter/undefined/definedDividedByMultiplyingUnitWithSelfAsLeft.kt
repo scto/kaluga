@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -64,7 +65,7 @@ fun <
             >,
         TargetUnit,
         >,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -86,7 +87,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.metricAndImperialDividedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -123,7 +124,7 @@ infix fun <
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -144,7 +145,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.metricDividedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -173,7 +174,7 @@ infix fun <
             DenominatorRightUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -194,7 +195,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.imperialDividedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -227,7 +228,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -248,7 +249,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.ukImperialDividedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -277,7 +278,7 @@ infix fun <
             DenominatorRightUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -298,7 +299,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.usCustomaryDividedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -327,7 +328,7 @@ infix fun <
             DenominatorRightUnit,
             >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -348,7 +349,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.metricAndUKImperialDividedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -381,7 +382,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {
@@ -402,7 +403,7 @@ infix fun <
     DenominatorRightQuantity : UndefinedQuantityType,
     DenominatorRightUnit,
     DenominatorUnit,
-    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.dividedByMultiplyingUnitWithSelfAsLeft(
+    > ScientificValue<NumeratorAndDenominatorLeftQuantity, NumeratorAndDenominatorLeftUnit>.metricAndUSCustomaryDividedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -435,7 +436,7 @@ infix fun <
             >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-    dividedByMultiplyingUnitWithSelfAsLeft(
+    dividedBy(
         right,
         reciprocalTargetUnit = { reciprocal() },
     ) {

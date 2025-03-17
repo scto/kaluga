@@ -1,3 +1,4 @@
+@file:Suppress("ktlint:standard:wrapping")
 /*
  Copyright 2025 Splendo Consulting B.V. The Netherlands
 
@@ -56,7 +57,7 @@ fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.multipliedBy(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -80,7 +81,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.metricAndImperialMultipliedByMetricAndImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -112,7 +113,7 @@ infix fun <
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -133,7 +134,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.metricMultipliedByMetric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -157,7 +158,7 @@ infix fun <
             LeftLeftAndRightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInMetric =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -178,7 +179,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.imperialMultipliedByImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -206,7 +207,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -227,7 +228,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.ukImperialMultipliedByUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -251,7 +252,7 @@ infix fun <
             LeftLeftAndRightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -272,7 +273,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.usCustomaryMultipliedByUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -296,7 +297,7 @@ infix fun <
             LeftLeftAndRightReciprocalUnit,
             >,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -317,7 +318,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -345,7 +346,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -366,7 +367,7 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
@@ -394,7 +395,7 @@ infix fun <
             >,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
-    multipliedByReciprocalLeft(right) {
+    multipliedBy(right) {
             value: Decimal,
             unit: LeftRightUnit,
         ->
@@ -423,14 +424,14 @@ infix fun <
         LeftRightQuantity,
         >,
     LeftUnit,
-    >.multipliedByReciprocalLeft(
+    >.genericMultipliedByGeneric(
     right: UndefinedScientificValue<
         UndefinedQuantityType.Reciprocal<
             LeftLeftAndRightReciprocalQuantity,
             >,
         RightUnit,
         >,
-) = multipliedByReciprocalLeft(right) {
+) = multipliedBy(right) {
         value: Decimal,
         unit: LeftRightUnit,
     ->
