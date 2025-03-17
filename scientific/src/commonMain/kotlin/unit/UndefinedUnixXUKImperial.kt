@@ -61,7 +61,7 @@ infix fun <
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : ScientificUnit<RightQuantity>,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     x(right.asUndefined())
 
@@ -81,7 +81,7 @@ infix fun <
     > LeftUnit.x(
     right: RightUnit,
 ) where
-        LeftUnit : ScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : UndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
@@ -103,9 +103,9 @@ infix fun <
     > LeftUnit.x(
     right: RightUnit,
 ) where
-        LeftUnit : ScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : ScientificUnit<RightQuantity>,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     x(right.asUndefined())
 
@@ -155,7 +155,7 @@ infix fun <
         LeftReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : UndefinedReciprocalUnit<LeftReciprocalQuantity, LeftReciprocalUnit>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : ScientificUnit<RightQuantity>,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     x(right.asUndefined())
 
@@ -201,7 +201,7 @@ infix fun <
     > LeftUnit.x(
     right: RightUnit,
 ) where
-        LeftUnit : ScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         RightReciprocalUnit : UndefinedScientificUnit<RightQuantity>,
         RightReciprocalUnit : MeasurementUsage.UsedInUKImperial,
@@ -369,7 +369,7 @@ infix fun <
         LeftDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : UndefinedDividedUnit<LeftNumeratorQuantity, LeftNumeratorUnit, LeftDenominatorQuantity, LeftDenominatorUnit>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : ScientificUnit<RightQuantity>,
+        RightUnit : AbstractScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     x(right.asUndefined())
 
@@ -427,7 +427,7 @@ infix fun <
     > LeftUnit.x(
     right: RightUnit,
 ) where
-        LeftUnit : ScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         RightNumeratorUnit : UndefinedScientificUnit<RightNumeratorQuantity>,
         RightNumeratorUnit : MeasurementUsage.UsedInUKImperial,

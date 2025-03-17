@@ -19,7 +19,9 @@ package com.splendo.kaluga.scientific.unit
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.Serializable
 
+@Serializable
 sealed class UndefinedMultipliedUnit<
     LeftQuantity : UndefinedQuantityType,
     LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -41,6 +43,7 @@ sealed class UndefinedMultipliedUnit<
     override fun fromSIUnit(value: Decimal): Decimal = left.deltaFromSIUnitDelta(right.deltaFromSIUnitDelta(value))
     override fun toSIUnit(value: Decimal): Decimal = left.deltaToSIUnitDelta(right.deltaToSIUnitDelta(value))
 
+    @Serializable
     data class MetricAndImperial<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,
@@ -69,6 +72,7 @@ sealed class UndefinedMultipliedUnit<
         override val metricAndUSCustomary: MetricAndUSCustomary<LeftQuantity, LeftUnit, RightQuantity, RightUnit> by lazy { MetricAndUSCustomary(left, right) }
     }
 
+    @Serializable
     data class Metric<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,
@@ -86,6 +90,7 @@ sealed class UndefinedMultipliedUnit<
         override val system = MeasurementSystem.Metric
     }
 
+    @Serializable
     data class Imperial<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,
@@ -108,6 +113,7 @@ sealed class UndefinedMultipliedUnit<
         override val usCustomary: USCustomary<LeftQuantity, LeftUnit, RightQuantity, RightUnit> by lazy { USCustomary(left, right) }
     }
 
+    @Serializable
     data class UKImperial<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,
@@ -125,6 +131,7 @@ sealed class UndefinedMultipliedUnit<
         override val system = MeasurementSystem.UKImperial
     }
 
+    @Serializable
     data class USCustomary<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,
@@ -142,6 +149,7 @@ sealed class UndefinedMultipliedUnit<
         override val system = MeasurementSystem.USCustomary
     }
 
+    @Serializable
     data class MetricAndUKImperial<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,
@@ -163,6 +171,7 @@ sealed class UndefinedMultipliedUnit<
         override val ukImperial: UKImperial<LeftQuantity, LeftUnit, RightQuantity, RightUnit> by lazy { UKImperial(left, right) }
     }
 
+    @Serializable
     data class MetricAndUSCustomary<
         LeftQuantity : UndefinedQuantityType,
         LeftUnit,

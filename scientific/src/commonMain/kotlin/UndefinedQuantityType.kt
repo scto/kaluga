@@ -25,9 +25,6 @@ sealed class UndefinedQuantityType {
     data class Extended<WrappedPhysicalQuantity : PhysicalQuantity.PhysicalQuantityWithDimension>(val extended: WrappedPhysicalQuantity) : UndefinedQuantityType()
 
     @Serializable
-    data class Custom<CustomQuantity>(val customQuantity: CustomQuantity) : UndefinedQuantityType()
-
-    @Serializable
     data class Dividing<NumeratorQuantity : UndefinedQuantityType, DenominatorQuantity : UndefinedQuantityType>(
         val numerator: NumeratorQuantity,
         val denominator: DenominatorQuantity,

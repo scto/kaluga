@@ -19,7 +19,9 @@ package com.splendo.kaluga.scientific.unit
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.Serializable
 
+@Serializable
 sealed class UndefinedDividedUnit<
     NumeratorQuantity : UndefinedQuantityType,
     NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -43,6 +45,7 @@ sealed class UndefinedDividedUnit<
     override fun fromSIUnit(value: Decimal): Decimal = denominator.deltaToSIUnitDelta(numerator.deltaFromSIUnitDelta(value))
     override fun toSIUnit(value: Decimal): Decimal = numerator.deltaToSIUnitDelta(denominator.deltaFromSIUnitDelta(value))
 
+    @Serializable
     data class MetricAndImperial<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,
@@ -75,6 +78,7 @@ sealed class UndefinedDividedUnit<
         }
     }
 
+    @Serializable
     data class Metric<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,
@@ -92,6 +96,7 @@ sealed class UndefinedDividedUnit<
         override val system = MeasurementSystem.Metric
     }
 
+    @Serializable
     data class Imperial<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,
@@ -113,6 +118,7 @@ sealed class UndefinedDividedUnit<
         override val usCustomary: USCustomary<NumeratorQuantity, NumeratorUnit, DenominatorQuantity, DenominatorUnit> by lazy { USCustomary(numerator, denominator) }
     }
 
+    @Serializable
     data class UKImperial<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,
@@ -130,6 +136,7 @@ sealed class UndefinedDividedUnit<
         override val system = MeasurementSystem.UKImperial
     }
 
+    @Serializable
     data class USCustomary<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,
@@ -147,6 +154,7 @@ sealed class UndefinedDividedUnit<
         override val system = MeasurementSystem.USCustomary
     }
 
+    @Serializable
     data class MetricAndUKImperial<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,
@@ -168,6 +176,7 @@ sealed class UndefinedDividedUnit<
         override val ukImperial: UKImperial<NumeratorQuantity, NumeratorUnit, DenominatorQuantity, DenominatorUnit> by lazy { UKImperial(numerator, denominator) }
     }
 
+    @Serializable
     data class MetricAndUSCustomary<
         NumeratorQuantity : UndefinedQuantityType,
         NumeratorUnit,

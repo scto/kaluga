@@ -67,7 +67,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
 
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -89,7 +89,7 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -115,11 +115,11 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
 
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -185,7 +185,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
 
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -240,7 +240,7 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -448,7 +448,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
 
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -516,7 +516,7 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
 
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,

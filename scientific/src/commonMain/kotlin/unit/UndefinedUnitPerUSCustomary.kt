@@ -61,7 +61,7 @@ infix fun <
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     this.per(denominator.asUndefined())
 
@@ -81,7 +81,7 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -103,9 +103,9 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     this.per(denominator.asUndefined())
 
@@ -159,7 +159,7 @@ infix fun <
         ReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         NumeratorUnit : UndefinedReciprocalUnit<ReciprocalQuantity, ReciprocalUnit>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     this.per(denominator.asUndefined())
 
@@ -206,7 +206,7 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ReciprocalUnit : UndefinedScientificUnit<ReciprocalQuantity>,
         ReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
@@ -366,7 +366,7 @@ infix fun <
         NumeratorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         NumeratorUnit : UndefinedDividedUnit<NumeratorNumeratorQuantity, NumeratorNumeratorUnit, NumeratorDenominatorQuantity, NumeratorDenominatorUnit>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     this.per(denominator.asUndefined())
 
@@ -424,7 +424,7 @@ infix fun <
     > NumeratorUnit.per(
     denominator: DenominatorUnit,
 ) where
-        NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,

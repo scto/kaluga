@@ -41,7 +41,7 @@ fun <
     InverseQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     InverseUnit,
     > InverseUnit.reciprocal() where
-                                     InverseUnit : ScientificUnit<InverseQuantity>,
+                                     InverseUnit : AbstractScientificUnit<InverseQuantity>,
                                      InverseUnit : MeasurementUsage.UsedInUSCustomary =
     asUndefined().reciprocal()
 

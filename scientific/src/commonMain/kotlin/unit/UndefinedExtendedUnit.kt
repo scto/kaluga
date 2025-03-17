@@ -18,150 +18,160 @@
 package com.splendo.kaluga.scientific.unit
 
 import com.splendo.kaluga.base.utils.Decimal
+import com.splendo.kaluga.base.utils.div
+import com.splendo.kaluga.base.utils.minus
+import com.splendo.kaluga.base.utils.plus
+import com.splendo.kaluga.base.utils.times
+import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.Serializable
 
+@Serializable
 sealed class UndefinedExtendedUnit<
     ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     > :
     AbstractUndefinedScientificUnit<UndefinedQuantityType.Extended<ExtendedQuantity>>() {
+
     abstract val extendedQuantity: ExtendedQuantity
     override val quantityType by lazy { UndefinedQuantityType.Extended(extendedQuantity) }
 
     override val numeratorUnits: List<ScientificUnit<*>> by lazy { listOf(this) }
     override val denominatorUnits: List<ScientificUnit<*>> = emptyList()
+}
 
-    abstract class MetricAndImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+@Serializable
+sealed class CustomUndefinedExtendedUnit<
+    ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    > : UndefinedExtendedUnit<ExtendedQuantity>() {
+
+    abstract val siFactor: Double
+    abstract val siOffset: Double
+    private val siFactorDecimal by lazy { siFactor.toDecimal() }
+    private val siOffsetDecimal by lazy { siOffset.toDecimal() }
+
+    override fun fromSIUnit(value: Decimal): Decimal = (value * siFactorDecimal) + siOffsetDecimal
+    override fun toSIUnit(value: Decimal): Decimal = (value - siOffsetDecimal) / siFactorDecimal
+
+    @Serializable
+    data class MetricAndImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.MetricAndImperial<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.MetricAndImperial
 
         override val metric: Metric<ExtendedQuantity> by lazy {
-            object : Metric<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndImperial.fromSIUnit(value)
-            }
+            Metric<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val imperial: Imperial<ExtendedQuantity> by lazy {
-            object : Imperial<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndImperial.fromSIUnit(value)
-            }
+            Imperial<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val ukImperial: UKImperial<ExtendedQuantity> by lazy {
-            object : UKImperial<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndImperial.fromSIUnit(value)
-            }
+            UKImperial<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val usCustomary: USCustomary<ExtendedQuantity> by lazy {
-            object : USCustomary<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndImperial.fromSIUnit(value)
-            }
+            USCustomary<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val metricAndUKImperial: MetricAndUKImperial<ExtendedQuantity> by lazy {
-            object : MetricAndUKImperial<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndImperial.fromSIUnit(value)
-            }
+            MetricAndUKImperial<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val metricAndUSCustomary: MetricAndUSCustomary<ExtendedQuantity> by lazy {
-            object : MetricAndUSCustomary<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndImperial.fromSIUnit(value)
-            }
+            MetricAndUSCustomary<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
     }
 
-    abstract class Metric<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+    @Serializable
+    data class Metric<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.Metric<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.Metric
     }
 
-    abstract class Imperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+    @Serializable
+    data class Imperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.Imperial<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.Imperial
 
         override val ukImperial: UKImperial<ExtendedQuantity> by lazy {
-            object : UKImperial<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@Imperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@Imperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@Imperial.fromSIUnit(value)
-            }
+            UKImperial<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val usCustomary: USCustomary<ExtendedQuantity> by lazy {
-            object : USCustomary<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@Imperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@Imperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@Imperial.fromSIUnit(value)
-            }
+            USCustomary<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
     }
 
-    abstract class UKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+    @Serializable
+    data class UKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.UKImperial<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.UKImperial
     }
 
-    abstract class USCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+    @Serializable
+    data class USCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.USCustomary<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.USCustomary
     }
 
-    abstract class MetricAndUKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+    @Serializable
+    data class MetricAndUKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.MetricAndUKImperial<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.MetricAndUKImperial
 
         override val metric: Metric<ExtendedQuantity> by lazy {
-            object : Metric<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndUKImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndUKImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndUKImperial.fromSIUnit(value)
-            }
+            Metric<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val ukImperial: UKImperial<ExtendedQuantity> by lazy {
-            object : UKImperial<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndUKImperial.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndUKImperial.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndUKImperial.fromSIUnit(value)
-            }
+            UKImperial<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
     }
 
-    abstract class MetricAndUSCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
-        UndefinedExtendedUnit<ExtendedQuantity>(),
+    @Serializable
+    data class MetricAndUSCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension>(
+        override val extendedQuantity: ExtendedQuantity,
+        override val siFactor: Double,
+        override val siOffset: Double,
+        override val symbol: String,
+    ) : CustomUndefinedExtendedUnit<ExtendedQuantity>(),
         UndefinedScientificUnit.MetricAndUSCustomary<UndefinedQuantityType.Extended<ExtendedQuantity>> {
         override val system = MeasurementSystem.MetricAndUSCustomary
 
         override val metric: Metric<ExtendedQuantity> by lazy {
-            object : Metric<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndUSCustomary.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndUSCustomary.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndUSCustomary.fromSIUnit(value)
-            }
+            Metric<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
         override val usCustomary: USCustomary<ExtendedQuantity> by lazy {
-            object : USCustomary<ExtendedQuantity>() {
-                override val extendedQuantity: ExtendedQuantity = this@MetricAndUSCustomary.extendedQuantity
-                override fun toSIUnit(value: Decimal): Decimal = this@MetricAndUSCustomary.toSIUnit(value)
-                override fun fromSIUnit(value: Decimal): Decimal = this@MetricAndUSCustomary.fromSIUnit(value)
-            }
+            USCustomary<ExtendedQuantity>(extendedQuantity, siFactor, siOffset, symbol)
         }
     }
 }
 
+@Serializable
 sealed class WrappedUndefinedExtendedUnit<
     WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     WrappedUnit : ScientificUnit<WrappedQuantity>,
@@ -177,6 +187,7 @@ sealed class WrappedUndefinedExtendedUnit<
     override fun deltaFromSIUnitDelta(delta: Decimal): Decimal = wrapped.deltaFromSIUnitDelta(delta)
     override fun deltaToSIUnitDelta(delta: Decimal): Decimal = wrapped.deltaToSIUnitDelta(delta)
 
+    @Serializable
     data class MetricAndImperial<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -184,7 +195,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.MetricAndImperial<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric,
               WrappedUnit : MeasurementUsage.UsedInUKImperial,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
@@ -197,6 +208,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val metricAndUSCustomary: MetricAndUSCustomary<WrappedQuantity, WrappedUnit> by lazy { MetricAndUSCustomary(wrapped) }
     }
 
+    @Serializable
     data class Metric<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -204,11 +216,12 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.Metric<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric {
         override val system = MeasurementSystem.Metric
     }
 
+    @Serializable
     data class Imperial<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -216,7 +229,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.Imperial<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInUKImperial,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.Imperial
@@ -224,6 +237,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val usCustomary: USCustomary<WrappedQuantity, WrappedUnit> by lazy { USCustomary(wrapped) }
     }
 
+    @Serializable
     data class UKImperial<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -231,11 +245,12 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.UKImperial<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.UKImperial
     }
 
+    @Serializable
     data class USCustomary<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -243,11 +258,12 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.USCustomary<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.USCustomary
     }
 
+    @Serializable
     data class MetricAndUKImperial<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -255,7 +271,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.MetricAndUKImperial<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric,
               WrappedUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.MetricAndUKImperial
@@ -263,6 +279,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val ukImperial: UKImperial<WrappedQuantity, WrappedUnit> by lazy { UKImperial(wrapped) }
     }
 
+    @Serializable
     data class MetricAndUSCustomary<
         WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
         WrappedUnit,
@@ -270,7 +287,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedScientificUnit.MetricAndUSCustomary<UndefinedQuantityType.Extended<WrappedQuantity>> where
-              WrappedUnit : ScientificUnit<WrappedQuantity>,
+              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.MetricAndUSCustomary
@@ -283,7 +300,7 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric,
                                Unit : MeasurementUsage.UsedInUKImperial,
                                Unit : MeasurementUsage.UsedInUSCustomary =
@@ -294,14 +311,14 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric =
     WrappedUndefinedExtendedUnit.Metric(this)
 fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInUKImperial,
                                Unit : MeasurementUsage.UsedInUSCustomary =
     WrappedUndefinedExtendedUnit.Imperial(
@@ -311,21 +328,21 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInUKImperial =
     WrappedUndefinedExtendedUnit.UKImperial(this)
 fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInUSCustomary =
     WrappedUndefinedExtendedUnit.USCustomary(this)
 fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric,
                                Unit : MeasurementUsage.UsedInUKImperial =
     WrappedUndefinedExtendedUnit.MetricAndUKImperial(
@@ -335,7 +352,7 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : ScientificUnit<Quantity>,
+                               Unit : AbstractScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric,
                                Unit : MeasurementUsage.UsedInUSCustomary =
     WrappedUndefinedExtendedUnit.MetricAndUSCustomary(

@@ -21,7 +21,9 @@ import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.base.utils.div
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.Serializable
 
+@Serializable
 sealed class UndefinedReciprocalUnit<
     InverseQuantity : UndefinedQuantityType,
     InverseUnit : UndefinedScientificUnit<InverseQuantity>,
@@ -44,6 +46,7 @@ sealed class UndefinedReciprocalUnit<
     override fun fromSIUnit(value: Decimal): Decimal = inverse.deltaFromSIUnitDelta(1.0.toDecimal() / value)
     override fun toSIUnit(value: Decimal): Decimal = inverse.deltaToSIUnitDelta(1.0.toDecimal() / value)
 
+    @Serializable
     data class MetricAndImperial<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,
@@ -64,6 +67,7 @@ sealed class UndefinedReciprocalUnit<
         override val metricAndUSCustomary: MetricAndUSCustomary<InverseQuantity, InverseUnit> by lazy { MetricAndUSCustomary(inverse) }
     }
 
+    @Serializable
     data class Metric<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,
@@ -75,6 +79,7 @@ sealed class UndefinedReciprocalUnit<
         override val system = MeasurementSystem.Metric
     }
 
+    @Serializable
     data class Imperial<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,
@@ -90,6 +95,7 @@ sealed class UndefinedReciprocalUnit<
         override val usCustomary: USCustomary<InverseQuantity, InverseUnit> by lazy { USCustomary(inverse) }
     }
 
+    @Serializable
     data class UKImperial<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,
@@ -101,6 +107,7 @@ sealed class UndefinedReciprocalUnit<
         override val system = MeasurementSystem.UKImperial
     }
 
+    @Serializable
     data class USCustomary<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,
@@ -112,6 +119,7 @@ sealed class UndefinedReciprocalUnit<
         override val system = MeasurementSystem.USCustomary
     }
 
+    @Serializable
     data class MetricAndUKImperial<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,
@@ -127,6 +135,7 @@ sealed class UndefinedReciprocalUnit<
         override val ukImperial: UKImperial<InverseQuantity, InverseUnit> by lazy { UKImperial(inverse) }
     }
 
+    @Serializable
     data class MetricAndUSCustomary<
         InverseQuantity : UndefinedQuantityType,
         InverseUnit,

@@ -17,47 +17,47 @@
 
 package com.splendo.kaluga.scientific.unit
 
-import com.splendo.kaluga.base.utils.Decimal
+import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class UndefinedScientificUnitTest {
 
-    object UndefinedUnitA : CustomUndefinedScientificUnit.MetricAndImperial<UndefinedUnitA>() {
-        override val customQuantity: UndefinedUnitA = this
-        override val symbol: String = "A"
-        override fun fromSIUnit(value: Decimal): Decimal = value
-        override fun toSIUnit(value: Decimal): Decimal = value
-    }
+    val undefinedUnitA = CustomUndefinedExtendedUnit.MetricAndImperial(
+        PhysicalQuantity.Length,
+        siFactor = 1.0,
+        siOffset = 0.0,
+        symbol = "A",
+    )
 
-    object UndefinedUnitB : CustomUndefinedScientificUnit.MetricAndImperial<UndefinedUnitB>() {
-        override val customQuantity: UndefinedUnitB = this
-        override val symbol: String = "B"
-        override fun fromSIUnit(value: Decimal): Decimal = value
-        override fun toSIUnit(value: Decimal): Decimal = value
-    }
+    val undefinedUnitB = CustomUndefinedExtendedUnit.MetricAndImperial(
+        PhysicalQuantity.Weight,
+        siFactor = 1.0,
+        siOffset = 0.0,
+        symbol = "B",
+    )
 
-    object UndefinedUnitC : CustomUndefinedScientificUnit.MetricAndImperial<UndefinedUnitC>() {
-        override val customQuantity: UndefinedUnitC = this
-        override val symbol: String = "C"
-        override fun fromSIUnit(value: Decimal): Decimal = value
-        override fun toSIUnit(value: Decimal): Decimal = value
-    }
+    val undefinedUnitC = CustomUndefinedExtendedUnit.MetricAndImperial(
+        PhysicalQuantity.AmountOfSubstance,
+        siFactor = 1.0,
+        siOffset = 0.0,
+        symbol = "C",
+    )
 
-    object UndefinedUnitD : CustomUndefinedScientificUnit.MetricAndImperial<UndefinedUnitD>() {
-        override val customQuantity: UndefinedUnitD = this
-        override val symbol: String = "D"
-        override fun fromSIUnit(value: Decimal): Decimal = value
-        override fun toSIUnit(value: Decimal): Decimal = value
-    }
+    val undefinedUnitD = CustomUndefinedExtendedUnit.MetricAndImperial(
+        PhysicalQuantity.ElectricCharge,
+        siFactor = 1.0,
+        siOffset = 0.0,
+        symbol = "D",
+    )
 
     @Test
     fun testAReciprocal() {
-        val aReciprocal = UndefinedUnitA.reciprocal()
+        val aReciprocal = undefinedUnitA.reciprocal()
         assertIs<UndefinedReciprocalUnit.MetricAndImperial<*, *>>(aReciprocal)
-        assertEquals("${UndefinedUnitA.symbol}-1", aReciprocal.symbol)
-        assertEquals(UndefinedUnitA, aReciprocal.inverse)
+        assertEquals("${undefinedUnitA.symbol}-1", aReciprocal.symbol)
+        assertEquals(undefinedUnitA, aReciprocal.inverse)
 
         val hourReciprocal = Hour.reciprocal()
         assertIs<UndefinedReciprocalUnit.MetricAndImperial<*, *>>(hourReciprocal)
@@ -67,22 +67,22 @@ class UndefinedScientificUnitTest {
 
     @Test
     fun testAPerB() {
-        val aPerB = (UndefinedUnitA per UndefinedUnitB)
+        val aPerB = (undefinedUnitA per undefinedUnitB)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(aPerB)
-        assertEquals("${UndefinedUnitA.symbol} / ${UndefinedUnitB.symbol}", aPerB.symbol)
-        assertEquals(UndefinedUnitA, aPerB.numerator)
-        assertEquals(UndefinedUnitB, aPerB.denominator)
+        assertEquals("${undefinedUnitA.symbol} / ${undefinedUnitB.symbol}", aPerB.symbol)
+        assertEquals(undefinedUnitA, aPerB.numerator)
+        assertEquals(undefinedUnitB, aPerB.denominator)
 
-        val hourPerB = (Hour per UndefinedUnitB)
+        val hourPerB = (Hour per undefinedUnitB)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(hourPerB)
-        assertEquals("${Hour.symbol} / ${UndefinedUnitB.symbol}", hourPerB.symbol)
+        assertEquals("${Hour.symbol} / ${undefinedUnitB.symbol}", hourPerB.symbol)
         assertEquals(Hour.asUndefined(), hourPerB.numerator)
-        assertEquals(UndefinedUnitB, hourPerB.denominator)
+        assertEquals(undefinedUnitB, hourPerB.denominator)
 
-        val aPerWatt = (UndefinedUnitA per Watt)
+        val aPerWatt = (undefinedUnitA per Watt)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(aPerWatt)
-        assertEquals("${UndefinedUnitA.symbol} / ${Watt.symbol}", aPerWatt.symbol)
-        assertEquals(UndefinedUnitA, aPerWatt.numerator)
+        assertEquals("${undefinedUnitA.symbol} / ${Watt.symbol}", aPerWatt.symbol)
+        assertEquals(undefinedUnitA, aPerWatt.numerator)
         assertEquals(Watt.asUndefined(), aPerWatt.denominator)
 
         val hourPerWatt = (Hour per Watt)
@@ -94,42 +94,42 @@ class UndefinedScientificUnitTest {
 
     @Test
     fun testAPerReciprocalB() {
-        val aPerReciprocalB = UndefinedUnitA per UndefinedUnitB.reciprocal()
+        val aPerReciprocalB = undefinedUnitA per undefinedUnitB.reciprocal()
         assertIs<UndefinedMultipliedUnit.MetricAndImperial<*, *, *, *>>(aPerReciprocalB)
-        assertEquals("${UndefinedUnitA.symbol} * ${UndefinedUnitB.symbol}", aPerReciprocalB.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitB, aPerReciprocalB)
+        assertEquals("${undefinedUnitA.symbol} * ${undefinedUnitB.symbol}", aPerReciprocalB.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitB, aPerReciprocalB)
 
-        val hourPerReciprocalB = Hour per UndefinedUnitB.reciprocal()
+        val hourPerReciprocalB = Hour per undefinedUnitB.reciprocal()
         assertIs<UndefinedMultipliedUnit.MetricAndImperial<*, *, *, *>>(hourPerReciprocalB)
-        assertEquals("${Hour.symbol} * ${UndefinedUnitB.symbol}", hourPerReciprocalB.symbol)
-        assertEquals(Hour x UndefinedUnitB, hourPerReciprocalB)
+        assertEquals("${Hour.symbol} * ${undefinedUnitB.symbol}", hourPerReciprocalB.symbol)
+        assertEquals(Hour x undefinedUnitB, hourPerReciprocalB)
     }
 
     @Test
     fun testAPerDividedBC() {
-        val aPerBOverC = UndefinedUnitA per (UndefinedUnitB per UndefinedUnitC)
+        val aPerBOverC = undefinedUnitA per (undefinedUnitB per undefinedUnitC)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(aPerBOverC)
-        assertEquals("${UndefinedUnitA.symbol} * ${UndefinedUnitC.symbol} / ${UndefinedUnitB.symbol}", aPerBOverC.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitC, aPerBOverC.numerator)
-        assertEquals(UndefinedUnitB, aPerBOverC.denominator)
+        assertEquals("${undefinedUnitA.symbol} * ${undefinedUnitC.symbol} / ${undefinedUnitB.symbol}", aPerBOverC.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitC, aPerBOverC.numerator)
+        assertEquals(undefinedUnitB, aPerBOverC.denominator)
 
-        val aPerBOverA = UndefinedUnitA per (UndefinedUnitB per UndefinedUnitA)
+        val aPerBOverA = undefinedUnitA per (undefinedUnitB per undefinedUnitA)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(aPerBOverA)
-        assertEquals("${UndefinedUnitA.symbol}2 / ${UndefinedUnitB.symbol}", aPerBOverA.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitA, aPerBOverA.numerator)
-        assertEquals(UndefinedUnitB, aPerBOverA.denominator)
+        assertEquals("${undefinedUnitA.symbol}2 / ${undefinedUnitB.symbol}", aPerBOverA.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitA, aPerBOverA.numerator)
+        assertEquals(undefinedUnitB, aPerBOverA.denominator)
 
-        val hourPerBOverC = Hour per (UndefinedUnitB per UndefinedUnitC)
+        val hourPerBOverC = Hour per (undefinedUnitB per undefinedUnitC)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(hourPerBOverC)
-        assertEquals("${Hour.symbol} * ${UndefinedUnitC.symbol} / ${UndefinedUnitB.symbol}", hourPerBOverC.symbol)
-        assertEquals(Hour x UndefinedUnitC, hourPerBOverC.numerator)
-        assertEquals(UndefinedUnitB, hourPerBOverC.denominator)
+        assertEquals("${Hour.symbol} * ${undefinedUnitC.symbol} / ${undefinedUnitB.symbol}", hourPerBOverC.symbol)
+        assertEquals(Hour x undefinedUnitC, hourPerBOverC.numerator)
+        assertEquals(undefinedUnitB, hourPerBOverC.denominator)
     }
 
     @Test
     fun testReciprocalAReciprocal() {
-        val reciprocalAReciprocal = UndefinedUnitA.reciprocal().reciprocal()
-        assertEquals(UndefinedUnitA, reciprocalAReciprocal)
+        val reciprocalAReciprocal = undefinedUnitA.reciprocal().reciprocal()
+        assertEquals(undefinedUnitA, reciprocalAReciprocal)
 
         val hourReciprocalReciprocal = Hour.reciprocal().reciprocal()
         assertEquals(Hour, hourReciprocalReciprocal)
@@ -137,97 +137,97 @@ class UndefinedScientificUnitTest {
 
     @Test
     fun testReciprocalAPerB() {
-        val reciprocalAPerB = UndefinedUnitA.reciprocal() per UndefinedUnitB
+        val reciprocalAPerB = undefinedUnitA.reciprocal() per undefinedUnitB
         assertIs<UndefinedReciprocalUnit.MetricAndImperial<*, *>>(reciprocalAPerB)
-        assertEquals("${UndefinedUnitA.symbol}-1 * ${UndefinedUnitB.symbol}-1", reciprocalAPerB.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitB, reciprocalAPerB.inverse)
+        assertEquals("${undefinedUnitA.symbol}-1 * ${undefinedUnitB.symbol}-1", reciprocalAPerB.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitB, reciprocalAPerB.inverse)
 
-        val reciprocalAPerWatt = UndefinedUnitA.reciprocal() per Watt
+        val reciprocalAPerWatt = undefinedUnitA.reciprocal() per Watt
         assertIs<UndefinedReciprocalUnit.MetricAndImperial<*, *>>(reciprocalAPerWatt)
-        assertEquals("${UndefinedUnitA.symbol}-1 * ${Watt.symbol}-1", reciprocalAPerWatt.symbol)
-        assertEquals(UndefinedUnitA x Watt, reciprocalAPerWatt.inverse)
+        assertEquals("${undefinedUnitA.symbol}-1 * ${Watt.symbol}-1", reciprocalAPerWatt.symbol)
+        assertEquals(undefinedUnitA x Watt, reciprocalAPerWatt.inverse)
     }
 
     @Test
     fun testReciprocalAPerReciprocalB() {
-        val reciprocalAPerReciprocalB = UndefinedUnitA.reciprocal() per UndefinedUnitB.reciprocal()
+        val reciprocalAPerReciprocalB = undefinedUnitA.reciprocal() per undefinedUnitB.reciprocal()
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(reciprocalAPerReciprocalB)
-        assertEquals("${UndefinedUnitB.symbol} / ${UndefinedUnitA.symbol}", reciprocalAPerReciprocalB.symbol)
-        assertEquals(UndefinedUnitB per UndefinedUnitA, reciprocalAPerReciprocalB)
+        assertEquals("${undefinedUnitB.symbol} / ${undefinedUnitA.symbol}", reciprocalAPerReciprocalB.symbol)
+        assertEquals(undefinedUnitB per undefinedUnitA, reciprocalAPerReciprocalB)
     }
 
     @Test
     fun testReciprocalAPerDivided() {
-        val reciprocalAPerDividedBOverC = UndefinedUnitA.reciprocal() per (UndefinedUnitB per UndefinedUnitC)
+        val reciprocalAPerDividedBOverC = undefinedUnitA.reciprocal() per (undefinedUnitB per undefinedUnitC)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(reciprocalAPerDividedBOverC)
-        assertEquals("${UndefinedUnitC.symbol} / ${UndefinedUnitA.symbol} * ${UndefinedUnitB.symbol}", reciprocalAPerDividedBOverC.symbol)
-        assertEquals(UndefinedUnitC, reciprocalAPerDividedBOverC.numerator)
-        assertEquals(UndefinedUnitA x UndefinedUnitB, reciprocalAPerDividedBOverC.denominator)
+        assertEquals("${undefinedUnitC.symbol} / ${undefinedUnitA.symbol} * ${undefinedUnitB.symbol}", reciprocalAPerDividedBOverC.symbol)
+        assertEquals(undefinedUnitC, reciprocalAPerDividedBOverC.numerator)
+        assertEquals(undefinedUnitA x undefinedUnitB, reciprocalAPerDividedBOverC.denominator)
 
-        val reciprocalAPerDividedBOverA = UndefinedUnitA.reciprocal() per (UndefinedUnitA per UndefinedUnitB)
+        val reciprocalAPerDividedBOverA = undefinedUnitA.reciprocal() per (undefinedUnitA per undefinedUnitB)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(reciprocalAPerDividedBOverA)
-        assertEquals("${UndefinedUnitB.symbol} / ${UndefinedUnitA.symbol}2", reciprocalAPerDividedBOverA.symbol)
-        assertEquals(UndefinedUnitB, reciprocalAPerDividedBOverA.numerator)
-        assertEquals(UndefinedUnitA x UndefinedUnitA, reciprocalAPerDividedBOverA.denominator)
+        assertEquals("${undefinedUnitB.symbol} / ${undefinedUnitA.symbol}2", reciprocalAPerDividedBOverA.symbol)
+        assertEquals(undefinedUnitB, reciprocalAPerDividedBOverA.numerator)
+        assertEquals(undefinedUnitA x undefinedUnitA, reciprocalAPerDividedBOverA.denominator)
     }
 
     @Test
     fun testDivedAOverBReciprocal() {
-        val aPerBReciprocal = (UndefinedUnitA per UndefinedUnitB).reciprocal()
+        val aPerBReciprocal = (undefinedUnitA per undefinedUnitB).reciprocal()
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(aPerBReciprocal)
-        assertEquals("${UndefinedUnitB.symbol} / ${UndefinedUnitA.symbol}", aPerBReciprocal.symbol)
-        assertEquals(UndefinedUnitB, aPerBReciprocal.numerator)
-        assertEquals(UndefinedUnitA, aPerBReciprocal.denominator)
+        assertEquals("${undefinedUnitB.symbol} / ${undefinedUnitA.symbol}", aPerBReciprocal.symbol)
+        assertEquals(undefinedUnitB, aPerBReciprocal.numerator)
+        assertEquals(undefinedUnitA, aPerBReciprocal.denominator)
     }
 
     @Test
     fun testDividedABPerC() {
-        val dividedABPerC = UndefinedUnitA per UndefinedUnitB per UndefinedUnitC
+        val dividedABPerC = undefinedUnitA per undefinedUnitB per undefinedUnitC
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedABPerC)
-        assertEquals("${UndefinedUnitA.symbol} / ${UndefinedUnitB.symbol} * ${UndefinedUnitC.symbol}", dividedABPerC.symbol)
-        assertEquals(UndefinedUnitA, dividedABPerC.numerator)
-        assertEquals(UndefinedUnitB x UndefinedUnitC, dividedABPerC.denominator)
+        assertEquals("${undefinedUnitA.symbol} / ${undefinedUnitB.symbol} * ${undefinedUnitC.symbol}", dividedABPerC.symbol)
+        assertEquals(undefinedUnitA, dividedABPerC.numerator)
+        assertEquals(undefinedUnitB x undefinedUnitC, dividedABPerC.denominator)
 
-        val dividedABPerB = UndefinedUnitA per UndefinedUnitB per UndefinedUnitB
+        val dividedABPerB = undefinedUnitA per undefinedUnitB per undefinedUnitB
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedABPerC)
-        assertEquals("${UndefinedUnitA.symbol} / ${UndefinedUnitB.symbol}2", dividedABPerB.symbol)
-        assertEquals(UndefinedUnitA, dividedABPerB.numerator)
-        assertEquals(UndefinedUnitB x UndefinedUnitB, dividedABPerB.denominator)
+        assertEquals("${undefinedUnitA.symbol} / ${undefinedUnitB.symbol}2", dividedABPerB.symbol)
+        assertEquals(undefinedUnitA, dividedABPerB.numerator)
+        assertEquals(undefinedUnitB x undefinedUnitB, dividedABPerB.denominator)
 
-        val dividedABPerWatt = UndefinedUnitA per UndefinedUnitB per Watt
+        val dividedABPerWatt = undefinedUnitA per undefinedUnitB per Watt
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedABPerWatt)
-        assertEquals("${UndefinedUnitA.symbol} / ${UndefinedUnitB.symbol} * ${Watt.symbol}", dividedABPerWatt.symbol)
-        assertEquals(UndefinedUnitA, dividedABPerWatt.numerator)
-        assertEquals(UndefinedUnitB x Watt, dividedABPerWatt.denominator)
+        assertEquals("${undefinedUnitA.symbol} / ${undefinedUnitB.symbol} * ${Watt.symbol}", dividedABPerWatt.symbol)
+        assertEquals(undefinedUnitA, dividedABPerWatt.numerator)
+        assertEquals(undefinedUnitB x Watt, dividedABPerWatt.denominator)
     }
 
     @Test
     fun testDividedPerReciprocalB() {
-        val dividedAOverCPerReciprocalB = UndefinedUnitA per UndefinedUnitC per UndefinedUnitB.reciprocal()
+        val dividedAOverCPerReciprocalB = undefinedUnitA per undefinedUnitC per undefinedUnitB.reciprocal()
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedAOverCPerReciprocalB)
-        assertEquals("${UndefinedUnitA.symbol} * ${UndefinedUnitB.symbol} / ${UndefinedUnitC.symbol}", dividedAOverCPerReciprocalB.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitB, dividedAOverCPerReciprocalB.numerator)
-        assertEquals(UndefinedUnitC, dividedAOverCPerReciprocalB.denominator)
+        assertEquals("${undefinedUnitA.symbol} * ${undefinedUnitB.symbol} / ${undefinedUnitC.symbol}", dividedAOverCPerReciprocalB.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitB, dividedAOverCPerReciprocalB.numerator)
+        assertEquals(undefinedUnitC, dividedAOverCPerReciprocalB.denominator)
 
-        val dividedAOverCPerReciprocalA = UndefinedUnitA per UndefinedUnitC per UndefinedUnitA.reciprocal()
+        val dividedAOverCPerReciprocalA = undefinedUnitA per undefinedUnitC per undefinedUnitA.reciprocal()
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedAOverCPerReciprocalA)
-        assertEquals("${UndefinedUnitA.symbol}2 / ${UndefinedUnitC.symbol}", dividedAOverCPerReciprocalA.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitA, dividedAOverCPerReciprocalA.numerator)
-        assertEquals(UndefinedUnitC, dividedAOverCPerReciprocalA.denominator)
+        assertEquals("${undefinedUnitA.symbol}2 / ${undefinedUnitC.symbol}", dividedAOverCPerReciprocalA.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitA, dividedAOverCPerReciprocalA.numerator)
+        assertEquals(undefinedUnitC, dividedAOverCPerReciprocalA.denominator)
     }
 
     @Test
     fun testDividedABPerDividedCD() {
-        val dividedAOverBPerDividedCOverD = (UndefinedUnitA per UndefinedUnitB) per (UndefinedUnitC per UndefinedUnitD)
+        val dividedAOverBPerDividedCOverD = (undefinedUnitA per undefinedUnitB) per (undefinedUnitC per undefinedUnitD)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedAOverBPerDividedCOverD)
-        assertEquals("${UndefinedUnitA.symbol} * ${UndefinedUnitD.symbol} / ${UndefinedUnitB.symbol} * ${UndefinedUnitC.symbol}", dividedAOverBPerDividedCOverD.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitD, dividedAOverBPerDividedCOverD.numerator)
-        assertEquals(UndefinedUnitB x UndefinedUnitC, dividedAOverBPerDividedCOverD.denominator)
+        assertEquals("${undefinedUnitA.symbol} * ${undefinedUnitD.symbol} / ${undefinedUnitB.symbol} * ${undefinedUnitC.symbol}", dividedAOverBPerDividedCOverD.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitD, dividedAOverBPerDividedCOverD.numerator)
+        assertEquals(undefinedUnitB x undefinedUnitC, dividedAOverBPerDividedCOverD.denominator)
 
-        val dividedAOverBPerDividedBOverA = (UndefinedUnitA per UndefinedUnitB) per (UndefinedUnitB per UndefinedUnitA)
+        val dividedAOverBPerDividedBOverA = (undefinedUnitA per undefinedUnitB) per (undefinedUnitB per undefinedUnitA)
         assertIs<UndefinedDividedUnit.MetricAndImperial<*, *, *, *>>(dividedAOverBPerDividedBOverA)
-        assertEquals("${UndefinedUnitA.symbol}2 / ${UndefinedUnitB.symbol}2", dividedAOverBPerDividedBOverA.symbol)
-        assertEquals(UndefinedUnitA x UndefinedUnitA, dividedAOverBPerDividedBOverA.numerator)
-        assertEquals(UndefinedUnitB x UndefinedUnitB, dividedAOverBPerDividedBOverA.denominator)
+        assertEquals("${undefinedUnitA.symbol}2 / ${undefinedUnitB.symbol}2", dividedAOverBPerDividedBOverA.symbol)
+        assertEquals(undefinedUnitA x undefinedUnitA, dividedAOverBPerDividedBOverA.numerator)
+        assertEquals(undefinedUnitB x undefinedUnitB, dividedAOverBPerDividedBOverA.denominator)
     }
 }
