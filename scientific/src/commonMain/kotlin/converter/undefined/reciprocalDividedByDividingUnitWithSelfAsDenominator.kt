@@ -35,14 +35,41 @@ import kotlin.jvm.JvmName
 fun <
     NumeratorReciprocalAndDenominatorDenominatorQuantity : UndefinedQuantityType,
     NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
-    NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+    NumeratorUnit : UndefinedReciprocalUnit<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        NumeratorReciprocalAndDenominatorDenominatorUnit,
+        >,
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
-    DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
-    TargetUnit : UndefinedReciprocalUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorNumeratorQuantity>, TargetUnit>,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    DenominatorUnit : UndefinedDividedUnit<
+        DenominatorNumeratorQuantity,
+        DenominatorNumeratorUnit,
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        NumeratorReciprocalAndDenominatorDenominatorUnit,
+        >,
+    TargetUnit : UndefinedReciprocalUnit<
+        DenominatorNumeratorQuantity,
+        DenominatorNumeratorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            DenominatorNumeratorQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
     reciprocalTargetUnit: DenominatorNumeratorUnit.() -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.numerator.reciprocalTargetUnit().byDividing(this, right, factory)
@@ -55,14 +82,28 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -70,7 +111,12 @@ infix fun <
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -95,16 +141,35 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
     dividedByDividingUnitWithSelfAsDenominator(
         right,
@@ -127,19 +192,38 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedByDividingUnitWithSelfAsDenominator(
@@ -163,16 +247,35 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
     dividedByDividingUnitWithSelfAsDenominator(
         right,
@@ -195,16 +298,35 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedByDividingUnitWithSelfAsDenominator(
         right,
@@ -227,19 +349,38 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
     dividedByDividingUnitWithSelfAsDenominator(
@@ -263,19 +404,38 @@ infix fun <
     DenominatorNumeratorQuantity : UndefinedQuantityType,
     DenominatorNumeratorUnit,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalAndDenominatorDenominatorQuantity>, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-    right: UndefinedScientificValue<UndefinedQuantityType.Dividing<DenominatorNumeratorQuantity, NumeratorReciprocalAndDenominatorDenominatorQuantity>, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalAndDenominatorDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalAndDenominatorDenominatorUnit : UndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity>,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalAndDenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedScientificUnit<DenominatorNumeratorQuantity>,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedDividedUnit<DenominatorNumeratorQuantity, DenominatorNumeratorUnit, NumeratorReciprocalAndDenominatorDenominatorQuantity, NumeratorReciprocalAndDenominatorDenominatorUnit>,
+        DenominatorUnit : UndefinedDividedUnit<
+            DenominatorNumeratorQuantity,
+            DenominatorNumeratorUnit,
+            NumeratorReciprocalAndDenominatorDenominatorQuantity,
+            NumeratorReciprocalAndDenominatorDenominatorUnit,
+            >,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedByDividingUnitWithSelfAsDenominator(

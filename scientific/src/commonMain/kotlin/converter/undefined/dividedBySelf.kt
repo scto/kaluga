@@ -39,8 +39,14 @@ fun <
     NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
     TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
     TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
     getDimensionless: () -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byDividing(this, right, factory)
@@ -49,8 +55,14 @@ fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
@@ -70,8 +82,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric =
@@ -89,8 +107,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial,
@@ -109,8 +133,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUKImperial =
@@ -128,8 +158,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -147,8 +183,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
@@ -167,8 +209,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) where
         NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         NumeratorAndDenominatorUnit : MeasurementUsage.UsedInMetric,
@@ -187,8 +235,14 @@ infix fun <
 infix fun <
     NumeratorAndDenominatorQuantity : UndefinedQuantityType,
     NumeratorAndDenominatorUnit : UndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-    > UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>.dividedBySelf(
-    right: UndefinedScientificValue<NumeratorAndDenominatorQuantity, NumeratorAndDenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorQuantity,
+    NumeratorAndDenominatorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        NumeratorAndDenominatorQuantity,
+        NumeratorAndDenominatorUnit,
+        >,
 ) = dividedBySelf(
     right,
     getDimensionless = { One },

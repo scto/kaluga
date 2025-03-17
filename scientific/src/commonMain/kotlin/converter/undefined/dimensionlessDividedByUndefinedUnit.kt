@@ -39,10 +39,21 @@ fun <
     NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
-    TargetUnit : UndefinedReciprocalUnit<DenominatorQuantity, DenominatorUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Reciprocal<DenominatorQuantity>, TargetUnit>,
+    TargetUnit : UndefinedReciprocalUnit<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            DenominatorQuantity,
+            >,
+        TargetUnit,
+        >,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
     reciprocalTargetUnit: DenominatorUnit.() -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.reciprocalTargetUnit().byDividing(this, right, factory)
@@ -53,7 +64,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
@@ -82,7 +96,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
@@ -107,7 +124,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
@@ -134,7 +154,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
@@ -159,7 +182,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -184,7 +210,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
@@ -211,7 +240,10 @@ infix fun <
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,

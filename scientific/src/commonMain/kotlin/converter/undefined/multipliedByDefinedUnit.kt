@@ -42,15 +42,38 @@ fun <
     LeftUnit : UndefinedScientificUnit<LeftQuantity>,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit : ScientificUnit<RightQuantity>,
-    WrappedRightUnit : WrappedUndefinedExtendedUnit<RightQuantity, RightUnit>,
-    TargetUnit : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, UndefinedQuantityType.Extended<RightQuantity>, WrappedRightUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftQuantity, UndefinedQuantityType.Extended<RightQuantity>>, TargetUnit>,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    WrappedRightUnit : WrappedUndefinedExtendedUnit<
+        RightQuantity,
+        RightUnit,
+        >,
+    TargetUnit : UndefinedMultipliedUnit<
+        LeftQuantity,
+        LeftUnit,
+        UndefinedQuantityType.Extended<
+            RightQuantity,
+            >,
+        WrappedRightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            LeftQuantity,
+            UndefinedQuantityType.Extended<
+                RightQuantity,
+                >,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
     rightAsUndefined: RightUnit.() -> WrappedRightUnit,
     leftUnitXWrappedRightUnit: LeftUnit.(WrappedRightUnit) -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.leftUnitXWrappedRightUnit(right.unit.rightAsUndefined()).byMultiplying(this, right, factory)
+) = unit.leftUnitXWrappedRightUnit(
+    right.unit.rightAsUndefined(),
+).byMultiplying(this, right, factory)
 
 @JvmName("metricAndImperialMultipliedByMetricAndImperialDefinedUnit")
 infix fun <
@@ -58,7 +81,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -78,8 +104,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.MetricAndImperial<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndImperial<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndImperial<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -91,7 +122,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -107,8 +141,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.Metric<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.Metric<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.Metric<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -120,7 +159,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -138,8 +180,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.Imperial<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.Imperial<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.Imperial<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -151,7 +198,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -167,8 +217,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.UKImperial<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.UKImperial<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.UKImperial<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -180,7 +235,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -196,8 +254,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.USCustomary<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.USCustomary<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.USCustomary<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -209,7 +272,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -227,8 +293,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.MetricAndUKImperial<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndUKImperial<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndUKImperial<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -240,7 +311,10 @@ infix fun <
     LeftUnit,
     RightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByDefinedUnit(
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByDefinedUnit(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
@@ -258,8 +332,13 @@ infix fun <
             unit: UndefinedMultipliedUnit.MetricAndUSCustomary<
                 LeftQuantity,
                 LeftUnit,
-                UndefinedQuantityType.Extended<RightQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<RightQuantity, RightUnit>,
+                UndefinedQuantityType.Extended<
+                    RightQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<
+                    RightQuantity,
+                    RightUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)

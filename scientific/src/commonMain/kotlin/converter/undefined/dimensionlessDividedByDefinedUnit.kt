@@ -41,9 +41,24 @@ fun <
     NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit : ScientificUnit<DenominatorQuantity>,
-    WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<DenominatorQuantity, DenominatorUnit>,
-    TargetUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<DenominatorQuantity>, WrappedDenominatorUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<DenominatorQuantity>>, TargetUnit>,
+    WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Extended<
+            DenominatorQuantity,
+            >,
+        WrappedDenominatorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Extended<
+                DenominatorQuantity,
+                >,
+            >,
+        TargetUnit,
+        >,
     > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
     denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
@@ -74,8 +89,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.MetricAndImperial<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndImperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndImperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -100,8 +120,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.Metric<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.Metric<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.Metric<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -128,8 +153,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.Imperial<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.Imperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.Imperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -154,8 +184,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.UKImperial<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.UKImperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.UKImperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -180,8 +215,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.USCustomary<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.USCustomary<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.USCustomary<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -208,8 +248,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.MetricAndUKImperial<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndUKImperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndUKImperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -236,8 +281,13 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.MetricAndUSCustomary<
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)

@@ -42,15 +42,38 @@ fun <
     NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit : ScientificUnit<DenominatorQuantity>,
-    WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<DenominatorQuantity, DenominatorUnit>,
-    TargetUnit : UndefinedDividedUnit<NumeratorQuantity, NumeratorUnit, UndefinedQuantityType.Extended<DenominatorQuantity>, WrappedDenominatorUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorQuantity, UndefinedQuantityType.Extended<DenominatorQuantity>>, TargetUnit>,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetUnit : UndefinedDividedUnit<
+        NumeratorQuantity,
+        NumeratorUnit,
+        UndefinedQuantityType.Extended<
+            DenominatorQuantity,
+            >,
+        WrappedDenominatorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            NumeratorQuantity,
+            UndefinedQuantityType.Extended<
+                DenominatorQuantity,
+                >,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
     denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
     numeratorUnitPerWrappedDenominatorUnit: NumeratorUnit.(WrappedDenominatorUnit) -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numeratorUnitPerWrappedDenominatorUnit(right.unit.denominatorAsUndefined()).byDividing(this, right, factory)
+) = unit.numeratorUnitPerWrappedDenominatorUnit(
+    right.unit.denominatorAsUndefined(),
+).byDividing(this, right, factory)
 
 @JvmName("metricAndImperialDividedByMetricAndImperialDefinedUnit")
 infix fun <
@@ -58,7 +81,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -78,8 +104,13 @@ infix fun <
             unit: UndefinedDividedUnit.MetricAndImperial<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndImperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndImperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -91,7 +122,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -107,8 +141,13 @@ infix fun <
             unit: UndefinedDividedUnit.Metric<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.Metric<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.Metric<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -120,7 +159,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -138,8 +180,13 @@ infix fun <
             unit: UndefinedDividedUnit.Imperial<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.Imperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.Imperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -151,7 +198,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -167,8 +217,13 @@ infix fun <
             unit: UndefinedDividedUnit.UKImperial<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.UKImperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.UKImperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -180,7 +235,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -196,8 +254,13 @@ infix fun <
             unit: UndefinedDividedUnit.USCustomary<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.USCustomary<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.USCustomary<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -209,7 +272,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -227,8 +293,13 @@ infix fun <
             unit: UndefinedDividedUnit.MetricAndUKImperial<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndUKImperial<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndUKImperial<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)
@@ -240,7 +311,10 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByDefinedUnit(
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
     right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
@@ -258,8 +332,13 @@ infix fun <
             unit: UndefinedDividedUnit.MetricAndUSCustomary<
                 NumeratorQuantity,
                 NumeratorUnit,
-                UndefinedQuantityType.Extended<DenominatorQuantity>,
-                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<DenominatorQuantity, DenominatorUnit>,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                WrappedUndefinedExtendedUnit.MetricAndUSCustomary<
+                    DenominatorQuantity,
+                    DenominatorUnit,
+                    >,
                 >,
         ->
         DefaultUndefinedScientificValue(value, unit)

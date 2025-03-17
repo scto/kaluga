@@ -37,12 +37,42 @@ fun <
     LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
     LeftReciprocalRightAndRightQuantity : UndefinedQuantityType,
     LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
-    LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
-    LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
-    TargetUnit : UndefinedReciprocalUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Reciprocal<LeftReciprocalLeftQuantity>, TargetUnit>,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    LeftReciprocalUnit : UndefinedMultipliedUnit<
+        LeftReciprocalLeftQuantity,
+        LeftReciprocalLeftUnit,
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
+    LeftUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        LeftReciprocalUnit,
+        >,
+    TargetUnit : UndefinedReciprocalUnit<
+        LeftReciprocalLeftQuantity,
+        LeftReciprocalLeftUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            LeftReciprocalLeftQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
     reciprocalTargetUnit: LeftReciprocalLeftUnit.() -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.inverse.left.reciprocalTargetUnit().byMultiplying(this, right, factory)
@@ -55,8 +85,19 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
@@ -66,11 +107,22 @@ infix fun <
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
@@ -95,16 +147,38 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInMetric,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInMetric,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric =
     multipliedByRight(
         right,
@@ -127,8 +201,19 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
@@ -136,10 +221,21 @@ infix fun <
         LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedByRight(
@@ -163,16 +259,38 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUKImperial,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInUKImperial,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
     multipliedByRight(
         right,
@@ -195,16 +313,38 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
         LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedByRight(
         right,
@@ -227,8 +367,19 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
@@ -236,10 +387,21 @@ infix fun <
         LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUKImperial,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalUnit : MeasurementUsage.UsedInUKImperial,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
     multipliedByRight(
@@ -263,8 +425,19 @@ infix fun <
     LeftReciprocalRightAndRightUnit,
     LeftReciprocalUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>>, LeftUnit>.multipliedByRight(
-    right: UndefinedScientificValue<LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalRightAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByRight(
+    right: UndefinedScientificValue<
+        LeftReciprocalRightAndRightQuantity,
+        LeftReciprocalRightAndRightUnit,
+        >,
 ) where
         LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
@@ -272,10 +445,21 @@ infix fun <
         LeftReciprocalRightAndRightUnit : UndefinedScientificUnit<LeftReciprocalRightAndRightQuantity>,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalUnit : UndefinedMultipliedUnit<LeftReciprocalLeftQuantity, LeftReciprocalLeftUnit, LeftReciprocalRightAndRightQuantity, LeftReciprocalRightAndRightUnit>,
+        LeftReciprocalUnit : UndefinedMultipliedUnit<
+            LeftReciprocalLeftQuantity,
+            LeftReciprocalLeftUnit,
+            LeftReciprocalRightAndRightQuantity,
+            LeftReciprocalRightAndRightUnit,
+            >,
         LeftReciprocalUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<LeftReciprocalLeftQuantity, LeftReciprocalRightAndRightQuantity>, LeftReciprocalUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Multiplying<
+                LeftReciprocalLeftQuantity,
+                LeftReciprocalRightAndRightQuantity,
+                >,
+            LeftReciprocalUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedByRight(

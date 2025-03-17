@@ -39,11 +39,26 @@ import kotlin.jvm.JvmName
 fun <
     LeftReciprocalAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     LeftReciprocalAndRightUnit : ScientificUnit<LeftReciprocalAndRightQuantity>,
-    WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
-    LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+    WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+        LeftReciprocalAndRightQuantity,
+        LeftReciprocalAndRightUnit,
+        >,
+    LeftUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        WrappedLeftReciprocalAndRightUnit,
+        >,
     TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
     TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
     getDimensionless: () -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
@@ -55,18 +70,33 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
@@ -86,14 +116,29 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric =
     multipliedBySelfAsDefinedSelf(
         right,
@@ -111,16 +156,31 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBySelfAsDefinedSelf(
@@ -139,14 +199,29 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBySelfAsDefinedSelf(
         right,
@@ -164,14 +239,29 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBySelfAsDefinedSelf(
         right,
@@ -189,16 +279,31 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUKImperial,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBySelfAsDefinedSelf(
@@ -217,16 +322,31 @@ infix fun <
     LeftReciprocalAndRightUnit,
     WrappedLeftReciprocalAndRightUnit,
     LeftUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) where
         LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
+        WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+            LeftReciprocalAndRightQuantity,
+            LeftReciprocalAndRightUnit,
+            >,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInMetric,
         WrappedLeftReciprocalAndRightUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
+        LeftUnit : UndefinedReciprocalUnit<
+            UndefinedQuantityType.Extended<
+                LeftReciprocalAndRightQuantity,
+                >,
+            WrappedLeftReciprocalAndRightUnit,
+            >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBySelfAsDefinedSelf(
@@ -243,9 +363,24 @@ infix fun <
 infix fun <
     LeftReciprocalAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     LeftReciprocalAndRightUnit : AbstractScientificUnit<LeftReciprocalAndRightQuantity>,
-    WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
-    LeftUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>, WrappedLeftReciprocalAndRightUnit>,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Extended<LeftReciprocalAndRightQuantity>>, LeftUnit>.multipliedBySelfAsDefinedSelf(
+    WrappedLeftReciprocalAndRightUnit : WrappedUndefinedExtendedUnit<
+        LeftReciprocalAndRightQuantity,
+        LeftReciprocalAndRightUnit,
+        >,
+    LeftUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        WrappedLeftReciprocalAndRightUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            LeftReciprocalAndRightQuantity,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedBySelfAsDefinedSelf(
     right: ScientificValue<LeftReciprocalAndRightQuantity, LeftReciprocalAndRightUnit>,
 ) = multipliedBySelfAsDefinedSelf(
     right,

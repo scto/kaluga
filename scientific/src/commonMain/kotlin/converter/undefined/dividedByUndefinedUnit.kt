@@ -36,13 +36,32 @@ fun <
     NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
-    TargetUnit : UndefinedDividedUnit<NumeratorQuantity, NumeratorUnit, DenominatorQuantity, DenominatorUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Dividing<NumeratorQuantity, DenominatorQuantity>, TargetUnit>,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    TargetUnit : UndefinedDividedUnit<
+        NumeratorQuantity,
+        NumeratorUnit,
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            NumeratorQuantity,
+            DenominatorQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
     numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numeratorUnitPerDenominatorUnit(right.unit).byDividing(this, right, factory)
+) = unit.numeratorUnitPerDenominatorUnit(
+    right.unit,
+).byDividing(this, right, factory)
 
 @JvmName("metricAndImperialDividedByMetricAndImperialUndefinedUnit")
 infix fun <
@@ -50,8 +69,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
@@ -82,8 +107,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
@@ -110,8 +141,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
@@ -140,8 +177,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
@@ -168,8 +211,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -196,8 +245,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
@@ -226,8 +281,14 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    NumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,

@@ -36,18 +36,50 @@ import kotlin.jvm.JvmName
 fun <
     NumeratorReciprocalQuantity : UndefinedQuantityType,
     NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
-    NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+    NumeratorUnit : UndefinedReciprocalUnit<
+        NumeratorReciprocalQuantity,
+        NumeratorReciprocalUnit,
+        >,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
-    TargetReciprocalUnit : UndefinedMultipliedUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit, DenominatorQuantity, DenominatorUnit>,
-    TargetUnit : UndefinedReciprocalUnit<UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>, TargetReciprocalUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Reciprocal<UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>>, TargetUnit>,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    TargetReciprocalUnit : UndefinedMultipliedUnit<
+        NumeratorReciprocalQuantity,
+        NumeratorReciprocalUnit,
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            NumeratorReciprocalQuantity,
+            DenominatorQuantity,
+            >,
+        TargetReciprocalUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Multiplying<
+                NumeratorReciprocalQuantity,
+                DenominatorQuantity,
+                >,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
     numeratorReciprocalUnitXDenominatorUnit: NumeratorReciprocalUnit.(DenominatorUnit) -> TargetReciprocalUnit,
     reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.inverse.numeratorReciprocalUnitXDenominatorUnit(right.unit).reciprocalTargetUnit().byDividing(this, right, factory)
+) = unit.inverse.numeratorReciprocalUnitXDenominatorUnit(
+    right.unit,
+).reciprocalTargetUnit().byDividing(this, right, factory)
 
 @JvmName("metricAndImperialReciprocalDividedByMetricAndImperialUndefinedUnit")
 infix fun <
@@ -56,14 +88,25 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -78,7 +121,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.MetricAndImperial<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.MetricAndImperial<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,
@@ -97,12 +143,23 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInMetric,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
@@ -113,7 +170,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.Metric<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.Metric<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,
@@ -132,13 +192,24 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
@@ -151,7 +222,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.Imperial<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.Imperial<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,
@@ -170,12 +244,23 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
@@ -186,7 +271,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.UKImperial<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.UKImperial<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,
@@ -205,12 +293,23 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -221,7 +320,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.USCustomary<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.USCustomary<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,
@@ -240,13 +342,24 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
@@ -259,7 +372,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.MetricAndUKImperial<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.MetricAndUKImperial<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,
@@ -278,13 +394,24 @@ infix fun <
     NumeratorUnit,
     DenominatorQuantity : UndefinedQuantityType,
     DenominatorUnit,
-    > UndefinedScientificValue<UndefinedQuantityType.Reciprocal<NumeratorReciprocalQuantity>, NumeratorUnit>.dividedByUndefinedUnit(
-    right: UndefinedScientificValue<DenominatorQuantity, DenominatorUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
 ) where
         NumeratorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalQuantity>,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorUnit : UndefinedReciprocalUnit<NumeratorReciprocalQuantity, NumeratorReciprocalUnit>,
+        NumeratorUnit : UndefinedReciprocalUnit<
+            NumeratorReciprocalQuantity,
+            NumeratorReciprocalUnit,
+            >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
@@ -297,7 +424,10 @@ infix fun <
     ) {
             value: Decimal,
             unit: UndefinedReciprocalUnit.MetricAndUSCustomary<
-                UndefinedQuantityType.Multiplying<NumeratorReciprocalQuantity, DenominatorQuantity>,
+                UndefinedQuantityType.Multiplying<
+                    NumeratorReciprocalQuantity,
+                    DenominatorQuantity,
+                    >,
                 UndefinedMultipliedUnit.MetricAndUSCustomary<
                     NumeratorReciprocalQuantity,
                     NumeratorReciprocalUnit,

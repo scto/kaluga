@@ -36,13 +36,32 @@ fun <
     LeftUnit : UndefinedScientificUnit<LeftQuantity>,
     RightQuantity : UndefinedQuantityType,
     RightUnit : UndefinedScientificUnit<RightQuantity>,
-    TargetUnit : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>,
-    TargetValue : UndefinedScientificValue<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>, TargetUnit>,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    TargetUnit : UndefinedMultipliedUnit<
+        LeftQuantity,
+        LeftUnit,
+        RightQuantity,
+        RightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            LeftQuantity,
+            RightQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
     leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
     factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.leftUnitXRightUnit(right.unit).byMultiplying(this, right, factory)
+) = unit.leftUnitXRightUnit(
+    right.unit,
+).byMultiplying(this, right, factory)
 
 @JvmName("metricAndImperialMultipliedByMetricAndImperialUndefinedUnit")
 infix fun <
@@ -50,8 +69,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
@@ -82,8 +107,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
@@ -110,8 +141,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
@@ -140,8 +177,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
@@ -168,8 +211,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
@@ -196,8 +245,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
@@ -226,8 +281,14 @@ infix fun <
     LeftUnit,
     RightQuantity : UndefinedQuantityType,
     RightUnit,
-    > UndefinedScientificValue<LeftQuantity, LeftUnit>.multipliedByUndefinedUnit(
-    right: UndefinedScientificValue<RightQuantity, RightUnit>,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
         LeftUnit : UndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
