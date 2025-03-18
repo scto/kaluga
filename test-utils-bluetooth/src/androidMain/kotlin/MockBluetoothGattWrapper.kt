@@ -19,12 +19,22 @@ package com.splendo.kaluga.test.bluetooth
 
 import com.splendo.kaluga.bluetooth.CharacteristicWrapper
 import com.splendo.kaluga.bluetooth.DescriptorWrapper
+import com.splendo.kaluga.bluetooth.MTU
+import com.splendo.kaluga.bluetooth.RSSI
+import com.splendo.kaluga.bluetooth.ServiceWrapper
 import com.splendo.kaluga.bluetooth.device.BluetoothGattWrapper
+import com.splendo.kaluga.bluetooth.device.DeviceConnectionManager
+import com.splendo.kaluga.bluetooth.device.GattEvent
 import com.splendo.kaluga.test.base.mock.call
 import com.splendo.kaluga.test.base.mock.on
 import com.splendo.kaluga.test.base.mock.parameters.mock
+import kotlinx.coroutines.flow.MutableSharedFlow
 
-class MockBluetoothGattWrapper(setupMocks: Boolean = true) : BluetoothGattWrapper {
+class MockBluetoothGattWrapper(
+    setupMocks: Boolean = true,
+    override var state: DeviceConnectionManager.State = DeviceConnectionManager.State.DISCONNECTED,
+    override val notifications: MutableSharedFlow<GattEvent.OnCharacteristicChange> = MutableSharedFlow(replay = Int.MAX_VALUE),
+) : BluetoothGattWrapper {
 
     val connectMock = ::connect.mock()
     val discoverServicesMock = ::discoverServices.mock()
@@ -40,37 +50,37 @@ class MockBluetoothGattWrapper(setupMocks: Boolean = true) : BluetoothGattWrappe
 
     init {
         if (setupMocks) {
-            connectMock.on().doReturn(true)
-            discoverServicesMock.on().doReturn(true)
-            readRemoteRssiMock.on().doReturn(true)
-            requestMtuMock.on().doReturn(true)
-            readCharacteristicMock.on().doReturn(true)
-            readDescriptorMock.on().doReturn(true)
-            writeCharacteristicMock.on().doReturn(true)
-            writeDescriptorMock.on().doReturn(true)
-            setCharacteristicNotificationMock.on().doReturn(true)
+            connectMock.on().doReturn(Result.success(Unit))
+            discoverServicesMock.on().doReturn(Result.success(emptyList()))
+            readRemoteRssiMock.on().doReturn(Result.success(-70))
+            requestMtuMock.on().doExecute { Result.success(it.value) }
+            readCharacteristicMock.on().doReturn(Result.success(ByteArray(0)))
+            readDescriptorMock.on().doReturn(Result.success(ByteArray(0)))
+            writeCharacteristicMock.on().doReturn(Result.success(Unit))
+            writeDescriptorMock.on().doReturn(Result.success(Unit))
+            setCharacteristicNotificationMock.on().doReturn(Result.success(Unit))
         }
     }
 
-    override fun connect(): Boolean = connectMock.call()
+    override suspend fun connect(): Result<Unit> = connectMock.call()
 
-    override fun discoverServices(): Boolean = discoverServicesMock.call()
+    override suspend fun discoverServices(): Result<List<ServiceWrapper>> = discoverServicesMock.call()
 
-    override fun disconnect(): Unit = disconnectMock.call()
+    override suspend fun disconnect(): Unit = disconnectMock.call()
 
     override fun close(): Unit = closeMock.call()
 
-    override fun readRemoteRssi(): Boolean = readRemoteRssiMock.call()
+    override suspend fun readRemoteRssi(): Result<RSSI> = readRemoteRssiMock.call()
 
-    override fun requestMtu(mtu: Int): Boolean = requestMtuMock.call(mtu)
+    override suspend fun requestMtu(mtu: MTU): Result<MTU> = requestMtuMock.call(mtu)
 
-    override fun readCharacteristic(wrapper: CharacteristicWrapper): Boolean = readCharacteristicMock.call(wrapper)
+    override suspend fun readCharacteristic(wrapper: CharacteristicWrapper): Result<ByteArray> = readCharacteristicMock.call(wrapper)
 
-    override fun readDescriptor(wrapper: DescriptorWrapper): Boolean = readDescriptorMock.call(wrapper)
+    override suspend fun readDescriptor(wrapper: DescriptorWrapper): Result<ByteArray> = readDescriptorMock.call(wrapper)
 
-    override fun writeCharacteristic(wrapper: CharacteristicWrapper, value: ByteArray): Boolean = writeCharacteristicMock.call(wrapper, value)
+    override suspend fun writeCharacteristic(wrapper: CharacteristicWrapper, value: ByteArray): Result<Unit> = writeCharacteristicMock.call(wrapper, value)
 
-    override fun writeDescriptor(wrapper: DescriptorWrapper, value: ByteArray): Boolean = writeDescriptorMock.call(wrapper, value)
+    override suspend fun writeDescriptor(wrapper: DescriptorWrapper, value: ByteArray): Result<Unit> = writeDescriptorMock.call(wrapper, value)
 
-    override fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Boolean = setCharacteristicNotificationMock.call(wrapper, enable)
+    override suspend fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Result<Unit> = setCharacteristicNotificationMock.call(wrapper, enable)
 }

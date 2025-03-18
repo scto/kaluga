@@ -27,6 +27,6 @@ class TestMockBluetoothGattWrapper {
     fun testRequestMtu() = runBlocking {
         val mtu = 54
         val mock = MockBluetoothGattWrapper()
-        assertTrue(mock.requestMtu(mtu))
+        assertTrue(mock.requestMtu(mtu).isSuccess)
     }
 }

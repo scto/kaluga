@@ -165,7 +165,7 @@ interface DeviceConnectionManager {
     /**
      * Starts connecting to the device
      */
-    fun connect()
+    suspend fun connect()
 
     /**
      * Starts discovering [Service] for the device
@@ -175,7 +175,7 @@ interface DeviceConnectionManager {
     /**
      * Starts disconnecting from the device
      */
-    fun disconnect()
+    suspend fun disconnect()
 
     /**
      * Starts reading the latest RSSI value of the device
@@ -252,9 +252,9 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
     DeviceConnectionManager,
     CoroutineScope by coroutineScope {
 
-    private val logTag = "Bluetooth Device ${deviceWrapper.identifier.stringValue}"
-    private val logger = settings.logger
-    private val dataLogger = settings.dataLogger
+    protected val logTag = "Bluetooth Device ${deviceWrapper.identifier.stringValue}"
+    protected val logger = settings.logger
+    protected val dataLogger = settings.dataLogger
 
     private val defaultReconnectionSettings = settings.reconnectionSettings
 
@@ -436,8 +436,8 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
 }
 
 internal expect class DefaultDeviceConnectionManager : BaseDeviceConnectionManager {
-    override fun connect()
-    override fun disconnect()
+    override suspend fun connect()
+    override suspend fun disconnect()
     override fun getCurrentState(): DeviceConnectionManager.State
     override suspend fun discoverServices()
     override suspend fun didStartPerformingAction(action: DeviceAction)

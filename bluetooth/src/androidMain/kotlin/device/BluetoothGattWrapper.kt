@@ -23,30 +23,53 @@ import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothStatusCodes
 import com.splendo.kaluga.bluetooth.CharacteristicWrapper
+import com.splendo.kaluga.bluetooth.DefaultGattServiceWrapper
 import com.splendo.kaluga.bluetooth.DescriptorWrapper
 import com.splendo.kaluga.bluetooth.MTU
+import com.splendo.kaluga.bluetooth.RSSI
+import com.splendo.kaluga.bluetooth.ServiceWrapper
+import com.splendo.kaluga.logging.logger
+import com.splendo.kaluga.logging.warn
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withTimeout
+import java.util.concurrent.TimeoutException
+import kotlin.code
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * A wrapper to access a [BluetoothGatt]
  */
 interface BluetoothGattWrapper {
 
+    /** Device connection state. */
+    val state: DeviceConnectionManager.State
+
+    /** Characteristics notifications. */
+    val notifications: Flow<GattEvent.OnCharacteristicChange>
+
     /**
      * Connect to the Bluetooth device
-     * @return `true` if the connection attempt was initiated successfully
+     * @return a result indicating whether the connection attempt was successful
      */
-    fun connect(): Boolean
+    suspend fun connect(): Result<Unit>
 
     /**
      * Discovers services offered by a remote device as well as their characteristics and descriptors.
-     * @return `true` if the discovery attempt was initiated successfully
+     * @return a result indicating whether the discovery attempt was successful
      */
-    fun discoverServices(): Boolean
+    suspend fun discoverServices(): Result<List<ServiceWrapper>>
 
     /**
      * Disconnects the current connection or cancels the current attempt if it is in progress
      */
-    fun disconnect()
+    suspend fun disconnect()
 
     /**
      * Close connection to the Bluetooth Gatt server
@@ -55,92 +78,146 @@ interface BluetoothGattWrapper {
 
     /**
      * Reads the RSSI value
-     * @return `true` if the RSSI value has been requested successfully
+     * @return an RSSI value
      */
-    fun readRemoteRssi(): Boolean
+    suspend fun readRemoteRssi(): Result<RSSI>
 
     /**
      * Request a [MTU] size
      * @param mtu the [MTU] size
-     * @return `true` if the new MTU value has been requested successfully
+     * @return a negotiated MTU
      */
-    fun requestMtu(mtu: MTU): Boolean
+    suspend fun requestMtu(mtu: MTU): Result<MTU>
 
     /**
      * Reads the value of the [CharacteristicWrapper] from the device
      * @param wrapper the [CharacteristicWrapper] to read from
-     * @return `true` if the read operation was initiated successfully
+     * @return a characteristic value
      */
-    fun readCharacteristic(wrapper: CharacteristicWrapper): Boolean
+    suspend fun readCharacteristic(wrapper: CharacteristicWrapper): Result<ByteArray>
 
     /**
      * Reads the value of the [DeviceWrapper] from the device
      * @param wrapper the [DeviceWrapper] to read from
-     * @return `true` if the read operation was initiated successfully
+     * @return a descriptor value
      */
-    fun readDescriptor(wrapper: DescriptorWrapper): Boolean
+    suspend fun readDescriptor(wrapper: DescriptorWrapper): Result<ByteArray>
 
     /**
      * Writes a value to the [CharacteristicWrapper] from the device
      * @param wrapper the [CharacteristicWrapper] to write to
      * @param value the [ByteArray] to write
-     * @return `true` if the write operation was initiated successfully
+     * @return a result indicating whether  the write operation was successful
      */
-    fun writeCharacteristic(wrapper: CharacteristicWrapper, value: ByteArray): Boolean
+    suspend fun writeCharacteristic(wrapper: CharacteristicWrapper, value: ByteArray): Result<Unit>
 
     /**
      * Writes a value to the [DescriptorWrapper] from the device
      * @param wrapper the [DescriptorWrapper] to write to
      * @param value the [ByteArray] to write
-     * @return `true` if the write operation was initiated successfully
+     * @return a result indicating whether the write operation was successful
      */
-    fun writeDescriptor(wrapper: DescriptorWrapper, value: ByteArray): Boolean
+    suspend fun writeDescriptor(wrapper: DescriptorWrapper, value: ByteArray): Result<Unit>
 
     /**
      * Enable or disable notifications for a given [CharacteristicWrapper]
      * @param wrapper the [CharacteristicWrapper] to enable/disable notifications for
      * @param enable if `true` notifications should be enabled
-     * @return `true` if the requested notification status was set successfully
+     * @return a result indicating whether the requested notification status was set successfully
      */
-    fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Boolean
+    suspend fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Result<Unit>
 }
+
+class GattCallFailedException : Exception("Gatt call failed!")
 
 /**
  * Default implementation of [BluetoothGattWrapper]
  * @param gatt the [BluetoothGatt] being wrapped
  */
 @SuppressLint("MissingPermission")
-class DefaultBluetoothGattWrapper(private val gatt: BluetoothGatt) : BluetoothGattWrapper {
+class DefaultBluetoothGattWrapper(
+    private val gatt: BluetoothGatt,
+    private val gattEvents: Flow<GattEvent>,
+    private val gattStateProvider: () -> DeviceConnectionManager.State,
+    private val operationTimeout: Duration = 5.seconds,
+) : BluetoothGattWrapper {
 
-    override fun connect(): Boolean = gatt.connect()
+    private suspend inline fun <reified T : GattEvent.WithStatus, R> callAndAwaitEvent(
+        crossinline call: () -> Boolean,
+        crossinline eventCondition: (T) -> Boolean = { true },
+        crossinline getSuccessValue: (T) -> R,
+    ): Result<R> = coroutineScope {
+        val eventResult = async(start = CoroutineStart.UNDISPATCHED) {
+            logger.warn { "Registered for ${T::class}" }
+            try {
+                val event = withTimeout(operationTimeout) {
+                    gattEvents.onEach { logger.warn { "Incoming event $it" } }
+                        .filterIsInstance<T>().first { eventCondition(it) }
+                }
+                logger.warn { "Event received $event" }
+                if (event.status.isSuccess) {
+                    Result.success(getSuccessValue(event))
+                } else {
+                    Result.failure(GattException(event.status.code))
+                }
+            } catch (e: TimeoutException) {
+                Result.failure(e)
+            }
+        }
 
-    override fun discoverServices(): Boolean = gatt.discoverServices()
+        logger.warn { "Call for ${T::class}" }
+        if (call()) {
+            eventResult.await()
+        } else {
+            eventResult.cancel()
+            Result.failure(GattCallFailedException())
+        }
+    }
 
-    override fun disconnect() {
-        gatt.disconnect()
+    private suspend inline fun <reified T : GattEvent.WithStatus> callAndAwaitEvent(crossinline call: () -> Boolean): Result<Unit> = callAndAwaitEvent<T, Unit>(call) { }
+
+    override val state: DeviceConnectionManager.State get() = gattStateProvider()
+
+    override val notifications: Flow<GattEvent.OnCharacteristicChange> = gattEvents.filterIsInstance<GattEvent.OnCharacteristicChange>()
+
+    override suspend fun connect(): Result<Unit> = callAndAwaitEvent<GattEvent.OnConnected>(gatt::connect)
+
+    override suspend fun discoverServices(): Result<List<ServiceWrapper>> =
+        callAndAwaitEvent<GattEvent.OnServicesDiscovered, List<DefaultGattServiceWrapper>>(gatt::discoverServices) { it.services }
+
+    override suspend fun disconnect() {
+        callAndAwaitEvent<GattEvent.OnDisconnected>(call = {
+            gatt.disconnect()
+            true
+        })
     }
 
     override fun close() {
         gatt.close()
     }
 
-    override fun readRemoteRssi(): Boolean = gatt.readRemoteRssi()
+    override suspend fun readRemoteRssi(): Result<RSSI> = callAndAwaitEvent<GattEvent.OnReadRemoteRssi, RSSI>(gatt::readRemoteRssi) { it.rssi }
 
-    override fun requestMtu(mtu: MTU): Boolean = gatt.requestMtu(mtu)
+    override suspend fun requestMtu(mtu: MTU): Result<MTU> = callAndAwaitEvent<GattEvent.OnMtuChanged, MTU>(
+        call = { gatt.requestMtu(mtu) },
+        getSuccessValue = { it.mtu },
+    )
 
-    override fun readCharacteristic(wrapper: CharacteristicWrapper): Boolean {
-        val characteristic = getCharacteristic(wrapper) ?: return false
-        return gatt.readCharacteristic(characteristic)
-    }
+    override suspend fun readCharacteristic(wrapper: CharacteristicWrapper): Result<ByteArray> = callAndAwaitEvent<GattEvent.OnCharacteristicRead, ByteArray>(
+        call = { getCharacteristic(wrapper)?.let(gatt::readCharacteristic) == true },
+        eventCondition = { it.uuid == wrapper.uuid },
+        getSuccessValue = { it.value },
+    )
 
-    override fun readDescriptor(wrapper: DescriptorWrapper): Boolean {
-        val descriptor = getDescriptor(wrapper) ?: return false
-        return gatt.readDescriptor(descriptor)
-    }
+    override suspend fun readDescriptor(wrapper: DescriptorWrapper): Result<ByteArray> = callAndAwaitEvent<GattEvent.OnDescriptorRead, ByteArray>(
+        call = { getDescriptor(wrapper)?.let(gatt::readDescriptor) == true },
+        eventCondition = { it.uuid == wrapper.uuid },
+        getSuccessValue = { it.value },
+    )
 
-    override fun writeCharacteristic(wrapper: CharacteristicWrapper, value: ByteArray): Boolean {
-        val characteristic = getCharacteristic(wrapper) ?: return false
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+    override suspend fun writeCharacteristic(wrapper: CharacteristicWrapper, value: ByteArray): Result<Unit> = callAndAwaitEvent<GattEvent.OnCharacteristicWrite> {
+        val characteristic = getCharacteristic(wrapper) ?: return@callAndAwaitEvent false
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             gatt.writeCharacteristic(characteristic, value, characteristic.writeType) == BluetoothStatusCodes.SUCCESS
         } else {
             @Suppress("DEPRECATION")
@@ -150,9 +227,9 @@ class DefaultBluetoothGattWrapper(private val gatt: BluetoothGatt) : BluetoothGa
         }
     }
 
-    override fun writeDescriptor(wrapper: DescriptorWrapper, value: ByteArray): Boolean {
-        val descriptor = getDescriptor(wrapper) ?: return false
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+    override suspend fun writeDescriptor(wrapper: DescriptorWrapper, value: ByteArray): Result<Unit> = callAndAwaitEvent<GattEvent.OnDescriptorWrite> {
+        val descriptor = getDescriptor(wrapper) ?: return@callAndAwaitEvent false
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             gatt.writeDescriptor(descriptor, value) == BluetoothStatusCodes.SUCCESS
         } else {
             @Suppress("DEPRECATION")
@@ -162,10 +239,12 @@ class DefaultBluetoothGattWrapper(private val gatt: BluetoothGatt) : BluetoothGa
         }
     }
 
-    override fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Boolean {
-        val characteristic = getCharacteristic(wrapper) ?: return false
-        return gatt.setCharacteristicNotification(characteristic, enable)
-    }
+    override suspend fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Result<Unit> =
+        if (getCharacteristic(wrapper)?.let { gatt.setCharacteristicNotification(it, enable) } == true) {
+            Result.success(Unit)
+        } else {
+            Result.failure(GattCallFailedException())
+        }
 
     private fun getCharacteristic(wrapper: CharacteristicWrapper): BluetoothGattCharacteristic? = gatt.getService(wrapper.service.uuid)?.getCharacteristic(wrapper.uuid)
 
