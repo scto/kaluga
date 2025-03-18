@@ -54,8 +54,6 @@ sealed interface GattEvent {
         val status: GattStatus
     }
 
-    interface Notification
-
     /** GATT client has connected to a remote GATT server. */
     @JvmInline
     value class OnConnected(override val status: GattStatus) :
@@ -107,12 +105,12 @@ sealed interface GattEvent {
         WithStatus
 
     /** A remote characteristic notification. */
-    data class OnCharacteristicChange(val uuid: UUID, val value: ByteArray) : GattEvent {
+    data class OnCharacteristicChanged(val uuid: UUID, val value: ByteArray) : GattEvent {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
 
-            other as OnCharacteristicChange
+            other as OnCharacteristicChanged
 
             if (uuid != other.uuid) return false
             if (!value.contentEquals(other.value)) return false
@@ -283,12 +281,12 @@ class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val log
         val value = characteristic.value.clone()
         log { "onCharacteristicChanged[DEP] characteristic $uuid value ${value.printableString}" }
 
-        sendEvent(GattEvent.OnCharacteristicChange(uuid, value))
+        sendEvent(GattEvent.OnCharacteristicChanged(uuid, value))
     }
 
     override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic, value: ByteArray) {
         log { "onCharacteristicChanged characteristic ${characteristic.uuid} value ${value.printableString}" }
-        sendEvent(GattEvent.OnCharacteristicChange(characteristic.uuid, value.clone()))
+        sendEvent(GattEvent.OnCharacteristicChanged(characteristic.uuid, value.clone()))
     }
 
     @Suppress("OVERRIDE_DEPRECATION")

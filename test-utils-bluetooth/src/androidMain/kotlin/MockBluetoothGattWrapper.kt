@@ -33,7 +33,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 class MockBluetoothGattWrapper(
     setupMocks: Boolean = true,
     override var state: DeviceConnectionManager.State = DeviceConnectionManager.State.DISCONNECTED,
-    override val notifications: MutableSharedFlow<GattEvent.OnCharacteristicChange> = MutableSharedFlow(replay = Int.MAX_VALUE),
+    override val notifications: MutableSharedFlow<GattEvent.OnCharacteristicChanged> = MutableSharedFlow(replay = Int.MAX_VALUE),
 ) : BluetoothGattWrapper {
 
     val connectMock = ::connect.mock()

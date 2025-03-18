@@ -39,7 +39,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
 import java.util.concurrent.TimeoutException
-import kotlin.code
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
@@ -52,7 +51,7 @@ interface BluetoothGattWrapper {
     val state: DeviceConnectionManager.State
 
     /** Characteristics notifications. */
-    val notifications: Flow<GattEvent.OnCharacteristicChange>
+    val notifications: Flow<GattEvent.OnCharacteristicChanged>
 
     /**
      * Connect to the Bluetooth device
@@ -178,7 +177,7 @@ class DefaultBluetoothGattWrapper(
 
     override val state: DeviceConnectionManager.State get() = gattStateProvider()
 
-    override val notifications: Flow<GattEvent.OnCharacteristicChange> = gattEvents.filterIsInstance<GattEvent.OnCharacteristicChange>()
+    override val notifications: Flow<GattEvent.OnCharacteristicChanged> = gattEvents.filterIsInstance<GattEvent.OnCharacteristicChanged>()
 
     override suspend fun connect(): Result<Unit> = callAndAwaitEvent<GattEvent.OnConnected>(gatt::connect)
 
