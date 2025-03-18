@@ -73,7 +73,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class Dimensionless :
     AbstractScientificUnit<PhysicalQuantity.Dimensionless>(),
-    MetricBaseUnit<MeasurementSystem.MetricAndImperial, PhysicalQuantity.Dimensionless>
+    MetricAndImperialScientificUnit<PhysicalQuantity.Dimensionless>
 
 /**
  * Set of all [Dimensionless]
