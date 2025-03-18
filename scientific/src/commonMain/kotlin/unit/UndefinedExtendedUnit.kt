@@ -32,25 +32,32 @@ sealed interface UndefinedExtendedUnit<
     > :
     UndefinedScientificUnit<UndefinedQuantityType.Extended<ExtendedQuantity>> {
 
-    sealed interface MetricAndImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface MetricAndImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.MetricAndImperial<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
-    sealed interface Metric<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface Metric<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.Metric<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
-    sealed interface Imperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface Imperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.Imperial<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
-    sealed interface UKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface UKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.UKImperial<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
-    sealed interface USCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface USCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.USCustomary<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
-    sealed interface MetricAndUKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface MetricAndUKImperial<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.MetricAndUKImperial<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
-    sealed interface MetricAndUSCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> : UndefinedExtendedUnit<ExtendedQuantity>,
+    sealed interface MetricAndUSCustomary<ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension> :
+        UndefinedExtendedUnit<ExtendedQuantity>,
         UndefinedScientificUnit.MetricAndUSCustomary<UndefinedQuantityType.Extended<ExtendedQuantity>>
 
     val extendedQuantity: ExtendedQuantity
@@ -63,7 +70,9 @@ sealed interface UndefinedExtendedUnit<
 @Serializable
 sealed class CustomUndefinedExtendedUnit<
     ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-    > : AbstractUndefinedScientificUnit<UndefinedQuantityType.Extended<ExtendedQuantity>>(), UndefinedExtendedUnit<ExtendedQuantity> {
+    > :
+    AbstractUndefinedScientificUnit<UndefinedQuantityType.Extended<ExtendedQuantity>>(),
+    UndefinedExtendedUnit<ExtendedQuantity> {
 
     abstract val siFactor: Double
     abstract val siOffset: Double
@@ -195,7 +204,8 @@ sealed class CustomUndefinedExtendedUnit<
 sealed class WrappedUndefinedExtendedUnit<
     WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     WrappedUnit : ScientificUnit<WrappedQuantity>,
-    > : AbstractUndefinedScientificUnit<UndefinedQuantityType.Extended<WrappedQuantity>>(),
+    > :
+    AbstractUndefinedScientificUnit<UndefinedQuantityType.Extended<WrappedQuantity>>(),
     UndefinedExtendedUnit<WrappedQuantity> {
     abstract val wrapped: WrappedUnit
     override val extendedQuantity: WrappedQuantity by lazy { wrapped.quantity }

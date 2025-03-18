@@ -26,42 +26,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.MetricAndImperial(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.MetricAndImperial(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.MetricAndImperial(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.MetricAndImperial(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.MetricAndImperial(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 
@@ -70,42 +70,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.Metric(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.Metric(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.Metric(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.Metric(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.Metric(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 
@@ -114,42 +114,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.Imperial(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.Imperial(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.Imperial(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.Imperial(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.Imperial(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 
@@ -158,42 +158,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.UKImperial(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.UKImperial(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.UKImperial(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.UKImperial(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.UKImperial(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 
@@ -202,42 +202,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.USCustomary(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.USCustomary(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.USCustomary(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.USCustomary(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.USCustomary(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 
@@ -246,42 +246,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.MetricAndUKImperial(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.MetricAndUKImperial(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.MetricAndUKImperial(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.MetricAndUKImperial(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.MetricAndUKImperial(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 
@@ -290,42 +290,42 @@ object UndefinedConverterUnits {
             PhysicalQuantity.Length,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "A"
+            symbol = "A",
         )
 
         val undefinedB = CustomUndefinedExtendedUnit.MetricAndUSCustomary(
             PhysicalQuantity.Weight,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "B"
+            symbol = "B",
         )
 
         val undefinedC = CustomUndefinedExtendedUnit.MetricAndUSCustomary(
             PhysicalQuantity.ElectricCharge,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "C"
+            symbol = "C",
         )
 
         val undefinedD = CustomUndefinedExtendedUnit.MetricAndUSCustomary(
             PhysicalQuantity.ElectricCurrent,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "D"
+            symbol = "D",
         )
 
         val undefinedE = CustomUndefinedExtendedUnit.MetricAndUSCustomary(
             PhysicalQuantity.Force,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "E"
+            symbol = "E",
         )
 
         val undefinedF = CustomUndefinedExtendedUnit.MetricAndUSCustomary(
             PhysicalQuantity.Power,
             siFactor = 2.0,
             siOffset = 0.0,
-            symbol = "F"
+            symbol = "F",
         )
     }
 }
