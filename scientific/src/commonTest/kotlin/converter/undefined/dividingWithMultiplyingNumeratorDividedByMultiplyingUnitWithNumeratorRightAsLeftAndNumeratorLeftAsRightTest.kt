@@ -30,37 +30,37 @@ class DividingWithMultiplyingNumeratorDividedByMultiplyingUnitWithNumeratorRight
 	@Test
 	fun dividedByMultiplyingUnitWithNumeratorRightAsLeftAndNumeratorLeftAsRight() {
 		assertEquals(
-			1(UndefinedConverterUnits.MetricAndImperial.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.MetricAndImperial.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.MetricAndImperial.undefinedA x UndefinedConverterUnits.MetricAndImperial.undefinedB) per UndefinedConverterUnits.MetricAndImperial.undefinedC)) metricAndImperialDividedByMetricAndImperial
 				2((UndefinedConverterUnits.MetricAndImperial.undefinedB x UndefinedConverterUnits.MetricAndImperial.undefinedA))
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.Metric.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.Metric.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.Metric.undefinedA x UndefinedConverterUnits.Metric.undefinedB) per UndefinedConverterUnits.Metric.undefinedC)) metricDividedByMetric
 				2((UndefinedConverterUnits.Metric.undefinedB x UndefinedConverterUnits.Metric.undefinedA))
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.Imperial.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.Imperial.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.Imperial.undefinedA x UndefinedConverterUnits.Imperial.undefinedB) per UndefinedConverterUnits.Imperial.undefinedC)) imperialDividedByImperial
 				2((UndefinedConverterUnits.Imperial.undefinedB x UndefinedConverterUnits.Imperial.undefinedA))
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.UKImperial.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.UKImperial.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.UKImperial.undefinedA x UndefinedConverterUnits.UKImperial.undefinedB) per UndefinedConverterUnits.UKImperial.undefinedC)) ukImperialDividedByUKImperial
 				2((UndefinedConverterUnits.UKImperial.undefinedB x UndefinedConverterUnits.UKImperial.undefinedA))
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.USCustomary.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.USCustomary.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.USCustomary.undefinedA x UndefinedConverterUnits.USCustomary.undefinedB) per UndefinedConverterUnits.USCustomary.undefinedC)) usCustomaryDividedByUSCustomary
 				2((UndefinedConverterUnits.USCustomary.undefinedB x UndefinedConverterUnits.USCustomary.undefinedA))
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.MetricAndUKImperial.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.MetricAndUKImperial.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.MetricAndUKImperial.undefinedA x UndefinedConverterUnits.MetricAndUKImperial.undefinedB) per UndefinedConverterUnits.MetricAndUKImperial.undefinedC)) metricAndUKImperialDividedByMetricAndUKImperial
 				2((UndefinedConverterUnits.MetricAndUKImperial.undefinedB x UndefinedConverterUnits.MetricAndUKImperial.undefinedA))
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.MetricAndUSCustomary.undefinedC.reciprocal()),
+			4(UndefinedConverterUnits.MetricAndUSCustomary.undefinedC.reciprocal()),
 			2(((UndefinedConverterUnits.MetricAndUSCustomary.undefinedA x UndefinedConverterUnits.MetricAndUSCustomary.undefinedB) per UndefinedConverterUnits.MetricAndUSCustomary.undefinedC)) metricAndUSCustomaryDividedByMetricAndUSCustomary
 				2((UndefinedConverterUnits.MetricAndUSCustomary.undefinedB x UndefinedConverterUnits.MetricAndUSCustomary.undefinedA))
 		)

@@ -29,37 +29,37 @@ class DimensionlessDividedByReciprocalUndefinedUnitTest {
 	@Test
 	fun dividedByReciprocalUndefinedUnit() {
 		assertEquals(
-			1(UndefinedConverterUnits.MetricAndImperial.undefinedA),
+			4(UndefinedConverterUnits.MetricAndImperial.undefinedA),
 			2(One) metricAndImperialDividedByMetricAndImperial
 				2(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal())
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.Metric.undefinedA),
+			4(UndefinedConverterUnits.Metric.undefinedA),
 			2(One) metricDividedByMetric
 				2(UndefinedConverterUnits.Metric.undefinedA.reciprocal())
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.Imperial.undefinedA),
+			4(UndefinedConverterUnits.Imperial.undefinedA),
 			2(One) imperialDividedByImperial
 				2(UndefinedConverterUnits.Imperial.undefinedA.reciprocal())
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.UKImperial.undefinedA),
+			4(UndefinedConverterUnits.UKImperial.undefinedA),
 			2(One) ukImperialDividedByUKImperial
 				2(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal())
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.USCustomary.undefinedA),
+			4(UndefinedConverterUnits.USCustomary.undefinedA),
 			2(One) usCustomaryDividedByUSCustomary
 				2(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal())
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.MetricAndUKImperial.undefinedA),
+			4(UndefinedConverterUnits.MetricAndUKImperial.undefinedA),
 			2(One) metricAndUKImperialDividedByMetricAndUKImperial
 				2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal())
 		)
 		assertEquals(
-			1(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA),
+			4(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA),
 			2(One) metricAndUSCustomaryDividedByMetricAndUSCustomary
 				2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal())
 		)
