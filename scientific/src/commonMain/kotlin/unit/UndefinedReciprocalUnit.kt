@@ -18,8 +18,6 @@
 package com.splendo.kaluga.scientific.unit
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.base.utils.div
-import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import kotlinx.serialization.Serializable
 
@@ -29,6 +27,7 @@ sealed class UndefinedReciprocalUnit<
     InverseUnit : UndefinedScientificUnit<InverseQuantity>,
     > :
     AbstractUndefinedScientificUnit<UndefinedQuantityType.Reciprocal<InverseQuantity>>() {
+
     abstract val inverse: InverseUnit
 
     override val numeratorUnits: List<ScientificUnit<*>> by lazy {
@@ -43,8 +42,8 @@ sealed class UndefinedReciprocalUnit<
         UndefinedQuantityType.Reciprocal(inverse.quantityType)
     }
 
-    override fun fromSIUnit(value: Decimal): Decimal = inverse.deltaFromSIUnitDelta(1.0.toDecimal() / value)
-    override fun toSIUnit(value: Decimal): Decimal = inverse.deltaToSIUnitDelta(1.0.toDecimal() / value)
+    override fun fromSIUnit(value: Decimal): Decimal = inverse.deltaToSIUnitDelta(value)
+    override fun toSIUnit(value: Decimal): Decimal = inverse.deltaFromSIUnitDelta(value)
 
     @Serializable
     data class MetricAndImperial<
