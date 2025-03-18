@@ -26,23 +26,20 @@ import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
-import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
-import com.splendo.kaluga.scientific.unit.ScientificUnit
-import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.One
+import com.splendo.kaluga.scientific.unit.ScientificUnit
+import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// A! / Wr<A> -> One
+// A! / Ex<A> -> One
 
 @JvmName("definedDividedBySelf")
 fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit : ScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : ScientificUnit<NumeratorAndDenominatorQuantity>,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
 	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
@@ -51,7 +48,7 @@ fun <
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 	getDimensionless: () -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
@@ -61,31 +58,25 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.metricAndImperialDividedByMetricAndImperial(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInMetric,
 	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
 	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -100,25 +91,21 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.metricDividedByMetric(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInMetric =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInMetric =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -133,28 +120,23 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.imperialDividedByImperial(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
 	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -169,25 +151,21 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.ukImperialDividedByUKImperial(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUKImperial =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -202,25 +180,21 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.usCustomaryDividedByUSCustomary(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -235,28 +209,23 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.metricAndUKImperialDividedByMetricAndUKImperial(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInMetric,
 	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUKImperial =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUKImperial =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -271,28 +240,23 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit,
-	DenominatorUnit,
-	WrappedDenominatorUnit,
+	ExtendedDenominatorUnit,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.metricAndUSCustomaryDividedByMetricAndUSCustomary(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) where
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
 	NumeratorUnit : MeasurementUsage.UsedInMetric,
 	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedDenominatorUnit : MeasurementUsage.UsedInUSCustomary =
 	dividedBy(
 		right,
 		getDimensionless = { One },
@@ -307,17 +271,15 @@ WrappedDenominatorUnit,
 infix fun <
 	NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedDenominatorUnit : UndefinedExtendedUnit<
 	NumeratorAndDenominatorQuantity,
-	DenominatorUnit,
 		>,
 	> ScientificValue<NumeratorAndDenominatorQuantity, NumeratorUnit>.genericDividedByGeneric(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Extended<
 		NumeratorAndDenominatorQuantity,
 		>,
-WrappedDenominatorUnit,
+ExtendedDenominatorUnit,
 	>,
 ) =
 	dividedBy(

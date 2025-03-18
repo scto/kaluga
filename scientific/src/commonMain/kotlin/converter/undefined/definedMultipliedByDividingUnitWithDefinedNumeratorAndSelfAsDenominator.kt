@@ -29,10 +29,11 @@ import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
+import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// A! * Div<Wr<B>, Wr<A>> -> B!
+// A! * Div<Wr<B>, Ex<A>> -> B!
 
 @JvmName("definedMultipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominator")
 fun <
@@ -44,10 +45,8 @@ fun <
 	RightNumeratorQuantity,
 	RightNumeratorUnit,
 		>,
-	RightDenominatorUnit : ScientificUnit<LeftAndRightDenominatorQuantity>,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
@@ -57,7 +56,7 @@ fun <
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightNumeratorValue : ScientificValue<RightNumeratorQuantity, RightNumeratorUnit>,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.multipliedBy(
@@ -82,8 +81,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.metricAndImperialMultipliedByMetricAndImperial(
 	right: UndefinedScientificValue<
@@ -113,17 +111,12 @@ RightUnit,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInMetric,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	RightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	RightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -132,7 +125,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInMetric,
 	RightUnit : MeasurementUsage.UsedInUKImperial,
@@ -151,8 +144,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.metricMultipliedByMetric(
 	right: UndefinedScientificValue<
@@ -176,13 +168,10 @@ RightUnit,
 	RightNumeratorUnit,
 		>,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInMetric,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -191,7 +180,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInMetric =
 	multipliedBy(right) {
@@ -208,8 +197,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.imperialMultipliedByImperial(
 	right: UndefinedScientificValue<
@@ -236,15 +224,11 @@ RightUnit,
 		>,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	RightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -253,7 +237,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInUKImperial,
 	RightUnit : MeasurementUsage.UsedInUSCustomary =
@@ -271,8 +255,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.ukImperialMultipliedByUKImperial(
 	right: UndefinedScientificValue<
@@ -296,13 +279,10 @@ RightUnit,
 	RightNumeratorUnit,
 		>,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -311,7 +291,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInUKImperial =
 	multipliedBy(right) {
@@ -328,8 +308,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.usCustomaryMultipliedByUSCustomary(
 	right: UndefinedScientificValue<
@@ -353,13 +332,10 @@ RightUnit,
 	RightNumeratorUnit,
 		>,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -368,7 +344,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInUSCustomary =
 	multipliedBy(right) {
@@ -385,8 +361,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.metricAndUKImperialMultipliedByMetricAndUKImperial(
 	right: UndefinedScientificValue<
@@ -413,15 +388,11 @@ RightUnit,
 		>,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInMetric,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	RightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUKImperial,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -430,7 +401,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInMetric,
 	RightUnit : MeasurementUsage.UsedInUKImperial =
@@ -448,8 +419,7 @@ infix fun <
 	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	RightNumeratorUnit,
 	WrappedRightNumeratorUnit,
-	RightDenominatorUnit,
-	WrappedRightDenominatorUnit,
+	ExtendedRightDenominatorUnit,
 	RightUnit,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
 	right: UndefinedScientificValue<
@@ -476,15 +446,11 @@ RightUnit,
 		>,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInMetric,
 	WrappedRightNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	RightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
-	WrappedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInMetric,
+	ExtendedRightDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
 			RightNumeratorQuantity,
@@ -493,7 +459,7 @@ RightUnit,
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	RightUnit : MeasurementUsage.UsedInMetric,
 	RightUnit : MeasurementUsage.UsedInUSCustomary =
@@ -514,10 +480,8 @@ infix fun <
 	RightNumeratorQuantity,
 	RightNumeratorUnit,
 		>,
-	RightDenominatorUnit : AbstractScientificUnit<LeftAndRightDenominatorQuantity>,
-	WrappedRightDenominatorUnit : WrappedUndefinedExtendedUnit<
+	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
 	LeftAndRightDenominatorQuantity,
-	RightDenominatorUnit,
 		>,
 	RightUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Extended<
@@ -527,7 +491,7 @@ infix fun <
 		UndefinedQuantityType.Extended<
 			LeftAndRightDenominatorQuantity,
 			>,
-		WrappedRightDenominatorUnit,
+		ExtendedRightDenominatorUnit,
 		>,
 	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.genericMultipliedByGeneric(
 	right: UndefinedScientificValue<
