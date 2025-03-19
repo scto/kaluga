@@ -66,7 +66,7 @@ sealed interface UndefinedScientificUnit<QuantityType : UndefinedQuantityType> :
 }
 
 @Serializable
-sealed class AbstractUndefinedScientificUnit<QuantityType : UndefinedQuantityType> : UndefinedScientificUnit<QuantityType> {
+sealed class AbstractUndefinedScientificUnit<QuantityType : UndefinedQuantityType> : AbstractScientificUnit<PhysicalQuantity.Undefined<QuantityType>>(), UndefinedScientificUnit<QuantityType> {
     override val quantity by lazy { PhysicalQuantity.Undefined(quantityType) }
 
     override val symbol: String by lazy {
