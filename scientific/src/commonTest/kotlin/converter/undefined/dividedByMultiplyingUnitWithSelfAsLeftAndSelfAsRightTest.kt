@@ -18,51 +18,48 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.reciprocal
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // A / Mul<A, A> -> Inv<A>
 
 class DividedByMultiplyingUnitWithSelfAsLeftAndSelfAsRightTest {
 
-	@Test
-	fun dividedByMultiplyingUnitWithSelfAsLeftAndSelfAsRight() {
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.MetricAndImperial.undefinedA) metricAndImperialDividedByMetricAndImperial
-		// 		2((UndefinedConverterUnits.MetricAndImperial.undefinedA x UndefinedConverterUnits.MetricAndImperial.undefinedA))
-		// )
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.Metric.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.Metric.undefinedA) metricDividedByMetric
-		// 		2((UndefinedConverterUnits.Metric.undefinedA x UndefinedConverterUnits.Metric.undefinedA))
-		// )
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.Imperial.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.Imperial.undefinedA) imperialDividedByImperial
-		// 		2((UndefinedConverterUnits.Imperial.undefinedA x UndefinedConverterUnits.Imperial.undefinedA))
-		// )
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.UKImperial.undefinedA) ukImperialDividedByUKImperial
-		// 		2((UndefinedConverterUnits.UKImperial.undefinedA x UndefinedConverterUnits.UKImperial.undefinedA))
-		// )
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.USCustomary.undefinedA) usCustomaryDividedByUSCustomary
-		// 		2((UndefinedConverterUnits.USCustomary.undefinedA x UndefinedConverterUnits.USCustomary.undefinedA))
-		// )
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA) metricAndUKImperialDividedByMetricAndUKImperial
-		// 		2((UndefinedConverterUnits.MetricAndUKImperial.undefinedA x UndefinedConverterUnits.MetricAndUKImperial.undefinedA))
-		// )
-		// assertEquals(
-		// 	1.0(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal()),
-		// 	2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA) metricAndUSCustomaryDividedByMetricAndUSCustomary
-		// 		2((UndefinedConverterUnits.MetricAndUSCustomary.undefinedA x UndefinedConverterUnits.MetricAndUSCustomary.undefinedA))
-		// )
-	}
+    @Test
+    fun dividedByMultiplyingUnitWithSelfAsLeftAndSelfAsRight() {
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.MetricAndImperial.undefinedA) metricAndImperialDividedByMetricAndImperial
+        // 		2((UndefinedConverterUnits.MetricAndImperial.undefinedA x UndefinedConverterUnits.MetricAndImperial.undefinedA))
+        // )
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.Metric.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.Metric.undefinedA) metricDividedByMetric
+        // 		2((UndefinedConverterUnits.Metric.undefinedA x UndefinedConverterUnits.Metric.undefinedA))
+        // )
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.Imperial.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.Imperial.undefinedA) imperialDividedByImperial
+        // 		2((UndefinedConverterUnits.Imperial.undefinedA x UndefinedConverterUnits.Imperial.undefinedA))
+        // )
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.UKImperial.undefinedA) ukImperialDividedByUKImperial
+        // 		2((UndefinedConverterUnits.UKImperial.undefinedA x UndefinedConverterUnits.UKImperial.undefinedA))
+        // )
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.USCustomary.undefinedA) usCustomaryDividedByUSCustomary
+        // 		2((UndefinedConverterUnits.USCustomary.undefinedA x UndefinedConverterUnits.USCustomary.undefinedA))
+        // )
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA) metricAndUKImperialDividedByMetricAndUKImperial
+        // 		2((UndefinedConverterUnits.MetricAndUKImperial.undefinedA x UndefinedConverterUnits.MetricAndUKImperial.undefinedA))
+        // )
+        // assertEquals(
+        // 	1.0(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal()),
+        // 	2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA) metricAndUSCustomaryDividedByMetricAndUSCustomary
+        // 		2((UndefinedConverterUnits.MetricAndUSCustomary.undefinedA x UndefinedConverterUnits.MetricAndUSCustomary.undefinedA))
+        // )
+    }
 }

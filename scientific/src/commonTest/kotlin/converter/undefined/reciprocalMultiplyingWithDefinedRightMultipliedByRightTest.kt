@@ -18,16 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.reciprocal
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // Inv<Mul<A, Wr<B>>> * B! -> Inv<A>
 
 class ReciprocalMultiplyingWithDefinedRightMultipliedByRightTest {
 
-	@Test
-	fun multipliedByRight() {
-	}
+    @Test
+    fun multipliedByRight() {
+    }
 }

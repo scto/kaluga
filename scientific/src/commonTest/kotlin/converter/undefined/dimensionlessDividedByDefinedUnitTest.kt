@@ -18,16 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.One
-import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // One / A! -> Inv<Wr<A>>
 
 class DimensionlessDividedByDefinedUnitTest {
 
-	@Test
-	fun dividedByDefinedUnit() {
-	}
+    @Test
+    fun dividedByDefinedUnit() {
+    }
 }

@@ -18,16 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.per
-import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // Div<Ex<A>, B> / A! -> Inv<B>
 
 class DividingWithExtendedNumeratorDividedByNumeratorTest {
 
-	@Test
-	fun dividedByNumerator() {
-	}
+    @Test
+    fun dividedByNumerator() {
+    }
 }

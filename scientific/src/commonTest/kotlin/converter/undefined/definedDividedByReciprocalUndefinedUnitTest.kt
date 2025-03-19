@@ -18,16 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.reciprocal
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // A! / Inv<B> -> Mul<Wr<A>, B>
 
 class DefinedDividedByReciprocalUndefinedUnitTest {
 
-	@Test
-	fun dividedByReciprocalUndefinedUnit() {
-	}
+    @Test
+    fun dividedByReciprocalUndefinedUnit() {
+    }
 }

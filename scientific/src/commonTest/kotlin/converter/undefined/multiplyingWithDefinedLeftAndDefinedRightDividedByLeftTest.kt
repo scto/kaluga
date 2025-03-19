@@ -18,15 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // Mul<Wr<A>, Wr<A>> / A! -> A!
 
 class MultiplyingWithDefinedLeftAndDefinedRightDividedByLeftTest {
 
-	@Test
-	fun dividedByLeft() {
-	}
+    @Test
+    fun dividedByLeft() {
+    }
 }

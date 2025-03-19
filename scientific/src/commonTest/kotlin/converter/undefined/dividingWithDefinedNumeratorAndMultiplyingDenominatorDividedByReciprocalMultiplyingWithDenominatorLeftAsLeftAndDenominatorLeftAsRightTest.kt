@@ -18,17 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.per
-import com.splendo.kaluga.scientific.unit.reciprocal
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // Div<Wr<A>, Mul<B, B>> / Inv<Mul<B, B>> -> A!
 
 class DividingWithDefinedNumeratorAndMultiplyingDenominatorDividedByReciprocalMultiplyingWithDenominatorLeftAsLeftAndDenominatorLeftAsRightTest {
 
-	@Test
-	fun dividedByReciprocalMultiplyingWithDenominatorLeftAsLeftAndDenominatorLeftAsRight() {
-	}
+    @Test
+    fun dividedByReciprocalMultiplyingWithDenominatorLeftAsLeftAndDenominatorLeftAsRight() {
+    }
 }

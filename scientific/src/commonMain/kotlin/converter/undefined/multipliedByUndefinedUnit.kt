@@ -33,281 +33,281 @@ import kotlin.jvm.JvmName
 
 @JvmName("multipliedByUndefinedUnit")
 fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	TargetUnit : UndefinedMultipliedUnit<
-		LeftQuantity,
-		LeftUnit,
-		RightQuantity,
-		RightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftQuantity,
-		RightQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.multipliedBy(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
-	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit : UndefinedScientificUnit<RightQuantity>,
+    TargetUnit : UndefinedMultipliedUnit<
+        LeftQuantity,
+        LeftUnit,
+        RightQuantity,
+        RightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            LeftQuantity,
+            RightQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedBy(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
+    leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitXRightUnit(
-	right.unit,
+    right.unit,
 ).byMultiplying(this, right, factory)
 
 @JvmName("metricAndImperialMultipliedByMetricAndImperialUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.metricAndImperialMultipliedByMetricAndImperial(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.metricAndImperialMultipliedByMetricAndImperial(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.MetricAndImperial<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.MetricAndImperial<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("metricMultipliedByMetricUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.metricMultipliedByMetric(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.metricMultipliedByMetric(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.Metric<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.Metric<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("imperialMultipliedByImperialUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.imperialMultipliedByImperial(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.imperialMultipliedByImperial(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.Imperial<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.Imperial<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("ukImperialMultipliedByUKImperialUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.ukImperialMultipliedByUKImperial(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.ukImperialMultipliedByUKImperial(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInUKImperial =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.UKImperial<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInUKImperial =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.UKImperial<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("usCustomaryMultipliedByUSCustomaryUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.usCustomaryMultipliedByUSCustomary(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.usCustomaryMultipliedByUSCustomary(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.USCustomary<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.USCustomary<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUKImperialMultipliedByMetricAndUKImperialUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.metricAndUKImperialMultipliedByMetricAndUKImperial(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.metricAndUKImperialMultipliedByMetricAndUKImperial(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUKImperial,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUKImperial =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.MetricAndUKImperial<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUKImperial,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUKImperial =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.MetricAndUKImperial<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }
 
 @JvmName("metricAndUSCustomaryMultipliedByMetricAndUSCustomaryUndefinedUnit")
 infix fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
 ) where
-	LeftUnit : UndefinedScientificUnit<LeftQuantity>,
-	LeftUnit : MeasurementUsage.UsedInMetric,
-	LeftUnit : MeasurementUsage.UsedInUSCustomary,
-	RightUnit : UndefinedScientificUnit<RightQuantity>,
-	RightUnit : MeasurementUsage.UsedInMetric,
-	RightUnit : MeasurementUsage.UsedInUSCustomary =
-	multipliedBy(
-		right,
-		leftUnitXRightUnit = { x(it) },
-	) {
-		value: Decimal,
-		unit: UndefinedMultipliedUnit.MetricAndUSCustomary<
-			LeftQuantity,
-				LeftUnit,
-				RightQuantity,
-				RightUnit,
-				>,
-		->
-		DefaultUndefinedScientificValue(value, unit)
-	}
+        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : MeasurementUsage.UsedInMetric,
+        LeftUnit : MeasurementUsage.UsedInUSCustomary,
+        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : MeasurementUsage.UsedInMetric,
+        RightUnit : MeasurementUsage.UsedInUSCustomary =
+    multipliedBy(
+        right,
+        leftUnitXRightUnit = { x(it) },
+    ) {
+            value: Decimal,
+            unit: UndefinedMultipliedUnit.MetricAndUSCustomary<
+                LeftQuantity,
+                LeftUnit,
+                RightQuantity,
+                RightUnit,
+                >,
+        ->
+        DefaultUndefinedScientificValue(value, unit)
+    }

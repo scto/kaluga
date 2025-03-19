@@ -18,16 +18,13 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
-import com.splendo.kaluga.scientific.unit.per
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 // Div<A, Mul<Ex<B>, C>> * B! -> Div<A, C>
 
 class DividingWithMultiplyingWithExtendedLeftDenominatorMultipliedByDenominatorLeftTest {
 
-	@Test
-	fun multipliedByDenominatorLeft() {
-	}
+    @Test
+    fun multipliedByDenominatorLeft() {
+    }
 }
