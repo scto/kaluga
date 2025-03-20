@@ -20,6 +20,9 @@ package com.splendo.kaluga.bluetooth
 import com.splendo.kaluga.logging.LogLevel
 import com.splendo.kaluga.logging.Logger
 
+/**
+ * A logger appending contextual data to each message
+ */
 class ContextualLogger(private val logger: Logger, private val tag: String, private val context: Map<String, Any?> = LinkedHashMap()) : Logger {
     private val contextAsString = if (context.isEmpty()) "" else "$context"
 

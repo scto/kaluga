@@ -200,7 +200,6 @@ class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val log
         private set
 
     private fun sendEvent(event: GattEvent) {
-        log { "sendEvent $event" }
         require(_events.tryEmit(event))
     }
 
