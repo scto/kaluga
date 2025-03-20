@@ -43,7 +43,9 @@ import com.splendo.kaluga.logging.info
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import java.util.UUID
+import kotlin.jvm.javaClass
 
+/** Transforms calls to underlying [gattCallback] into [events]. */
 interface BluetoothGattReceiver {
     val events: Flow<GattEvent>
     val gattCallback: BluetoothGattCallback
@@ -58,6 +60,12 @@ sealed interface GattEvent {
 
     /** An event triggered by the device change, and not as a command response. */
     interface Update
+
+    /** Event containing data payload. */
+    interface WithPayload {
+        val uuid: UUID
+        val value: ByteArray
+    }
 
     /** GATT client has connected to a remote GATT server. */
     @JvmInline
@@ -82,28 +90,13 @@ sealed interface GattEvent {
         WithStatus
 
     /** The result of a characteristic read operation. */
-    data class OnCharacteristicRead(val uuid: UUID, val value: ByteArray, override val status: GattStatus) :
+    data class OnCharacteristicRead(override val uuid: UUID, override val value: ByteArray, override val status: GattStatus) :
         GattEvent,
-        WithStatus {
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
+        WithStatus,
+        WithPayload {
 
-            other as OnCharacteristicRead
-
-            if (uuid != other.uuid) return false
-            if (!value.contentEquals(other.value)) return false
-            if (status != other.status) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = uuid.hashCode()
-            result = 31 * result + value.contentHashCode()
-            result = 31 * result + status.hashCode()
-            return result
-        }
+        override fun equals(other: Any?): Boolean = equals(this, other)
+        override fun hashCode(): Int = 31 * hashCode(this) + status.hashCode()
     }
 
     /** The result of a characteristic write operation. */
@@ -112,47 +105,22 @@ sealed interface GattEvent {
         WithStatus
 
     /** A remote characteristic notification. */
-    data class OnCharacteristicChanged(val uuid: UUID, val value: ByteArray) :
+    data class OnCharacteristicChanged(override val uuid: UUID, override val value: ByteArray) :
         GattEvent,
-        Update {
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
+        Update,
+        WithPayload {
 
-            other as OnCharacteristicChanged
-
-            if (uuid != other.uuid) return false
-            if (!value.contentEquals(other.value)) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int = 31 * uuid.hashCode() + value.contentHashCode()
+        override fun equals(other: Any?): Boolean = equals(this, other)
+        override fun hashCode(): Int = hashCode(this)
     }
 
     /** The result of a descriptor read operation. */
-    data class OnDescriptorRead(val uuid: UUID, val value: ByteArray, override val status: GattStatus) :
+    data class OnDescriptorRead(override val uuid: UUID, override val value: ByteArray, override val status: GattStatus) :
         GattEvent,
-        WithStatus {
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
-
-            other as OnDescriptorRead
-
-            if (uuid != other.uuid) return false
-            if (!value.contentEquals(other.value)) return false
-            if (status != other.status) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = uuid.hashCode()
-            result = 31 * result + value.contentHashCode()
-            result = 31 * result + status.hashCode()
-            return result
-        }
+        WithStatus,
+        WithPayload {
+        override fun equals(other: Any?): Boolean = equals(this, other)
+        override fun hashCode(): Int = 31 * hashCode(this) + status.hashCode()
     }
 
     /** The result of a descriptor write operation. */
@@ -177,8 +145,6 @@ sealed interface GattEvent {
      */
     data object OnServiceChanged : GattEvent
 }
-
-class GattException(val status: GattStatus) : Exception(status.toString())
 
 @JvmInline
 value class GattStatus(val code: Int) {
@@ -313,6 +279,22 @@ class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val log
         sendEvent(GattEvent.OnServiceChanged)
     }
 }
+
+private inline fun <reified T : GattEvent.WithPayload> equals(one: T, other: Any?, extraCheck: (T, T) -> Boolean = { _, _ -> true }): Boolean {
+    if (one === other) return true
+    if (one.javaClass != other?.javaClass) return false
+
+    other as T
+
+    if (one.uuid != other.uuid) return false
+    if (!one.value.contentEquals(other.value)) return false
+    return extraCheck(one, other)
+}
+
+private inline fun <reified T> equals(one: T, other: Any?): Boolean where T : GattEvent.WithPayload, T : GattEvent.WithStatus =
+    equals(one, other) { one, other -> one.status == other.status }
+
+private inline fun <reified T : GattEvent.WithPayload> hashCode(event: T): Int = 31 * event.uuid.hashCode() + event.value.contentHashCode()
 
 private val Int.gattStatusAsString get() = when (this) {
     GATT_SUCCESS -> "SUCCESS"

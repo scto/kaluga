@@ -22,8 +22,6 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCallback
 import android.content.Context
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * Accessor to the [BluetoothDevice]
@@ -77,21 +75,12 @@ actual interface DeviceWrapper {
     fun createBond()
 }
 
-fun interface GattUpdateHandler {
-    suspend fun onUpdate(update: GattEvent.Update)
-}
-
 /**
  * Default implementation of [DeviceWrapper]
  * @param device the [BluetoothDevice] being wrapped
  */
 @SuppressLint("MissingPermission")
 class DefaultDeviceWrapper(private val device: BluetoothDevice) : DeviceWrapper {
-
-    private companion object {
-        val OPERATION_TIMEOUT: Duration = 5.seconds
-    }
-
     override val name: String?
         get() = device.name
     override val identifier: Identifier
