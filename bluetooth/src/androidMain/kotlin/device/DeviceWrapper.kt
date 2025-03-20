@@ -110,7 +110,6 @@ class DefaultDeviceWrapper(private val device: BluetoothDevice) : DeviceWrapper 
                 receiver.events.filterIsInstance<GattEvent.OnConnected>().first()
             } != null
         }
-
         val gatt = device.connectGatt(context, autoConnect, receiver, BluetoothDevice.TRANSPORT_LE)
 
         if (isConnected.await()) {

@@ -36,6 +36,7 @@ import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -61,9 +62,20 @@ internal actual class DefaultDeviceConnectionManager(
 
     init {
         coroutineScope.launch {
-            gatt.flatMapConcat { it?.notifications ?: emptyFlow() }
-                .collect { notification ->
-                    updateCharacteristic(notification.uuid, notification.value, true)
+            gatt
+                .flatMapConcat { wrapper ->
+                    wrapper?.updates?.map { wrapper.state to it } ?: emptyFlow()
+                }
+                .collect { (state, update) ->
+                    when (update) {
+                        is GattEvent.OnCharacteristicChanged -> updateCharacteristic(update.uuid, update.value, true)
+                        is GattEvent.OnConnected -> if (state != DeviceConnectionManager.State.CONNECTED) {
+                            handleConnect()
+                        }
+                        is GattEvent.OnDisconnected -> if (state != DeviceConnectionManager.State.DISCONNECTED) {
+                            handleDisconnect { closeGatt() }
+                        }
+                    }
                 }
         }
     }
@@ -82,7 +94,7 @@ internal actual class DefaultDeviceConnectionManager(
                     gatt.value = result.getOrThrow()
                     handleConnect()
                 } else {
-                    logger.error(logTag, result.exceptionOrNull()) { "Gatt can't be connected" }
+                    logger.error(throwable = result.exceptionOrNull()) { "Gatt can't be connected" }
                 }
             }
             readyGatt.state == DeviceConnectionManager.State.CONNECTED || readyGatt.connect().isSuccess -> handleConnect()

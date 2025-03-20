@@ -17,6 +17,7 @@
 
 package com.splendo.kaluga.test.bluetooth.device
 
+import com.splendo.kaluga.bluetooth.ContextualLogger
 import com.splendo.kaluga.bluetooth.RSSI
 import com.splendo.kaluga.bluetooth.Service
 import com.splendo.kaluga.bluetooth.device.BaseAdvertisementData
@@ -101,8 +102,7 @@ class MockDevice(
         Service(
             service = createServiceWrapper { uuid = it },
             emitNewAction = {},
-            parentLogTag = "MockDeviceService",
-            logger = logger,
+            logger = ContextualLogger(logger, "MockDeviceService"),
         )
     }
 

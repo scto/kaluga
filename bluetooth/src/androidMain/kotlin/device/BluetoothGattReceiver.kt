@@ -49,22 +49,29 @@ interface BluetoothGattReceiver {
     val state: DeviceConnectionManager.State
 }
 
+/** Gatt callback events. */
 sealed interface GattEvent {
+    /** Event containing status. */
     interface WithStatus {
         val status: GattStatus
     }
+
+    /** An event triggered by the device change, and not as a command response. */
+    interface Update
 
     /** GATT client has connected to a remote GATT server. */
     @JvmInline
     value class OnConnected(override val status: GattStatus) :
         GattEvent,
-        WithStatus
+        WithStatus,
+        Update
 
     /** GATT client has disconnected from a remote GATT server. */
     @JvmInline
     value class OnDisconnected(override val status: GattStatus) :
         GattEvent,
-        WithStatus
+        WithStatus,
+        Update
 
     /**
      * The list of remote services, characteristics and descriptors for the
@@ -105,7 +112,9 @@ sealed interface GattEvent {
         WithStatus
 
     /** A remote characteristic notification. */
-    data class OnCharacteristicChanged(val uuid: UUID, val value: ByteArray) : GattEvent {
+    data class OnCharacteristicChanged(val uuid: UUID, val value: ByteArray) :
+        GattEvent,
+        Update {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -169,27 +178,13 @@ sealed interface GattEvent {
     data object OnServiceChanged : GattEvent
 }
 
-class GattException(val code: Int) : Exception(code.gattStatusAsString)
+class GattException(val status: GattStatus) : Exception(status.toString())
 
 @JvmInline
 value class GattStatus(val code: Int) {
     val isSuccess get() = code == GATT_SUCCESS
 
-    override fun toString(): String = when (code) {
-        GATT_SUCCESS -> "SUCCESS"
-        GATT_READ_NOT_PERMITTED -> "ERROR_READ_NOT_PERMITTED"
-        GATT_WRITE_NOT_PERMITTED -> "ERROR_WRITE_NOT_PERMITTED"
-        GATT_INSUFFICIENT_AUTHENTICATION -> "ERROR_INSUFFICIENT_AUTHENTICATION"
-        GATT_REQUEST_NOT_SUPPORTED -> "ERROR_REQUEST_NOT_SUPPORTED"
-        GATT_INSUFFICIENT_ENCRYPTION -> "ERROR_INSUFFICIENT_ENCRYPTION"
-        GATT_INVALID_OFFSET -> "ERROR_INVALID_OFFSET"
-        GATT_INSUFFICIENT_AUTHORIZATION -> "ERROR_INSUFFICIENT_AUTHORIZATION"
-        GATT_INVALID_ATTRIBUTE_LENGTH -> "ERROR_INVALID_ATTRIBUTE_LENGTH"
-        GATT_CONNECTION_CONGESTED -> "ERROR_CONNECTION_CONGESTED"
-        GATT_CONNECTION_TIMEOUT -> "ERROR_CONNECTION_TIMEOUT"
-        GATT_FAILURE -> "ERROR_FAILURE"
-        else -> "ERROR_OTHER($code)"
-    }
+    override fun toString(): String = code.gattStatusAsString
 }
 
 class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val logger: Logger) :
@@ -345,6 +340,8 @@ private val Int.gattStatusAsString get() = when (this) {
     GATT_CONNECTION_CONGESTED -> "ERROR_CONNECTION_CONGESTED"
     GATT_CONNECTION_TIMEOUT -> "ERROR_CONNECTION_TIMEOUT"
     GATT_FAILURE -> "ERROR_FAILURE"
+    19 -> "REMOTE_USER_TERMINATED_CONNECTION"
+    133 -> "DEVICE_NOT_FOUND"
     else -> "ERROR_OTHER($this)"
 }
 

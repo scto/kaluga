@@ -17,6 +17,7 @@
 
 package com.splendo.kaluga.test.bluetooth
 
+import com.splendo.kaluga.bluetooth.ContextualLogger
 import com.splendo.kaluga.bluetooth.Descriptor
 import com.splendo.kaluga.bluetooth.DescriptorWrapper
 import com.splendo.kaluga.bluetooth.device.DeviceConnectionManager
@@ -31,8 +32,7 @@ class MockDescriptor(descriptorWrapper: DescriptorWrapper, emitNewAction: (Devic
     Descriptor(
         wrapper = descriptorWrapper,
         emitNewAction = emitNewAction,
-        parentLogTag = "",
-        logger = defaultLogger,
+        logger = ContextualLogger(defaultLogger, "MockDescriptor"),
     ) {
 
     /**

@@ -28,15 +28,12 @@ import com.splendo.kaluga.bluetooth.DescriptorWrapper
 import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.RSSI
 import com.splendo.kaluga.bluetooth.ServiceWrapper
-import com.splendo.kaluga.logging.logger
-import com.splendo.kaluga.logging.warn
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withTimeout
 import java.util.concurrent.TimeoutException
 import kotlin.time.Duration
@@ -50,8 +47,8 @@ interface BluetoothGattWrapper {
     /** Device connection state. */
     val state: DeviceConnectionManager.State
 
-    /** Characteristics notifications. */
-    val notifications: Flow<GattEvent.OnCharacteristicChanged>
+    /** Device updates. */
+    val updates: Flow<GattEvent.Update>
 
     /**
      * Connect to the Bluetooth device
@@ -147,24 +144,19 @@ class DefaultBluetoothGattWrapper(
         crossinline getSuccessValue: (T) -> R,
     ): Result<R> = coroutineScope {
         val eventResult = async(start = CoroutineStart.UNDISPATCHED) {
-            logger.warn { "Registered for ${T::class}" }
             try {
                 val event = withTimeout(operationTimeout) {
-                    gattEvents.onEach { logger.warn { "Incoming event $it" } }
-                        .filterIsInstance<T>().first { eventCondition(it) }
+                    gattEvents.filterIsInstance<T>().first { eventCondition(it) }
                 }
-                logger.warn { "Event received $event" }
                 if (event.status.isSuccess) {
                     Result.success(getSuccessValue(event))
                 } else {
-                    Result.failure(GattException(event.status.code))
+                    Result.failure(GattException(event.status))
                 }
             } catch (e: TimeoutException) {
                 Result.failure(e)
             }
         }
-
-        logger.warn { "Call for ${T::class}" }
         if (call()) {
             eventResult.await()
         } else {
@@ -177,7 +169,7 @@ class DefaultBluetoothGattWrapper(
 
     override val state: DeviceConnectionManager.State get() = gattStateProvider()
 
-    override val notifications: Flow<GattEvent.OnCharacteristicChanged> = gattEvents.filterIsInstance<GattEvent.OnCharacteristicChanged>()
+    override val updates: Flow<GattEvent.Update> = gattEvents.filterIsInstance<GattEvent.Update>()
 
     override suspend fun connect(): Result<Unit> = callAndAwaitEvent<GattEvent.OnConnected>(gatt::connect)
 
