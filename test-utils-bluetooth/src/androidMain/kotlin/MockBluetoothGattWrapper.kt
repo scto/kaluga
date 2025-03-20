@@ -33,13 +33,12 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 class MockBluetoothGattWrapper(
     setupMocks: Boolean = true,
     override var state: DeviceConnectionManager.State = DeviceConnectionManager.State.DISCONNECTED,
-    override val updates: MutableSharedFlow<GattEvent.Update> = MutableSharedFlow(replay = Int.MAX_VALUE),
+    override val notifications: MutableSharedFlow<GattEvent.OnCharacteristicChanged> = MutableSharedFlow(replay = Int.MAX_VALUE),
 ) : BluetoothGattWrapper {
 
     val connectMock = ::connect.mock()
     val discoverServicesMock = ::discoverServices.mock()
     val disconnectMock = ::disconnect.mock()
-    val closeMock = ::close.mock()
     val readRemoteRssiMock = ::readRemoteRssi.mock()
     val requestMtuMock = ::requestMtu.mock()
     val readCharacteristicMock = ::readCharacteristic.mock()
@@ -50,7 +49,7 @@ class MockBluetoothGattWrapper(
 
     init {
         if (setupMocks) {
-            connectMock.on().doReturn(Result.success(Unit))
+            connectMock.on().doReturn(Unit)
             discoverServicesMock.on().doReturn(Result.success(emptyList()))
             readRemoteRssiMock.on().doReturn(Result.success(-70))
             requestMtuMock.on().doExecute { Result.success(it.value) }
@@ -62,13 +61,11 @@ class MockBluetoothGattWrapper(
         }
     }
 
-    override suspend fun connect(): Result<Unit> = connectMock.call()
+    override suspend fun connect(): Unit = connectMock.call()
 
     override suspend fun discoverServices(): Result<List<ServiceWrapper>> = discoverServicesMock.call()
 
     override suspend fun disconnect(): Unit = disconnectMock.call()
-
-    override fun close(): Unit = closeMock.call()
 
     override suspend fun readRemoteRssi(): Result<RSSI> = readRemoteRssiMock.call()
 

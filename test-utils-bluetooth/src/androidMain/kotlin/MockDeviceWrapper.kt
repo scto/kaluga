@@ -17,36 +17,21 @@
 
 package com.splendo.kaluga.test.bluetooth
 
+import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGattCallback
 import android.content.Context
-import com.splendo.kaluga.base.collections.concurrentMutableListOf
-import com.splendo.kaluga.bluetooth.device.BluetoothGattWrapper
 import com.splendo.kaluga.bluetooth.device.DeviceWrapper
 import com.splendo.kaluga.bluetooth.device.Identifier
-import com.splendo.kaluga.logging.Logger
 import com.splendo.kaluga.test.base.mock.call
-import com.splendo.kaluga.test.base.mock.on
 import com.splendo.kaluga.test.base.mock.parameters.mock
 
-class MockDeviceWrapper(override val name: String?, override val identifier: Identifier, override val bondState: DeviceWrapper.BondState, setupMocks: Boolean = true) :
-    DeviceWrapper {
+class MockDeviceWrapper(override val name: String?, override val identifier: Identifier, override val bondState: DeviceWrapper.BondState) : DeviceWrapper {
 
-    val gattWrappers = concurrentMutableListOf<MockBluetoothGattWrapper>()
     val connectGattMock = ::connectGatt.mock()
     val removeBondMock = ::removeBond.mock()
     val createBondMock = ::createBond.mock()
 
-    init {
-        if (setupMocks) {
-            connectGattMock.on().doExecute {
-                val wrapper = MockBluetoothGattWrapper(setupMocks)
-                gattWrappers.add(wrapper)
-                Result.success(wrapper)
-            }
-        }
-    }
-
-    override suspend fun connectGatt(context: Context, autoConnect: Boolean, dataLogger: Logger): Result<BluetoothGattWrapper> =
-        connectGattMock.call(context, autoConnect, dataLogger)
+    override fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGatt = connectGattMock.call(context, autoConnect, callback)
     override fun removeBond(): Unit = removeBondMock.call()
     override fun createBond(): Unit = createBondMock.call()
 }

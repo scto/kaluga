@@ -31,12 +31,6 @@ import com.splendo.kaluga.bluetooth.containsAnyOf
 import com.splendo.kaluga.bluetooth.uuidString
 import com.splendo.kaluga.logging.error
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -58,78 +52,41 @@ internal actual class DefaultDeviceConnectionManager(
 
     override val coroutineContext: CoroutineContext = coroutineScope.coroutineContext
 
-    private val gatt = MutableStateFlow<BluetoothGattWrapper?>(null)
+    private val gatt: BluetoothGattWrapper = DefaultBluetoothGattWrapper(
+        deviceIdentifier = deviceWrapper.identifier,
+        logger = dataLogger,
+        createGatt = { callback -> deviceWrapper.connectGatt(context, false, callback) },
+        onConnected = ::handleConnect,
+        onDisconnected = ::handleDisconnect,
+        coroutineContext = coroutineContext,
+    )
 
     init {
         coroutineScope.launch {
-            gatt
-                .flatMapConcat { wrapper ->
-                    wrapper?.updates?.map { wrapper.state to it } ?: emptyFlow()
-                }
-                .collect { (state, update) ->
-                    when (update) {
-                        is GattEvent.OnCharacteristicChanged -> updateCharacteristic(update.uuid, update.value, true)
-                        is GattEvent.OnConnected -> if (state != DeviceConnectionManager.State.CONNECTED) {
-                            handleConnect()
-                        }
-                        is GattEvent.OnDisconnected -> if (state != DeviceConnectionManager.State.DISCONNECTED) {
-                            handleDisconnect { closeGatt() }
-                        }
-                    }
-                }
-        }
-    }
-
-    actual override fun getCurrentState(): DeviceConnectionManager.State = gatt.value?.state ?: DeviceConnectionManager.State.DISCONNECTED
-
-    private suspend fun readyGatt() = gatt.filterNotNull().first()
-
-    @SuppressLint("MissingPermission")
-    actual override suspend fun connect() {
-        val readyGatt = gatt.value
-        when {
-            readyGatt == null -> {
-                val result = deviceWrapper.connectGatt(context, false, connectionSettings.dataLogger)
-                if (result.isSuccess) {
-                    gatt.value = result.getOrThrow()
-                    handleConnect()
-                } else {
-                    logger.error(throwable = result.exceptionOrNull()) { "Gatt can't be connected" }
+            launch {
+                gatt.notifications.collect { notification ->
+                    updateCharacteristic(notification.uuid, notification.value, true)
                 }
             }
-            readyGatt.state == DeviceConnectionManager.State.CONNECTED || readyGatt.connect().isSuccess -> handleConnect()
-            else -> handleDisconnect { closeGatt() }
         }
     }
+
+    actual override fun getCurrentState(): DeviceConnectionManager.State = gatt.state
+
+    actual override suspend fun connect() = gatt.connect()
 
     actual override suspend fun discoverServices() {
-        readyGatt().discoverServices().getOrNull()
-            ?.let(::handleDiscoverCompleted)
+        gatt.discoverServices().getOrNull()?.let(::handleDiscoverCompleted)
     }
 
-    actual override suspend fun disconnect() {
-        val readyGatt = gatt.value
-        if (readyGatt != null && readyGatt.state != DeviceConnectionManager.State.DISCONNECTED) {
-            readyGatt.disconnect()
-        } else {
-            handleDisconnect {
-                closeGatt()
-            }
-        }
-    }
-
-    private fun closeGatt() {
-        gatt.value?.close()
-        gatt.value = null
-    }
+    actual override suspend fun disconnect() = gatt.disconnect()
 
     override suspend fun readRssi() {
-        readyGatt().readRemoteRssi().getOrNull()
-            ?.let(::handleNewRssi)
+        gatt.readRemoteRssi().getOrNull()?.let(::handleNewRssi)
     }
 
     actual override suspend fun requestMtu(mtu: MTU): Boolean {
-        val result = readyGatt().requestMtu(mtu)
+        val result = gatt.requestMtu(mtu)
         result.getOrNull()?.let(::handleNewMtu)
         return result.isSuccess
     }
@@ -138,23 +95,23 @@ internal actual class DefaultDeviceConnectionManager(
         currentAction = action
         when (action) {
             is DeviceAction.Read.Characteristic -> {
-                val result = readyGatt().readCharacteristic(action.characteristic.wrapper)
+                val result = gatt.readCharacteristic(action.characteristic.wrapper)
                 updateCharacteristic(action.characteristic.wrapper.uuid, result.getOrDefault(byteArrayOf()), result.isSuccess)
             }
             is DeviceAction.Read.Descriptor -> {
-                val result = readyGatt().readDescriptor(action.descriptor.wrapper)
+                val result = gatt.readDescriptor(action.descriptor.wrapper)
                 updateDescriptor(action.descriptor.wrapper.uuid, result.getOrDefault(byteArrayOf()), result.isSuccess)
             }
             is DeviceAction.Write.Characteristic -> {
-                val succeeded = readyGatt().writeCharacteristic(action.characteristic, action.newValue)
+                val succeeded = gatt.writeCharacteristic(action.characteristic, action.newValue)
                 handleUpdatedCharacteristic(action.characteristic.uuid, succeeded)
             }
             is DeviceAction.Write.Descriptor -> {
-                val succeeded = readyGatt().writeDescriptor(action.descriptor, action.newValue)
+                val succeeded = gatt.writeDescriptor(action.descriptor, action.newValue)
                 handleUpdatedDescriptor(action.descriptor.uuid, succeeded)
             }
-            is DeviceAction.Notification.Enable -> readyGatt().setNotification(action.characteristic, true)
-            is DeviceAction.Notification.Disable -> readyGatt().setNotification(action.characteristic, false)
+            is DeviceAction.Notification.Enable -> gatt.setNotification(action.characteristic, true)
+            is DeviceAction.Notification.Disable -> gatt.setNotification(action.characteristic, false)
         }
     }
 

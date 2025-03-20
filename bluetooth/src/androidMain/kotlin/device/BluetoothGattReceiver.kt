@@ -46,7 +46,7 @@ import java.util.UUID
 
 interface BluetoothGattReceiver {
     val events: Flow<GattEvent>
-    val state: DeviceConnectionManager.State
+    val gattCallback: BluetoothGattCallback
 }
 
 /** Gatt callback events. */
@@ -196,8 +196,7 @@ class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val log
 
     override val events: Flow<GattEvent> by ::_events
 
-    override var state: DeviceConnectionManager.State = DeviceConnectionManager.State.DISCONNECTED
-        private set
+    override val gattCallback: BluetoothGattCallback = this
 
     private fun sendEvent(event: GattEvent) {
         require(_events.tryEmit(event))
@@ -213,21 +212,10 @@ class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val log
 
         when (newState) {
             BluetoothProfile.STATE_DISCONNECTED -> {
-                state = DeviceConnectionManager.State.DISCONNECTED
                 sendEvent(GattEvent.OnDisconnected(gattStatus))
             }
             BluetoothProfile.STATE_CONNECTED -> {
-                state = DeviceConnectionManager.State.CONNECTED
                 sendEvent(GattEvent.OnConnected(gattStatus))
-            }
-            BluetoothProfile.STATE_CONNECTING -> {
-                state = DeviceConnectionManager.State.CONNECTING
-            }
-            BluetoothProfile.STATE_DISCONNECTING -> {
-                state = DeviceConnectionManager.State.DISCONNECTING
-            }
-            else -> {
-                state = DeviceConnectionManager.State.DISCONNECTED
             }
         }
     }

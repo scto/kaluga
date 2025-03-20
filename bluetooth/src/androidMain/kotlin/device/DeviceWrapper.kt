@@ -19,14 +19,9 @@ package com.splendo.kaluga.bluetooth.device
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothGatt
+import android.bluetooth.BluetoothGattCallback
 import android.content.Context
-import com.splendo.kaluga.logging.Logger
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
@@ -66,9 +61,10 @@ actual interface DeviceWrapper {
      * Connects to the GATT Server hosted by the [BluetoothDevice]
      * @param context the [Context] used for connecting to the GATT server
      * @param autoConnect if `true` the device will connect as soon as it becomes available, otherwise connects directly
-     * @param dataLogger logger for bluetooth data
+     * @param callback a callback for Gatt events
+     * @return a [BluetoothGatt] instance
      */
-    suspend fun connectGatt(context: Context, autoConnect: Boolean, dataLogger: Logger): Result<BluetoothGattWrapper>
+    fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGatt
 
     /**
      * Removes the bond from the device (unpair)
@@ -79,6 +75,10 @@ actual interface DeviceWrapper {
      * Creates a bond with the device (pair)
      */
     fun createBond()
+}
+
+fun interface GattUpdateHandler {
+    suspend fun onUpdate(update: GattEvent.Update)
 }
 
 /**
@@ -103,21 +103,8 @@ class DefaultDeviceWrapper(private val device: BluetoothDevice) : DeviceWrapper 
             else -> DeviceWrapper.BondState.NONE
         }
 
-    override suspend fun connectGatt(context: Context, autoConnect: Boolean, dataLogger: Logger): Result<BluetoothGattWrapper> = coroutineScope {
-        val receiver = DefaultBluetoothGattReceiver(identifier, dataLogger)
-        val isConnected = async(start = CoroutineStart.UNDISPATCHED) {
-            withTimeoutOrNull(OPERATION_TIMEOUT) {
-                receiver.events.filterIsInstance<GattEvent.OnConnected>().first()
-            } != null
-        }
-        val gatt = device.connectGatt(context, autoConnect, receiver, BluetoothDevice.TRANSPORT_LE)
-
-        if (isConnected.await()) {
-            Result.success(DefaultBluetoothGattWrapper(gatt, receiver.events, { receiver.state }))
-        } else {
-            Result.failure(IllegalStateException("Gatt not connected"))
-        }
-    }
+    override fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGatt =
+        device.connectGatt(context, autoConnect, callback, BluetoothDevice.TRANSPORT_LE)
 
     override fun removeBond() {
         try {

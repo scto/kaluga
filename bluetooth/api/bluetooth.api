@@ -375,16 +375,15 @@ public abstract class com/splendo/kaluga/bluetooth/device/BaseDeviceConnectionMa
 
 public abstract interface class com/splendo/kaluga/bluetooth/device/BluetoothGattReceiver {
 	public abstract fun getEvents ()Lkotlinx/coroutines/flow/Flow;
-	public abstract fun getState ()Lcom/splendo/kaluga/bluetooth/device/DeviceConnectionManager$State;
+	public abstract fun getGattCallback ()Landroid/bluetooth/BluetoothGattCallback;
 }
 
 public abstract interface class com/splendo/kaluga/bluetooth/device/BluetoothGattWrapper {
-	public abstract fun close ()V
-	public abstract fun connect-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun connect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun disconnect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun discoverServices-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getNotifications ()Lkotlinx/coroutines/flow/Flow;
 	public abstract fun getState ()Lcom/splendo/kaluga/bluetooth/device/DeviceConnectionManager$State;
-	public abstract fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
 	public abstract fun readCharacteristic-gIAlu-s (Lcom/splendo/kaluga/bluetooth/CharacteristicWrapper;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun readDescriptor-gIAlu-s (Lcom/splendo/kaluga/bluetooth/DescriptorWrapper;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun readRemoteRssi-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -491,7 +490,7 @@ public final class com/splendo/kaluga/bluetooth/device/ConnectionSettings$Reconn
 public final class com/splendo/kaluga/bluetooth/device/DefaultBluetoothGattReceiver : android/bluetooth/BluetoothGattCallback, com/splendo/kaluga/bluetooth/device/BluetoothGattReceiver {
 	public fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;)V
 	public fun getEvents ()Lkotlinx/coroutines/flow/Flow;
-	public fun getState ()Lcom/splendo/kaluga/bluetooth/device/DeviceConnectionManager$State;
+	public fun getGattCallback ()Landroid/bluetooth/BluetoothGattCallback;
 	public fun onCharacteristicChanged (Landroid/bluetooth/BluetoothGatt;Landroid/bluetooth/BluetoothGattCharacteristic;)V
 	public fun onCharacteristicChanged (Landroid/bluetooth/BluetoothGatt;Landroid/bluetooth/BluetoothGattCharacteristic;[B)V
 	public fun onCharacteristicRead (Landroid/bluetooth/BluetoothGatt;Landroid/bluetooth/BluetoothGattCharacteristic;I)V
@@ -508,14 +507,13 @@ public final class com/splendo/kaluga/bluetooth/device/DefaultBluetoothGattRecei
 }
 
 public final class com/splendo/kaluga/bluetooth/device/DefaultBluetoothGattWrapper : com/splendo/kaluga/bluetooth/device/BluetoothGattWrapper {
-	public synthetic fun <init> (Landroid/bluetooth/BluetoothGatt;Lkotlinx/coroutines/flow/Flow;Lkotlin/jvm/functions/Function0;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Landroid/bluetooth/BluetoothGatt;Lkotlinx/coroutines/flow/Flow;Lkotlin/jvm/functions/Function0;JLkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun close ()V
-	public fun connect-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public synthetic fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;JLkotlin/coroutines/CoroutineContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;JLkotlin/coroutines/CoroutineContext;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun connect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun disconnect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun discoverServices-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getNotifications ()Lkotlinx/coroutines/flow/Flow;
 	public fun getState ()Lcom/splendo/kaluga/bluetooth/device/DeviceConnectionManager$State;
-	public fun getUpdates ()Lkotlinx/coroutines/flow/Flow;
 	public fun readCharacteristic-gIAlu-s (Lcom/splendo/kaluga/bluetooth/CharacteristicWrapper;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun readDescriptor-gIAlu-s (Lcom/splendo/kaluga/bluetooth/DescriptorWrapper;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun readRemoteRssi-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -527,7 +525,7 @@ public final class com/splendo/kaluga/bluetooth/device/DefaultBluetoothGattWrapp
 
 public final class com/splendo/kaluga/bluetooth/device/DefaultDeviceWrapper : com/splendo/kaluga/bluetooth/device/DeviceWrapper {
 	public fun <init> (Landroid/bluetooth/BluetoothDevice;)V
-	public fun connectGatt-BWLJW6A (Landroid/content/Context;ZLcom/splendo/kaluga/logging/Logger;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun connectGatt (Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;
 	public fun createBond ()V
 	public fun getBondState ()Lcom/splendo/kaluga/bluetooth/device/DeviceWrapper$BondState;
 	public fun getIdentifier ()Ljava/lang/String;
@@ -798,7 +796,7 @@ public abstract interface class com/splendo/kaluga/bluetooth/device/DeviceState 
 }
 
 public abstract interface class com/splendo/kaluga/bluetooth/device/DeviceWrapper {
-	public abstract fun connectGatt-BWLJW6A (Landroid/content/Context;ZLcom/splendo/kaluga/logging/Logger;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun connectGatt (Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;
 	public abstract fun createBond ()V
 	public abstract fun getBondState ()Lcom/splendo/kaluga/bluetooth/device/DeviceWrapper$BondState;
 	public abstract fun getIdentifier ()Ljava/lang/String;
@@ -990,6 +988,10 @@ public final class com/splendo/kaluga/bluetooth/device/GattStatus {
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (I)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()I
+}
+
+public abstract interface class com/splendo/kaluga/bluetooth/device/GattUpdateHandler {
+	public abstract fun onUpdate (Lcom/splendo/kaluga/bluetooth/device/GattEvent$Update;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public class com/splendo/kaluga/bluetooth/device/IdentifierSerializer : kotlinx/serialization/KSerializer {

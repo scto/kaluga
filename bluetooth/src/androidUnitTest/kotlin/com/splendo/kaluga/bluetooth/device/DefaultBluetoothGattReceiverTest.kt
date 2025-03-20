@@ -56,27 +56,23 @@ class DefaultBluetoothGattReceiverTest {
     private fun createReceiver() = DefaultBluetoothGattReceiver("id", defaultLogger)
 
     @Test
-    fun stateTransitions() = runTest {
+    fun onConnectionStateChangeConnected() = runTest {
         val receiver = createReceiver()
-        assertEquals(DeviceConnectionManager.State.DISCONNECTED, receiver.state)
-
-        receiver.onConnectionStateChange(null, GATT_SUCCESS, BluetoothProfile.STATE_CONNECTING)
-        assertEquals(DeviceConnectionManager.State.CONNECTING, receiver.state)
 
         receiver.callAndVerify<GattEvent.OnConnected>(
             call = { onConnectionStateChange(null, GATT_SUCCESS, BluetoothProfile.STATE_CONNECTED) },
             eventVerifier = { assertEquals(GattStatus(GATT_SUCCESS), it.status) },
         )
-        assertEquals(DeviceConnectionManager.State.CONNECTED, receiver.state)
+    }
 
-        receiver.onConnectionStateChange(null, GATT_SUCCESS, BluetoothProfile.STATE_DISCONNECTING)
-        assertEquals(DeviceConnectionManager.State.DISCONNECTING, receiver.state)
+    @Test
+    fun onConnectionStateChangeDisconnected() = runTest {
+        val receiver = createReceiver()
 
         receiver.callAndVerify<GattEvent.OnDisconnected>(
             call = { onConnectionStateChange(null, GATT_SUCCESS, BluetoothProfile.STATE_DISCONNECTED) },
             eventVerifier = { assertEquals(GattStatus(GATT_SUCCESS), it.status) },
         )
-        assertEquals(DeviceConnectionManager.State.DISCONNECTED, receiver.state)
     }
 
     @Test
