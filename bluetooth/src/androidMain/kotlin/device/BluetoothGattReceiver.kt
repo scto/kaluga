@@ -46,13 +46,13 @@ import java.util.UUID
 import kotlin.jvm.javaClass
 
 /** Transforms calls to underlying [gattCallback] into [events]. */
-interface BluetoothGattReceiver {
+internal interface BluetoothGattReceiver {
     val events: Flow<GattEvent>
     val gattCallback: BluetoothGattCallback
 }
 
 /** Gatt callback events. */
-sealed interface GattEvent {
+internal sealed interface GattEvent {
     /** Event containing status. */
     interface WithStatus {
         val status: GattStatus
@@ -147,13 +147,13 @@ sealed interface GattEvent {
 }
 
 @JvmInline
-value class GattStatus(val code: Int) {
+internal value class GattStatus(val code: Int) {
     val isSuccess get() = code == GATT_SUCCESS
 
     override fun toString(): String = code.gattStatusAsString
 }
 
-class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val logger: Logger) :
+internal class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, private val logger: Logger) :
     BluetoothGattCallback(),
     BluetoothGattReceiver {
 

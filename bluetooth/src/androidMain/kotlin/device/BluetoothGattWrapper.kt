@@ -52,7 +52,7 @@ import kotlin.time.Duration.Companion.seconds
 /**
  * A wrapper to access a [BluetoothGatt]
  */
-interface BluetoothGattWrapper {
+internal interface BluetoothGattWrapper {
     /** Device connection state. */
     val state: DeviceConnectionManager.State
 
@@ -127,15 +127,25 @@ interface BluetoothGattWrapper {
     suspend fun setCharacteristicNotification(wrapper: CharacteristicWrapper, enable: Boolean): Result<Unit>
 }
 
+/**
+ * Indicates that [android.bluetooth.BluetoothGatt] call has return `false`
+ */
 class GattCallFailedException : Exception("Gatt call failed!")
-class GattStatusException(val status: GattStatus) : Exception("Gatt call finished with status $status!")
+
+/**
+ * Indicates that [android.bluetooth.BluetoothGatt] call triggered a callback with an error status
+ */
+class GattStatusException internal constructor(private val status: GattStatus) : Exception("Gatt call finished with status $status!") {
+    /** One of [android.bluetooth.BluetoothGatt].GATT_XX error codes. */
+    val code by status::code
+}
 
 /**
  * Default implementation of [BluetoothGattWrapper]
  * @param gatt the [BluetoothGatt] being wrapped
  */
 @SuppressLint("MissingPermission")
-class DefaultBluetoothGattWrapper(
+internal class DefaultBluetoothGattWrapper(
     private val deviceIdentifier: Identifier,
     private val logger: Logger,
     private val receiver: BluetoothGattReceiver = DefaultBluetoothGattReceiver(deviceIdentifier, logger),

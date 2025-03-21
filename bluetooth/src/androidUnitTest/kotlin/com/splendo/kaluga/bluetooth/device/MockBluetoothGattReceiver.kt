@@ -21,7 +21,7 @@ import android.bluetooth.BluetoothGattCallback
 import kotlinx.coroutines.flow.MutableSharedFlow
 import org.mockito.Mockito.spy
 
-class MockBluetoothGattReceiver(
+internal class MockBluetoothGattReceiver(
     override val events: MutableSharedFlow<GattEvent> = MutableSharedFlow(),
     override val gattCallback: BluetoothGattCallback = spy<BluetoothGattCallback>(),
 ) : BluetoothGattReceiver
