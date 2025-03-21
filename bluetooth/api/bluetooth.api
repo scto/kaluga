@@ -507,8 +507,8 @@ public final class com/splendo/kaluga/bluetooth/device/DefaultBluetoothGattRecei
 }
 
 public final class com/splendo/kaluga/bluetooth/device/DefaultBluetoothGattWrapper : com/splendo/kaluga/bluetooth/device/BluetoothGattWrapper {
-	public synthetic fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;JLkotlin/coroutines/CoroutineContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;JLkotlin/coroutines/CoroutineContext;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;Lcom/splendo/kaluga/bluetooth/device/BluetoothGattReceiver;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;JLkotlin/coroutines/CoroutineContext;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/splendo/kaluga/logging/Logger;Lcom/splendo/kaluga/bluetooth/device/BluetoothGattReceiver;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;JLkotlin/coroutines/CoroutineContext;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun connect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun disconnect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun discoverServices-IoAF18A (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -988,6 +988,11 @@ public final class com/splendo/kaluga/bluetooth/device/GattStatus {
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (I)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()I
+}
+
+public final class com/splendo/kaluga/bluetooth/device/GattStatusException : java/lang/Exception {
+	public synthetic fun <init> (ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getStatus-crYjYms ()I
 }
 
 public class com/splendo/kaluga/bluetooth/device/IdentifierSerializer : kotlinx/serialization/KSerializer {

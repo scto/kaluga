@@ -35,6 +35,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -44,7 +45,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
-import java.util.concurrent.TimeoutException
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -128,6 +128,7 @@ interface BluetoothGattWrapper {
 }
 
 class GattCallFailedException : Exception("Gatt call failed!")
+class GattStatusException(val status: GattStatus) : Exception("Gatt call finished with status $status!")
 
 /**
  * Default implementation of [BluetoothGattWrapper]
@@ -137,7 +138,7 @@ class GattCallFailedException : Exception("Gatt call failed!")
 class DefaultBluetoothGattWrapper(
     private val deviceIdentifier: Identifier,
     private val logger: Logger,
-    createReceiver: () -> BluetoothGattReceiver = { DefaultBluetoothGattReceiver(deviceIdentifier, logger) },
+    private val receiver: BluetoothGattReceiver = DefaultBluetoothGattReceiver(deviceIdentifier, logger),
     private val createGatt: (BluetoothGattCallback) -> BluetoothGatt,
     private val onConnected: suspend () -> Unit,
     private val onDisconnected: suspend () -> Unit,
@@ -147,7 +148,6 @@ class DefaultBluetoothGattWrapper(
     private var gatt: BluetoothGatt? = null
     private val gattMutex = Mutex()
     private var gattDisconnectionObserver: Job? = null
-    private val receiver = createReceiver()
 
     private val coroutineScope = CoroutineScope(coroutineContext)
 
@@ -167,7 +167,7 @@ class DefaultBluetoothGattWrapper(
     }
 
     private suspend fun Result<GattEvent.OnConnected>.handleOr(onError: suspend () -> Unit) {
-        if (isSuccess) {
+        if (isSuccess && getOrThrow().status.isSuccess) {
             state = DeviceConnectionManager.State.CONNECTED
             onConnected()
         } else {
@@ -319,13 +319,18 @@ class DefaultBluetoothGattWrapper(
                 withTimeout(operationTimeout) {
                     Result.success(receiver.events.filterIsInstance<T>().first { condition(it) })
                 }
-            } catch (e: TimeoutException) {
+            } catch (e: TimeoutCancellationException) {
                 Result.failure(e)
             }
         }
 
     private fun <T : GattEvent.WithStatus, R> Result<T>.map(successMapper: (T) -> R): Result<R> = if (isSuccess) {
-        Result.success(successMapper(getOrThrow()))
+        val value = getOrThrow()
+        if (value.status.isSuccess) {
+            Result.success(successMapper(value))
+        } else {
+            Result.failure(GattStatusException(value.status))
+        }
     } else {
         Result.failure(exceptionOrNull()!!)
     }
