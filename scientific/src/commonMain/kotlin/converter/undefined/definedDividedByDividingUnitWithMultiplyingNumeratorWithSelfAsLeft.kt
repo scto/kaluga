@@ -25,13 +25,13 @@ import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.per
 import kotlin.jvm.JvmName
 
@@ -45,7 +45,7 @@ fun <
         NumeratorAndDenominatorNumeratorLeftQuantity,
         >,
     DenominatorNumeratorRightQuantity : UndefinedQuantityType,
-    DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+    DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
     DenominatorNumeratorUnit : UndefinedMultipliedUnit<
         UndefinedQuantityType.Extended<
             NumeratorAndDenominatorNumeratorLeftQuantity,
@@ -55,7 +55,7 @@ fun <
         DenominatorNumeratorRightUnit,
         >,
     DenominatorDenominatorQuantity : UndefinedQuantityType,
-    DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+    DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
     DenominatorUnit : UndefinedDividedUnit<
         UndefinedQuantityType.Multiplying<
             UndefinedQuantityType.Extended<
@@ -124,7 +124,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -134,7 +134,7 @@ infix fun <
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
@@ -149,7 +149,7 @@ infix fun <
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -207,13 +207,13 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorLeftUnit : UndefinedExtendedUnit<
             NumeratorAndDenominatorNumeratorLeftQuantity,
             >,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInMetric,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : UndefinedMultipliedUnit<
             UndefinedQuantityType.Extended<
@@ -224,7 +224,7 @@ infix fun <
             DenominatorNumeratorRightUnit,
             >,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : UndefinedDividedUnit<
             UndefinedQuantityType.Multiplying<
@@ -278,7 +278,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ExtendedDenominatorNumeratorLeftUnit : UndefinedExtendedUnit<
@@ -286,7 +286,7 @@ infix fun <
             >,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedMultipliedUnit<
@@ -299,7 +299,7 @@ infix fun <
             >,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedDividedUnit<
@@ -355,13 +355,13 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorLeftUnit : UndefinedExtendedUnit<
             NumeratorAndDenominatorNumeratorLeftQuantity,
             >,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : UndefinedMultipliedUnit<
             UndefinedQuantityType.Extended<
@@ -372,7 +372,7 @@ infix fun <
             DenominatorNumeratorRightUnit,
             >,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : UndefinedDividedUnit<
             UndefinedQuantityType.Multiplying<
@@ -426,13 +426,13 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ExtendedDenominatorNumeratorLeftUnit : UndefinedExtendedUnit<
             NumeratorAndDenominatorNumeratorLeftQuantity,
             >,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedMultipliedUnit<
             UndefinedQuantityType.Extended<
@@ -443,7 +443,7 @@ infix fun <
             DenominatorNumeratorRightUnit,
             >,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedDividedUnit<
             UndefinedQuantityType.Multiplying<
@@ -497,7 +497,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorLeftUnit : UndefinedExtendedUnit<
@@ -505,7 +505,7 @@ infix fun <
             >,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorNumeratorUnit : UndefinedMultipliedUnit<
@@ -518,7 +518,7 @@ infix fun <
             >,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : UndefinedDividedUnit<
@@ -574,7 +574,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorLeftQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ExtendedDenominatorNumeratorLeftUnit : UndefinedExtendedUnit<
@@ -582,7 +582,7 @@ infix fun <
             >,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorNumeratorRightUnit : UndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
+        DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorRightQuantity>,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorRightUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorNumeratorUnit : UndefinedMultipliedUnit<
@@ -595,7 +595,7 @@ infix fun <
             >,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         DenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : UndefinedScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedDividedUnit<

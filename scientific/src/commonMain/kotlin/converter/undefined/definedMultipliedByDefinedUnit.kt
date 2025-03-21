@@ -25,7 +25,7 @@ import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
@@ -90,11 +90,11 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.metricAndImperialMultipliedByMetricAndImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
@@ -134,9 +134,9 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.metricMultipliedByMetric(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric =
     multipliedBy(
         right,
@@ -174,10 +174,10 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.imperialMultipliedByImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(
@@ -216,9 +216,9 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.ukImperialMultipliedByUKImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBy(
         right,
@@ -256,9 +256,9 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.usCustomaryMultipliedByUSCustomary(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(
         right,
@@ -296,10 +296,10 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.metricAndUKImperialMultipliedByMetricAndUKImperial(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBy(
@@ -338,10 +338,10 @@ infix fun <
     > ScientificValue<LeftQuantity, LeftUnit>.metricAndUSCustomaryMultipliedByMetricAndUSCustomary(
     right: ScientificValue<RightQuantity, RightUnit>,
 ) where
-        LeftUnit : AbstractScientificUnit<LeftQuantity>,
+        LeftUnit : DefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : AbstractScientificUnit<RightQuantity>,
+        RightUnit : DefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(

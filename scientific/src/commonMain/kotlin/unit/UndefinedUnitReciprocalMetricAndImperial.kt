@@ -29,7 +29,7 @@ fun <
     InverseQuantity : UndefinedQuantityType,
     InverseUnit,
     > InverseUnit.reciprocal() where
-                                     InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+                                     InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
                                      InverseUnit : MeasurementUsage.UsedInMetric,
                                      InverseUnit : MeasurementUsage.UsedInUKImperial,
                                      InverseUnit : MeasurementUsage.UsedInUSCustomary =
@@ -43,7 +43,7 @@ fun <
     InverseQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     InverseUnit,
     > InverseUnit.reciprocal() where
-                                     InverseUnit : AbstractScientificUnit<InverseQuantity>,
+                                     InverseUnit : DefinedScientificUnit<InverseQuantity>,
                                      InverseUnit : MeasurementUsage.UsedInMetric,
                                      InverseUnit : MeasurementUsage.UsedInUKImperial,
                                      InverseUnit : MeasurementUsage.UsedInUSCustomary =
@@ -58,7 +58,7 @@ fun <
     InverseUnit,
     ReciprocalUnit,
     > ReciprocalUnit.reciprocal() where
-                                        InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+                                        InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
                                         InverseUnit : MeasurementUsage.UsedInMetric,
                                         InverseUnit : MeasurementUsage.UsedInUKImperial,
                                         InverseUnit : MeasurementUsage.UsedInUSCustomary,
@@ -103,11 +103,11 @@ fun <
     DenominatorUnit,
     DividerUnit,
     > DividerUnit.reciprocal() where
-                                     NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+                                     NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
                                      NumeratorUnit : MeasurementUsage.UsedInMetric,
                                      NumeratorUnit : MeasurementUsage.UsedInUKImperial,
                                      NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-                                     DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+                                     DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
                                      DenominatorUnit : MeasurementUsage.UsedInMetric,
                                      DenominatorUnit : MeasurementUsage.UsedInUKImperial,
                                      DenominatorUnit : MeasurementUsage.UsedInUSCustomary,

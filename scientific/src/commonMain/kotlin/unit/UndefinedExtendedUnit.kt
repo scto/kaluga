@@ -25,7 +25,11 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 sealed interface UndefinedExtendedUnit<
     ExtendedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
@@ -203,7 +207,7 @@ sealed class CustomUndefinedExtendedUnit<
 @Serializable
 sealed class WrappedUndefinedExtendedUnit<
     WrappedQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-    WrappedUnit : ScientificUnit<WrappedQuantity>,
+    WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
     > :
     AbstractUndefinedScientificUnit<UndefinedQuantityType.Extended<WrappedQuantity>>(),
     UndefinedExtendedUnit<WrappedQuantity> {
@@ -225,7 +229,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.MetricAndImperial<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric,
               WrappedUnit : MeasurementUsage.UsedInUKImperial,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
@@ -246,7 +250,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.Metric<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric {
         override val system = MeasurementSystem.Metric
     }
@@ -259,7 +263,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.Imperial<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInUKImperial,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.Imperial
@@ -275,7 +279,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.UKImperial<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.UKImperial
     }
@@ -288,7 +292,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.USCustomary<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.USCustomary
     }
@@ -301,7 +305,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.MetricAndUKImperial<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric,
               WrappedUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.MetricAndUKImperial
@@ -317,7 +321,7 @@ sealed class WrappedUndefinedExtendedUnit<
         override val wrapped: WrappedUnit,
     ) : WrappedUndefinedExtendedUnit<WrappedQuantity, WrappedUnit>(),
         UndefinedExtendedUnit.MetricAndUSCustomary<WrappedQuantity> where
-              WrappedUnit : AbstractScientificUnit<WrappedQuantity>,
+              WrappedUnit : DefinedScientificUnit<WrappedQuantity>,
               WrappedUnit : MeasurementUsage.UsedInMetric,
               WrappedUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.MetricAndUSCustomary
@@ -330,7 +334,7 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric,
                                Unit : MeasurementUsage.UsedInUKImperial,
                                Unit : MeasurementUsage.UsedInUSCustomary =
@@ -341,14 +345,14 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric =
     WrappedUndefinedExtendedUnit.Metric(this)
 fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInUKImperial,
                                Unit : MeasurementUsage.UsedInUSCustomary =
     WrappedUndefinedExtendedUnit.Imperial(
@@ -358,21 +362,21 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInUKImperial =
     WrappedUndefinedExtendedUnit.UKImperial(this)
 fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInUSCustomary =
     WrappedUndefinedExtendedUnit.USCustomary(this)
 fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric,
                                Unit : MeasurementUsage.UsedInUKImperial =
     WrappedUndefinedExtendedUnit.MetricAndUKImperial(
@@ -382,9 +386,210 @@ fun <
     Quantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     Unit,
     > Unit.asUndefined() where
-                               Unit : AbstractScientificUnit<Quantity>,
+                               Unit : DefinedScientificUnit<Quantity>,
                                Unit : MeasurementUsage.UsedInMetric,
                                Unit : MeasurementUsage.UsedInUSCustomary =
     WrappedUndefinedExtendedUnit.MetricAndUSCustomary(
         this,
     )
+
+internal fun SerializersModuleBuilder.setupForUndefinedExtendedUnit() {
+    polymorphic(WrappedUndefinedExtendedUnit::class) {
+        registerWrappedUndefinedUnitClasses()
+    }
+    polymorphic(CustomUndefinedExtendedUnit::class) {
+        registerCustomUndefinedExtendedUnitClasses()
+    }
+    polymorphic(UndefinedExtendedUnit::class) {
+        registerUndefinedExtendedUnitClasses()
+    }
+
+    val definedQuantitySerializer = PhysicalQuantity.DefinedPhysicalQuantityWithDimension.serializer()
+    val definedUnitSerializer = DefinedScientificUnit.serializer(definedQuantitySerializer)
+
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.MetricAndImperial::class) {
+        WrappedUndefinedExtendedUnit.MetricAndImperial.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndImperial<*, *>>
+    }
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.Metric::class) {
+        WrappedUndefinedExtendedUnit.Metric.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.Metric<*, *>>
+    }
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.Imperial::class) {
+        WrappedUndefinedExtendedUnit.Imperial.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.Imperial<*, *>>
+    }
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.UKImperial::class) {
+        WrappedUndefinedExtendedUnit.UKImperial.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.UKImperial<*, *>>
+    }
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.USCustomary::class) {
+        WrappedUndefinedExtendedUnit.USCustomary.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.USCustomary<*, *>>
+    }
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.MetricAndUKImperial::class) {
+        WrappedUndefinedExtendedUnit.MetricAndUKImperial.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndUKImperial<*, *>>
+    }
+    polymorphicDefaultSerializer(WrappedUndefinedExtendedUnit.MetricAndUSCustomary::class) {
+        WrappedUndefinedExtendedUnit.MetricAndUSCustomary.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndUSCustomary<*, *>>
+    }
+
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.MetricAndImperial::class) {
+        WrappedUndefinedExtendedUnit.MetricAndImperial.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndImperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.Metric::class) {
+        WrappedUndefinedExtendedUnit.Metric.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.Metric<*, *>>
+    }
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.Imperial::class) {
+        WrappedUndefinedExtendedUnit.Imperial.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.Imperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.UKImperial::class) {
+        WrappedUndefinedExtendedUnit.UKImperial.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.UKImperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.USCustomary::class) {
+        WrappedUndefinedExtendedUnit.USCustomary.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.USCustomary<*, *>>
+    }
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.MetricAndUKImperial::class) {
+        WrappedUndefinedExtendedUnit.MetricAndUKImperial.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndUKImperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(WrappedUndefinedExtendedUnit.MetricAndUSCustomary::class) {
+        WrappedUndefinedExtendedUnit.MetricAndUSCustomary.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndUSCustomary<*, *>>
+    }
+
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.MetricAndImperial::class) {
+        CustomUndefinedExtendedUnit.MetricAndImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndImperial<*>>
+    }
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.Metric::class) {
+        CustomUndefinedExtendedUnit.Metric.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.Metric<*>>
+    }
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.Imperial::class) {
+        CustomUndefinedExtendedUnit.Imperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.Imperial<*>>
+    }
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.UKImperial::class) {
+        CustomUndefinedExtendedUnit.UKImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.UKImperial<*>>
+    }
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.USCustomary::class) {
+        CustomUndefinedExtendedUnit.USCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.USCustomary<*>>
+    }
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.MetricAndUKImperial::class) {
+        CustomUndefinedExtendedUnit.MetricAndUKImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUKImperial<*>>
+    }
+    polymorphicDefaultSerializer(CustomUndefinedExtendedUnit.MetricAndUSCustomary::class) {
+        CustomUndefinedExtendedUnit.MetricAndUSCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUSCustomary<*>>
+    }
+
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.MetricAndImperial::class) {
+        CustomUndefinedExtendedUnit.MetricAndImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndImperial<*>>
+    }
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.Metric::class) {
+        CustomUndefinedExtendedUnit.Metric.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.Metric<*>>
+    }
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.Imperial::class) {
+        CustomUndefinedExtendedUnit.Imperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.Imperial<*>>
+    }
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.UKImperial::class) {
+        CustomUndefinedExtendedUnit.UKImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.UKImperial<*>>
+    }
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.USCustomary::class) {
+        CustomUndefinedExtendedUnit.USCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.USCustomary<*>>
+    }
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.MetricAndUKImperial::class) {
+        CustomUndefinedExtendedUnit.MetricAndUKImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUKImperial<*>>
+    }
+    polymorphicDefaultDeserializer(CustomUndefinedExtendedUnit.MetricAndUSCustomary::class) {
+        CustomUndefinedExtendedUnit.MetricAndUSCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUSCustomary<*>>
+    }
+}
+
+internal fun PolymorphicModuleBuilder<UndefinedExtendedUnit<*>>.registerUndefinedExtendedUnitClasses() {
+    registerCustomUndefinedExtendedUnitClasses()
+    registerWrappedUndefinedUnitClasses()
+}
+
+internal fun PolymorphicModuleBuilder<CustomUndefinedExtendedUnit<*>>.registerCustomUndefinedExtendedUnitClasses() {
+    val definedQuantitySerializer = PhysicalQuantity.DefinedPhysicalQuantityWithDimension.serializer()
+
+    subclass(
+        CustomUndefinedExtendedUnit.MetricAndImperial::class,
+        CustomUndefinedExtendedUnit.MetricAndImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndImperial<*>>,
+    )
+    subclass(
+        CustomUndefinedExtendedUnit.Metric::class,
+        CustomUndefinedExtendedUnit.Metric.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.Metric<*>>,
+    )
+    subclass(
+        CustomUndefinedExtendedUnit.Imperial::class,
+        CustomUndefinedExtendedUnit.Imperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.Imperial<*>>,
+    )
+    subclass(
+        CustomUndefinedExtendedUnit.UKImperial::class,
+        CustomUndefinedExtendedUnit.UKImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.UKImperial<*>>,
+    )
+    subclass(
+        CustomUndefinedExtendedUnit.USCustomary::class,
+        CustomUndefinedExtendedUnit.USCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.USCustomary<*>>,
+    )
+    subclass(
+        CustomUndefinedExtendedUnit.MetricAndUKImperial::class,
+        CustomUndefinedExtendedUnit.MetricAndUKImperial.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUKImperial<*>>,
+    )
+    subclass(
+        CustomUndefinedExtendedUnit.MetricAndUSCustomary::class,
+        CustomUndefinedExtendedUnit.MetricAndUSCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUSCustomary<*>>,
+    )
+}
+internal fun PolymorphicModuleBuilder<WrappedUndefinedExtendedUnit<*, *>>.registerWrappedUndefinedUnitClasses() {
+    val definedQuantitySerializer = PhysicalQuantity.DefinedPhysicalQuantityWithDimension.serializer()
+    val definedUnitSerializer = DefinedScientificUnit.serializer(definedQuantitySerializer)
+
+    subclass(
+        WrappedUndefinedExtendedUnit.MetricAndImperial::class,
+        WrappedUndefinedExtendedUnit.MetricAndImperial.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndImperial<*, *>>,
+    )
+    subclass(
+        WrappedUndefinedExtendedUnit.Metric::class,
+        WrappedUndefinedExtendedUnit.Metric.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.Metric<*, *>>,
+    )
+    subclass(
+        WrappedUndefinedExtendedUnit.Imperial::class,
+        WrappedUndefinedExtendedUnit.Imperial.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.Imperial<*, *>>,
+    )
+    subclass(
+        WrappedUndefinedExtendedUnit.UKImperial::class,
+        WrappedUndefinedExtendedUnit.UKImperial.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.UKImperial<*, *>>,
+    )
+    subclass(
+        WrappedUndefinedExtendedUnit.USCustomary::class,
+        WrappedUndefinedExtendedUnit.USCustomary.serializer(definedQuantitySerializer, definedUnitSerializer) as KSerializer<WrappedUndefinedExtendedUnit.USCustomary<*, *>>,
+    )
+    subclass(
+        WrappedUndefinedExtendedUnit.MetricAndUKImperial::class,
+        WrappedUndefinedExtendedUnit.MetricAndUKImperial.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndUKImperial<*, *>>,
+    )
+    subclass(
+        WrappedUndefinedExtendedUnit.MetricAndUSCustomary::class,
+        WrappedUndefinedExtendedUnit.MetricAndUSCustomary.serializer(
+            definedQuantitySerializer,
+            definedUnitSerializer,
+        ) as KSerializer<WrappedUndefinedExtendedUnit.MetricAndUSCustomary<*, *>>,
+    )
+}

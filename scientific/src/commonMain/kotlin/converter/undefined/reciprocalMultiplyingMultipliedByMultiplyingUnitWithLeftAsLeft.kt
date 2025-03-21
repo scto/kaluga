@@ -27,7 +27,7 @@ import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.per
 import kotlin.jvm.JvmName
 
@@ -36,9 +36,9 @@ import kotlin.jvm.JvmName
 @JvmName("reciprocalMultiplyingMultipliedByMultiplyingUnitWithLeftAsLeft")
 fun <
     LeftReciprocalLeftAndRightLeftQuantity : UndefinedQuantityType,
-    LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+    LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
     LeftReciprocalRightQuantity : UndefinedQuantityType,
-    LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+    LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
     LeftReciprocalUnit : UndefinedMultipliedUnit<
         LeftReciprocalLeftAndRightLeftQuantity,
         LeftReciprocalLeftUnit,
@@ -52,9 +52,9 @@ fun <
             >,
         LeftReciprocalUnit,
         >,
-    RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+    RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
     RightRightQuantity : UndefinedQuantityType,
-    RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+    RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
     RightUnit : UndefinedMultipliedUnit<
         LeftReciprocalLeftAndRightLeftQuantity,
         RightLeftUnit,
@@ -125,11 +125,11 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
@@ -152,11 +152,11 @@ infix fun <
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInMetric,
         RightLeftUnit : MeasurementUsage.UsedInUKImperial,
         RightLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInMetric,
         RightRightUnit : MeasurementUsage.UsedInUKImperial,
         RightRightUnit : MeasurementUsage.UsedInUSCustomary,
@@ -213,9 +213,9 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalUnit : UndefinedMultipliedUnit<
             LeftReciprocalLeftAndRightLeftQuantity,
@@ -232,9 +232,9 @@ infix fun <
             LeftReciprocalUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInMetric,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : UndefinedMultipliedUnit<
             LeftReciprocalLeftAndRightLeftQuantity,
@@ -287,10 +287,10 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
         LeftReciprocalUnit : UndefinedMultipliedUnit<
@@ -310,10 +310,10 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInUKImperial,
         RightLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInUKImperial,
         RightRightUnit : MeasurementUsage.UsedInUSCustomary,
         RightUnit : UndefinedMultipliedUnit<
@@ -368,9 +368,9 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalUnit : UndefinedMultipliedUnit<
             LeftReciprocalLeftAndRightLeftQuantity,
@@ -387,9 +387,9 @@ infix fun <
             LeftReciprocalUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : UndefinedMultipliedUnit<
             LeftReciprocalLeftAndRightLeftQuantity,
@@ -442,9 +442,9 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
         LeftReciprocalUnit : UndefinedMultipliedUnit<
             LeftReciprocalLeftAndRightLeftQuantity,
@@ -461,9 +461,9 @@ infix fun <
             LeftReciprocalUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInUSCustomary,
         RightUnit : UndefinedMultipliedUnit<
             LeftReciprocalLeftAndRightLeftQuantity,
@@ -516,10 +516,10 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftReciprocalUnit : UndefinedMultipliedUnit<
@@ -539,10 +539,10 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInMetric,
         RightLeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInMetric,
         RightRightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : UndefinedMultipliedUnit<
@@ -597,10 +597,10 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftReciprocalLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftReciprocalRightUnit : UndefinedScientificUnit<LeftReciprocalRightQuantity>,
+        LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         LeftReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
         LeftReciprocalUnit : UndefinedMultipliedUnit<
@@ -620,10 +620,10 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightLeftUnit : UndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
+        RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightLeftQuantity>,
         RightLeftUnit : MeasurementUsage.UsedInMetric,
         RightLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightRightUnit : UndefinedScientificUnit<RightRightQuantity>,
+        RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
         RightRightUnit : MeasurementUsage.UsedInMetric,
         RightRightUnit : MeasurementUsage.UsedInUSCustomary,
         RightUnit : UndefinedMultipliedUnit<

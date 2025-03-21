@@ -26,7 +26,7 @@ import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.jvm.JvmName
 
@@ -35,9 +35,9 @@ import kotlin.jvm.JvmName
 @JvmName("reciprocalMultiplyingDividedByReciprocalRight")
 fun <
     NumeratorReciprocalLeftQuantity : UndefinedQuantityType,
-    NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+    NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
     NumeratorReciprocalRightAndDenominatorReciprocalQuantity : UndefinedQuantityType,
-    NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+    NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
     NumeratorReciprocalUnit : UndefinedMultipliedUnit<
         NumeratorReciprocalLeftQuantity,
         NumeratorReciprocalLeftUnit,
@@ -51,7 +51,7 @@ fun <
             >,
         NumeratorReciprocalUnit,
         >,
-    DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+    DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
     DenominatorUnit : UndefinedReciprocalUnit<
         NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
         DenominatorReciprocalUnit,
@@ -111,11 +111,11 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
@@ -138,7 +138,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
@@ -188,9 +188,9 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalUnit : UndefinedMultipliedUnit<
             NumeratorReciprocalLeftQuantity,
@@ -207,7 +207,7 @@ infix fun <
             NumeratorReciprocalUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : UndefinedReciprocalUnit<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -253,10 +253,10 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
         NumeratorReciprocalUnit : UndefinedMultipliedUnit<
@@ -276,7 +276,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedReciprocalUnit<
@@ -324,9 +324,9 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalUnit : UndefinedMultipliedUnit<
             NumeratorReciprocalLeftQuantity,
@@ -343,7 +343,7 @@ infix fun <
             NumeratorReciprocalUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : UndefinedReciprocalUnit<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -389,9 +389,9 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
         NumeratorReciprocalUnit : UndefinedMultipliedUnit<
             NumeratorReciprocalLeftQuantity,
@@ -408,7 +408,7 @@ infix fun <
             NumeratorReciprocalUnit,
             >,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedReciprocalUnit<
             NumeratorReciprocalRightAndDenominatorReciprocalQuantity,
@@ -454,10 +454,10 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUKImperial,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorReciprocalUnit : UndefinedMultipliedUnit<
@@ -477,7 +477,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : UndefinedReciprocalUnit<
@@ -525,10 +525,10 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorReciprocalLeftUnit : UndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
+        NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftQuantity>,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        NumeratorReciprocalRightUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInMetric,
         NumeratorReciprocalRightUnit : MeasurementUsage.UsedInUSCustomary,
         NumeratorReciprocalUnit : UndefinedMultipliedUnit<
@@ -548,7 +548,7 @@ infix fun <
             >,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : UndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         DenominatorUnit : UndefinedReciprocalUnit<

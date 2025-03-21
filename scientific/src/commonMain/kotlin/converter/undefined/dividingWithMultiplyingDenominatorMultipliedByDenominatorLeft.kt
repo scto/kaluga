@@ -26,7 +26,7 @@ import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.per
 import kotlin.jvm.JvmName
 
@@ -35,11 +35,11 @@ import kotlin.jvm.JvmName
 @JvmName("dividingWithMultiplyingDenominatorMultipliedByDenominatorLeft")
 fun <
     LeftNumeratorQuantity : UndefinedQuantityType,
-    LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+    LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
     LeftDenominatorLeftAndRightQuantity : UndefinedQuantityType,
-    LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+    LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
     LeftDenominatorRightQuantity : UndefinedQuantityType,
-    LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+    LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
     LeftDenominatorUnit : UndefinedMultipliedUnit<
         LeftDenominatorLeftAndRightQuantity,
         LeftDenominatorLeftUnit,
@@ -55,7 +55,7 @@ fun <
             >,
         LeftDenominatorUnit,
         >,
-    RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+    RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
     TargetUnit : UndefinedDividedUnit<
         LeftNumeratorQuantity,
         LeftNumeratorUnit,
@@ -115,15 +115,15 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
         LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUSCustomary,
@@ -148,7 +148,7 @@ infix fun <
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
@@ -193,11 +193,11 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInMetric,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorUnit : UndefinedMultipliedUnit<
             LeftDenominatorLeftAndRightQuantity,
@@ -216,7 +216,7 @@ infix fun <
             LeftDenominatorUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric =
     multipliedBy(
         right,
@@ -259,13 +259,13 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUSCustomary,
         LeftDenominatorUnit : UndefinedMultipliedUnit<
@@ -287,7 +287,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(
@@ -331,11 +331,11 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUKImperial,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftDenominatorUnit : UndefinedMultipliedUnit<
             LeftDenominatorLeftAndRightQuantity,
@@ -354,7 +354,7 @@ infix fun <
             LeftDenominatorUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBy(
         right,
@@ -397,11 +397,11 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUSCustomary,
         LeftDenominatorUnit : UndefinedMultipliedUnit<
             LeftDenominatorLeftAndRightQuantity,
@@ -420,7 +420,7 @@ infix fun <
             LeftDenominatorUnit,
             >,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(
         right,
@@ -463,13 +463,13 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
         LeftNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUKImperial,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUKImperial,
         LeftDenominatorUnit : UndefinedMultipliedUnit<
@@ -491,7 +491,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBy(
@@ -535,13 +535,13 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftNumeratorUnit : UndefinedScientificUnit<LeftNumeratorQuantity>,
+        LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
         LeftNumeratorUnit : MeasurementUsage.UsedInMetric,
         LeftNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorLeftUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorLeftUnit : MeasurementUsage.UsedInUSCustomary,
-        LeftDenominatorRightUnit : UndefinedScientificUnit<LeftDenominatorRightQuantity>,
+        LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInMetric,
         LeftDenominatorRightUnit : MeasurementUsage.UsedInUSCustomary,
         LeftDenominatorUnit : UndefinedMultipliedUnit<
@@ -563,7 +563,7 @@ infix fun <
             >,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(

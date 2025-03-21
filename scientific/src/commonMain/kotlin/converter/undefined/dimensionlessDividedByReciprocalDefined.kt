@@ -25,7 +25,7 @@ import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
@@ -84,7 +84,7 @@ infix fun <
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
@@ -130,7 +130,7 @@ infix fun <
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
             DenominatorReciprocalQuantity,
@@ -171,7 +171,7 @@ infix fun <
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
@@ -214,7 +214,7 @@ infix fun <
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
             DenominatorReciprocalQuantity,
@@ -254,7 +254,7 @@ infix fun <
 ) where
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
             DenominatorReciprocalQuantity,
@@ -295,7 +295,7 @@ infix fun <
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUKImperial,
         WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
@@ -339,7 +339,7 @@ infix fun <
         NumeratorUnit : Dimensionless,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+        DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInMetric,
         DenominatorReciprocalUnit : MeasurementUsage.UsedInUSCustomary,
         WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
@@ -367,7 +367,7 @@ infix fun <
 infix fun <
     NumeratorUnit : Dimensionless,
     DenominatorReciprocalQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-    DenominatorReciprocalUnit : AbstractScientificUnit<DenominatorReciprocalQuantity>,
+    DenominatorReciprocalUnit : DefinedScientificUnit<DenominatorReciprocalQuantity>,
     WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
         DenominatorReciprocalQuantity,
         DenominatorReciprocalUnit,

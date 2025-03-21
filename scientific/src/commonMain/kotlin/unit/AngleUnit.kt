@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 import kotlin.math.PI
 
 /**
@@ -48,12 +51,12 @@ val AngleUnits: Set<Angle> get() = setOf(
 )
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Angle]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Angle]
  * SI unit is [Radian]
  */
 @Serializable
 sealed class Angle :
-    AbstractScientificUnit<PhysicalQuantity.Angle>(),
+    DefinedScientificUnit<PhysicalQuantity.Angle>(),
     MetricAndImperialScientificUnit<PhysicalQuantity.Angle>
 
 @Serializable
@@ -153,4 +156,29 @@ data object ArcSecond : Angle() {
     override val quantity = PhysicalQuantity.Angle
     override fun fromSIUnit(value: Decimal): Decimal = Turn.fromSIUnit(value) * ARCSECOND_IN_TURN.toDecimal()
     override fun toSIUnit(value: Decimal): Decimal = Turn.toSIUnit(value / ARCSECOND_IN_TURN.toDecimal())
+}
+
+internal fun SerializersModuleBuilder.setupForAngle() {
+    polymorphic(Angle::class) {
+        registerAngleClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Angle>.registerAngleClasses() {
+    subclass(ArcMinute::class, ArcMinute.serializer())
+    subclass(ArcSecond::class, ArcSecond.serializer())
+    subclass(Degree::class, Degree.serializer())
+    subclass(Gradian::class, Gradian.serializer())
+    subclass(Radian::class, Radian.serializer())
+    subclass(Centiradian::class, Centiradian.serializer())
+    subclass(Deciradian::class, Deciradian.serializer())
+    subclass(Microradian::class, Microradian.serializer())
+    subclass(Milliradian::class, Milliradian.serializer())
+    subclass(Nanoradian::class, Nanoradian.serializer())
+    subclass(Turn::class, Turn.serializer())
+    subclass(Centiturn::class, Centiturn.serializer())
+    subclass(Deciturn::class, Deciturn.serializer())
+    subclass(Microturn::class, Microturn.serializer())
+    subclass(Milliturn::class, Milliturn.serializer())
+    subclass(Nanoturn::class, Nanoturn.serializer())
 }

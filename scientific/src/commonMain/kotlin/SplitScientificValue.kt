@@ -23,7 +23,7 @@ import com.splendo.kaluga.base.utils.minus
 import com.splendo.kaluga.base.utils.plus
 import com.splendo.kaluga.base.utils.round
 import com.splendo.kaluga.base.utils.toDecimal
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementSystem
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.SystemScientificUnit
@@ -90,9 +90,9 @@ fun <
     scale: UInt = 0U,
     roundingThreshold: Decimal = 0.0000001.toDecimal(),
 ) where
-        ValueUnit : AbstractScientificUnit<Quantity>,
+        ValueUnit : DefinedScientificUnit<Quantity>,
         ValueUnit : SystemScientificUnit<System, Quantity>,
-        RightUnit : AbstractScientificUnit<Quantity>,
+        RightUnit : DefinedScientificUnit<Quantity>,
         RightUnit : SystemScientificUnit<System, Quantity> =
     split(unit, rightUnit, scale, roundingThreshold, ::DefaultScientificValue, ::DefaultScientificValue)
 
@@ -175,9 +175,9 @@ fun <
     scale: UInt = 0U,
     roundingThreshold: Decimal = 0.0000001.toDecimal(),
 ) where
-        LeftUnit : AbstractScientificUnit<Quantity>,
+        LeftUnit : DefinedScientificUnit<Quantity>,
         LeftUnit : SystemScientificUnit<System, Quantity>,
-        RightUnit : AbstractScientificUnit<Quantity>,
+        RightUnit : DefinedScientificUnit<Quantity>,
         RightUnit : SystemScientificUnit<System, Quantity> =
     split(leftUnit, rightUnit, scale, roundingThreshold, ::DefaultScientificValue, ::DefaultScientificValue)
 
@@ -185,13 +185,13 @@ fun <
  * Breaks up a [ScientificValue] of [Quantity] into its components in [UnitOne], [UnitTwo] and executes the given [action] with these components.
  * A value is broken up into its components by converting the value to to [UnitOne] and splitting into [UnitTwo] using [scale].
  *
- * Splitting can only be done between [AbstractScientificUnit] using the same [MeasurementSystem].
+ * Splitting can only be done between [DefinedScientificUnit] using the same [MeasurementSystem].
  * To account for rounding errors, a [roundingThreshold] can be set. If the non-rounded value in [UnitOne] is within this threshold, it will be rounded up.
  * @param System the [MeasurementSystem] of the units to split
  * @param Quantity the [PhysicalQuantity] of the units to split
  * @param Unit the [ScientificUnit] of the [ScientificValue] to split
- * @param UnitOne the [AbstractScientificUnit] to use as the first (rounded) component.
- * @param UnitTwo the [AbstractScientificUnit] to use as the second component.
+ * @param UnitOne the [DefinedScientificUnit] to use as the first (rounded) component.
+ * @param UnitTwo the [DefinedScientificUnit] to use as the second component.
  * @param Result the type of result to be returned.
  * @param one the [UnitOne] to use.
  * @param two the [UnitTwo] to use.
@@ -215,9 +215,9 @@ fun <
     roundingThreshold: Decimal = 0.0000001.toDecimal(),
     action: (DefaultScientificValue<Quantity, UnitOne>, DefaultScientificValue<Quantity, UnitTwo>) -> Result,
 ): Result where
-                UnitOne : AbstractScientificUnit<Quantity>,
+                UnitOne : DefinedScientificUnit<Quantity>,
                 UnitOne : SystemScientificUnit<System, Quantity>,
-                UnitTwo : AbstractScientificUnit<Quantity>,
+                UnitTwo : DefinedScientificUnit<Quantity>,
                 UnitTwo : SystemScientificUnit<System, Quantity> {
     val (valueOne, valueTwo) = this.split(one, two, scale, roundingThreshold)
     return action(valueOne, valueTwo)
@@ -227,14 +227,14 @@ fun <
  * Breaks up a [ScientificValue] of [Quantity] into its components in [UnitOne], [UnitTwo], [UnitThree] and executes the given [action] with these components.
  * A value is broken up into its components by converting the value to to [UnitOne] and splitting into [UnitTwo] using [scale], then splitting the remainder into [UnitThree].
  *
- * Splitting can only be done between [AbstractScientificUnit] using the same [MeasurementSystem].
+ * Splitting can only be done between [DefinedScientificUnit] using the same [MeasurementSystem].
  * To account for rounding errors, a [roundingThreshold] can be set. If the non-rounded value in any unit (except for [UnitThree]) is within this threshold, it will be rounded up.
  * @param System the [MeasurementSystem] of the units to split
  * @param Quantity the [PhysicalQuantity] of the units to split
  * @param Unit the [ScientificUnit] of the [ScientificValue] to split
- * @param UnitOne the [AbstractScientificUnit] to use as the first (rounded) component.
- * @param UnitTwo the [AbstractScientificUnit] to use as the second (rounded) component.
- * @param UnitThree the [AbstractScientificUnit] to use as the third component.
+ * @param UnitOne the [DefinedScientificUnit] to use as the first (rounded) component.
+ * @param UnitTwo the [DefinedScientificUnit] to use as the second (rounded) component.
+ * @param UnitThree the [DefinedScientificUnit] to use as the third component.
  * @param Result the type of result to be returned.
  * @param one the [UnitOne] to use.
  * @param two the [UnitTwo] to use.
@@ -261,11 +261,11 @@ fun <
     roundingThreshold: Decimal = 0.0000001.toDecimal(),
     action: (DefaultScientificValue<Quantity, UnitOne>, DefaultScientificValue<Quantity, UnitTwo>, DefaultScientificValue<Quantity, UnitThree>) -> Result,
 ): Result where
-                UnitOne : AbstractScientificUnit<Quantity>,
+                UnitOne : DefinedScientificUnit<Quantity>,
                 UnitOne : SystemScientificUnit<System, Quantity>,
-                UnitTwo : AbstractScientificUnit<Quantity>,
+                UnitTwo : DefinedScientificUnit<Quantity>,
                 UnitTwo : SystemScientificUnit<System, Quantity>,
-                UnitThree : AbstractScientificUnit<Quantity>,
+                UnitThree : DefinedScientificUnit<Quantity>,
                 UnitThree : SystemScientificUnit<System, Quantity> {
     val (valueOne, oneRemainder) = this.split(one, two, scale, roundingThreshold)
     val (valueTwo, valueThree) = oneRemainder.split(three, scale, roundingThreshold)
@@ -276,15 +276,15 @@ fun <
  * Breaks up a [ScientificValue] of [Quantity] into its components in [UnitOne], [UnitTwo], [UnitThree], [UnitFour] and executes the given [action] with these components.
  * A value is broken up into its components by converting the value to to [UnitOne] and splitting into [UnitTwo] using [scale], then splitting the remainder into [UnitThree] and so on.
  *
- * Splitting can only be done between [AbstractScientificUnit] using the same [MeasurementSystem].
+ * Splitting can only be done between [DefinedScientificUnit] using the same [MeasurementSystem].
  * To account for rounding errors, a [roundingThreshold] can be set. If the non-rounded value in any unit (except for [UnitFour]) is within this threshold, it will be rounded up.
  * @param System the [MeasurementSystem] of the units to split
  * @param Quantity the [PhysicalQuantity] of the units to split
  * @param Unit the [ScientificUnit] of the [ScientificValue] to split
- * @param UnitOne the [AbstractScientificUnit] to use as the first (rounded) component.
- * @param UnitTwo the [AbstractScientificUnit] to use as the second (rounded) component.
- * @param UnitThree the [AbstractScientificUnit] to use as the third (rounded) component.
- * @param UnitFour the [AbstractScientificUnit] to use as the fourth component.
+ * @param UnitOne the [DefinedScientificUnit] to use as the first (rounded) component.
+ * @param UnitTwo the [DefinedScientificUnit] to use as the second (rounded) component.
+ * @param UnitThree the [DefinedScientificUnit] to use as the third (rounded) component.
+ * @param UnitFour the [DefinedScientificUnit] to use as the fourth component.
  * @param Result the type of result to be returned.
  * @param one the [UnitOne] to use.
  * @param two the [UnitTwo] to use.
@@ -319,13 +319,13 @@ fun <
         DefaultScientificValue<Quantity, UnitFour>,
     ) -> Result,
 ): Result where
-                UnitOne : AbstractScientificUnit<Quantity>,
+                UnitOne : DefinedScientificUnit<Quantity>,
                 UnitOne : SystemScientificUnit<System, Quantity>,
-                UnitTwo : AbstractScientificUnit<Quantity>,
+                UnitTwo : DefinedScientificUnit<Quantity>,
                 UnitTwo : SystemScientificUnit<System, Quantity>,
-                UnitThree : AbstractScientificUnit<Quantity>,
+                UnitThree : DefinedScientificUnit<Quantity>,
                 UnitThree : SystemScientificUnit<System, Quantity>,
-                UnitFour : AbstractScientificUnit<Quantity>,
+                UnitFour : DefinedScientificUnit<Quantity>,
                 UnitFour : SystemScientificUnit<System, Quantity> {
     val (valueOne, oneRemainder) = this.split(one, two, scale, roundingThreshold)
     val (valueTwo, twoRemainder) = oneRemainder.split(three, scale, roundingThreshold)
@@ -337,16 +337,16 @@ fun <
  * Breaks up a [ScientificValue] of [Quantity] into its components in [UnitOne], [UnitTwo], [UnitThree], [UnitFour], [UnitFive] and executes the given [action] with these components.
  * A value is broken up into its components by converting the value to to [UnitOne] and splitting into [UnitTwo] using [scale], then splitting the remainder into [UnitThree] and so on.
  *
- * Splitting can only be done between [AbstractScientificUnit] using the same [MeasurementSystem].
+ * Splitting can only be done between [DefinedScientificUnit] using the same [MeasurementSystem].
  * To account for rounding errors, a [roundingThreshold] can be set. If the non-rounded value in any unit (except for [UnitFive]) is within this threshold, it will be rounded up.
  * @param System the [MeasurementSystem] of the units to split
  * @param Quantity the [PhysicalQuantity] of the units to split
  * @param Unit the [ScientificUnit] of the [ScientificValue] to split
- * @param UnitOne the [AbstractScientificUnit] to use as the first (rounded) component.
- * @param UnitTwo the [AbstractScientificUnit] to use as the second (rounded) component.
- * @param UnitThree the [AbstractScientificUnit] to use as the third (rounded) component.
- * @param UnitFour the [AbstractScientificUnit] to use as the fourth (rounded) component.
- * @param UnitFive the [AbstractScientificUnit] to use as the fifth component.
+ * @param UnitOne the [DefinedScientificUnit] to use as the first (rounded) component.
+ * @param UnitTwo the [DefinedScientificUnit] to use as the second (rounded) component.
+ * @param UnitThree the [DefinedScientificUnit] to use as the third (rounded) component.
+ * @param UnitFour the [DefinedScientificUnit] to use as the fourth (rounded) component.
+ * @param UnitFive the [DefinedScientificUnit] to use as the fifth component.
  * @param Result the type of result to be returned.
  * @param one the [UnitOne] to use.
  * @param two the [UnitTwo] to use.
@@ -385,15 +385,15 @@ fun <
         DefaultScientificValue<Quantity, UnitFive>,
     ) -> Result,
 ): Result where
-                UnitOne : AbstractScientificUnit<Quantity>,
+                UnitOne : DefinedScientificUnit<Quantity>,
                 UnitOne : SystemScientificUnit<System, Quantity>,
-                UnitTwo : AbstractScientificUnit<Quantity>,
+                UnitTwo : DefinedScientificUnit<Quantity>,
                 UnitTwo : SystemScientificUnit<System, Quantity>,
-                UnitThree : AbstractScientificUnit<Quantity>,
+                UnitThree : DefinedScientificUnit<Quantity>,
                 UnitThree : SystemScientificUnit<System, Quantity>,
-                UnitFour : AbstractScientificUnit<Quantity>,
+                UnitFour : DefinedScientificUnit<Quantity>,
                 UnitFour : SystemScientificUnit<System, Quantity>,
-                UnitFive : AbstractScientificUnit<Quantity>,
+                UnitFive : DefinedScientificUnit<Quantity>,
                 UnitFive : SystemScientificUnit<System, Quantity> {
     val (valueOne, oneRemainder) = this.split(one, two, scale, roundingThreshold)
     val (valueTwo, twoRemainder) = oneRemainder.split(three, scale, roundingThreshold)

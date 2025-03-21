@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricWeight]
@@ -83,11 +86,11 @@ val WeightUnits: Set<Weight> get() = MetricWeightUnits +
     USCustomaryWeightUnits.filter { it !is USCustomaryImperialWeightWrapper }.toSet()
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Weight]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Weight]
  * SI unit is [Kilogram]
  */
 @Serializable
-sealed class Weight : AbstractScientificUnit<PhysicalQuantity.Weight>()
+sealed class Weight : DefinedScientificUnit<PhysicalQuantity.Weight>()
 
 /**
  * A [Weight] for [MeasurementSystem.Metric]
@@ -325,3 +328,73 @@ data class USCustomaryImperialWeightWrapper(val imperial: ImperialWeight) : USCu
  * @param WeightUnit the type of [ImperialWeight] to convert
  */
 val <WeightUnit : ImperialWeight> WeightUnit.usCustomary get() = USCustomaryImperialWeightWrapper(this)
+
+internal fun SerializersModuleBuilder.setupForWeight() {
+    polymorphic(Weight::class) {
+        registerWeightClasses()
+    }
+    polymorphic(MetricWeight::class) {
+        registerMetricWeightClasses()
+    }
+    polymorphic(ImperialWeight::class) {
+        registerImperialWeightClasses()
+    }
+    polymorphic(UKImperialWeight::class) {
+        registerUKImperialWeightClasses()
+    }
+    polymorphic(USCustomaryWeight::class) {
+        registerUSCustomaryWeightClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Weight>.registerWeightClasses() {
+    registerMetricWeightClasses()
+    registerImperialWeightClasses()
+    registerUKImperialWeightClasses()
+    registerUSCustomaryWeightClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricWeight>.registerMetricWeightClasses() {
+    subclass(Dalton::class, Dalton.serializer())
+    subclass(Centidalton::class, Centidalton.serializer())
+    subclass(Decadalton::class, Decadalton.serializer())
+    subclass(Decidalton::class, Decidalton.serializer())
+    subclass(Gigadalton::class, Gigadalton.serializer())
+    subclass(HectoDalton::class, HectoDalton.serializer())
+    subclass(Kilodalton::class, Kilodalton.serializer())
+    subclass(Megadalton::class, Megadalton.serializer())
+    subclass(Microdalton::class, Microdalton.serializer())
+    subclass(Millidalton::class, Millidalton.serializer())
+    subclass(Nanodalton::class, Nanodalton.serializer())
+    subclass(Gram::class, Gram.serializer())
+    subclass(Centigram::class, Centigram.serializer())
+    subclass(Decagram::class, Decagram.serializer())
+    subclass(Decigram::class, Decigram.serializer())
+    subclass(Gigagram::class, Gigagram.serializer())
+    subclass(Hectogram::class, Hectogram.serializer())
+    subclass(Kilogram::class, Kilogram.serializer())
+    subclass(Megagram::class, Megagram.serializer())
+    subclass(Microgram::class, Microgram.serializer())
+    subclass(Milligram::class, Milligram.serializer())
+    subclass(Nanogram::class, Nanogram.serializer())
+    subclass(Tonne::class, Tonne.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialWeight>.registerImperialWeightClasses() {
+    subclass(Dram::class, Dram.serializer())
+    subclass(Grain::class, Grain.serializer())
+    subclass(Ounce::class, Ounce.serializer())
+    subclass(Pound::class, Pound.serializer())
+    subclass(Slug::class, Slug.serializer())
+    subclass(Stone::class, Stone.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<UKImperialWeight>.registerUKImperialWeightClasses() {
+    subclass(ImperialTon::class, ImperialTon.serializer())
+    subclass(UKImperialImperialWeightWrapper::class, UKImperialImperialWeightWrapper.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<USCustomaryWeight>.registerUSCustomaryWeightClasses() {
+    subclass(USCustomaryImperialWeightWrapper::class, USCustomaryImperialWeightWrapper.serializer())
+    subclass(UsTon::class, UsTon.serializer())
+}

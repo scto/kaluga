@@ -19,12 +19,17 @@ package com.splendo.kaluga.scientific.unit
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.PolymorphicSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 @Serializable
 sealed class UndefinedReciprocalUnit<
     InverseQuantity : UndefinedQuantityType,
-    InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+    InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
     > :
     AbstractUndefinedScientificUnit<UndefinedQuantityType.Reciprocal<InverseQuantity>>() {
 
@@ -52,7 +57,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.MetricAndImperial<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInMetric,
               InverseUnit : MeasurementUsage.UsedInUKImperial,
               InverseUnit : MeasurementUsage.UsedInUSCustomary {
@@ -73,7 +78,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.Metric<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInMetric {
         override val system = MeasurementSystem.Metric
     }
@@ -85,7 +90,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.Imperial<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInUKImperial,
               InverseUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.Imperial
@@ -101,7 +106,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.UKImperial<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.UKImperial
     }
@@ -113,7 +118,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.USCustomary<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.USCustomary
     }
@@ -125,7 +130,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.MetricAndUKImperial<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInMetric,
               InverseUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.MetricAndUKImperial
@@ -141,7 +146,7 @@ sealed class UndefinedReciprocalUnit<
         > internal constructor(override val inverse: InverseUnit) :
         UndefinedReciprocalUnit<InverseQuantity, InverseUnit>(),
         UndefinedScientificUnit.MetricAndUSCustomary<UndefinedQuantityType.Reciprocal<InverseQuantity>> where
-              InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+              InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
               InverseUnit : MeasurementUsage.UsedInMetric,
               InverseUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.MetricAndUSCustomary
@@ -149,4 +154,89 @@ sealed class UndefinedReciprocalUnit<
         override val metric: Metric<InverseQuantity, InverseUnit> by lazy { Metric(inverse) }
         override val usCustomary: USCustomary<InverseQuantity, InverseUnit> by lazy { USCustomary(inverse) }
     }
+}
+
+internal fun SerializersModuleBuilder.setupForUndefinedReciprocalUnit() {
+    polymorphic(UndefinedReciprocalUnit::class) {
+        registerUndefinedReciprocalUnitClasses()
+    }
+    val quantitySerializer = PolymorphicSerializer(UndefinedQuantityType::class)
+    val undefinedSerializer = AbstractUndefinedScientificUnit.serializer(quantitySerializer)
+
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.MetricAndImperial::class) {
+        UndefinedReciprocalUnit.MetricAndImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndImperial<*, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.Metric::class) {
+        UndefinedReciprocalUnit.Metric.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.Metric<*, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.Imperial::class) {
+        UndefinedReciprocalUnit.Imperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.Imperial<*, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.UKImperial::class) {
+        UndefinedReciprocalUnit.UKImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.UKImperial<*, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.USCustomary::class) {
+        UndefinedReciprocalUnit.USCustomary.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.USCustomary<*, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.MetricAndUKImperial::class) {
+        UndefinedReciprocalUnit.MetricAndUKImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndUKImperial<*, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedReciprocalUnit.MetricAndUSCustomary::class) {
+        UndefinedReciprocalUnit.MetricAndUSCustomary.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndUSCustomary<*, *>>
+    }
+
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.MetricAndImperial::class) {
+        UndefinedReciprocalUnit.MetricAndImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndImperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.Metric::class) {
+        UndefinedReciprocalUnit.Metric.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.Metric<*, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.Imperial::class) {
+        UndefinedReciprocalUnit.Imperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.Imperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.UKImperial::class) {
+        UndefinedReciprocalUnit.UKImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.UKImperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.USCustomary::class) {
+        UndefinedReciprocalUnit.USCustomary.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.USCustomary<*, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.MetricAndUKImperial::class) {
+        UndefinedReciprocalUnit.MetricAndUKImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndUKImperial<*, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedReciprocalUnit.MetricAndUSCustomary::class) {
+        UndefinedReciprocalUnit.MetricAndUSCustomary.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndUSCustomary<*, *>>
+    }
+}
+
+internal fun PolymorphicModuleBuilder<UndefinedReciprocalUnit<*, *>>.registerUndefinedReciprocalUnitClasses() {
+    val quantitySerializer = PolymorphicSerializer(UndefinedQuantityType::class)
+    val undefinedSerializer = AbstractUndefinedScientificUnit.serializer(quantitySerializer)
+    subclass(
+        UndefinedReciprocalUnit.MetricAndImperial::class,
+        UndefinedReciprocalUnit.MetricAndImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndImperial<*, *>>,
+    )
+    subclass(
+        UndefinedReciprocalUnit.Metric::class,
+        UndefinedReciprocalUnit.Metric.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.Metric<*, *>>,
+    )
+    subclass(
+        UndefinedReciprocalUnit.Imperial::class,
+        UndefinedReciprocalUnit.Imperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.Imperial<*, *>>,
+    )
+    subclass(
+        UndefinedReciprocalUnit.UKImperial::class,
+        UndefinedReciprocalUnit.UKImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.UKImperial<*, *>>,
+    )
+    subclass(
+        UndefinedReciprocalUnit.USCustomary::class,
+        UndefinedReciprocalUnit.USCustomary.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.USCustomary<*, *>>,
+    )
+    subclass(
+        UndefinedReciprocalUnit.MetricAndUKImperial::class,
+        UndefinedReciprocalUnit.MetricAndUKImperial.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndUKImperial<*, *>>,
+    )
+    subclass(
+        UndefinedReciprocalUnit.MetricAndUSCustomary::class,
+        UndefinedReciprocalUnit.MetricAndUSCustomary.serializer(quantitySerializer, undefinedSerializer) as KSerializer<UndefinedReciprocalUnit.MetricAndUSCustomary<*, *>>,
+    )
 }

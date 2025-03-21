@@ -15,16 +15,12 @@
 
  */
 
-package com.splendo.kaluga.scientific.converter.undefined
+package com.splendo.kaluga.scientific
 
-import com.splendo.kaluga.scientific.invoke
-import kotlin.test.Test
+import com.splendo.kaluga.scientific.unit.setupForScientificUnit
+import kotlinx.serialization.modules.SerializersModule
 
-// Div<Mul<C, Wr<D>>, Mul<B, A>> * Div<Mul<A, B>, C> -> D!
-
-class DivWMulWDefinedRNumAndMulDenomMultipliedByDivUnitWMulNumWDenomRAsLAndDenomLAsRAndNumLAsDenomTest {
-
-    @Test
-    fun multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorRightAsLeftAndDenominatorLeftAsRightAndNumeratorLeftAsDenominator() {
-    }
+val scientificSerializationModule = SerializersModule {
+    setupPhysicalQuantity()
+    setupForScientificUnit()
 }

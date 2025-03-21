@@ -25,11 +25,11 @@ import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.asUndefined
 import com.splendo.kaluga.scientific.unit.per
@@ -42,7 +42,7 @@ fun <
     NumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     NumeratorUnit : ScientificUnit<NumeratorQuantity>,
     DenominatorQuantity : UndefinedQuantityType,
-    DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+    DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
     WrappedNumeratorUnit : WrappedUndefinedExtendedUnit<
         NumeratorQuantity,
         NumeratorUnit,
@@ -88,11 +88,11 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -129,9 +129,9 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
     dividedBy(
         right,
@@ -166,10 +166,10 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedBy(
@@ -205,9 +205,9 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
     dividedBy(
         right,
@@ -242,9 +242,9 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedBy(
         right,
@@ -279,10 +279,10 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
     dividedBy(
@@ -318,10 +318,10 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+        DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedBy(

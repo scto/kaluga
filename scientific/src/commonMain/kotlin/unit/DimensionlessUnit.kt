@@ -24,9 +24,12 @@ import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.invoke
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Dimensionless]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Dimensionless]
  *
  * Dimensionless Quantity
  * is a quantity to which no physical dimension is assigned, also known as a bare, pure, or scalar quantity
@@ -72,7 +75,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 sealed class Dimensionless :
-    AbstractScientificUnit<PhysicalQuantity.Dimensionless>(),
+    DefinedScientificUnit<PhysicalQuantity.Dimensionless>(),
     MetricAndImperialScientificUnit<PhysicalQuantity.Dimensionless>
 
 /**
@@ -114,4 +117,16 @@ data object Permill : Dimensionless() {
     override val quantity = PhysicalQuantity.Dimensionless
     override fun fromSIUnit(value: Decimal): Decimal = value * PARTS_PER_THOUSAND.toDecimal()
     override fun toSIUnit(value: Decimal): Decimal = value / PARTS_PER_THOUSAND.toDecimal()
+}
+
+internal fun SerializersModuleBuilder.setupForDimensionlessUnit() {
+    polymorphic(Dimensionless::class) {
+        registerDimensionlessClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Dimensionless>.registerDimensionlessClasses() {
+    subclass(One::class, One.serializer())
+    subclass(Percent::class, Percent.serializer())
+    subclass(Permill::class, Permill.serializer())
 }

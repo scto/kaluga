@@ -25,7 +25,7 @@ import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
@@ -96,7 +96,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -106,7 +106,7 @@ infix fun <
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
@@ -159,13 +159,13 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
             NumeratorAndDenominatorNumeratorQuantity,
             >,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
             DenominatorDenominatorQuantity,
@@ -212,7 +212,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
@@ -220,7 +220,7 @@ infix fun <
             >,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
@@ -270,13 +270,13 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
             NumeratorAndDenominatorNumeratorQuantity,
             >,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
             DenominatorDenominatorQuantity,
@@ -323,13 +323,13 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
             NumeratorAndDenominatorNumeratorQuantity,
             >,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
             DenominatorDenominatorQuantity,
@@ -376,7 +376,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
@@ -384,7 +384,7 @@ infix fun <
             >,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUKImperial,
         WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
@@ -434,7 +434,7 @@ infix fun <
         DenominatorUnit,
         >,
 ) where
-        NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+        NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
         NumeratorUnit : MeasurementUsage.UsedInMetric,
         NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
         ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
@@ -442,7 +442,7 @@ infix fun <
             >,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedDenominatorNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+        DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorDenominatorUnit : MeasurementUsage.UsedInUSCustomary,
         WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
@@ -473,12 +473,12 @@ infix fun <
 @JvmName("genericDefinedDividedByGenericDividingUnitWithSelfAsNumeratorAndDefinedDenominator")
 infix fun <
     NumeratorAndDenominatorNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-    NumeratorUnit : AbstractScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+    NumeratorUnit : DefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
     ExtendedDenominatorNumeratorUnit : UndefinedExtendedUnit<
         NumeratorAndDenominatorNumeratorQuantity,
         >,
     DenominatorDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-    DenominatorDenominatorUnit : AbstractScientificUnit<DenominatorDenominatorQuantity>,
+    DenominatorDenominatorUnit : DefinedScientificUnit<DenominatorDenominatorQuantity>,
     WrappedDenominatorDenominatorUnit : WrappedUndefinedExtendedUnit<
         DenominatorDenominatorQuantity,
         DenominatorDenominatorUnit,

@@ -19,14 +19,19 @@ package com.splendo.kaluga.scientific.unit
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.UndefinedQuantityType
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.PolymorphicSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 @Serializable
 sealed class UndefinedMultipliedUnit<
     LeftQuantity : UndefinedQuantityType,
-    LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+    LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
     RightQuantity : UndefinedQuantityType,
-    RightUnit : UndefinedScientificUnit<RightQuantity>,
+    RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
     > : AbstractUndefinedScientificUnit<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>>() {
     abstract val left: LeftUnit
     abstract val right: RightUnit
@@ -54,11 +59,11 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.MetricAndImperial<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInMetric,
               LeftUnit : MeasurementUsage.UsedInUKImperial,
               LeftUnit : MeasurementUsage.UsedInUSCustomary,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInMetric,
               RightUnit : MeasurementUsage.UsedInUKImperial,
               RightUnit : MeasurementUsage.UsedInUSCustomary {
@@ -83,9 +88,9 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.Metric<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInMetric,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInMetric {
         override val system = MeasurementSystem.Metric
     }
@@ -101,10 +106,10 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.Imperial<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInUKImperial,
               LeftUnit : MeasurementUsage.UsedInUSCustomary,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInUKImperial,
               RightUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.Imperial
@@ -124,9 +129,9 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.UKImperial<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInUKImperial,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.UKImperial
     }
@@ -142,9 +147,9 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.USCustomary<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInUSCustomary,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.USCustomary
     }
@@ -160,10 +165,10 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.MetricAndUKImperial<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInMetric,
               LeftUnit : MeasurementUsage.UsedInUKImperial,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInMetric,
               RightUnit : MeasurementUsage.UsedInUKImperial {
         override val system = MeasurementSystem.MetricAndUKImperial
@@ -182,14 +187,195 @@ sealed class UndefinedMultipliedUnit<
         override val right: RightUnit,
     ) : UndefinedMultipliedUnit<LeftQuantity, LeftUnit, RightQuantity, RightUnit>(),
         UndefinedScientificUnit.MetricAndUSCustomary<UndefinedQuantityType.Multiplying<LeftQuantity, RightQuantity>> where
-              LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+              LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
               LeftUnit : MeasurementUsage.UsedInMetric,
               LeftUnit : MeasurementUsage.UsedInUSCustomary,
-              RightUnit : UndefinedScientificUnit<RightQuantity>,
+              RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
               RightUnit : MeasurementUsage.UsedInMetric,
               RightUnit : MeasurementUsage.UsedInUSCustomary {
         override val system = MeasurementSystem.MetricAndUSCustomary
         override val metric: Metric<LeftQuantity, LeftUnit, RightQuantity, RightUnit> by lazy { Metric(left, right) }
         override val usCustomary: USCustomary<LeftQuantity, LeftUnit, RightQuantity, RightUnit> by lazy { USCustomary(left, right) }
     }
+}
+
+internal fun SerializersModuleBuilder.setupForUndefinedMultipliedUnit() {
+    polymorphic(UndefinedMultipliedUnit::class) {
+        registerUndefinedMultipliedUnitClasses()
+    }
+    val quantitySerializer = PolymorphicSerializer(UndefinedQuantityType::class)
+    val undefinedSerializer = AbstractUndefinedScientificUnit.serializer(quantitySerializer)
+
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.MetricAndImperial::class) {
+        UndefinedMultipliedUnit.MetricAndImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndImperial<*, *, *, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.Metric::class) {
+        UndefinedMultipliedUnit.Metric.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.Metric<*, *, *, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.Imperial::class) {
+        UndefinedMultipliedUnit.Imperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.Imperial<*, *, *, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.UKImperial::class) {
+        UndefinedMultipliedUnit.UKImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.UKImperial<*, *, *, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.USCustomary::class) {
+        UndefinedMultipliedUnit.USCustomary.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.USCustomary<*, *, *, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.MetricAndUKImperial::class) {
+        UndefinedMultipliedUnit.MetricAndUKImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndUKImperial<*, *, *, *>>
+    }
+    polymorphicDefaultSerializer(UndefinedMultipliedUnit.MetricAndUSCustomary::class) {
+        UndefinedMultipliedUnit.MetricAndUSCustomary.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndUSCustomary<*, *, *, *>>
+    }
+
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.MetricAndImperial::class) {
+        UndefinedMultipliedUnit.MetricAndImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndImperial<*, *, *, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.Metric::class) {
+        UndefinedMultipliedUnit.Metric.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.Metric<*, *, *, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.Imperial::class) {
+        UndefinedMultipliedUnit.Imperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.Imperial<*, *, *, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.UKImperial::class) {
+        UndefinedMultipliedUnit.UKImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.UKImperial<*, *, *, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.USCustomary::class) {
+        UndefinedMultipliedUnit.USCustomary.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.USCustomary<*, *, *, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.MetricAndUKImperial::class) {
+        UndefinedMultipliedUnit.MetricAndUKImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndUKImperial<*, *, *, *>>
+    }
+    polymorphicDefaultDeserializer(UndefinedMultipliedUnit.MetricAndUSCustomary::class) {
+        UndefinedMultipliedUnit.MetricAndUSCustomary.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndUSCustomary<*, *, *, *>>
+    }
+}
+
+internal fun PolymorphicModuleBuilder<UndefinedMultipliedUnit<*, *, *, *>>.registerUndefinedMultipliedUnitClasses() {
+    val quantitySerializer = PolymorphicSerializer(UndefinedQuantityType::class)
+    val undefinedSerializer = AbstractUndefinedScientificUnit.serializer(quantitySerializer)
+    subclass(
+        UndefinedMultipliedUnit.MetricAndImperial::class,
+        UndefinedMultipliedUnit.MetricAndImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndImperial<*, *, *, *>>,
+    )
+    subclass(
+        UndefinedMultipliedUnit.Metric::class,
+        UndefinedMultipliedUnit.Metric.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.Metric<*, *, *, *>>,
+    )
+    subclass(
+        UndefinedMultipliedUnit.Imperial::class,
+        UndefinedMultipliedUnit.Imperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.Imperial<*, *, *, *>>,
+    )
+    subclass(
+        UndefinedMultipliedUnit.UKImperial::class,
+        UndefinedMultipliedUnit.UKImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.UKImperial<*, *, *, *>>,
+    )
+    subclass(
+        UndefinedMultipliedUnit.USCustomary::class,
+        UndefinedMultipliedUnit.USCustomary.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.USCustomary<*, *, *, *>>,
+    )
+    subclass(
+        UndefinedMultipliedUnit.MetricAndUKImperial::class,
+        UndefinedMultipliedUnit.MetricAndUKImperial.serializer(
+            quantitySerializer,
+            undefinedSerializer,
+            quantitySerializer,
+            undefinedSerializer,
+        ) as KSerializer<UndefinedMultipliedUnit.MetricAndUKImperial<*, *, *, *>>,
+    )
 }

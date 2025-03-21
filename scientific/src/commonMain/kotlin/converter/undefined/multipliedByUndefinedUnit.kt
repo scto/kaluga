@@ -25,7 +25,7 @@ import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
@@ -34,9 +34,9 @@ import kotlin.jvm.JvmName
 @JvmName("multipliedByUndefinedUnit")
 fun <
     LeftQuantity : UndefinedQuantityType,
-    LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+    LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
     RightQuantity : UndefinedQuantityType,
-    RightUnit : UndefinedScientificUnit<RightQuantity>,
+    RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
     TargetUnit : UndefinedMultipliedUnit<
         LeftQuantity,
         LeftUnit,
@@ -79,11 +79,11 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
@@ -117,9 +117,9 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric =
     multipliedBy(
         right,
@@ -151,10 +151,10 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(
@@ -187,9 +187,9 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBy(
         right,
@@ -221,9 +221,9 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(
         right,
@@ -255,10 +255,10 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUKImperial,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUKImperial =
     multipliedBy(
@@ -291,10 +291,10 @@ infix fun <
         RightUnit,
         >,
 ) where
-        LeftUnit : UndefinedScientificUnit<LeftQuantity>,
+        LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
         LeftUnit : MeasurementUsage.UsedInMetric,
         LeftUnit : MeasurementUsage.UsedInUSCustomary,
-        RightUnit : UndefinedScientificUnit<RightQuantity>,
+        RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
         RightUnit : MeasurementUsage.UsedInMetric,
         RightUnit : MeasurementUsage.UsedInUSCustomary =
     multipliedBy(

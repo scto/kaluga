@@ -22,7 +22,7 @@ import kotlin.test.Test
 
 // Div<A, Mul<B, C>> / Inv<Mul<C, B>> -> A
 
-class DividingWithMultiplyingDenominatorDividedByReciprocalMultiplyingWithDenominatorRightAsLeftAndDenominatorLeftAsRightTest {
+class DivWMulDenomDividedByReciprocalMulWDenomRAsLAndDenomLAsRTest {
 
     @Test
     fun dividedByReciprocalMultiplyingWithDenominatorRightAsLeftAndDenominatorLeftAsRight() {

@@ -22,7 +22,7 @@ import kotlin.test.Test
 
 // Div<A, Mul<B, C>> / Div<D, Mul<B, E>> -> Div<Mul<A, E>, Mul<C, D>>
 
-class DividingWithMultiplyingDenominatorDividedByDividingUnitWithMultiplyingDenominatorWithDenominatorLeftAsLeftTest {
+class DivWMulDenomDividedByDivUnitWMulDenomWDenomLAsLTest {
 
     @Test
     fun dividedByDividingUnitWithMultiplyingDenominatorWithDenominatorLeftAsLeft() {

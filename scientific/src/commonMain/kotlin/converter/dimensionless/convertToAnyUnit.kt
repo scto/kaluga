@@ -23,7 +23,7 @@ import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.byMultiplying
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import kotlin.jvm.JvmName
@@ -31,7 +31,7 @@ import kotlin.jvm.JvmName
 @JvmName("valueTimesDimensionless")
 infix operator fun <
     Quantity : PhysicalQuantity.PhysicalQuantityWithDimension,
-    Unit : AbstractScientificUnit<Quantity>,
+    Unit : DefinedScientificUnit<Quantity>,
     DimensionlessUnit : Dimensionless,
     > ScientificValue<Quantity, Unit>.times(
     value: ScientificValue<PhysicalQuantity.Dimensionless, DimensionlessUnit>,
@@ -40,7 +40,7 @@ infix operator fun <
 @JvmName("dimensionlessTimesValue")
 infix operator fun <
     Quantity : PhysicalQuantity.PhysicalQuantityWithDimension,
-    Unit : AbstractScientificUnit<Quantity>,
+    Unit : DefinedScientificUnit<Quantity>,
     DimensionlessUnit : Dimensionless,
     > ScientificValue<PhysicalQuantity.Dimensionless, DimensionlessUnit>.times(
     value: ScientificValue<Quantity, Unit>,
@@ -59,7 +59,7 @@ fun <
 @JvmName("valueDivDimensionless")
 infix operator fun <
     Quantity : PhysicalQuantity.PhysicalQuantityWithDimension,
-    Unit : AbstractScientificUnit<Quantity>,
+    Unit : DefinedScientificUnit<Quantity>,
     DimensionlessUnit : Dimensionless,
     > ScientificValue<Quantity, Unit>.div(
     value: ScientificValue<PhysicalQuantity.Dimensionless, DimensionlessUnit>,
@@ -68,7 +68,7 @@ infix operator fun <
 @JvmName("dimensionlessDivValue")
 infix operator fun <
     Quantity : PhysicalQuantity.PhysicalQuantityWithDimension,
-    Unit : AbstractScientificUnit<Quantity>,
+    Unit : DefinedScientificUnit<Quantity>,
     DimensionlessUnit : Dimensionless,
     > ScientificValue<PhysicalQuantity.Dimensionless, DimensionlessUnit>.div(
     value: ScientificValue<Quantity, Unit>,

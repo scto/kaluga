@@ -17,18 +17,25 @@
 
 package com.splendo.kaluga.scientific
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * A physical property of a material or system that can be quantified by measurement
  */
 @Serializable
 sealed class PhysicalQuantity : com.splendo.kaluga.base.utils.Serializable {
+
+    sealed interface Defined
+
     /**
      * A [PhysicalQuantity] that has no specific dimension
      */
     @Serializable
-    data object Dimensionless : PhysicalQuantity()
+    data object Dimensionless : PhysicalQuantity(), Defined
 
     /**
      * A [PhysicalQuantity] that has a specific dimension
@@ -40,7 +47,9 @@ sealed class PhysicalQuantity : com.splendo.kaluga.base.utils.Serializable {
      * A [PhysicalQuantityWithDimension] that has been defined by this library
      */
     @Serializable
-    sealed class DefinedPhysicalQuantityWithDimension : PhysicalQuantityWithDimension() {
+    sealed class DefinedPhysicalQuantityWithDimension :
+        PhysicalQuantityWithDimension(),
+        Defined {
         val undefined get() = Undefined(UndefinedQuantityType.Extended(this))
     }
 
@@ -409,4 +418,92 @@ sealed class PhysicalQuantity : com.splendo.kaluga.base.utils.Serializable {
      */
     @Serializable
     data class Undefined<CustomQuantity : UndefinedQuantityType>(val customQuantity: CustomQuantity) : PhysicalQuantityWithDimension()
+}
+
+internal fun SerializersModuleBuilder.setupPhysicalQuantity() {
+    polymorphic(PhysicalQuantity::class) {
+        registerPhysicalQuantityClasses()
+    }
+    polymorphic(PhysicalQuantity.Defined::class) {
+        registerDefinedPhysicalQuantityClasses()
+    }
+    polymorphic(PhysicalQuantity.DefinedPhysicalQuantityWithDimension::class) {
+        registerDefinedPhysicalQuantityWithDimensionClasses()
+    }
+    polymorphicDefaultSerializer(PhysicalQuantity.Undefined::class) {
+        PhysicalQuantity.Undefined.serializer(UndefinedQuantityType.serializer()) as KSerializer<PhysicalQuantity.Undefined<*>>
+    }
+}
+
+internal fun PolymorphicModuleBuilder<PhysicalQuantity.DefinedPhysicalQuantityWithDimension>.registerDefinedPhysicalQuantityWithDimensionClasses() {
+    subclass(PhysicalQuantity.Acceleration::class, PhysicalQuantity.Acceleration.serializer())
+    subclass(PhysicalQuantity.Action::class, PhysicalQuantity.Action.serializer())
+    subclass(PhysicalQuantity.AmountOfSubstance::class, PhysicalQuantity.AmountOfSubstance.serializer())
+    subclass(PhysicalQuantity.Angle::class, PhysicalQuantity.Angle.serializer())
+    subclass(PhysicalQuantity.AngularAcceleration::class, PhysicalQuantity.AngularAcceleration.serializer())
+    subclass(PhysicalQuantity.AngularVelocity::class, PhysicalQuantity.AngularVelocity.serializer())
+    subclass(PhysicalQuantity.Area::class, PhysicalQuantity.Area.serializer())
+    subclass(PhysicalQuantity.AreaDensity::class, PhysicalQuantity.AreaDensity.serializer())
+    subclass(PhysicalQuantity.CatalysticActivity::class, PhysicalQuantity.CatalysticActivity.serializer())
+    subclass(PhysicalQuantity.DynamicViscosity::class, PhysicalQuantity.DynamicViscosity.serializer())
+    subclass(PhysicalQuantity.ElectricCapacitance::class, PhysicalQuantity.ElectricCapacitance.serializer())
+    subclass(PhysicalQuantity.ElectricCharge::class, PhysicalQuantity.ElectricCharge.serializer())
+    subclass(PhysicalQuantity.ElectricConductance::class, PhysicalQuantity.ElectricConductance.serializer())
+    subclass(PhysicalQuantity.ElectricCurrent::class, PhysicalQuantity.ElectricCurrent.serializer())
+    subclass(PhysicalQuantity.ElectricInductance::class, PhysicalQuantity.ElectricInductance.serializer())
+    subclass(PhysicalQuantity.ElectricResistance::class, PhysicalQuantity.ElectricResistance.serializer())
+    subclass(PhysicalQuantity.Energy::class, PhysicalQuantity.Energy.serializer())
+    subclass(PhysicalQuantity.Force::class, PhysicalQuantity.Force.serializer())
+    subclass(PhysicalQuantity.Frequency::class, PhysicalQuantity.Frequency.serializer())
+    subclass(PhysicalQuantity.HeatCapacity::class, PhysicalQuantity.HeatCapacity.serializer())
+    subclass(PhysicalQuantity.Illuminance::class, PhysicalQuantity.Illuminance.serializer())
+    subclass(PhysicalQuantity.IonizingRadiationAbsorbedDose::class, PhysicalQuantity.IonizingRadiationAbsorbedDose.serializer())
+    subclass(PhysicalQuantity.IonizingRadiationEquivalentDose::class, PhysicalQuantity.IonizingRadiationEquivalentDose.serializer())
+    subclass(PhysicalQuantity.LinearMassDensity::class, PhysicalQuantity.LinearMassDensity.serializer())
+    subclass(PhysicalQuantity.Jolt::class, PhysicalQuantity.Jolt.serializer())
+    subclass(PhysicalQuantity.KinematicViscosity::class, PhysicalQuantity.KinematicViscosity.serializer())
+    subclass(PhysicalQuantity.Length::class, PhysicalQuantity.Length.serializer())
+    subclass(PhysicalQuantity.Luminance::class, PhysicalQuantity.Luminance.serializer())
+    subclass(PhysicalQuantity.LuminousEnergy::class, PhysicalQuantity.LuminousEnergy.serializer())
+    subclass(PhysicalQuantity.LuminousExposure::class, PhysicalQuantity.LuminousExposure.serializer())
+    subclass(PhysicalQuantity.LuminousFlux::class, PhysicalQuantity.LuminousFlux.serializer())
+    subclass(PhysicalQuantity.LuminousIntensity::class, PhysicalQuantity.LuminousIntensity.serializer())
+    subclass(PhysicalQuantity.MassFlowRate::class, PhysicalQuantity.MassFlowRate.serializer())
+    subclass(PhysicalQuantity.MagneticFlux::class, PhysicalQuantity.MagneticFlux.serializer())
+    subclass(PhysicalQuantity.MagneticInduction::class, PhysicalQuantity.MagneticInduction.serializer())
+    subclass(PhysicalQuantity.Molality::class, PhysicalQuantity.Molality.serializer())
+    subclass(PhysicalQuantity.Molarity::class, PhysicalQuantity.Molarity.serializer())
+    subclass(PhysicalQuantity.MolarEnergy::class, PhysicalQuantity.MolarEnergy.serializer())
+    subclass(PhysicalQuantity.MolarMass::class, PhysicalQuantity.MolarMass.serializer())
+    subclass(PhysicalQuantity.MolarVolume::class, PhysicalQuantity.MolarVolume.serializer())
+    subclass(PhysicalQuantity.Momentum::class, PhysicalQuantity.Momentum.serializer())
+    subclass(PhysicalQuantity.Power::class, PhysicalQuantity.Power.serializer())
+    subclass(PhysicalQuantity.Pressure::class, PhysicalQuantity.Pressure.serializer())
+    subclass(PhysicalQuantity.Radioactivity::class, PhysicalQuantity.Radioactivity.serializer())
+    subclass(PhysicalQuantity.SolidAngle::class, PhysicalQuantity.SolidAngle.serializer())
+    subclass(PhysicalQuantity.SpecificEnergy::class, PhysicalQuantity.SpecificEnergy.serializer())
+    subclass(PhysicalQuantity.SpecificHeatCapacity::class, PhysicalQuantity.SpecificHeatCapacity.serializer())
+    subclass(PhysicalQuantity.SpecificVolume::class, PhysicalQuantity.SpecificVolume.serializer())
+    subclass(PhysicalQuantity.Speed::class, PhysicalQuantity.Speed.serializer())
+    subclass(PhysicalQuantity.SurfaceTension::class, PhysicalQuantity.SurfaceTension.serializer())
+    subclass(PhysicalQuantity.Temperature::class, PhysicalQuantity.Temperature.serializer())
+    subclass(PhysicalQuantity.ThermalResistance::class, PhysicalQuantity.ThermalResistance.serializer())
+    subclass(PhysicalQuantity.Time::class, PhysicalQuantity.Time.serializer())
+    subclass(PhysicalQuantity.Voltage::class, PhysicalQuantity.Voltage.serializer())
+    subclass(PhysicalQuantity.Volume::class, PhysicalQuantity.Volume.serializer())
+    subclass(PhysicalQuantity.VolumetricFlow::class, PhysicalQuantity.VolumetricFlow.serializer())
+    subclass(PhysicalQuantity.VolumetricFlux::class, PhysicalQuantity.VolumetricFlux.serializer())
+    subclass(PhysicalQuantity.Weight::class, PhysicalQuantity.Weight.serializer())
+    subclass(PhysicalQuantity.Yank::class, PhysicalQuantity.Yank.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<PhysicalQuantity.Defined>.registerDefinedPhysicalQuantityClasses() {
+    subclass(PhysicalQuantity.Dimensionless::class, PhysicalQuantity.Dimensionless.serializer())
+    registerDefinedPhysicalQuantityWithDimensionClasses()
+}
+
+internal fun PolymorphicModuleBuilder<PhysicalQuantity>.registerPhysicalQuantityClasses() {
+    subclass(PhysicalQuantity.Dimensionless::class, PhysicalQuantity.Dimensionless.serializer())
+    registerDefinedPhysicalQuantityWithDimensionClasses()
+    subclass(PhysicalQuantity.Undefined::class, PhysicalQuantity.Undefined.serializer(UndefinedQuantityType.serializer()) as KSerializer<PhysicalQuantity.Undefined<*>>)
 }

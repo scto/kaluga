@@ -25,6 +25,9 @@ import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.convertValue
 import com.splendo.kaluga.scientific.invoke
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricPressure]
@@ -120,11 +123,11 @@ val PressureUnits: Set<Pressure> get() = MetricPressureUnits +
     UKImperialPressureUnits.filter { it !is UKImperialPressureWrapper }.toSet()
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Pressure]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Pressure]
  * SI unit is [Pascal]
  */
 @Serializable
-sealed class Pressure : AbstractScientificUnit<PhysicalQuantity.Pressure>()
+sealed class Pressure : DefinedScientificUnit<PhysicalQuantity.Pressure>()
 
 /**
  * A [Pressure] for [MeasurementSystem.Metric]
@@ -510,3 +513,103 @@ data class UKImperialPressureWrapper(val imperial: ImperialPressure) : UKImperia
  * @param PressureUnit the type of [ImperialPressure] to convert
  */
 val <PressureUnit : ImperialPressure> PressureUnit.ukImperial get() = UKImperialPressureWrapper(this)
+
+internal fun SerializersModuleBuilder.setupForPressure() {
+    polymorphic(Pressure::class) {
+        registerPressureClasses()
+    }
+    polymorphic(MetricPressure::class) {
+        registerMetricPressureClasses()
+    }
+    polymorphic(ImperialPressure::class) {
+        registerImperialPressureClasses()
+    }
+    polymorphic(UKImperialPressure::class) {
+        registerUKImperialPressureClasses()
+    }
+    polymorphic(USCustomaryPressure::class) {
+        registerUSCustomaryPressureClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Pressure>.registerPressureClasses() {
+    registerMetricPressureClasses()
+    registerImperialPressureClasses()
+    registerUKImperialPressureClasses()
+    registerUSCustomaryPressureClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricPressure>.registerMetricPressureClasses() {
+    subclass(Atmosphere::class, Atmosphere.serializer())
+    subclass(Bar::class, Bar.serializer())
+    subclass(Centibar::class, Centibar.serializer())
+    subclass(Decabar::class, Decabar.serializer())
+    subclass(Decibar::class, Decibar.serializer())
+    subclass(Gigabar::class, Gigabar.serializer())
+    subclass(Hectobar::class, Hectobar.serializer())
+    subclass(Kilobar::class, Kilobar.serializer())
+    subclass(Megabar::class, Megabar.serializer())
+    subclass(Microbar::class, Microbar.serializer())
+    subclass(Millibar::class, Millibar.serializer())
+    subclass(Nanobar::class, Nanobar.serializer())
+    subclass(Barye::class, Barye.serializer())
+    subclass(Centibarye::class, Centibarye.serializer())
+    subclass(Decabarye::class, Decabarye.serializer())
+    subclass(Decibarye::class, Decibarye.serializer())
+    subclass(Gigabarye::class, Gigabarye.serializer())
+    subclass(Hectobarye::class, Hectobarye.serializer())
+    subclass(Kilobarye::class, Kilobarye.serializer())
+    subclass(Megabarye::class, Megabarye.serializer())
+    subclass(Microbarye::class, Microbarye.serializer())
+    subclass(Millibarye::class, Millibarye.serializer())
+    subclass(Nanobarye::class, Nanobarye.serializer())
+    subclass(CentimeterOfWater::class, CentimeterOfWater.serializer())
+    subclass(MillimeterOfMercury::class, MillimeterOfMercury.serializer())
+    subclass(MillimeterOfWater::class, MillimeterOfWater.serializer())
+    subclass(Pascal::class, Pascal.serializer())
+    subclass(Centipascal::class, Centipascal.serializer())
+    subclass(Decapascal::class, Decapascal.serializer())
+    subclass(Decipascal::class, Decipascal.serializer())
+    subclass(Gigapascal::class, Gigapascal.serializer())
+    subclass(Hectopascal::class, Hectopascal.serializer())
+    subclass(Kilopascal::class, Kilopascal.serializer())
+    subclass(Megapascal::class, Megapascal.serializer())
+    subclass(Micropascal::class, Micropascal.serializer())
+    subclass(Millipascal::class, Millipascal.serializer())
+    subclass(Nanopascal::class, Nanopascal.serializer())
+    subclass(Torr::class, Torr.serializer())
+    subclass(Centitorr::class, Centitorr.serializer())
+    subclass(Decatorr::class, Decatorr.serializer())
+    subclass(Decitorr::class, Decitorr.serializer())
+    subclass(Gigatorr::class, Gigatorr.serializer())
+    subclass(Hectotorr::class, Hectotorr.serializer())
+    subclass(Kilotorr::class, Kilotorr.serializer())
+    subclass(Megatorr::class, Megatorr.serializer())
+    subclass(Microtorr::class, Microtorr.serializer())
+    subclass(Millitorr::class, Millitorr.serializer())
+    subclass(Nanotorr::class, Nanotorr.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialPressure>.registerImperialPressureClasses() {
+    subclass(FootOfWater::class, FootOfWater.serializer())
+    subclass(InchOfMercury::class, InchOfMercury.serializer())
+    subclass(InchOfWater::class, InchOfWater.serializer())
+    subclass(KiloPoundSquareInch::class, KiloPoundSquareInch.serializer())
+    subclass(OunceSquareInch::class, OunceSquareInch.serializer())
+    subclass(PoundSquareFoot::class, PoundSquareFoot.serializer())
+    subclass(PoundSquareInch::class, PoundSquareInch.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<UKImperialPressure>.registerUKImperialPressureClasses() {
+    subclass(ImperialTonSquareFoot::class, ImperialTonSquareFoot.serializer())
+    subclass(ImperialTonSquareInch::class, ImperialTonSquareInch.serializer())
+    subclass(UKImperialPressureWrapper::class, UKImperialPressureWrapper.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<USCustomaryPressure>.registerUSCustomaryPressureClasses() {
+    subclass(KipSquareFoot::class, KipSquareFoot.serializer())
+    subclass(KipSquareInch::class, KipSquareInch.serializer())
+    subclass(USCustomaryImperialPressureWrapper::class, USCustomaryImperialPressureWrapper.serializer())
+    subclass(USTonSquareFoot::class, USTonSquareFoot.serializer())
+    subclass(USTonSquareInch::class, USTonSquareInch.serializer())
+}

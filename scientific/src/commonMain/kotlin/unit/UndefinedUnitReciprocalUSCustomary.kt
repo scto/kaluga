@@ -29,7 +29,7 @@ fun <
     InverseQuantity : UndefinedQuantityType,
     InverseUnit,
     > InverseUnit.reciprocal() where
-                                     InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+                                     InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
                                      InverseUnit : MeasurementUsage.UsedInUSCustomary =
     UndefinedReciprocalUnit.USCustomary(this)
 
@@ -41,7 +41,7 @@ fun <
     InverseQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
     InverseUnit,
     > InverseUnit.reciprocal() where
-                                     InverseUnit : AbstractScientificUnit<InverseQuantity>,
+                                     InverseUnit : DefinedScientificUnit<InverseQuantity>,
                                      InverseUnit : MeasurementUsage.UsedInUSCustomary =
     asUndefined().reciprocal()
 
@@ -54,7 +54,7 @@ fun <
     InverseUnit,
     ReciprocalUnit,
     > ReciprocalUnit.reciprocal() where
-                                        InverseUnit : UndefinedScientificUnit<InverseQuantity>,
+                                        InverseUnit : AbstractUndefinedScientificUnit<InverseQuantity>,
                                         InverseUnit : MeasurementUsage.UsedInUSCustomary,
                                         ReciprocalUnit : UndefinedReciprocalUnit<InverseQuantity, InverseUnit>,
                                         ReciprocalUnit : MeasurementUsage.UsedInUSCustomary =
@@ -88,9 +88,9 @@ fun <
     DenominatorUnit,
     DividerUnit,
     > DividerUnit.reciprocal() where
-                                     NumeratorUnit : UndefinedScientificUnit<NumeratorQuantity>,
+                                     NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
                                      NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-                                     DenominatorUnit : UndefinedScientificUnit<DenominatorQuantity>,
+                                     DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
                                      DenominatorUnit : MeasurementUsage.UsedInUSCustomary,
                                      DividerUnit : UndefinedDividedUnit<NumeratorQuantity, NumeratorUnit, DenominatorQuantity, DenominatorUnit>,
                                      DividerUnit : MeasurementUsage.UsedInUSCustomary =

@@ -25,7 +25,7 @@ import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
+import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
@@ -74,7 +74,7 @@ infix fun <
         ExtendedNumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
@@ -105,7 +105,7 @@ infix fun <
             NumeratorAndDenominatorQuantity,
             >,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInMetric,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric =
     dividedBy(
         right,
@@ -135,7 +135,7 @@ infix fun <
             >,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUKImperial,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedBy(
@@ -165,7 +165,7 @@ infix fun <
             NumeratorAndDenominatorQuantity,
             >,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
     dividedBy(
         right,
@@ -194,7 +194,7 @@ infix fun <
             NumeratorAndDenominatorQuantity,
             >,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedBy(
         right,
@@ -224,7 +224,7 @@ infix fun <
             >,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUKImperial,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUKImperial =
     dividedBy(
@@ -255,7 +255,7 @@ infix fun <
             >,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInMetric,
         ExtendedNumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-        DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+        DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
         DenominatorUnit : MeasurementUsage.UsedInMetric,
         DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
     dividedBy(
@@ -274,7 +274,7 @@ infix fun <
         NumeratorAndDenominatorQuantity,
         >,
     NumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-    DenominatorUnit : AbstractScientificUnit<NumeratorAndDenominatorQuantity>,
+    DenominatorUnit : DefinedScientificUnit<NumeratorAndDenominatorQuantity>,
     > UndefinedScientificValue<
     UndefinedQuantityType.Extended<
         NumeratorAndDenominatorQuantity,

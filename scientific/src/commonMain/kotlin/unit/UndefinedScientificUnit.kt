@@ -20,6 +20,9 @@ package com.splendo.kaluga.scientific.unit
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 sealed interface UndefinedScientificUnit<QuantityType : UndefinedQuantityType> : ScientificUnit<PhysicalQuantity.Undefined<QuantityType>> {
     val quantityType: QuantityType
@@ -66,7 +69,9 @@ sealed interface UndefinedScientificUnit<QuantityType : UndefinedQuantityType> :
 }
 
 @Serializable
-sealed class AbstractUndefinedScientificUnit<QuantityType : UndefinedQuantityType> : AbstractScientificUnit<PhysicalQuantity.Undefined<QuantityType>>(), UndefinedScientificUnit<QuantityType> {
+sealed class AbstractUndefinedScientificUnit<QuantityType : UndefinedQuantityType> :
+    AbstractScientificUnit<PhysicalQuantity.Undefined<QuantityType>>(),
+    UndefinedScientificUnit<QuantityType> {
     override val quantity by lazy { PhysicalQuantity.Undefined(quantityType) }
 
     override val symbol: String by lazy {
@@ -103,4 +108,22 @@ sealed class AbstractUndefinedScientificUnit<QuantityType : UndefinedQuantityTyp
         symbol.matches(".*[\\d/*].*".toRegex()) -> "($symbol)"
         else -> symbol
     }
+}
+
+internal fun SerializersModuleBuilder.setupForUndefinedScientificUnit() {
+    polymorphic(AbstractUndefinedScientificUnit::class) {
+        registerUndefinedScientificUnitClasses()
+    }
+    setupForUndefinedDividedUnit()
+    setupForUndefinedMultipliedUnit()
+    setupForUndefinedReciprocalUnit()
+    setupForUndefinedExtendedUnit()
+}
+
+internal fun PolymorphicModuleBuilder<AbstractUndefinedScientificUnit<*>>.registerUndefinedScientificUnitClasses() {
+    registerUndefinedDividedUnitClasses()
+    registerUndefinedMultipliedUnitClasses()
+    registerUndefinedReciprocalUnitClasses()
+    registerCustomUndefinedExtendedUnitClasses()
+    registerWrappedUndefinedUnitClasses()
 }
