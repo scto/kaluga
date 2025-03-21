@@ -19,20 +19,20 @@ package com.splendo.kaluga.scientific
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.base.utils.toDecimal
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
 
 /**
- * Creates a [DefaultScientificValue] of this number using a given [DefinedScientificUnit]
+ * Creates a [DefaultScientificValue] of this number using a given [AbstractScientificUnit]
  * @param Quantity the type of [PhysicalQuantity] of the unit
- * @param Unit the type of [DefinedScientificUnit] the value should represents
+ * @param Unit the type of [AbstractScientificUnit] the value should represents
  * @param unit the [Unit] of the [DefaultScientificValue] to be created
  * @return the created [DefaultScientificValue]
  */
 operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Number.invoke(unit: Unit) = this.toDecimal()(unit)
 
 /**
@@ -54,15 +54,15 @@ operator fun <
 ) = this.toDecimal()(unit, factory)
 
 /**
- * Creates a [DefaultScientificValue] of this [Decimal] using a given [DefinedScientificUnit]
+ * Creates a [DefaultScientificValue] of this [Decimal] using a given [AbstractScientificUnit]
  * @param Quantity the type of [PhysicalQuantity] of the unit
- * @param Unit the type of [DefinedScientificUnit] the value should represents
+ * @param Unit the type of [AbstractScientificUnit] the value should represents
  * @param unit the [Unit] of the [DefaultScientificValue] to be created
  * @return the created [DefaultScientificValue]
  */
 operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Decimal.invoke(unit: Unit) = this(unit, ::DefaultScientificValue)
 
 /**

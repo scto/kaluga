@@ -20,7 +20,7 @@ package com.splendo.kaluga.scientific
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
 
@@ -41,51 +41,51 @@ internal fun <
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] multiplied by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the amount to multiply the value with
  * @return the [DefaultScientificValue] where the [ScientificValue.value] is multiplied by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.times(value: Number) =
     this * value.toDecimal()
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] multiplied by this [Number]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] to multiply the value with
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is multiplied by this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Number.times(value: ScientificValue<Quantity, Unit>) = toDecimal() * value
 
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] multiplied by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [Decimal] to multiply the value with
  * @return the [DefaultScientificValue] where the [ScientificValue.value] is multiplied by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.times(value: Decimal) =
     times(value, ::DefaultScientificValue)
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] multiplied by this [Decimal]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] to multiply the value with
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is multiplied by this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Decimal.times(value: ScientificValue<Quantity, Unit>) =
     times(value, ::DefaultScientificValue)
 
@@ -154,14 +154,14 @@ fun <
 /**
  * Multiplies the [ScientificValue.value] of two [ScientificValue] into a [DefaultScientificValue] with [LeftUnit] as its unit
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param LeftUnit the type of [DefinedScientificUnit] of the [ScientificValue] being multiplied
+ * @param LeftUnit the type of [AbstractScientificUnit] of the [ScientificValue] being multiplied
  * @param RightUnit the type of [ScientificUnit] of the [ScientificValue] multiplying
  * @param right the [ScientificValue] of [RightUnit] to multiply
  * @return a [DefaultScientificValue] in [LeftUnit] where [right] is multiplied by this value
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    LeftUnit : DefinedScientificUnit<Quantity>,
+    LeftUnit : AbstractScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificValue<Quantity, LeftUnit>.times(
     right: ScientificValue<Quantity, RightUnit>,

@@ -22,7 +22,7 @@ import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.base.utils.toDecimalList
 import com.splendo.kaluga.base.utils.toDoubleArray
 import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
+import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.convert
 import kotlinx.serialization.Serializable
@@ -219,16 +219,16 @@ data class DefaultScientificArray<Quantity : PhysicalQuantity, Unit : AbstractSc
 // Creation
 
 /**
- * Creates a [DefaultScientificArray] containing this list using a given [DefinedScientificUnit]
+ * Creates a [DefaultScientificArray] containing this list using a given [AbstractScientificUnit]
  * @param Quantity the type of [PhysicalQuantity] of the unit
- * @param Unit the type of [DefinedScientificUnit] the array should represent
+ * @param Unit the type of [AbstractScientificUnit] the array should represent
  * @param unit the [Unit] of the [DefaultScientificArray] to be created
  * @return the created [DefaultScientificArray]
  */
 @JvmName("scientificArrayFromListOfNumberDefault")
 operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > List<Number>.invoke(unit: Unit) = this.toDecimalList()(unit)
 
 /**
@@ -253,16 +253,16 @@ operator fun <
 ) = this.toDecimalList()(unit, factory)
 
 /**
- * Creates a [DefaultScientificArray] containing this list of [Decimal] using a given [DefinedScientificUnit]
+ * Creates a [DefaultScientificArray] containing this list of [Decimal] using a given [AbstractScientificUnit]
  * @param Quantity the type of [PhysicalQuantity] of the unit
- * @param Unit the type of [DefinedScientificUnit] the array should represent
+ * @param Unit the type of [AbstractScientificUnit] the array should represent
  * @param unit the [Unit] of the [DefaultScientificArray] to be created
  * @return the created [DefaultScientificArray]
  */
 @JvmName("scientificArrayFromListOfDecimalDefault")
 operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > List<Decimal>.invoke(unit: Unit) = this(unit, ::DefaultScientificArray)
 
 /**
@@ -292,14 +292,14 @@ operator fun <
  * Creates a [DefaultScientificArray] from a list of [ScientificValue]
  * @param Quantity the type of [PhysicalQuantity] of the unit
  * @param Unit the type of [ScientificUnit] representing all elements in the list of [ScientificValue]
- * @param TargetUnit the type of [DefinedScientificUnit] the array should represent
+ * @param TargetUnit the type of [AbstractScientificUnit] the array should represent
  * @param unit the [TargetUnit] to convert all values to
  * @return A [DefaultScientificArray] containing all values of the list in [TargetUnit]
  */
 fun <
     Quantity : PhysicalQuantity,
     Unit : ScientificUnit<Quantity>,
-    TargetUnit : DefinedScientificUnit<Quantity>,
+    TargetUnit : AbstractScientificUnit<Quantity>,
     > List<ScientificValue<Quantity, Unit>>.toScientificArray(
     unit: TargetUnit,
 ) = toScientificArray(unit, ::DefaultScientificArray)
@@ -329,13 +329,13 @@ fun <
 /**
  * Splits a [ScientificArray] into a list of [DefaultScientificValue] of all the values in the array
  * @param Quantity the type of [PhysicalQuantity] of the unit
- * @param Unit the type of [DefinedScientificUnit] of the array
+ * @param Unit the type of [AbstractScientificUnit] of the array
  * @param NumberType the type of [Number] stored in the array
  * @return a list of [DefaultScientificValue] in [Unit] for all values stored in the array
  */
 fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     NumberType : Number,
     > ScientificArray<NumberType, Quantity, Unit>.split() =
     split(unit, ::DefaultScientificValue)
@@ -345,7 +345,7 @@ fun <
  * @param Quantity the type of [PhysicalQuantity] of the unit
  * @param Unit the type of [ScientificUnit] of the array
  * @param NumberType the type of [Number] stored in the array
- * @param TargetUnit the type of [DefinedScientificUnit] the resulting [DefaultScientificValue] should be in
+ * @param TargetUnit the type of [AbstractScientificUnit] the resulting [DefaultScientificValue] should be in
  * @param targetUnit the [TargetUnit] the resulting [DefaultScientificValue] should be in
  * @return a list of [DefaultScientificValue] in [TargetUnit] for all values stored in the array
  */
@@ -353,7 +353,7 @@ fun <
     Quantity : PhysicalQuantity,
     Unit : ScientificUnit<Quantity>,
     NumberType : Number,
-    TargetUnit : DefinedScientificUnit<Quantity>,
+    TargetUnit : AbstractScientificUnit<Quantity>,
     > ScientificArray<NumberType, Quantity, Unit>.split(
     targetUnit: TargetUnit,
 ) = split(targetUnit, ::DefaultScientificValue)
@@ -410,15 +410,15 @@ fun <
  * Creates a [DefaultScientificArray] that contains all values of a [ScientificArray] converted to [TargetUnit]
  * @param Quantity the type of [PhysicalQuantity] of the this [ScientificArray] and the resulting [DefaultScientificArray]
  * @param NumberType the type of [Number] stored in this [ScientificArray]
- * @param Unit the type of [DefinedScientificUnit] of this [ScientificArray]
- * @param TargetUnit the type of [DefinedScientificUnit] to convert the values into
+ * @param Unit the type of [AbstractScientificUnit] of this [ScientificArray]
+ * @param TargetUnit the type of [AbstractScientificUnit] to convert the values into
  * @return a [DefaultScientificArray] containing all values of this [ScientificArray] converted to [TargetUnit]
  */
 fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
-    Unit : DefinedScientificUnit<Quantity>,
-    TargetUnit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
+    TargetUnit : AbstractScientificUnit<Quantity>,
     > ScientificArray<NumberType, Quantity, Unit>.convert(
     target: TargetUnit,
 ) = convert(target, ::DefaultScientificArray)
@@ -427,8 +427,8 @@ fun <
  * Creates a [TargetArray] that contains all values of a [ScientificArray] converted to [TargetUnit]
  * @param Quantity the type of [PhysicalQuantity] of the this [ScientificArray] and the resulting [TargetArray]
  * @param NumberType the type of [Number] stored in this [ScientificArray]
- * @param Unit the type of [DefinedScientificUnit] of this [ScientificArray]
- * @param TargetUnit the type of [DefinedScientificUnit] to convert the values into
+ * @param Unit the type of [AbstractScientificUnit] of this [ScientificArray]
+ * @param TargetUnit the type of [AbstractScientificUnit] to convert the values into
  * @param TargetNumberType the type of [Number] stored in [TargetArray]
  * @param TargetArray the type of [ScientificArray] to create
  * @param arrayFactory method for creating a [TargetArray] from a list of [Decimal] and a [TargetUnit]
@@ -437,8 +437,8 @@ fun <
 fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
-    Unit : DefinedScientificUnit<Quantity>,
-    TargetUnit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
+    TargetUnit : AbstractScientificUnit<Quantity>,
     TargetNumberType : Number,
     TargetArray : ScientificArray<TargetNumberType, Quantity, TargetUnit>,
     > ScientificArray<NumberType, Quantity, Unit>.convert(
@@ -451,7 +451,7 @@ fun <
  * @param Quantity the type of [PhysicalQuantity] of the this [ScientificArray] and the resulting [TargetArray]
  * @param NumberType the type of [Number] stored in this [ScientificArray]
  * @param Unit the type of [ScientificUnit] of this [ScientificArray]
- * @param TargetUnit the type of [DefinedScientificUnit] to convert the values into
+ * @param TargetUnit the type of [AbstractScientificUnit] to convert the values into
  * @param TargetNumberType the type of [Number] stored in [TargetArray]
  * @param TargetArray the type of [ScientificArray] to create
  * @param valueFactory method for creating a [ScientificValue] of [Unit] from a [Decimal] and a [Unit]
@@ -462,7 +462,7 @@ fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
     Unit : ScientificUnit<Quantity>,
-    TargetUnit : DefinedScientificUnit<Quantity>,
+    TargetUnit : AbstractScientificUnit<Quantity>,
     TargetNumberType : Number,
     TargetArray : ScientificArray<TargetNumberType, Quantity, TargetUnit>,
     > ScientificArray<NumberType, Quantity, Unit>.convert(
@@ -530,16 +530,16 @@ fun <
  * @param NumberType the type of [Number] stored in this [ScientificArray]
  * @param Unit the type of [ScientificUnit] of this [ScientificArray]
  * @param TargetQuantity the type of [PhysicalQuantity] to convert the values into
- * @param TargetUnit the type of [DefinedScientificUnit] to convert the values into
+ * @param TargetUnit the type of [AbstractScientificUnit] to convert the values into
  * @param transform method for transforming a [DefaultScientificValue] in [Unit] into a [ScientificValue] of [TargetUnit]
  * @return a [DefaultScientificArray] containing all values transformed using the transform method
  */
 fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     TargetQuantity : PhysicalQuantity,
-    TargetUnit : DefinedScientificUnit<TargetQuantity>,
+    TargetUnit : AbstractScientificUnit<TargetQuantity>,
     > ScientificArray<NumberType, Quantity, Unit>.map(
     transform: DefaultScientificValue<Quantity, Unit>.() -> ScientificValue<TargetQuantity, TargetUnit>,
 ) = map(::DefaultScientificValue, ::DefaultScientificArray, transform)
@@ -551,7 +551,7 @@ fun <
  * @param Unit the type of [ScientificUnit] of this [ScientificArray]
  * @param Value the type of [ScientificValue] that each element of this [ScientificArray] should converted to before mapping
  * @param TargetQuantity the type of [PhysicalQuantity] to convert the values into
- * @param TargetUnit the type of [DefinedScientificUnit] to convert the values into
+ * @param TargetUnit the type of [AbstractScientificUnit] to convert the values into
  * @param valueFactory method for creating a [Value] from a [Decimal] and a [Unit]
  * @param transform method for transforming a [Value] into a [ScientificValue] of [TargetUnit]
  * @return a [DefaultScientificArray] containing all values transformed using the transform method
@@ -562,7 +562,7 @@ fun <
     Unit : ScientificUnit<Quantity>,
     Value : ScientificValue<Quantity, Unit>,
     TargetQuantity : PhysicalQuantity,
-    TargetUnit : DefinedScientificUnit<TargetQuantity>,
+    TargetUnit : AbstractScientificUnit<TargetQuantity>,
     > ScientificArray<NumberType, Quantity, Unit>.map(
     valueFactory: (Decimal, Unit) -> Value,
     transform: Value.() -> ScientificValue<TargetQuantity, TargetUnit>,
@@ -615,10 +615,10 @@ fun <
  * Combines this [ScientificArray] and [right] into a [DefaultScientificArray] using a transformation method
  * @param LeftQuantity the type of [PhysicalQuantity] of this [ScientificArray]
  * @param LeftNumberType the type of [Number] stored in this [ScientificArray]
- * @param LeftUnit the type of [DefinedScientificUnit] of this [ScientificArray]
+ * @param LeftUnit the type of [AbstractScientificUnit] of this [ScientificArray]
  * @param RightQuantity the type of [PhysicalQuantity] of the [right] unit
  * @param RightNumberType the type of [Number] stored in the [right] array
- * @param RightUnit the type of [DefinedScientificUnit] of [right]
+ * @param RightUnit the type of [AbstractScientificUnit] of [right]
  * @param TargetQuantity the type of [PhysicalQuantity] of the resulting [DefaultScientificArray]
  * @param TargetUnit the type of [ScientificUnit] that [LeftUnit] and [RightUnit] should be combined into
  * @param right a [ScientificArray] of [RightUnit] to combine with this [ScientificArray]
@@ -629,12 +629,12 @@ fun <
 fun <
     LeftQuantity : PhysicalQuantity,
     LeftNumberType : Number,
-    LeftUnit : DefinedScientificUnit<LeftQuantity>,
+    LeftUnit : AbstractScientificUnit<LeftQuantity>,
     RightQuantity : PhysicalQuantity,
     RightNumberType : Number,
-    RightUnit : DefinedScientificUnit<RightQuantity>,
+    RightUnit : AbstractScientificUnit<RightQuantity>,
     TargetQuantity : PhysicalQuantity,
-    TargetUnit : DefinedScientificUnit<TargetQuantity>,
+    TargetUnit : AbstractScientificUnit<TargetQuantity>,
     > ScientificArray<LeftNumberType, LeftQuantity, LeftUnit>.combine(
     right: ScientificArray<RightNumberType, RightQuantity, RightUnit>,
     transform: DefaultScientificValue<LeftQuantity, LeftUnit>.(DefaultScientificValue<RightQuantity, RightUnit>) -> ScientificValue<TargetQuantity, TargetUnit>,
@@ -701,7 +701,7 @@ fun <
  * Creates a [DefaultScientificArray] in [Unit] containing all values of this [ScientificArray] and [right]
  * @param Quantity the type of [PhysicalQuantity] of the unit
  * @param NumberType the type of [Number] stored in this [ScientificArray]
- * @param Unit the type of [DefinedScientificUnit] of the this [ScientificArray] and the resulting [DefaultScientificArray]
+ * @param Unit the type of [AbstractScientificUnit] of the this [ScientificArray] and the resulting [DefaultScientificArray]
  * @param RightUnit the type of [ScientificUnit] of [right]
  * @param right the [ScientificArray] to add to this [ScientificArray]
  * @return the [DefaultScientificArray] containing all values of this [ScientificArray] and [right] in [Unit]
@@ -709,7 +709,7 @@ fun <
 infix operator fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     RightNumberType : Number,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificArray<NumberType, Quantity, Unit>.plus(
@@ -720,16 +720,16 @@ infix operator fun <
  * Creates a [DefaultScientificArray] in [Unit] by adding a [ScientificValue] to this [ScientificArray]
  * @param Quantity the type of [PhysicalQuantity] of the units
  * @param NumberType the type of [Number] stored in this [ScientificArray]
- * @param Unit the type of [DefinedScientificUnit] of the this [ScientificArray] and the resulting [DefaultScientificArray]
- * @param RightUnit the type of [DefinedScientificUnit] of [right]
+ * @param Unit the type of [AbstractScientificUnit] of the this [ScientificArray] and the resulting [DefaultScientificArray]
+ * @param RightUnit the type of [AbstractScientificUnit] of [right]
  * @param right the [ScientificValue] to add to this [ScientificArray]
  * @return the [DefaultScientificArray] containing all values of this [ScientificArray] as well as [right] in [Unit]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
-    Unit : DefinedScientificUnit<Quantity>,
-    RightUnit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
+    RightUnit : AbstractScientificUnit<Quantity>,
     > ScientificArray<NumberType, Quantity, Unit>.plus(
     right: ScientificValue<Quantity, RightUnit>,
 ) = concat(listOf(right).toScientificArray(right.unit))
@@ -739,7 +739,7 @@ infix operator fun <
  * This will convert the values [right] into [Unit]
  * @param Quantity the type of [PhysicalQuantity] of the units
  * @param NumberType the type of [Number] stored in [right]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue] and the resulting [DefaultScientificArray]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue] and the resulting [DefaultScientificArray]
  * @param RightUnit the type of [ScientificUnit] of [right]
  * @param right the [ScientificArray] to add to this [ScientificValue]
  * @return the [DefaultScientificArray] containing this [ScientificValue] and all values of [right] in [Unit]
@@ -747,7 +747,7 @@ infix operator fun <
 infix operator fun <
     Quantity : PhysicalQuantity,
     NumberType : Number,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.plus(
     right: ScientificArray<NumberType, Quantity, RightUnit>,
@@ -757,14 +757,14 @@ infix operator fun <
  * Creates a [DefaultScientificArray] containing all values of this [ScientificArray] and [right]
  * This will convert the values [right] into [Unit]
  * @param Quantity the type of [PhysicalQuantity] of the units to be concatenated
- * @param Unit the type of [DefinedScientificUnit] of this [ScientificArray] and the resulting [DefaultScientificArray]
+ * @param Unit the type of [AbstractScientificUnit] of this [ScientificArray] and the resulting [DefaultScientificArray]
  * @param RightUnit the type of [ScientificUnit] of [right]
  * @param right the [ScientificArray] to add to this [ScientificArray]
  * @return the [DefaultScientificArray] containing all values of both this [ScientificArray] and [right] in [Unit]
  */
 fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificArray<*, Quantity, Unit>.concat(
     right: ScientificArray<*, Quantity, RightUnit>,
@@ -799,7 +799,7 @@ fun <
  * @param Quantity the type of [PhysicalQuantity] of the units to be concatenated
  * @param LeftUnit the type of [ScientificUnit] of this [ScientificArray]
  * @param RightUnit the type of [ScientificUnit] of [right]
- * @param TargetUnit the type of [DefinedScientificUnit] of the [DefaultScientificArray] to be returned
+ * @param TargetUnit the type of [AbstractScientificUnit] of the [DefaultScientificArray] to be returned
  * @param right the [ScientificArray] to add to this [ScientificArray]
  * @param targetUnit the [TargetUnit] of the [DefaultScientificArray] to be returned
  * @return the [DefaultScientificArray] containing all values of both this [ScientificArray] and [right] in [TargetUnit]
@@ -808,7 +808,7 @@ fun <
     Quantity : PhysicalQuantity,
     LeftUnit : ScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
-    TargetUnit : DefinedScientificUnit<Quantity>,
+    TargetUnit : AbstractScientificUnit<Quantity>,
     > ScientificArray<*, Quantity, LeftUnit>.concat(
     right: ScientificArray<*, Quantity, RightUnit>,
     targetUnit: TargetUnit,

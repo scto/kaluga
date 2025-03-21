@@ -24,7 +24,6 @@ import com.splendo.kaluga.base.utils.plus
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.base.utils.toDouble
 import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import kotlinx.serialization.Serializable
 
@@ -58,7 +57,7 @@ interface ScientificValue<Quantity : PhysicalQuantity, Unit : ScientificUnit<Qua
 /**
  * A class implementation of [ScientificValue]
  * @param Quantity the type of [PhysicalQuantity] of the unit
- * @param Unit the type of [DefinedScientificUnit] this value represents
+ * @param Unit the type of [AbstractScientificUnit] this value represents
  * @param value the [Decimal] component
  * @param unit the [Unit] component
  */
@@ -79,51 +78,51 @@ data class DefaultScientificValue<Quantity : PhysicalQuantity, Unit : AbstractSc
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] increased by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the amount to add to the value
  * @return the [DefaultScientificValue] where the [ScientificValue.value] is increased by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.plus(value: Number) =
     this + value.toDecimal()
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] increased by this [Number]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] to add the value to
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is increased by this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Number.plus(value: ScientificValue<Quantity, Unit>) = toDecimal() + value
 
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] increased by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [Decimal] amount to add to the value
  * @return a [DefaultScientificValue] where the [ScientificValue.value] is increased by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.plus(value: Decimal) =
     plus(value, ::DefaultScientificValue)
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] increased by this [Decimal]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] to add the value to
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is increased by this [Decimal]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Decimal.plus(value: ScientificValue<Quantity, Unit>) =
     plus(value, ::DefaultScientificValue)
 
@@ -166,14 +165,14 @@ fun <
 /**
  * Adds the [ScientificValue.value] of two [ScientificValue] into a [DefaultScientificValue] with [LeftUnit] as its unit
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param LeftUnit the type of [DefinedScientificUnit] of the [ScientificValue] being added to
+ * @param LeftUnit the type of [AbstractScientificUnit] of the [ScientificValue] being added to
  * @param RightUnit the type of [ScientificUnit] of the [ScientificValue] being added
  * @param right the [ScientificValue] of [RightUnit] to add
  * @return a [DefaultScientificValue] in [LeftUnit] where [right] is added to this value
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    LeftUnit : DefinedScientificUnit<Quantity>,
+    LeftUnit : AbstractScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificValue<Quantity, LeftUnit>.plus(
     right: ScientificValue<Quantity, RightUnit>,
@@ -206,51 +205,51 @@ fun <
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] decreased by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the amount to subtract from the value
  * @return a [DefaultScientificValue] where the [ScientificValue.value] is decreased by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.minus(value: Number) =
     this - value.toDecimal()
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] decreased from this [Number]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] whose value should be subtracted from this [Number]
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is subtracted from this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Number.minus(value: ScientificValue<Quantity, Unit>) = toDecimal() - value
 
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] decreased by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [Decimal] to subtract from the value
  * @return a [DefaultScientificValue] where the [ScientificValue.value] is decreased by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.minus(value: Decimal) =
     minus(value, ::DefaultScientificValue)
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] decreased from this [Decimal]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] whose value should be subtracted from this [Decimal]
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is subtracted from this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Decimal.minus(value: ScientificValue<Quantity, Unit>) =
     minus(value, ::DefaultScientificValue)
 
@@ -293,14 +292,14 @@ fun <
 /**
  * Subtracts the [ScientificValue.value] of two [ScientificValue] into a [DefaultScientificValue] with [LeftUnit] as its unit
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param LeftUnit the type of [DefinedScientificUnit] of the [ScientificValue] being subtracted from
+ * @param LeftUnit the type of [AbstractScientificUnit] of the [ScientificValue] being subtracted from
  * @param RightUnit the type of [ScientificUnit] of the [ScientificValue] being subtracted
  * @param right the [ScientificValue] of [RightUnit] to subtract
  * @return a [DefaultScientificValue] in [LeftUnit] where [right] is subtracted from this value
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    LeftUnit : DefinedScientificUnit<Quantity>,
+    LeftUnit : AbstractScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificValue<Quantity, LeftUnit>.minus(
     right: ScientificValue<Quantity, RightUnit>,
@@ -333,51 +332,51 @@ fun <
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] divided by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the amount to divide from the value
  * @return a [DefaultScientificValue] where the [ScientificValue.value] is divided by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.div(value: Number) =
     this / value.toDecimal()
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] divided from this [Number]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] whose value should be divided from this [Number]
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [unit] is divided from this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Number.div(value: ScientificValue<Quantity, Unit>) = toDecimal() / value
 
 /**
  * Creates a [DefaultScientificValue] equal to the [ScientificValue.value] divided by [value]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [Decimal] to divided from the value
  * @return a [DefaultScientificValue] where the [ScientificValue.value] is divided by [value]
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > ScientificValue<Quantity, Unit>.div(value: Decimal) =
     div(value, ::DefaultScientificValue)
 
 /**
  * Creates a [DefaultScientificValue] equal to a [ScientificValue.value] divided from this [Decimal]
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param Unit the type of [DefinedScientificUnit] of the [ScientificValue]
+ * @param Unit the type of [AbstractScientificUnit] of the [ScientificValue]
  * @param value the [ScientificValue] whose value should be divided from this [Decimal]
  * @return a [DefaultScientificValue] where the [ScientificValue.value] of [value] is divided from this number
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    Unit : DefinedScientificUnit<Quantity>,
+    Unit : AbstractScientificUnit<Quantity>,
     > Decimal.div(value: ScientificValue<Quantity, Unit>) =
     div(value, ::DefaultScientificValue)
 
@@ -420,14 +419,14 @@ fun <
 /**
  * Divides the [ScientificValue.value] of two [ScientificValue] into a [DefaultScientificValue] with [LeftUnit] as its unit
  * @param Quantity the type of [PhysicalQuantity] of the [ScientificValue]
- * @param LeftUnit the type of [DefinedScientificUnit] of the [ScientificValue] being divided from
+ * @param LeftUnit the type of [AbstractScientificUnit] of the [ScientificValue] being divided from
  * @param RightUnit the type of [ScientificUnit] of the [ScientificValue] being divided
  * @param right the [ScientificValue] of [RightUnit] to divide with
  * @return a [DefaultScientificValue] in [LeftUnit] where [right] is divided from this value
  */
 infix operator fun <
     Quantity : PhysicalQuantity,
-    LeftUnit : DefinedScientificUnit<Quantity>,
+    LeftUnit : AbstractScientificUnit<Quantity>,
     RightUnit : ScientificUnit<Quantity>,
     > ScientificValue<Quantity, LeftUnit>.div(
     right: ScientificValue<Quantity, RightUnit>,
