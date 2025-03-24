@@ -27,6 +27,7 @@ import com.splendo.kaluga.bluetooth.device.DeviceAction
 import com.splendo.kaluga.bluetooth.device.DeviceState
 import com.splendo.kaluga.bluetooth.device.Identifier
 import com.splendo.kaluga.bluetooth.device.randomIdentifier
+import com.splendo.kaluga.logging.ContextualLogger
 import com.splendo.kaluga.logging.Logger
 import com.splendo.kaluga.logging.RestrictedLogLevel
 import com.splendo.kaluga.logging.RestrictedLogger
@@ -101,8 +102,7 @@ class MockDevice(
         Service(
             service = createServiceWrapper { uuid = it },
             emitNewAction = {},
-            parentLogTag = "MockDeviceService",
-            logger = logger,
+            logger = ContextualLogger(logger, "MockDeviceService"),
         )
     }
 
