@@ -66,7 +66,7 @@ internal interface BluetoothGattWrapper {
 
     /**
      * Discovers services offered by a remote device as well as their characteristics and descriptors.
-     * @return a result indicating whether the discovery attempt was successful
+     * @return a list of discovered services
      */
     suspend fun discoverServices(): Result<List<ServiceWrapper>>
 

@@ -19,7 +19,7 @@ package com.splendo.kaluga.bluetooth.device
 
 import com.splendo.kaluga.base.collections.concurrentMutableMapOf
 import com.splendo.kaluga.bluetooth.Characteristic
-import com.splendo.kaluga.bluetooth.ContextualLogger
+import com.splendo.kaluga.logging.ContextualLogger
 import com.splendo.kaluga.bluetooth.Descriptor
 import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.RSSI

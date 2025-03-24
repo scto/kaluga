@@ -19,7 +19,7 @@ package com.splendo.kaluga.test.bluetooth
 
 import com.splendo.kaluga.bluetooth.Characteristic
 import com.splendo.kaluga.bluetooth.CharacteristicWrapper
-import com.splendo.kaluga.bluetooth.ContextualLogger
+import com.splendo.kaluga.logging.ContextualLogger
 import com.splendo.kaluga.bluetooth.device.DeviceConnectionManager
 import com.splendo.kaluga.logging.defaultLogger
 import com.splendo.kaluga.test.base.mock.call

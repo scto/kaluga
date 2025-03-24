@@ -15,10 +15,7 @@
 
  */
 
-package com.splendo.kaluga.bluetooth
-
-import com.splendo.kaluga.logging.LogLevel
-import com.splendo.kaluga.logging.Logger
+package com.splendo.kaluga.logging
 
 /**
  * A logger appending contextual data to each message

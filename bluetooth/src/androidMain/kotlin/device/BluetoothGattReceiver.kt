@@ -35,115 +35,16 @@ import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothProfile
 import com.splendo.kaluga.bluetooth.DefaultGattServiceWrapper
-import com.splendo.kaluga.bluetooth.MTU
-import com.splendo.kaluga.bluetooth.RSSI
 import com.splendo.kaluga.bluetooth.extensions.printableString
 import com.splendo.kaluga.logging.Logger
 import com.splendo.kaluga.logging.info
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import java.util.UUID
-import kotlin.jvm.javaClass
 
 /** Transforms calls to underlying [gattCallback] into [events]. */
 internal interface BluetoothGattReceiver {
     val events: Flow<GattEvent>
     val gattCallback: BluetoothGattCallback
-}
-
-/** Gatt callback events. */
-internal sealed interface GattEvent {
-    /** Event containing status. */
-    interface WithStatus {
-        val status: GattStatus
-    }
-
-    /** An event triggered by the device change, and not as a command response. */
-    interface Update
-
-    /** Event containing data payload. */
-    interface WithPayload {
-        val uuid: UUID
-        val value: ByteArray
-    }
-
-    /** GATT client has connected to a remote GATT server. */
-    @JvmInline
-    value class OnConnected(override val status: GattStatus) :
-        GattEvent,
-        WithStatus,
-        Update
-
-    /** GATT client has disconnected from a remote GATT server. */
-    @JvmInline
-    value class OnDisconnected(override val status: GattStatus) :
-        GattEvent,
-        WithStatus,
-        Update
-
-    /**
-     * The list of remote services, characteristics and descriptors for the
-     * remote device have been updated, ie new services have been discovered.
-     */
-    data class OnServicesDiscovered(val services: List<DefaultGattServiceWrapper>, override val status: GattStatus) :
-        GattEvent,
-        WithStatus
-
-    /** The result of a characteristic read operation. */
-    data class OnCharacteristicRead(override val uuid: UUID, override val value: ByteArray, override val status: GattStatus) :
-        GattEvent,
-        WithStatus,
-        WithPayload {
-
-        override fun equals(other: Any?): Boolean = equals(this, other)
-        override fun hashCode(): Int = 31 * hashCode(this) + status.hashCode()
-    }
-
-    /** The result of a characteristic write operation. */
-    data class OnCharacteristicWrite(val uuid: UUID, override val status: GattStatus) :
-        GattEvent,
-        WithStatus
-
-    /** A remote characteristic notification. */
-    data class OnCharacteristicChanged(override val uuid: UUID, override val value: ByteArray) :
-        GattEvent,
-        Update,
-        WithPayload {
-
-        override fun equals(other: Any?): Boolean = equals(this, other)
-        override fun hashCode(): Int = hashCode(this)
-    }
-
-    /** The result of a descriptor read operation. */
-    data class OnDescriptorRead(override val uuid: UUID, override val value: ByteArray, override val status: GattStatus) :
-        GattEvent,
-        WithStatus,
-        WithPayload {
-        override fun equals(other: Any?): Boolean = equals(this, other)
-        override fun hashCode(): Int = 31 * hashCode(this) + status.hashCode()
-    }
-
-    /** The result of a descriptor write operation. */
-    data class OnDescriptorWrite(val uuid: UUID, override val status: GattStatus) :
-        GattEvent,
-        WithStatus
-
-    /** The RSSI for a remote device connection. */
-    data class OnReadRemoteRssi(val rssi: RSSI, override val status: GattStatus) :
-        GattEvent,
-        WithStatus
-
-    /** The MTU for a given device connection has changed. */
-    data class OnMtuChanged(val mtu: MTU, override val status: GattStatus) :
-        GattEvent,
-        WithStatus
-
-    /**
-     * The service changed event is received
-     * <p>Receiving this event means that the GATT database is out of sync with the remote device.
-     * {@link BluetoothGatt#discoverServices} should be called to re-discover the services.
-     */
-    data object OnServiceChanged : GattEvent
 }
 
 @JvmInline
@@ -279,22 +180,6 @@ internal class DefaultBluetoothGattReceiver(deviceIdentifier: Identifier, privat
         sendEvent(GattEvent.OnServiceChanged)
     }
 }
-
-private inline fun <reified T : GattEvent.WithPayload> equals(one: T, other: Any?, extraCheck: (T, T) -> Boolean = { _, _ -> true }): Boolean {
-    if (one === other) return true
-    if (one.javaClass != other?.javaClass) return false
-
-    other as T
-
-    if (one.uuid != other.uuid) return false
-    if (!one.value.contentEquals(other.value)) return false
-    return extraCheck(one, other)
-}
-
-private inline fun <reified T> equals(one: T, other: Any?): Boolean where T : GattEvent.WithPayload, T : GattEvent.WithStatus =
-    equals(one, other) { one, other -> one.status == other.status }
-
-private inline fun <reified T : GattEvent.WithPayload> hashCode(event: T): Int = 31 * event.uuid.hashCode() + event.value.contentHashCode()
 
 private val Int.gattStatusAsString get() = when (this) {
     GATT_SUCCESS -> "SUCCESS"
