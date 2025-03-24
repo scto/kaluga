@@ -38,34 +38,6 @@ public abstract interface class com/splendo/kaluga/test/bluetooth/CanUpdateMockV
 	public abstract fun updateMockValue ([B)V
 }
 
-public final class com/splendo/kaluga/test/bluetooth/MockBluetoothGattWrapper : com/splendo/kaluga/bluetooth/device/BluetoothGattWrapper {
-	public fun <init> ()V
-	public fun <init> (Z)V
-	public synthetic fun <init> (ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun close ()V
-	public fun connect ()Z
-	public fun disconnect ()V
-	public fun discoverServices ()Z
-	public final fun getCloseMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getConnectMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getDisconnectMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getDiscoverServicesMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getReadCharacteristicMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getReadDescriptorMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getReadRemoteRssiMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getRequestMtuMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getSetCharacteristicNotificationMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getWriteCharacteristicMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getWriteDescriptorMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public fun readCharacteristic (Lcom/splendo/kaluga/bluetooth/CharacteristicWrapper;)Z
-	public fun readDescriptor (Lcom/splendo/kaluga/bluetooth/DescriptorWrapper;)Z
-	public fun readRemoteRssi ()Z
-	public fun requestMtu (I)Z
-	public fun setCharacteristicNotification (Lcom/splendo/kaluga/bluetooth/CharacteristicWrapper;Z)Z
-	public fun writeCharacteristic (Lcom/splendo/kaluga/bluetooth/CharacteristicWrapper;[B)Z
-	public fun writeDescriptor (Lcom/splendo/kaluga/bluetooth/DescriptorWrapper;[B)Z
-}
-
 public final class com/splendo/kaluga/test/bluetooth/MockBluetoothMonitor : com/splendo/kaluga/test/service/MockServiceMonitor, com/splendo/kaluga/bluetooth/BluetoothMonitor {
 	public fun <init> (Lkotlinx/coroutines/flow/StateFlow;)V
 	public synthetic fun isEnabled ()Lkotlinx/coroutines/flow/Flow;
@@ -177,14 +149,12 @@ public final class com/splendo/kaluga/test/bluetooth/MockDeviceInfoBuilderKt {
 }
 
 public final class com/splendo/kaluga/test/bluetooth/MockDeviceWrapper : com/splendo/kaluga/bluetooth/device/DeviceWrapper {
-	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/splendo/kaluga/bluetooth/device/DeviceWrapper$BondState;Z)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/splendo/kaluga/bluetooth/device/DeviceWrapper$BondState;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun connectGatt (Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Lcom/splendo/kaluga/bluetooth/device/BluetoothGattWrapper;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Lcom/splendo/kaluga/bluetooth/device/DeviceWrapper$BondState;)V
+	public fun connectGatt (Landroid/content/Context;ZLandroid/bluetooth/BluetoothGattCallback;)Landroid/bluetooth/BluetoothGatt;
 	public fun createBond ()V
 	public fun getBondState ()Lcom/splendo/kaluga/bluetooth/device/DeviceWrapper$BondState;
 	public final fun getConnectGattMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
 	public final fun getCreateBondMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
-	public final fun getGattWrappers ()Lcom/splendo/kaluga/base/collections/ConcurrentMutableList;
 	public fun getIdentifier ()Ljava/lang/String;
 	public fun getName ()Ljava/lang/String;
 	public final fun getRemoveBondMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
@@ -346,13 +316,13 @@ public final class com/splendo/kaluga/test/bluetooth/device/MockDevice : com/spl
 public final class com/splendo/kaluga/test/bluetooth/device/MockDeviceConnectionManager : com/splendo/kaluga/bluetooth/device/BaseDeviceConnectionManager {
 	public fun <init> (ZLcom/splendo/kaluga/bluetooth/device/DeviceWrapper;Lcom/splendo/kaluga/bluetooth/device/ConnectionSettings;Lkotlinx/coroutines/CoroutineScope;Z)V
 	public synthetic fun <init> (ZLcom/splendo/kaluga/bluetooth/device/DeviceWrapper;Lcom/splendo/kaluga/bluetooth/device/ConnectionSettings;Lkotlinx/coroutines/CoroutineScope;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun connect ()V
+	public fun connect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createService (Lcom/splendo/kaluga/bluetooth/ServiceWrapper;)Lcom/splendo/kaluga/bluetooth/Service;
-	public fun disconnect ()V
+	public fun disconnect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun discoverServices (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public final fun getConnectMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
+	public final fun getConnectMock ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
 	public fun getCurrentState ()Lcom/splendo/kaluga/bluetooth/device/DeviceConnectionManager$State;
-	public final fun getDisconnectMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
+	public final fun getDisconnectMock ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
 	public final fun getDiscoverServicesMock ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
 	public final fun getGetCurrentStateMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
 	public final fun getHandleCurrentActionCompletedMock ()Lcom/splendo/kaluga/test/base/mock/MethodMock;

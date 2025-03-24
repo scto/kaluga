@@ -1,5 +1,5 @@
 /*
- Copyright 2022 Splendo Consulting B.V. The Netherlands
+ Copyright 2025 Splendo Consulting B.V. The Netherlands
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,18 +15,13 @@
 
  */
 
-package com.splendo.kaluga.test.bluetooth
+package com.splendo.kaluga.bluetooth.device
 
-import com.splendo.kaluga.base.runBlocking
-import org.junit.Test
-import kotlin.test.assertTrue
+import android.bluetooth.BluetoothGattCallback
+import kotlinx.coroutines.flow.MutableSharedFlow
+import org.mockito.Mockito.spy
 
-class TestMockBluetoothGattWrapper {
-
-    @Test
-    fun testRequestMtu() = runBlocking {
-        val mtu = 54
-        val mock = MockBluetoothGattWrapper()
-        assertTrue(mock.requestMtu(mtu))
-    }
-}
+internal class MockBluetoothGattReceiver(
+    override val events: MutableSharedFlow<GattEvent> = MutableSharedFlow(),
+    override val gattCallback: BluetoothGattCallback = spy<BluetoothGattCallback>(),
+) : BluetoothGattReceiver

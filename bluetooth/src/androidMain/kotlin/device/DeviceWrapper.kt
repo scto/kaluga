@@ -19,6 +19,7 @@ package com.splendo.kaluga.bluetooth.device
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothGattCallback
 import android.content.Context
 
@@ -58,9 +59,10 @@ actual interface DeviceWrapper {
      * Connects to the GATT Server hosted by the [BluetoothDevice]
      * @param context the [Context] used for connecting to the GATT server
      * @param autoConnect if `true` the device will connect as soon as it becomes available, otherwise connects directly
-     * @param callback the [BluetoothGattCallback] used to receive for asynchronous result
+     * @param callback a callback for Gatt events
+     * @return a [BluetoothGatt] instance
      */
-    fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGattWrapper
+    fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGatt
 
     /**
      * Removes the bond from the device (unpair)
@@ -79,7 +81,6 @@ actual interface DeviceWrapper {
  */
 @SuppressLint("MissingPermission")
 class DefaultDeviceWrapper(private val device: BluetoothDevice) : DeviceWrapper {
-
     override val name: String?
         get() = device.name
     override val identifier: Identifier
@@ -91,10 +92,8 @@ class DefaultDeviceWrapper(private val device: BluetoothDevice) : DeviceWrapper 
             else -> DeviceWrapper.BondState.NONE
         }
 
-    override fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGattWrapper {
-        val gatt = device.connectGatt(context, autoConnect, callback, BluetoothDevice.TRANSPORT_LE)
-        return DefaultBluetoothGattWrapper(gatt)
-    }
+    override fun connectGatt(context: Context, autoConnect: Boolean, callback: BluetoothGattCallback): BluetoothGatt =
+        device.connectGatt(context, autoConnect, callback, BluetoothDevice.TRANSPORT_LE)
 
     override fun removeBond() {
         try {

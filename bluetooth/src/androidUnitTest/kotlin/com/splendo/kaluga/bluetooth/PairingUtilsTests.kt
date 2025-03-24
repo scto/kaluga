@@ -1,5 +1,5 @@
 /*
- Copyright 2022 Splendo Consulting B.V. The Netherlands
+ Copyright 2025 Splendo Consulting B.V. The Netherlands
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -68,7 +68,13 @@ class PairingUtilsTests : BaseTest() {
                 MockAdvertisementData(NAME),
             ),
             ConnectionSettings(),
-            { manager.create(MockDeviceWrapper(NAME, NAME, DeviceWrapper.BondState.NONE, true), ConnectionSettings(), coroutineScope) },
+            {
+                manager.create(
+                    MockDeviceWrapper(NAME, NAME, DeviceWrapper.BondState.NONE),
+                    ConnectionSettings(),
+                    coroutineScope,
+                )
+            },
             coroutineScope,
         )
     }
