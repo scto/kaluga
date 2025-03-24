@@ -18,13 +18,15 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // A * B! -> Mul<A, Wr<B>>
 
 class MultipliedByDefinedUnitTest {
 
-    @Test
-    fun multipliedByDefinedUnit() {
-    }
+	@Test
+	fun multipliedByDefinedUnit() {
+	}
 }

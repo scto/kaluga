@@ -18,13 +18,15 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.per
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // A! * Div<Wr<B>, Ex<A>> -> B!
 
 class DefinedMultipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominatorTest {
 
-    @Test
-    fun multipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominator() {
-    }
+	@Test
+	fun multipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominator() {
+	}
 }

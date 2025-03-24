@@ -18,13 +18,15 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.One
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // A! / Ex<A> -> One
 
 class DefinedDividedBySelfTest {
 
-    @Test
-    fun dividedBySelf() {
-    }
+	@Test
+	fun dividedBySelf() {
+	}
 }

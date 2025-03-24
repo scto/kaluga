@@ -18,13 +18,16 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.per
+import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // A! / Div<Mul<B, Ex<A>>, C> -> Div<C, B>
 
 class DefinedDividedByDividingUnitWithMultiplyingNumeratorWithSelfAsRightTest {
 
-    @Test
-    fun dividedByDividingUnitWithMultiplyingNumeratorWithSelfAsRight() {
-    }
+	@Test
+	fun dividedByDividingUnitWithMultiplyingNumeratorWithSelfAsRight() {
+	}
 }

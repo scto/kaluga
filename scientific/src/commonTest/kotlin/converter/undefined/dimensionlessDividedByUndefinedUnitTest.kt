@@ -18,48 +18,51 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.One
+import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // One / A -> Inv<A>
 
 class DimensionlessDividedByUndefinedUnitTest {
 
-    @Test
-    fun dividedByUndefinedUnit() {
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal()),
-        // 	2(One) metricAndImperialDividedByMetricAndImperial
-        // 		2(UndefinedConverterUnits.MetricAndImperial.undefinedA)
-        // )
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.Metric.undefinedA.reciprocal()),
-        // 	2(One) metricDividedByMetric
-        // 		2(UndefinedConverterUnits.Metric.undefinedA)
-        // )
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.Imperial.undefinedA.reciprocal()),
-        // 	2(One) imperialDividedByImperial
-        // 		2(UndefinedConverterUnits.Imperial.undefinedA)
-        // )
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal()),
-        // 	2(One) ukImperialDividedByUKImperial
-        // 		2(UndefinedConverterUnits.UKImperial.undefinedA)
-        // )
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal()),
-        // 	2(One) usCustomaryDividedByUSCustomary
-        // 		2(UndefinedConverterUnits.USCustomary.undefinedA)
-        // )
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal()),
-        // 	2(One) metricAndUKImperialDividedByMetricAndUKImperial
-        // 		2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA)
-        // )
-        // assertEquals(
-        // 	1.0(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal()),
-        // 	2(One) metricAndUSCustomaryDividedByMetricAndUSCustomary
-        // 		2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA)
-        // )
-    }
+	@Test
+	fun dividedByUndefinedUnit() {
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal()),
+		// 	2(One) metricAndImperialDividedByMetricAndImperial
+		// 		2(UndefinedConverterUnits.MetricAndImperial.undefinedA)
+		// )
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.Metric.undefinedA.reciprocal()),
+		// 	2(One) metricDividedByMetric
+		// 		2(UndefinedConverterUnits.Metric.undefinedA)
+		// )
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.Imperial.undefinedA.reciprocal()),
+		// 	2(One) imperialDividedByImperial
+		// 		2(UndefinedConverterUnits.Imperial.undefinedA)
+		// )
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal()),
+		// 	2(One) ukImperialDividedByUKImperial
+		// 		2(UndefinedConverterUnits.UKImperial.undefinedA)
+		// )
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal()),
+		// 	2(One) usCustomaryDividedByUSCustomary
+		// 		2(UndefinedConverterUnits.USCustomary.undefinedA)
+		// )
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal()),
+		// 	2(One) metricAndUKImperialDividedByMetricAndUKImperial
+		// 		2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA)
+		// )
+		// assertEquals(
+		// 	1.0(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal()),
+		// 	2(One) metricAndUSCustomaryDividedByMetricAndUSCustomary
+		// 		2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA)
+		// )
+	}
 }

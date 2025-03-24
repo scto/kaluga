@@ -18,13 +18,16 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.One
+import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // Inv<Ex<A>> * A! -> One
 
 class ReciprocalExtendedMultipliedBySelfAsExtendedSelfTest {
 
-    @Test
-    fun multipliedBySelfAsExtendedSelf() {
-    }
+	@Test
+	fun multipliedBySelfAsExtendedSelf() {
+	}
 }

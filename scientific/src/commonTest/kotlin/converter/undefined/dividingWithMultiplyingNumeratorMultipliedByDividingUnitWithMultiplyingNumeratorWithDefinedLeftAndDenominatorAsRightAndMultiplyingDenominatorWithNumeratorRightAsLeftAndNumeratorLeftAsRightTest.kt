@@ -18,13 +18,16 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.per
+import com.splendo.kaluga.scientific.unit.x
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // Div<Mul<A, B>, C> * Div<Mul<Wr<D>, C>, Mul<B, A>> -> D!
 
 class DivWMulNumMultipliedByDivUnitWMulNumWDefinedLAndDenomAsRAndMulDenomWNumRAsLAndNumLAsRTest {
 
-    @Test
-    fun multipliedByDividingUnitWithMultiplyingNumeratorWithDefinedLeftAndDenominatorAsRightAndMultiplyingDenominatorWithNumeratorRightAsLeftAndNumeratorLeftAsRight() {
-    }
+	@Test
+	fun multipliedByDividingUnitWithMultiplyingNumeratorWithDefinedLeftAndDenominatorAsRightAndMultiplyingDenominatorWithNumeratorRightAsLeftAndNumeratorLeftAsRight() {
+	}
 }

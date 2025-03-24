@@ -18,48 +18,51 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.scientific.invoke
+import com.splendo.kaluga.scientific.unit.One
+import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 // A * Inv<A> -> One
 
 class MultipliedBySelfTest {
 
-    @Test
-    fun multipliedBySelf() {
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.MetricAndImperial.undefinedA) metricAndImperialMultipliedByMetricAndImperial
-        // 		2(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal())
-        // )
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.Metric.undefinedA) metricMultipliedByMetric
-        // 		2(UndefinedConverterUnits.Metric.undefinedA.reciprocal())
-        // )
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.Imperial.undefinedA) imperialMultipliedByImperial
-        // 		2(UndefinedConverterUnits.Imperial.undefinedA.reciprocal())
-        // )
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.UKImperial.undefinedA) ukImperialMultipliedByUKImperial
-        // 		2(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal())
-        // )
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.USCustomary.undefinedA) usCustomaryMultipliedByUSCustomary
-        // 		2(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal())
-        // )
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA) metricAndUKImperialMultipliedByMetricAndUKImperial
-        // 		2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal())
-        // )
-        // assertEquals(
-        // 	4.0(One),
-        // 	2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA) metricAndUSCustomaryMultipliedByMetricAndUSCustomary
-        // 		2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal())
-        // )
-    }
+	@Test
+	fun multipliedBySelf() {
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.MetricAndImperial.undefinedA) metricAndImperialMultipliedByMetricAndImperial
+		// 		2(UndefinedConverterUnits.MetricAndImperial.undefinedA.reciprocal())
+		// )
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.Metric.undefinedA) metricMultipliedByMetric
+		// 		2(UndefinedConverterUnits.Metric.undefinedA.reciprocal())
+		// )
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.Imperial.undefinedA) imperialMultipliedByImperial
+		// 		2(UndefinedConverterUnits.Imperial.undefinedA.reciprocal())
+		// )
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.UKImperial.undefinedA) ukImperialMultipliedByUKImperial
+		// 		2(UndefinedConverterUnits.UKImperial.undefinedA.reciprocal())
+		// )
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.USCustomary.undefinedA) usCustomaryMultipliedByUSCustomary
+		// 		2(UndefinedConverterUnits.USCustomary.undefinedA.reciprocal())
+		// )
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA) metricAndUKImperialMultipliedByMetricAndUKImperial
+		// 		2(UndefinedConverterUnits.MetricAndUKImperial.undefinedA.reciprocal())
+		// )
+		// assertEquals(
+		// 	4.0(One),
+		// 	2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA) metricAndUSCustomaryMultipliedByMetricAndUSCustomary
+		// 		2(UndefinedConverterUnits.MetricAndUSCustomary.undefinedA.reciprocal())
+		// )
+	}
 }
