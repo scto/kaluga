@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
@@ -228,7 +228,7 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDividingMultipliedByMetricDividingUnitWithMultiplyingNumeratorWithDenominatorAsRightAndMultiplyingDenominatorWithNumeratorAsLeft")
@@ -326,7 +326,7 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDividingMultipliedByImperialDividingUnitWithMultiplyingNumeratorWithDenominatorAsRightAndMultiplyingDenominatorWithNumeratorAsLeft")
@@ -434,7 +434,7 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDividingMultipliedByUKImperialDividingUnitWithMultiplyingNumeratorWithDenominatorAsRightAndMultiplyingDenominatorWithNumeratorAsLeft")
@@ -532,7 +532,7 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDividingMultipliedByUSCustomaryDividingUnitWithMultiplyingNumeratorWithDenominatorAsRightAndMultiplyingDenominatorWithNumeratorAsLeft")
@@ -630,7 +630,7 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDividingMultipliedByMetricAndUKImperialDividingUnitWithMultiplyingNumeratorWithDenominatorAsRightAndMultiplyingDenominatorWithNumeratorAsLeft")
@@ -738,7 +738,7 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDividingMultipliedByMetricAndUSCustomaryDividingUnitWithMultiplyingNumeratorWithDenominatorAsRightAndMultiplyingDenominatorWithNumeratorAsLeft")
@@ -846,5 +846,5 @@ RightUnit,
 				RightDenominatorRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

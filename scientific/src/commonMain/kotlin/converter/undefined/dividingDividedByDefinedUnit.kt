@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
@@ -174,7 +174,7 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDividingDividedByMetricDefinedUnit")
@@ -237,7 +237,7 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDividingDividedByImperialDefinedUnit")
@@ -304,7 +304,7 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDividingDividedByUKImperialDefinedUnit")
@@ -367,7 +367,7 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDividingDividedByUSCustomaryDefinedUnit")
@@ -430,7 +430,7 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDividingDividedByMetricAndUKImperialDefinedUnit")
@@ -497,7 +497,7 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDividingDividedByMetricAndUSCustomaryDefinedUnit")
@@ -564,5 +564,5 @@ NumeratorUnit,
 					>,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
@@ -123,7 +123,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricMultiplyingMultipliedByMetricReciprocalRight")
@@ -171,7 +171,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialMultiplyingMultipliedByImperialReciprocalRight")
@@ -224,7 +224,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialMultiplyingMultipliedByUKImperialReciprocalRight")
@@ -272,7 +272,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryMultiplyingMultipliedByUSCustomaryReciprocalRight")
@@ -320,7 +320,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialMultiplyingMultipliedByMetricAndUKImperialReciprocalRight")
@@ -373,7 +373,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryMultiplyingMultipliedByMetricAndUSCustomaryReciprocalRight")
@@ -426,7 +426,7 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("genericMultiplyingMultipliedByGenericReciprocalRight")
@@ -464,5 +464,5 @@ RightUnit,
 		value: Decimal,
 		unit: LeftLeftUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

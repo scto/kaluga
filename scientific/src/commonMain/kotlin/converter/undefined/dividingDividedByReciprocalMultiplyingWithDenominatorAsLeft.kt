@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -181,7 +181,7 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDividingDividedByMetricReciprocalMultiplyingWithDenominatorAsLeft")
@@ -255,7 +255,7 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDividingDividedByImperialReciprocalMultiplyingWithDenominatorAsLeft")
@@ -336,7 +336,7 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDividingDividedByUKImperialReciprocalMultiplyingWithDenominatorAsLeft")
@@ -410,7 +410,7 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDividingDividedByUSCustomaryReciprocalMultiplyingWithDenominatorAsLeft")
@@ -484,7 +484,7 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDividingDividedByMetricAndUKImperialReciprocalMultiplyingWithDenominatorAsLeft")
@@ -565,7 +565,7 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDividingDividedByMetricAndUSCustomaryReciprocalMultiplyingWithDenominatorAsLeft")
@@ -646,5 +646,5 @@ DenominatorUnit,
 				DenominatorReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

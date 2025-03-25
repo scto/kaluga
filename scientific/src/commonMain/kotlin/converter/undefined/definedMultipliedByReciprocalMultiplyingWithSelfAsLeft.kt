@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
@@ -163,7 +163,7 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDefinedMultipliedByMetricReciprocalMultiplyingWithSelfAsLeft")
@@ -230,7 +230,7 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDefinedMultipliedByImperialReciprocalMultiplyingWithSelfAsLeft")
@@ -302,7 +302,7 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDefinedMultipliedByUKImperialReciprocalMultiplyingWithSelfAsLeft")
@@ -369,7 +369,7 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDefinedMultipliedByUSCustomaryReciprocalMultiplyingWithSelfAsLeft")
@@ -436,7 +436,7 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDefinedMultipliedByMetricAndUKImperialReciprocalMultiplyingWithSelfAsLeft")
@@ -508,7 +508,7 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDefinedMultipliedByMetricAndUSCustomaryReciprocalMultiplyingWithSelfAsLeft")
@@ -580,5 +580,5 @@ RightUnit,
 							RightReciprocalRightUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

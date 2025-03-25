@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -156,7 +156,7 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricSquaredDividedByMetricDividingUnitWithRootAsNumerator")
@@ -218,7 +218,7 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialSquaredDividedByImperialDividingUnitWithRootAsNumerator")
@@ -286,7 +286,7 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialSquaredDividedByUKImperialDividingUnitWithRootAsNumerator")
@@ -348,7 +348,7 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomarySquaredDividedByUSCustomaryDividingUnitWithRootAsNumerator")
@@ -410,7 +410,7 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialSquaredDividedByMetricAndUKImperialDividingUnitWithRootAsNumerator")
@@ -478,7 +478,7 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomarySquaredDividedByMetricAndUSCustomaryDividingUnitWithRootAsNumerator")
@@ -546,5 +546,5 @@ DenominatorUnit,
 				DenominatorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

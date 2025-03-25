@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -158,7 +158,7 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricMultiplyingDividedByMetricMultiplyingUnitWithRightAsRight")
@@ -221,7 +221,7 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialMultiplyingDividedByImperialMultiplyingUnitWithRightAsRight")
@@ -290,7 +290,7 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialMultiplyingDividedByUKImperialMultiplyingUnitWithRightAsRight")
@@ -353,7 +353,7 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryMultiplyingDividedByUSCustomaryMultiplyingUnitWithRightAsRight")
@@ -416,7 +416,7 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialMultiplyingDividedByMetricAndUKImperialMultiplyingUnitWithRightAsRight")
@@ -485,7 +485,7 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryMultiplyingDividedByMetricAndUSCustomaryMultiplyingUnitWithRightAsRight")
@@ -554,5 +554,5 @@ DenominatorUnit,
 				DenominatorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

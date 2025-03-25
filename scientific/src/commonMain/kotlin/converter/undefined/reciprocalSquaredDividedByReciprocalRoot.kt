@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -145,7 +145,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricReciprocalSquaredDividedByMetricReciprocalRoot")
@@ -203,7 +203,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialReciprocalSquaredDividedByImperialReciprocalRoot")
@@ -267,7 +267,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialReciprocalSquaredDividedByUKImperialReciprocalRoot")
@@ -325,7 +325,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryReciprocalSquaredDividedByUSCustomaryReciprocalRoot")
@@ -383,7 +383,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialReciprocalSquaredDividedByMetricAndUKImperialReciprocalRoot")
@@ -447,7 +447,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryReciprocalSquaredDividedByMetricAndUSCustomaryReciprocalRoot")
@@ -511,7 +511,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("genericReciprocalSquaredDividedByGenericReciprocalRoot")
@@ -557,5 +557,5 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

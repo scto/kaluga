@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
@@ -184,7 +184,7 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDefinedDividedByMetricDividingUnitWithMultiplyingNumeratorWithSelfAsRight")
@@ -260,7 +260,7 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDefinedDividedByImperialDividingUnitWithMultiplyingNumeratorWithSelfAsRight")
@@ -342,7 +342,7 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDefinedDividedByUKImperialDividingUnitWithMultiplyingNumeratorWithSelfAsRight")
@@ -418,7 +418,7 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDefinedDividedByUSCustomaryDividingUnitWithMultiplyingNumeratorWithSelfAsRight")
@@ -494,7 +494,7 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDefinedDividedByMetricAndUKImperialDividingUnitWithMultiplyingNumeratorWithSelfAsRight")
@@ -576,7 +576,7 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDefinedDividedByMetricAndUSCustomaryDividingUnitWithMultiplyingNumeratorWithSelfAsRight")
@@ -658,5 +658,5 @@ DenominatorUnit,
 				DenominatorNumeratorLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

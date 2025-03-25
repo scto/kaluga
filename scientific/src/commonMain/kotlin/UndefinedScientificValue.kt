@@ -18,20 +18,13 @@
 package com.splendo.kaluga.scientific
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.base.utils.toDouble
 import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.asUndefined
 import kotlin.jvm.JvmName
 
-interface UndefinedScientificValue<Quantity : UndefinedQuantityType, Unit : UndefinedScientificUnit<Quantity>> : ScientificValue<PhysicalQuantity.Undefined<Quantity>, Unit>
-
-data class DefaultUndefinedScientificValue<Quantity : UndefinedQuantityType, Unit : UndefinedScientificUnit<Quantity>>(override val value: Double, override val unit: Unit) :
-    UndefinedScientificValue<Quantity, Unit> {
-    constructor(value: Decimal, unit: Unit) : this(value.toDouble(), unit)
-}
+typealias UndefinedScientificValue<Quantity, Unit> = ScientificValue<PhysicalQuantity.Undefined<Quantity>, Unit>
 
 @JvmName("metricAndImperialValueAsUndefined")
 fun <
@@ -57,7 +50,7 @@ fun <
                                                           Unit : MeasurementUsage.UsedInUKImperial,
                                                           Unit : MeasurementUsage.UsedInUSCustomary =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.MetricAndImperial<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }
 
 @JvmName("metricValueAsUndefined")
@@ -79,7 +72,7 @@ fun <
                                                           Unit : DefinedScientificUnit<Quantity>,
                                                           Unit : MeasurementUsage.UsedInMetric =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.Metric<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }
 
 @JvmName("imperialValueAsUndefined")
@@ -104,7 +97,7 @@ fun <
                                                           Unit : MeasurementUsage.UsedInUKImperial,
                                                           Unit : MeasurementUsage.UsedInUSCustomary =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.Imperial<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }
 
 @JvmName("ukImperialValueAsUndefined")
@@ -126,7 +119,7 @@ fun <
                                                           Unit : DefinedScientificUnit<Quantity>,
                                                           Unit : MeasurementUsage.UsedInUKImperial =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.UKImperial<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }
 
 @JvmName("usCustomaryValueAsUndefined")
@@ -148,7 +141,7 @@ fun <
                                                           Unit : DefinedScientificUnit<Quantity>,
                                                           Unit : MeasurementUsage.UsedInUSCustomary =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.USCustomary<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }
 
 @JvmName("metricAndUKImperialValueAsUndefined")
@@ -173,7 +166,7 @@ fun <
                                                           Unit : MeasurementUsage.UsedInMetric,
                                                           Unit : MeasurementUsage.UsedInUKImperial =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.MetricAndUKImperial<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }
 
 @JvmName("metricAndUSCustomaryValueAsUndefined")
@@ -198,5 +191,5 @@ fun <
                                                           Unit : MeasurementUsage.UsedInMetric,
                                                           Unit : MeasurementUsage.UsedInUSCustomary =
     asUndefined { value: Decimal, unit: WrappedUndefinedExtendedUnit.MetricAndUSCustomary<Quantity, Unit> ->
-        DefaultUndefinedScientificValue(value, unit)
+        DefaultScientificValue(value, unit)
     }

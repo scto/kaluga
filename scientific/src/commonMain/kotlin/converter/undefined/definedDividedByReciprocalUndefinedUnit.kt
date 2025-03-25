@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
@@ -131,7 +131,7 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDefinedDividedByMetricReciprocalUndefinedUnit")
@@ -176,7 +176,7 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDefinedDividedByImperialReciprocalUndefinedUnit")
@@ -224,7 +224,7 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDefinedDividedByUKImperialReciprocalUndefinedUnit")
@@ -269,7 +269,7 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDefinedDividedByUSCustomaryReciprocalUndefinedUnit")
@@ -314,7 +314,7 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDefinedDividedByMetricAndUKImperialReciprocalUndefinedUnit")
@@ -362,7 +362,7 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDefinedDividedByMetricAndUSCustomaryReciprocalUndefinedUnit")
@@ -410,5 +410,5 @@ DenominatorUnit,
 				DenominatorReciprocalUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

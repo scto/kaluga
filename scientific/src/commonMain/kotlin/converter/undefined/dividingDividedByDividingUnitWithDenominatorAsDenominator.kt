@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -157,7 +157,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDividingDividedByMetricDividingUnitWithDenominatorAsDenominator")
@@ -220,7 +220,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDividingDividedByImperialDividingUnitWithDenominatorAsDenominator")
@@ -289,7 +289,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDividingDividedByUKImperialDividingUnitWithDenominatorAsDenominator")
@@ -352,7 +352,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDividingDividedByUSCustomaryDividingUnitWithDenominatorAsDenominator")
@@ -415,7 +415,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDividingDividedByMetricAndUKImperialDividingUnitWithDenominatorAsDenominator")
@@ -484,7 +484,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDividingDividedByMetricAndUSCustomaryDividingUnitWithDenominatorAsDenominator")
@@ -553,5 +553,5 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

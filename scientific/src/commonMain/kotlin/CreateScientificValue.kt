@@ -21,7 +21,6 @@ import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
 
 /**
  * Creates a [DefaultScientificValue] of this number using a given [AbstractScientificUnit]
@@ -82,22 +81,3 @@ operator fun <
     unit: Unit,
     factory: (Decimal, Unit) -> Value,
 ) = factory(this, unit)
-
-operator fun <
-    Quantity : UndefinedQuantityType,
-    Unit : UndefinedScientificUnit<Quantity>,
-    > Number.invoke(unit: Unit) = this.toDecimal()(unit)
-
-operator fun <
-    Quantity : UndefinedQuantityType,
-    Unit : UndefinedScientificUnit<Quantity>,
-    Value : UndefinedScientificValue<Quantity, Unit>,
-    > Number.invoke(
-    unit: Unit,
-    factory: (Decimal, Unit) -> Value,
-) = this.toDecimal()(unit, factory)
-
-operator fun <
-    Quantity : UndefinedQuantityType,
-    Unit : UndefinedScientificUnit<Quantity>,
-    > Decimal.invoke(unit: Unit) = this(unit, ::DefaultUndefinedScientificValue)

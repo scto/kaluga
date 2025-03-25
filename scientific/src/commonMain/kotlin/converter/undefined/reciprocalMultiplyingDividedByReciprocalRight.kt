@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -159,7 +159,7 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricReciprocalMultiplyingDividedByMetricReciprocalRight")
@@ -224,7 +224,7 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialReciprocalMultiplyingDividedByImperialReciprocalRight")
@@ -295,7 +295,7 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialReciprocalMultiplyingDividedByUKImperialReciprocalRight")
@@ -360,7 +360,7 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryReciprocalMultiplyingDividedByUSCustomaryReciprocalRight")
@@ -425,7 +425,7 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialReciprocalMultiplyingDividedByMetricAndUKImperialReciprocalRight")
@@ -496,7 +496,7 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryReciprocalMultiplyingDividedByMetricAndUSCustomaryReciprocalRight")
@@ -567,5 +567,5 @@ DenominatorUnit,
 							NumeratorReciprocalLeftUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

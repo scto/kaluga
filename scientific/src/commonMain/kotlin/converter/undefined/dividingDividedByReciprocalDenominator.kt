@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -123,7 +123,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDividingDividedByMetricReciprocalDenominator")
@@ -171,7 +171,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDividingDividedByImperialReciprocalDenominator")
@@ -224,7 +224,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDividingDividedByUKImperialReciprocalDenominator")
@@ -272,7 +272,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDividingDividedByUSCustomaryReciprocalDenominator")
@@ -320,7 +320,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDividingDividedByMetricAndUKImperialReciprocalDenominator")
@@ -373,7 +373,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDividingDividedByMetricAndUSCustomaryReciprocalDenominator")
@@ -426,7 +426,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("genericDividingDividedByGenericReciprocalDenominator")
@@ -464,5 +464,5 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorNumeratorUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

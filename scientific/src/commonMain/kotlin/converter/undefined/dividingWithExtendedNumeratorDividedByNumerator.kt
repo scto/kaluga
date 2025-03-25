@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
@@ -137,7 +137,7 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDividingWithExtendedNumeratorDividedByMetricNumerator")
@@ -191,7 +191,7 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDividingWithExtendedNumeratorDividedByImperialNumerator")
@@ -249,7 +249,7 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDividingWithExtendedNumeratorDividedByUKImperialNumerator")
@@ -303,7 +303,7 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDividingWithExtendedNumeratorDividedByUSCustomaryNumerator")
@@ -357,7 +357,7 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDividingWithExtendedNumeratorDividedByMetricAndUKImperialNumerator")
@@ -415,7 +415,7 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDividingWithExtendedNumeratorDividedByMetricAndUSCustomaryNumerator")
@@ -473,5 +473,5 @@ NumeratorUnit,
 							NumeratorDenominatorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
@@ -91,7 +91,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricDimensionlessDividedByMetricReciprocalUndefinedUnit")
@@ -121,7 +121,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialDimensionlessDividedByImperialReciprocalUndefinedUnit")
@@ -154,7 +154,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialDimensionlessDividedByUKImperialReciprocalUndefinedUnit")
@@ -184,7 +184,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryDimensionlessDividedByUSCustomaryReciprocalUndefinedUnit")
@@ -214,7 +214,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialDimensionlessDividedByMetricAndUKImperialReciprocalUndefinedUnit")
@@ -247,7 +247,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryDimensionlessDividedByMetricAndUSCustomaryReciprocalUndefinedUnit")
@@ -280,7 +280,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("genericDimensionlessDividedByGenericReciprocalUndefinedUnit")
@@ -304,5 +304,5 @@ DenominatorUnit,
 		value: Decimal,
 		unit: DenominatorReciprocalUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -179,7 +179,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricReciprocalDividedByMetricDividingUnitWithSquaredDenominatorWithSelfAsRoot")
@@ -252,7 +252,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialReciprocalDividedByImperialDividingUnitWithSquaredDenominatorWithSelfAsRoot")
@@ -332,7 +332,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialReciprocalDividedByUKImperialDividingUnitWithSquaredDenominatorWithSelfAsRoot")
@@ -405,7 +405,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryReciprocalDividedByUSCustomaryDividingUnitWithSquaredDenominatorWithSelfAsRoot")
@@ -478,7 +478,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialReciprocalDividedByMetricAndUKImperialDividingUnitWithSquaredDenominatorWithSelfAsRoot")
@@ -558,7 +558,7 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryReciprocalDividedByMetricAndUSCustomaryDividingUnitWithSquaredDenominatorWithSelfAsRoot")
@@ -638,5 +638,5 @@ DenominatorUnit,
 				DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

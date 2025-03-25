@@ -22,7 +22,6 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
-import com.splendo.kaluga.scientific.unit.UndefinedScientificUnit
 
 internal fun <
     TargetQuantity : PhysicalQuantity,
@@ -88,32 +87,6 @@ infix operator fun <
     Unit : AbstractScientificUnit<Quantity>,
     > Decimal.times(value: ScientificValue<Quantity, Unit>) =
     times(value, ::DefaultScientificValue)
-
-/**
- * Creates a [DefaultUndefinedScientificValue] equal to the [UndefinedScientificValue.value] multiplied by [value]
- * @param Quantity the type of [UndefinedQuantityType] of the [UndefinedScientificValue]
- * @param Unit the type of [UndefinedScientificUnit] of the [UndefinedScientificValue]
- * @param value the [Decimal] to multiply the value with
- * @return the [DefaultUndefinedScientificValue] where the [UndefinedScientificValue.value] is multiplied by [value]
- */
-infix operator fun <
-    Quantity : UndefinedQuantityType,
-    Unit : UndefinedScientificUnit<Quantity>,
-    > UndefinedScientificValue<Quantity, Unit>.times(value: Decimal) =
-    times(value, ::DefaultUndefinedScientificValue)
-
-/**
- * Creates a [DefaultUndefinedScientificValue] equal to a [UndefinedScientificValue.value] multiplied by this [Decimal]
- * @param Quantity the type of [UndefinedQuantityType] of the [UndefinedScientificValue]
- * @param Unit the type of [UndefinedScientificUnit] of the [UndefinedScientificValue]
- * @param value the [UndefinedScientificValue] to multiply the value with
- * @return a [DefaultUndefinedScientificValue] where the [UndefinedScientificValue.value] of [value] is multiplied by this number
- */
-infix operator fun <
-    Quantity : UndefinedQuantityType,
-    Unit : UndefinedScientificUnit<Quantity>,
-    > Decimal.times(value: UndefinedScientificValue<Quantity, Unit>) =
-    times(value, ::DefaultUndefinedScientificValue)
 
 /**
  * Creates a [Value] equal to the [ScientificValue.value] multiplied by [value]

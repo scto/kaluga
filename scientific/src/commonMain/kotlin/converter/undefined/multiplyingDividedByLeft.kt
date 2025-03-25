@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -106,7 +106,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricMultiplyingDividedByMetricLeft")
@@ -146,7 +146,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialMultiplyingDividedByImperialLeft")
@@ -190,7 +190,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialMultiplyingDividedByUKImperialLeft")
@@ -230,7 +230,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryMultiplyingDividedByUSCustomaryLeft")
@@ -270,7 +270,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialMultiplyingDividedByMetricAndUKImperialLeft")
@@ -314,7 +314,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryMultiplyingDividedByMetricAndUSCustomaryLeft")
@@ -358,7 +358,7 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("genericMultiplyingDividedByGenericLeft")
@@ -390,5 +390,5 @@ DenominatorUnit,
 		value: Decimal,
 		unit: NumeratorRightUnit,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}

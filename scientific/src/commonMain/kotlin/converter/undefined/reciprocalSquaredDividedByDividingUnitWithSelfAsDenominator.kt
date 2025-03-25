@@ -19,7 +19,7 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultUndefinedScientificValue
+import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
@@ -206,7 +206,7 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricReciprocalSquaredDividedByMetricDividingUnitWithSelfAsDenominator")
@@ -294,7 +294,7 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("imperialReciprocalSquaredDividedByImperialDividingUnitWithSelfAsDenominator")
@@ -391,7 +391,7 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("ukImperialReciprocalSquaredDividedByUKImperialDividingUnitWithSelfAsDenominator")
@@ -479,7 +479,7 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("usCustomaryReciprocalSquaredDividedByUSCustomaryDividingUnitWithSelfAsDenominator")
@@ -567,7 +567,7 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUKImperialReciprocalSquaredDividedByMetricAndUKImperialDividingUnitWithSelfAsDenominator")
@@ -664,7 +664,7 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
 
 @JvmName("metricAndUSCustomaryReciprocalSquaredDividedByMetricAndUSCustomaryDividingUnitWithSelfAsDenominator")
@@ -761,5 +761,5 @@ DenominatorUnit,
 							DenominatorNumeratorUnit,
 				>,
 		->
-		DefaultUndefinedScientificValue(value, unit)
+		DefaultScientificValue(value, unit)
 	}
