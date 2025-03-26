@@ -53,7 +53,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedByUndefinedUnit(
 	right: UndefinedScientificValue<
 	DenominatorQuantity,
 DenominatorUnit,

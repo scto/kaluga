@@ -50,7 +50,7 @@ fun <
 	> UndefinedScientificValue<
 	LeftAndRightReciprocalQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedBySelf(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		LeftAndRightReciprocalQuantity,

@@ -50,7 +50,7 @@ DenominatorDenominatorUnit,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorNumeratorQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedByDividingUnitWithSelfAsNumerator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		NumeratorAndDenominatorNumeratorQuantity,

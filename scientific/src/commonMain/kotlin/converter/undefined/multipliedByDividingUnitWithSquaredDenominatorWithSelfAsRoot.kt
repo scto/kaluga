@@ -71,7 +71,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	LeftAndRightDenominatorLeftAndRightQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByDividingUnitWithSquaredDenominatorWithSelfAsRoot(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		RightNumeratorQuantity,

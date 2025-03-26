@@ -58,7 +58,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	LeftQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByReciprocalUndefinedUnit(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		RightReciprocalQuantity,

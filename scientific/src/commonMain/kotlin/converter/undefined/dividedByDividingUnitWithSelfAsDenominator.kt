@@ -74,7 +74,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorDenominatorQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedByDividingUnitWithSelfAsDenominator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		DenominatorNumeratorQuantity,

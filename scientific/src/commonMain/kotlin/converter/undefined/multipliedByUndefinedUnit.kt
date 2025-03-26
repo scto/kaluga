@@ -53,7 +53,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	LeftQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByUndefinedUnit(
 	right: UndefinedScientificValue<
 	RightQuantity,
 RightUnit,

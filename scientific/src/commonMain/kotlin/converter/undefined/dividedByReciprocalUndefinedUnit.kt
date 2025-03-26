@@ -58,7 +58,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedByReciprocalUndefinedUnit(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		DenominatorReciprocalQuantity,

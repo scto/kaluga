@@ -50,7 +50,7 @@ RightNumeratorUnit,
 	> UndefinedScientificValue<
 	LeftAndRightDenominatorQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByDividingUnitWithSelfAsDenominator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		RightNumeratorQuantity,
