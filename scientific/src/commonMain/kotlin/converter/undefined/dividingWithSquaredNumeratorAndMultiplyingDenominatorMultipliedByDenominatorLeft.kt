@@ -66,18 +66,12 @@ fun <
 		LeftDenominatorUnit,
 		>,
 	RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightQuantity>,
-	TargetNumeratorUnit : UndefinedMultipliedUnit<
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorLeftUnit,
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorLeftUnit,
-		>,
 	TargetUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Multiplying<
 			LeftNumeratorLeftAndRightQuantity,
 			LeftNumeratorLeftAndRightQuantity,
 			>,
-		TargetNumeratorUnit,
+		LeftNumeratorUnit,
 		LeftDenominatorRightQuantity,
 		LeftDenominatorRightUnit,
 		>,
@@ -108,8 +102,8 @@ LeftUnit,
 	LeftDenominatorLeftAndRightQuantity,
 RightUnit,
 	>,
-	targetNumeratorUnitPerLeftDenominatorRightUnit: TargetNumeratorUnit.(LeftDenominatorRightUnit) -> TargetUnit,
+	leftNumeratorUnitPerLeftDenominatorRightUnit: LeftNumeratorUnit.(LeftDenominatorRightUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numerator.targetNumeratorUnitPerLeftDenominatorRightUnit(
+) = unit.numerator.leftNumeratorUnitPerLeftDenominatorRightUnit(
 	unit.denominator.right,
 ).byMultiplying(this, right, factory)

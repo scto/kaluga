@@ -71,18 +71,12 @@ fun <
 		NumeratorDenominatorLeftAndRightAndDenominatorDenominatorQuantity,
 		DenominatorDenominatorUnit,
 		>,
-	TargetUnit : UndefinedDividedUnit<
-		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-		NumeratorNumeratorLeftUnit,
-		NumeratorDenominatorLeftAndRightAndDenominatorDenominatorQuantity,
-		NumeratorDenominatorLeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
+	DenominatorValue : UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
 		NumeratorDenominatorLeftAndRightAndDenominatorDenominatorQuantity,
 		>,
-TargetUnit,
+DenominatorUnit,
 	>,
 	> UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
@@ -104,5 +98,5 @@ NumeratorUnit,
 		>,
 DenominatorUnit,
 	>,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+	factory: (Decimal, DenominatorUnit) -> DenominatorValue,
 ) = right.unit.byDividing(this, right, factory)

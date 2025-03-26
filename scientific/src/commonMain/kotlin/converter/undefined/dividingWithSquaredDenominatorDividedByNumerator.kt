@@ -56,18 +56,12 @@ fun <
 		NumeratorDenominatorUnit,
 		>,
 	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
-	TargetReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorDenominatorLeftAndRightQuantity,
-		NumeratorDenominatorLeftUnit,
-		NumeratorDenominatorLeftAndRightQuantity,
-		NumeratorDenominatorLeftUnit,
-		>,
 	TargetUnit : UndefinedReciprocalUnit<
 		UndefinedQuantityType.Multiplying<
 			NumeratorDenominatorLeftAndRightQuantity,
 			NumeratorDenominatorLeftAndRightQuantity,
 			>,
-		TargetReciprocalUnit,
+		NumeratorDenominatorUnit,
 		>,
 	TargetValue : UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
@@ -92,6 +86,6 @@ NumeratorUnit,
 	NumeratorNumeratorAndDenominatorQuantity,
 DenominatorUnit,
 	>,
-	reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
+	reciprocalTargetUnit: NumeratorDenominatorUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.denominator.reciprocalTargetUnit().byDividing(this, right, factory)

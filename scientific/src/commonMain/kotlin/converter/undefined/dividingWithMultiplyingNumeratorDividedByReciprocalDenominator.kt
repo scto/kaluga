@@ -60,18 +60,12 @@ fun <
 		NumeratorDenominatorAndDenominatorReciprocalQuantity,
 		DenominatorReciprocalUnit,
 		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		NumeratorNumeratorLeftQuantity,
-		NumeratorNumeratorLeftUnit,
-		NumeratorNumeratorRightQuantity,
-		NumeratorNumeratorRightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
+	NumeratorNumeratorValue : UndefinedScientificValue<
 	UndefinedQuantityType.Multiplying<
 		NumeratorNumeratorLeftQuantity,
 		NumeratorNumeratorRightQuantity,
 		>,
-TargetUnit,
+NumeratorNumeratorUnit,
 	>,
 	> UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
@@ -89,5 +83,5 @@ NumeratorUnit,
 		>,
 DenominatorUnit,
 	>,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+	factory: (Decimal, NumeratorNumeratorUnit) -> NumeratorNumeratorValue,
 ) = unit.numerator.byDividing(this, right, factory)

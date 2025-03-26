@@ -76,12 +76,6 @@ fun <
 		RightDenominatorQuantity,
 		RightDenominatorUnit,
 		>,
-	TargetNumeratorUnit : UndefinedMultipliedUnit<
-		LeftNumeratorLeftQuantity,
-		LeftNumeratorLeftUnit,
-		LeftNumeratorRightQuantity,
-		LeftNumeratorRightUnit,
-		>,
 	TargetDenominatorUnit : UndefinedMultipliedUnit<
 		LeftDenominatorRightQuantity,
 		LeftDenominatorRightUnit,
@@ -93,7 +87,7 @@ fun <
 			LeftNumeratorLeftQuantity,
 			LeftNumeratorRightQuantity,
 			>,
-		TargetNumeratorUnit,
+		LeftNumeratorUnit,
 		UndefinedQuantityType.Multiplying<
 			LeftDenominatorRightQuantity,
 			RightDenominatorQuantity,
@@ -134,9 +128,9 @@ LeftUnit,
 RightUnit,
 	>,
 	leftDenominatorRightUnitXRightDenominatorUnit: LeftDenominatorRightUnit.(RightDenominatorUnit) -> TargetDenominatorUnit,
-	targetNumeratorUnitPerTargetDenominatorUnit: TargetNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
+	leftNumeratorUnitPerTargetDenominatorUnit: LeftNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numerator.targetNumeratorUnitPerTargetDenominatorUnit(
+) = unit.numerator.leftNumeratorUnitPerTargetDenominatorUnit(
 	unit.denominator.right.leftDenominatorRightUnitXRightDenominatorUnit(
 	right.unit.denominator,
 ),
