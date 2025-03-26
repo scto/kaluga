@@ -20,266 +20,52 @@ package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.DefaultScientificValue
-import com.splendo.kaluga.scientific.PhysicalQuantity
-import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
-import com.splendo.kaluga.scientific.unit.ScientificUnit
-import com.splendo.kaluga.scientific.unit.One
+import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
+import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
+import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
-// A / A -> One
+// A / Inv<A> -> Mul<A, A>
 
 @JvmName("dividedBySelf")
 fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+	NumeratorAndDenominatorReciprocalQuantity : UndefinedQuantityType,
+	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorReciprocalQuantity>,
+	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorReciprocalQuantity>,
+	DenominatorUnit : UndefinedReciprocalUnit<
+		NumeratorAndDenominatorReciprocalQuantity,
+		DenominatorReciprocalUnit,
+		>,
+	TargetUnit : UndefinedMultipliedUnit<
+		NumeratorAndDenominatorReciprocalQuantity,
+		NumeratorUnit,
+		NumeratorAndDenominatorReciprocalQuantity,
+		NumeratorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorAndDenominatorReciprocalQuantity,
+		NumeratorAndDenominatorReciprocalQuantity,
+		>,
+TargetUnit,
+	>,
 	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
+	NumeratorAndDenominatorReciprocalQuantity,
 NumeratorUnit,
 	>.dividedBy(
 	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
+	UndefinedQuantityType.Reciprocal<
+		NumeratorAndDenominatorReciprocalQuantity,
+		>,
 DenominatorUnit,
 	>,
-	getDimensionless: () -> TargetUnit,
+	numeratorUnitXNumeratorUnit: NumeratorUnit.(NumeratorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = getDimensionless().byDividing(this, right, factory)
-
-@JvmName("metricAndImperialDividedByMetricAndImperialSelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.metricAndImperialDividedByMetricAndImperial(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInMetric,
-	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("metricDividedByMetricSelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.metricDividedByMetric(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("imperialDividedByImperialSelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.imperialDividedByImperial(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("ukImperialDividedByUKImperialSelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.ukImperialDividedByUKImperial(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("usCustomaryDividedByUSCustomarySelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.usCustomaryDividedByUSCustomary(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("metricAndUKImperialDividedByMetricAndUKImperialSelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.metricAndUKImperialDividedByMetricAndUKImperial(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInMetric,
-	NumeratorUnit : MeasurementUsage.UsedInUKImperial,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : MeasurementUsage.UsedInUKImperial =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("metricAndUSCustomaryDividedByMetricAndUSCustomarySelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit,
-	DenominatorUnit,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.metricAndUSCustomaryDividedByMetricAndUSCustomary(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) where
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	NumeratorUnit : MeasurementUsage.UsedInMetric,
-	NumeratorUnit : MeasurementUsage.UsedInUSCustomary,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : MeasurementUsage.UsedInMetric,
-	DenominatorUnit : MeasurementUsage.UsedInUSCustomary =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
-
-@JvmName("genericDividedByGenericSelf")
-infix fun <
-	NumeratorAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorQuantity>,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-NumeratorUnit,
-	>.genericDividedByGeneric(
-	right: UndefinedScientificValue<
-	NumeratorAndDenominatorQuantity,
-DenominatorUnit,
-	>,
-) =
-	dividedBy(
-		right,
-		getDimensionless = { One },
-	) {
-		value: Decimal,
-		unit: One,
-		->
-		DefaultScientificValue(value, unit)
-	}
+) = unit.numeratorUnitXNumeratorUnit(
+	unit,
+).byDividing(this, right, factory)

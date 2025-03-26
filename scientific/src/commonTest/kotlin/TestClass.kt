@@ -17,17 +17,16 @@
 
 package com.splendo.kaluga.scientific
 
-import com.splendo.kaluga.scientific.converter.undefined.metricAndImperialDividedByMetricAndImperial
 import com.splendo.kaluga.scientific.unit.Ampere
-import com.splendo.kaluga.scientific.unit.Biot
-import com.splendo.kaluga.scientific.unit.Kilowatt
+import com.splendo.kaluga.scientific.unit.Hertz
+import com.splendo.kaluga.scientific.unit.Joule
 import com.splendo.kaluga.scientific.unit.Watt
-import com.splendo.kaluga.scientific.unit.reciprocal
+import com.splendo.kaluga.scientific.unit.asUndefined
+import com.splendo.kaluga.scientific.unit.per
 import com.splendo.kaluga.scientific.unit.x
 
 fun test() {
-    val left = 1((Watt x Ampere).reciprocal())
-    val right = 2((Biot x Kilowatt).reciprocal())
-    val test = left metricAndImperialDividedByMetricAndImperial right
+    val left = 1(((Watt x Ampere) per (Joule x Hertz)))
+    val right = 2(Ampere.asUndefined())
 
 }
