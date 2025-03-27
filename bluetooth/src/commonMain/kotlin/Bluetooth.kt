@@ -39,6 +39,7 @@ import com.splendo.kaluga.permissions.base.Permissions
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -423,7 +424,7 @@ fun Flow<Device?>.rssi(): Flow<RSSI> = info().map { it.rssi }.distinctUntilChang
  * @return the [Flow] of [MTU] associated with the [Device] in the given [Flow]
  */
 fun Flow<Device?>.mtu() = state().map { state ->
-    if (state is ConnectableDeviceState.Connected) {
+    if (state is ConnectableDeviceState.Connected.MtuHolder) {
         state.mtu
     } else {
         null
@@ -472,11 +473,10 @@ suspend fun Flow<Device?>.updateRssi() {
  * Attempts to request a [MTU] size for the [Device] from a [Flow] of [Device]
  * When this method completes, the devices should have had [ConnectableDeviceState.Connected.requestMtu] called
  * @param mtu the [MTU] size to request
- * @return if `true` the new MTU value has been requested successfully
  */
-suspend fun Flow<Device?>.requestMtu(mtu: MTU): Boolean = state().transformLatest { deviceState ->
+suspend fun Flow<Device?>.requestMtu(mtu: MTU): Deferred<Boolean> = state().transformLatest { deviceState ->
     when (deviceState) {
-        is ConnectableDeviceState.Connected -> {
+        is ConnectableDeviceState.Connected.MtuHolder -> {
             emit(deviceState.requestMtu(mtu))
         }
         else -> {}

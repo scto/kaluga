@@ -21,7 +21,6 @@ import com.splendo.kaluga.base.collections.concurrentMutableListOf
 import com.splendo.kaluga.base.utils.toHexString
 import com.splendo.kaluga.bluetooth.Characteristic
 import com.splendo.kaluga.bluetooth.Descriptor
-import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.RSSI
 import com.splendo.kaluga.bluetooth.Service
 import com.splendo.kaluga.bluetooth.ServiceWrapper
@@ -118,11 +117,6 @@ class MockDeviceConnectionManager(
     val readRssiMock = ::readRssi.mock()
 
     /**
-     * [com.splendo.kaluga.test.base.mock.BaseMethodMock] for [requestMtu]
-     */
-    val requestMtuMock = ::requestMtu.mock()
-
-    /**
      * [com.splendo.kaluga.test.base.mock.BaseMethodMock] for [pair]
      */
     val pairMock = ::pair.mock()
@@ -145,10 +139,6 @@ class MockDeviceConnectionManager(
     init {
         if (setupMocks) {
             getCurrentStateMock.on().doReturn(DeviceConnectionManager.State.DISCONNECTED)
-            requestMtuMock.on().doExecuteSuspended { (mtu) ->
-                handleNewMtu(mtu)
-                true
-            }
 
             performActionMock.on().doExecuteSuspended { (action) ->
                 currentAction = action
@@ -169,8 +159,6 @@ class MockDeviceConnectionManager(
     override fun disconnect(): Unit = disconnectMock.call()
 
     override suspend fun readRssi(): Unit = readRssiMock.call()
-
-    override suspend fun requestMtu(mtu: MTU): Boolean = requestMtuMock.call(mtu)
 
     override suspend fun requestStartPairing(): Unit = pairMock.call()
 
@@ -204,6 +192,8 @@ class MockDeviceConnectionManager(
                     handleUpdatedDescriptor(action.descriptor.uuid, willActionSucceed)
                 }
                 is DeviceAction.Notification -> handleCurrentActionCompleted(willActionSucceed)
+
+                is DeviceAction.RequestMtu -> handleNewMtu(action.mtu, willActionSucceed)
             }
         }
     }

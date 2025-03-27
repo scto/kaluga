@@ -25,6 +25,7 @@ import com.splendo.kaluga.bluetooth.device.ConnectableDeviceState
 import com.splendo.kaluga.bluetooth.device.ConnectionSettings
 import com.splendo.kaluga.bluetooth.device.DeviceAction
 import com.splendo.kaluga.bluetooth.device.NotConnectableDeviceState
+import kotlinx.coroutines.Deferred
 
 sealed class MockDeviceState : KalugaState {
     data object NotConnectable : MockDeviceState(), NotConnectableDeviceState
@@ -46,23 +47,18 @@ sealed class MockDeviceState : KalugaState {
 
         suspend fun readRssi() = mockConnectableDeviceManager.readRssi()
 
-        suspend fun requestMtu(mtu: MTU): Boolean = mockConnectableDeviceManager.requestMtu(mtu)
-
         suspend fun pair() = mockConnectableDeviceManager.pair()
 
         data class NoServices(
             override val reconnectionSettings: ConnectionSettings.ReconnectionSettings,
-            override val mtu: MTU?,
             override val mockConnectableDeviceManager: MockConnectableDeviceManager,
         ) : Connected(),
             ConnectableDeviceState.Connected.NoServices {
 
             override fun startDiscovering() = mockConnectableDeviceManager.startDiscovering()
 
-            override val discoverServices: suspend () -> ConnectableDeviceState.Connected.Discovering = { Discovering(reconnectionSettings, mtu, mockConnectableDeviceManager) }
-            override fun didUpdateMtu(mtu: MTU) = suspend {
-                copy(mtu = mtu)
-            }
+            override val discoverServices: suspend () -> ConnectableDeviceState.Connected.Discovering = { Discovering(reconnectionSettings, mockConnectableDeviceManager) }
+
             override fun updateReconnectionSettings(reconnectionSettings: ConnectionSettings.ReconnectionSettings) = suspend {
                 copy(reconnectionSettings = reconnectionSettings)
             }
@@ -74,16 +70,12 @@ sealed class MockDeviceState : KalugaState {
 
         data class Discovering(
             override val reconnectionSettings: ConnectionSettings.ReconnectionSettings,
-            override val mtu: MTU?,
             override val mockConnectableDeviceManager: MockConnectableDeviceManager,
         ) : Connected(),
             ConnectableDeviceState.Connected.Discovering,
             HandleAfterOldStateIsRemoved<MockDeviceState> {
             override fun didDiscoverServices(services: List<Service>): suspend () -> ConnectableDeviceState.Connected.Idle = {
-                Idle(reconnectionSettings, mtu, services, mockConnectableDeviceManager)
-            }
-            override fun didUpdateMtu(mtu: MTU) = suspend {
-                copy(mtu = mtu)
+                Idle(reconnectionSettings, null, services, mockConnectableDeviceManager)
             }
             override fun updateReconnectionSettings(reconnectionSettings: ConnectionSettings.ReconnectionSettings) = suspend {
                 copy(reconnectionSettings = reconnectionSettings)
@@ -108,15 +100,16 @@ sealed class MockDeviceState : KalugaState {
             override fun handleAction(action: DeviceAction): suspend () -> ConnectableDeviceState.Connected.HandlingAction = {
                 HandlingAction(reconnectionSettings, mtu, services, action, emptyList(), mockConnectableDeviceManager)
             }
-            override fun didUpdateMtu(mtu: MTU) = suspend {
-                copy(mtu = mtu)
-            }
             override fun updateReconnectionSettings(reconnectionSettings: ConnectionSettings.ReconnectionSettings) = suspend {
                 copy(reconnectionSettings = reconnectionSettings)
             }
 
             override val reconnect: suspend () -> ConnectableDeviceState.Connecting = { Connecting(reconnectionSettings, mockConnectableDeviceManager) }
-
+            override suspend fun requestMtu(mtu: MTU): Deferred<Boolean> {
+                val action = DeviceAction.RequestMtu(mtu)
+                mockConnectableDeviceManager.performAction(action)
+                return action.completedSuccessfully
+            }
             override val asDeviceState: ConnectableDeviceState = this
         }
         data class HandlingAction(
@@ -134,19 +127,27 @@ sealed class MockDeviceState : KalugaState {
             }
 
             override val actionCompleted: suspend () -> ConnectableDeviceState.Connected.DiscoveredServices = {
+                val newMtu = if (action is DeviceAction.RequestMtu) {
+                    action.mtu
+                } else {
+                    mtu
+                }
                 nextActions.firstOrNull()?.let {
-                    HandlingAction(reconnectionSettings, mtu, services, it, nextActions.drop(1), mockConnectableDeviceManager)
-                } ?: Idle(reconnectionSettings, mtu, services, mockConnectableDeviceManager)
+                    HandlingAction(reconnectionSettings, newMtu, services, it, nextActions.drop(1), mockConnectableDeviceManager)
+                } ?: Idle(reconnectionSettings, newMtu, services, mockConnectableDeviceManager)
             }
 
-            override fun didUpdateMtu(mtu: MTU) = suspend {
-                copy(mtu = mtu)
-            }
             override fun updateReconnectionSettings(reconnectionSettings: ConnectionSettings.ReconnectionSettings) = suspend {
                 copy(reconnectionSettings = reconnectionSettings)
             }
 
             override val reconnect: suspend () -> ConnectableDeviceState.Connecting = { Connecting(reconnectionSettings, mockConnectableDeviceManager) }
+
+            override suspend fun requestMtu(mtu: MTU): Deferred<Boolean> {
+                val action = DeviceAction.RequestMtu(mtu)
+                mockConnectableDeviceManager.performAction(action)
+                return action.completedSuccessfully
+            }
 
             override val asDeviceState: ConnectableDeviceState = this
         }
@@ -159,7 +160,7 @@ sealed class MockDeviceState : KalugaState {
 
         override val cancelConnection: suspend () -> Disconnecting = { Disconnecting(mockConnectableDeviceManager) }
 
-        override val didConnect: suspend () -> ConnectableDeviceState.Connected.NoServices = { Connected.NoServices(reconnectionSettings, null, mockConnectableDeviceManager) }
+        override val didConnect: suspend () -> ConnectableDeviceState.Connected.NoServices = { Connected.NoServices(reconnectionSettings, mockConnectableDeviceManager) }
 
         override fun handleCancel() = mockConnectableDeviceManager.handleCancelConnecting()
 

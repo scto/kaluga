@@ -159,15 +159,13 @@ internal actual class DefaultDeviceConnectionManager(
         peripheral.readRSSI()
     }
 
-    actual override suspend fun requestMtu(mtu: MTU): Boolean {
+    private fun requestMtu(mtu: MTU) {
         val max = peripheral.maximumWriteValueLengthForType(CBCharacteristicWriteWithResponse)
         debug(TAG) {
             "maximumWriteValueLengthForType(CBCharacteristicWriteWithResponse) = $max"
         }
-        // Update MTU to current known value
-        handleNewMtu(max.toInt())
-        // Return false, because we can't request MTU change from iOS
-        return false
+        // Update MTU to current known value, set succeeded to false, because we can't request MTU change from iOS
+        handleNewMtu(max.toInt(), false)
     }
 
     actual override suspend fun didStartPerformingAction(action: DeviceAction) {
@@ -190,6 +188,9 @@ internal actual class DefaultDeviceConnectionManager(
                 val uuid = action.characteristic.uuid.uuidString
                 notifyingCharacteristics.remove(uuid)
                 action.characteristic.wrapper.setNotificationValue(false, peripheral)
+            }
+            is DeviceAction.RequestMtu -> {
+                requestMtu(action.mtu)
             }
         }
     }

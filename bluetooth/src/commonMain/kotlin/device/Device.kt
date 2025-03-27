@@ -204,7 +204,6 @@ class DeviceImpl(
                     is DeviceConnectionManager.Event.CompletedAction,
                     is DeviceConnectionManager.Event.Disconnecting,
                     is DeviceConnectionManager.Event.Disconnected,
-                    is DeviceConnectionManager.Event.MtuUpdated,
                     -> deviceStateRepo.value
                 }
                 repo?.takeAndChangeState { state ->
@@ -255,7 +254,6 @@ class DeviceImpl(
         is DeviceConnectionManager.Event.DiscoveredServices -> stateTransition(state)
         is DeviceConnectionManager.Event.AddAction -> stateTransition(state)
         is DeviceConnectionManager.Event.CompletedAction -> stateTransition(state)
-        is DeviceConnectionManager.Event.MtuUpdated -> stateTransition(state)
     }
 
     private fun DeviceConnectionManager.Event.Connecting.stateTransition(state: ConnectableDeviceState) =
@@ -326,12 +324,6 @@ class DeviceImpl(
         } else {
             state.remain()
         }
-
-    private fun DeviceConnectionManager.Event.MtuUpdated.stateTransition(state: ConnectableDeviceState) = if (state is ConnectableDeviceState.Connected) {
-        state.didUpdateMtu(newMtu)
-    } else {
-        state.remain()
-    }
 }
 
 /**
@@ -360,7 +352,6 @@ class ConnectableDeviceStateImplRepo(
         when (connectionManager.getCurrentState()) {
             DeviceConnectionManager.State.CONNECTED -> ConnectableDeviceStateImpl.Connected.NoServices(
                 defaultReconnectionSettings,
-                null,
                 connectionManager,
             )
             DeviceConnectionManager.State.CONNECTING -> ConnectableDeviceStateImpl.Connecting(

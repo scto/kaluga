@@ -44,7 +44,6 @@ import com.splendo.kaluga.base.utils.getCompletedOrNull
 import com.splendo.kaluga.bluetooth.Characteristic
 import com.splendo.kaluga.bluetooth.DefaultGattServiceWrapper
 import com.splendo.kaluga.bluetooth.Descriptor
-import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.UUID
 import com.splendo.kaluga.bluetooth.containsAnyOf
 import com.splendo.kaluga.bluetooth.extensions.printableString
@@ -91,9 +90,7 @@ internal actual class DefaultDeviceConnectionManager(
 
         override fun onMtuChanged(gatt: BluetoothGatt?, mtu: Int, status: Int) {
             log { "onMtuChanged mtu $mtu status ${status.gattStatusAsString}" }
-            if (status == GATT_SUCCESS) {
-                handleNewMtu(mtu)
-            }
+            handleNewMtu(mtu, status == GATT_SUCCESS)
         }
 
         @Suppress("OVERRIDE_DEPRECATION")
@@ -237,8 +234,6 @@ internal actual class DefaultDeviceConnectionManager(
         gatt.await().readRemoteRssi()
     }
 
-    actual override suspend fun requestMtu(mtu: MTU): Boolean = gatt.await().requestMtu(mtu)
-
     actual override suspend fun didStartPerformingAction(action: DeviceAction) {
         currentAction = action
         val readyGatt = gatt.await()
@@ -249,6 +244,7 @@ internal actual class DefaultDeviceConnectionManager(
             is DeviceAction.Write.Descriptor -> readyGatt.writeDescriptor(action.descriptor, action.newValue)
             is DeviceAction.Notification.Enable -> readyGatt.setNotification(action.characteristic, true)
             is DeviceAction.Notification.Disable -> readyGatt.setNotification(action.characteristic, false)
+            is DeviceAction.RequestMtu -> readyGatt.requestMtu(action.mtu)
         }
 
         // Action Failed
