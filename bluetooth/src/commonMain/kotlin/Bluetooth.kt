@@ -371,20 +371,18 @@ fun Flow<Device?>.services(): Flow<List<Service>> = state().transformLatest { de
  * @param reconnectionSettings the [ConnectionSettings.ReconnectionSettings] to use if the [Device] disconnects after connecting. If `null` the default will be used.
  * @return `true` if connection was successful
  */
-suspend fun Flow<Device?>.connect(reconnectionSettings: ConnectionSettings.ReconnectionSettings? = null) {
-    transformLatest { device ->
-        device?.let {
-            try {
-                emit(it.connect(reconnectionSettings))
-            } catch (e: CancellationException) {
-                withContext(NonCancellable) {
-                    it.disconnect()
-                }
-                throw e
+suspend fun Flow<Device?>.connect(reconnectionSettings: ConnectionSettings.ReconnectionSettings? = null): Boolean = transformLatest { device ->
+    device?.let {
+        try {
+            emit(it.connect(reconnectionSettings))
+        } catch (e: CancellationException) {
+            withContext(NonCancellable) {
+                it.disconnect()
             }
+            throw e
         }
-    }.first()
-}
+    }
+}.first()
 
 /**
  * Attempts to disconnect to the [Device] from a [Flow] of [Device]
