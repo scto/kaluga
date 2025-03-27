@@ -17,10 +17,7 @@
 
 package com.splendo.kaluga.scientific.unit
 
-import com.splendo.kaluga.scientific.converter.temperature.div
-import com.splendo.kaluga.scientific.invoke
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class ThermalResistanceUnitTest {
 
@@ -29,15 +26,5 @@ class ThermalResistanceUnitTest {
         assertScientificConversion(1.0, (Celsius per Megawatt), 0.00074, Kelvin per MetricHorsepower, 5)
         assertScientificConversion(1.0, (Kelvin per MetricHorsepower), 0.000055, Fahrenheit per (FootPoundForce per Minute), 6)
         assertScientificConversion(1.0, (Celsius per Watt), 31.65, Rankine per (BritishThermalUnit per Minute), 2)
-    }
-
-    @Test
-    fun thermalResistanceFromTemperatureAndPowerTest() {
-        assertEquals(1(Kelvin per Watt), 2(Kelvin) / 2(Watt))
-        assertEquals(1(Fahrenheit per Watt), 2(Fahrenheit) / 2(Watt))
-        assertEquals(1(Rankine per Watt), 2(Rankine) / 2(Watt))
-        assertEquals(1(Kelvin per Horsepower), 2(Kelvin) / 2(Horsepower))
-        assertEquals(1(Fahrenheit per Horsepower), 2(Fahrenheit) / 2(Horsepower))
-        assertEquals(1(Rankine per Horsepower), 2(Rankine) / 2(Horsepower))
     }
 }

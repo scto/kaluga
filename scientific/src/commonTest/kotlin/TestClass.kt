@@ -28,5 +28,4 @@ import com.splendo.kaluga.scientific.unit.x
 fun test() {
     val left = 1(((Watt x Ampere) per (Joule x Hertz)))
     val right = 2(Ampere.asUndefined())
-
 }

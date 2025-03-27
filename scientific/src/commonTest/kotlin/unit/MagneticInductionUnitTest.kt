@@ -17,10 +17,7 @@
 
 package com.splendo.kaluga.scientific.unit
 
-import com.splendo.kaluga.scientific.converter.magneticFlux.div
-import com.splendo.kaluga.scientific.invoke
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class MagneticInductionUnitTest {
 
@@ -37,11 +34,5 @@ class MagneticInductionUnitTest {
         assertScientificConversion(1, Tesla, 1e-6, Megatesla)
         assertScientificConversion(1, Tesla, 1e-9, Gigatesla)
         assertScientificConversion(1, Tesla, 10000.0, Gauss)
-    }
-
-    @Test
-    fun inductionFromFluxAndAreaTest() {
-        assertEquals(1(Gauss), 2(Maxwell) / 2(SquareCentimeter))
-        assertEquals(1(Tesla), 2(Weber) / 2(SquareMeter))
     }
 }

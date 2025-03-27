@@ -23,7 +23,7 @@ import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.unit.AbstractScientificUnit
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 
-internal fun <
+fun <
     TargetQuantity : PhysicalQuantity,
     TargetUnit : ScientificUnit<TargetQuantity>,
     Value : ScientificValue<TargetQuantity, TargetUnit>,

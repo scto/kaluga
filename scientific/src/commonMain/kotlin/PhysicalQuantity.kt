@@ -430,6 +430,7 @@ internal fun SerializersModuleBuilder.setupPhysicalQuantity() {
     polymorphic(PhysicalQuantity.DefinedPhysicalQuantityWithDimension::class) {
         registerDefinedPhysicalQuantityWithDimensionClasses()
     }
+    @Suppress("UNCHECKED_CAST")
     polymorphicDefaultSerializer(PhysicalQuantity.Undefined::class) {
         PhysicalQuantity.Undefined.serializer(UndefinedQuantityType.serializer()) as KSerializer<PhysicalQuantity.Undefined<*>>
     }

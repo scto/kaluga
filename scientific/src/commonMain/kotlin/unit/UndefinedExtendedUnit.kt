@@ -393,6 +393,7 @@ fun <
         this,
     )
 
+@Suppress("UNCHECKED_CAST")
 internal fun SerializersModuleBuilder.setupForUndefinedExtendedUnit() {
     polymorphic(WrappedUndefinedExtendedUnit::class) {
         registerWrappedUndefinedUnitClasses()
@@ -519,6 +520,7 @@ internal fun PolymorphicModuleBuilder<UndefinedExtendedUnit<*>>.registerUndefine
     registerWrappedUndefinedUnitClasses()
 }
 
+@Suppress("UNCHECKED_CAST")
 internal fun PolymorphicModuleBuilder<CustomUndefinedExtendedUnit<*>>.registerCustomUndefinedExtendedUnitClasses() {
     val definedQuantitySerializer = PhysicalQuantity.DefinedPhysicalQuantityWithDimension.serializer()
 

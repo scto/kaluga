@@ -199,6 +199,7 @@ sealed class UndefinedMultipliedUnit<
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 internal fun SerializersModuleBuilder.setupForUndefinedMultipliedUnit() {
     polymorphic(UndefinedMultipliedUnit::class) {
         registerUndefinedMultipliedUnitClasses()
@@ -321,6 +322,7 @@ internal fun SerializersModuleBuilder.setupForUndefinedMultipliedUnit() {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 internal fun PolymorphicModuleBuilder<UndefinedMultipliedUnit<*, *, *, *>>.registerUndefinedMultipliedUnitClasses() {
     val quantitySerializer = PolymorphicSerializer(UndefinedQuantityType::class)
     val undefinedSerializer = AbstractUndefinedScientificUnit.serializer(quantitySerializer)

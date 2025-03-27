@@ -17,16 +17,7 @@
 
 package com.splendo.kaluga.scientific.unit
 
-import com.splendo.kaluga.scientific.converter.electricCharge.div
-import com.splendo.kaluga.scientific.converter.electricConductance.times
-import com.splendo.kaluga.scientific.converter.energy.div
-import com.splendo.kaluga.scientific.converter.magneticFlux.div
-import com.splendo.kaluga.scientific.converter.power.div
-import com.splendo.kaluga.scientific.converter.voltage.div
-import com.splendo.kaluga.scientific.converter.voltage.times
-import com.splendo.kaluga.scientific.invoke
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class ElectricCurrentUnitTest {
 
@@ -45,44 +36,5 @@ class ElectricCurrentUnitTest {
 
         assertScientificConversion(1, Ampere, 0.1, Biot)
         assertScientificConversion(1, Ampere, 0.1, Abampere)
-    }
-
-    @Test
-    fun currentFromChargeAndTimeTest() {
-        assertEquals(1(Abampere), 2(Abcoulomb) / 2(Second))
-        assertEquals(1(Ampere), 2(Coulomb) / 2(Second))
-    }
-
-    @Test
-    fun currentFromEnergyAndFluxTest() {
-        assertEquals(1(Abampere), 2(Erg) / 2(Maxwell))
-        assertEquals(1(Abampere), 20(Decierg) / 2(Maxwell))
-        assertEquals(1(Ampere), 2(Joule) / 2(Weber))
-    }
-
-    @Test
-    fun currentFromFluxAndInductanceTest() {
-        assertEquals(1(Abampere), 2(Maxwell) / 2(Abhenry))
-        assertEquals(1(Ampere), 2(Weber) / 2(Henry))
-    }
-
-    @Test
-    fun currentFromPowerAndVoltageTest() {
-        assertEquals(1(Abampere), 2(Erg per Second) / 2(Abvolt))
-        assertEquals(1(Ampere), 2(Watt) / 2(Volt))
-    }
-
-    @Test
-    fun currentFromVoltageAndConductanceTest() {
-        assertEquals(4(Ampere), 2(Siemens) * 2(Volt))
-        assertEquals(4(Ampere), 2(Volt) * 2(Siemens))
-        assertEquals(4(Abampere), 2(Absiemens) * 2(Abvolt))
-        assertEquals(4(Abampere), 2(Abvolt) * 2(Absiemens))
-    }
-
-    @Test
-    fun currentFromVoltageAndResistanceTest() {
-        assertEquals(1(Abampere), 2(Abvolt) / 2(Abohm))
-        assertEquals(1(Ampere), 2(Volt) / 2(Ohm))
     }
 }

@@ -156,6 +156,7 @@ sealed class UndefinedReciprocalUnit<
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 internal fun SerializersModuleBuilder.setupForUndefinedReciprocalUnit() {
     polymorphic(UndefinedReciprocalUnit::class) {
         registerUndefinedReciprocalUnitClasses()
@@ -208,6 +209,7 @@ internal fun SerializersModuleBuilder.setupForUndefinedReciprocalUnit() {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
 internal fun PolymorphicModuleBuilder<UndefinedReciprocalUnit<*, *>>.registerUndefinedReciprocalUnitClasses() {
     val quantitySerializer = PolymorphicSerializer(UndefinedQuantityType::class)
     val undefinedSerializer = AbstractUndefinedScientificUnit.serializer(quantitySerializer)

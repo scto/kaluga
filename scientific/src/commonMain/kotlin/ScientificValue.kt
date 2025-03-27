@@ -484,7 +484,7 @@ internal fun <
     factory: (Decimal, TargetUnit) -> Value,
 ) = fromSIUnit(left.unit.toSIUnit(left.decimalValue) - right.unit.toSIUnit(right.decimalValue))(this, factory)
 
-internal fun <
+fun <
     TargetQuantity : PhysicalQuantity,
     Unit : ScientificUnit<TargetQuantity>,
     Value : ScientificValue<TargetQuantity, Unit>,
@@ -498,7 +498,7 @@ internal fun <
     factory: (Decimal, Unit) -> Value,
 ) = fromSIUnit(nominator.unit.toSIUnit(nominator.decimalValue) / divider.unit.toSIUnit(divider.decimalValue))(this, factory)
 
-internal fun <
+fun <
     InverseQuantity : PhysicalQuantity,
     InverseUnit : ScientificUnit<InverseQuantity>,
     Quantity : PhysicalQuantity,
