@@ -31,9 +31,10 @@ import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
+import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import kotlin.jvm.JvmName
 
-// Div<Ex<A>, B> / A! -> B
+// Div<Ex<A>, B> / A! -> Inv<B>
 
 fun <
 	ExtendedNumeratorNumeratorUnit : UndefinedExtendedUnit<
@@ -51,9 +52,15 @@ fun <
 		>,
 	NumeratorNumeratorAndDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	DenominatorUnit : ScientificUnit<NumeratorNumeratorAndDenominatorQuantity>,
-	NumeratorDenominatorValue : UndefinedScientificValue<
-	NumeratorDenominatorQuantity,
-NumeratorDenominatorUnit,
+	TargetUnit : UndefinedReciprocalUnit<
+		NumeratorDenominatorQuantity,
+		NumeratorDenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		NumeratorDenominatorQuantity,
+		>,
+TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
@@ -65,5 +72,6 @@ NumeratorDenominatorUnit,
 NumeratorUnit,
 	>.dividingWithExtendedNumeratorDividedByNumerator(
 	right: ScientificValue<NumeratorNumeratorAndDenominatorQuantity, DenominatorUnit>,
-	factory: (Decimal, NumeratorDenominatorUnit) -> NumeratorDenominatorValue,
-) = unit.denominator.byDividing(this, right, factory)
+	reciprocalTargetUnit: NumeratorDenominatorUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = unit.denominator.reciprocalTargetUnit().byDividing(this, right, factory)

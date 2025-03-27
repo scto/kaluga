@@ -22,22 +22,44 @@ import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
+import com.splendo.kaluga.scientific.UndefinedQuantityType
+import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
+import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
+import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// One / A! -> A!
+// One / A! -> Inv<Wr<A>>
 
 fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	DenominatorUnit : ScientificUnit<DenominatorQuantity>,
-	DenominatorValue : ScientificValue<DenominatorQuantity, DenominatorUnit>,
+	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+	DenominatorQuantity,
+	DenominatorUnit,
+		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Extended<
+			DenominatorQuantity,
+			>,
+		WrappedDenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Extended<
+			DenominatorQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
 	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dimensionlessDividedByDefinedUnit(
 	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 	denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
-	factory: (Decimal, DenominatorUnit) -> DenominatorValue,
-) = right.unit.denominatorAsUndefined().byDividing(this, right, factory)
+	reciprocalTargetUnit: WrappedDenominatorUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = right.unit.denominatorAsUndefined().reciprocalTargetUnit().byDividing(this, right, factory)

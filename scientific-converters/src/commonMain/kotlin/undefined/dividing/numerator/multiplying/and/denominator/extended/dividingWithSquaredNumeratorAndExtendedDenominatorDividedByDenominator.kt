@@ -35,7 +35,7 @@ import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// Div<Mul<A, A>, Ex<B>> / B! -> Div<Mul<Ex<B>, Wr<B>>, Mul<A, A>>
+// Div<Mul<A, A>, Ex<B>> / B! -> Div<Mul<A, A>, Mul<Ex<B>, Wr<B>>>
 
 fun <
 	NumeratorNumeratorLeftAndRightQuantity : UndefinedQuantityType,
@@ -67,7 +67,7 @@ fun <
 	NumeratorDenominatorAndDenominatorQuantity,
 	DenominatorUnit,
 		>,
-	TargetNumeratorUnit : UndefinedMultipliedUnit<
+	TargetDenominatorUnit : UndefinedMultipliedUnit<
 		UndefinedQuantityType.Extended<
 			NumeratorDenominatorAndDenominatorQuantity,
 			>,
@@ -79,22 +79,10 @@ fun <
 		>,
 	TargetUnit : UndefinedDividedUnit<
 		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				NumeratorDenominatorAndDenominatorQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				NumeratorDenominatorAndDenominatorQuantity,
-				>,
-			>,
-		TargetNumeratorUnit,
-		UndefinedQuantityType.Multiplying<
 			NumeratorNumeratorLeftAndRightQuantity,
 			NumeratorNumeratorLeftAndRightQuantity,
 			>,
 		NumeratorNumeratorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
 		UndefinedQuantityType.Multiplying<
 			UndefinedQuantityType.Extended<
 				NumeratorDenominatorAndDenominatorQuantity,
@@ -103,9 +91,21 @@ fun <
 				NumeratorDenominatorAndDenominatorQuantity,
 				>,
 			>,
+		TargetDenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
 		UndefinedQuantityType.Multiplying<
 			NumeratorNumeratorLeftAndRightQuantity,
 			NumeratorNumeratorLeftAndRightQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			UndefinedQuantityType.Extended<
+				NumeratorDenominatorAndDenominatorQuantity,
+				>,
+			UndefinedQuantityType.Extended<
+				NumeratorDenominatorAndDenominatorQuantity,
+				>,
 			>,
 		>,
 TargetUnit,
@@ -123,11 +123,11 @@ TargetUnit,
 NumeratorUnit,
 	>.dividingWithSquaredNumeratorAndExtendedDenominatorDividedByDenominator(
 	right: ScientificValue<NumeratorDenominatorAndDenominatorQuantity, DenominatorUnit>,
-	extendedNumeratorDenominatorUnitXWrappedDenominatorUnit: ExtendedNumeratorDenominatorUnit.(WrappedDenominatorUnit) -> TargetNumeratorUnit,
-	targetNumeratorUnitPerNumeratorNumeratorUnit: TargetNumeratorUnit.(NumeratorNumeratorUnit) -> TargetUnit,
+	extendedNumeratorDenominatorUnitXWrappedDenominatorUnit: ExtendedNumeratorDenominatorUnit.(WrappedDenominatorUnit) -> TargetDenominatorUnit,
+	numeratorNumeratorUnitPerTargetDenominatorUnit: NumeratorNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.denominator.extendedNumeratorDenominatorUnitXWrappedDenominatorUnit(
+) = unit.numerator.numeratorNumeratorUnitPerTargetDenominatorUnit(
+	unit.denominator.extendedNumeratorDenominatorUnitXWrappedDenominatorUnit(
 	unit.denominator.extended,
-).targetNumeratorUnitPerNumeratorNumeratorUnit(
-	unit.numerator,
+),
 ).byDividing(this, right, factory)

@@ -34,7 +34,7 @@ import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// Inv<A> / B! -> Mul<A, Wr<B>>
+// Inv<A> / B! -> Inv<Mul<A, Wr<B>>>
 
 fun <
 	NumeratorReciprocalQuantity : UndefinedQuantityType,
@@ -49,7 +49,7 @@ fun <
 	DenominatorQuantity,
 	DenominatorUnit,
 		>,
-	TargetUnit : UndefinedMultipliedUnit<
+	TargetReciprocalUnit : UndefinedMultipliedUnit<
 		NumeratorReciprocalQuantity,
 		NumeratorReciprocalUnit,
 		UndefinedQuantityType.Extended<
@@ -57,11 +57,22 @@ fun <
 			>,
 		WrappedDenominatorUnit,
 		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			NumeratorReciprocalQuantity,
+			UndefinedQuantityType.Extended<
+				DenominatorQuantity,
+				>,
+			>,
+		TargetReciprocalUnit,
+		>,
 	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		NumeratorReciprocalQuantity,
-		UndefinedQuantityType.Extended<
-			DenominatorQuantity,
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			NumeratorReciprocalQuantity,
+			UndefinedQuantityType.Extended<
+				DenominatorQuantity,
+				>,
 			>,
 		>,
 TargetUnit,
@@ -74,8 +85,9 @@ NumeratorUnit,
 	>.reciprocalDividedByDefinedUnit(
 	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 	denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
-	numeratorReciprocalUnitXWrappedDenominatorUnit: NumeratorReciprocalUnit.(WrappedDenominatorUnit) -> TargetUnit,
+	numeratorReciprocalUnitXWrappedDenominatorUnit: NumeratorReciprocalUnit.(WrappedDenominatorUnit) -> TargetReciprocalUnit,
+	reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.inverse.numeratorReciprocalUnitXWrappedDenominatorUnit(
 	right.unit.denominatorAsUndefined(),
-).byDividing(this, right, factory)
+).reciprocalTargetUnit().byDividing(this, right, factory)
