@@ -31,60 +31,6 @@ import kotlin.jvm.JvmName
 
 // Div<Mul<A, A>, B> / Div<A, B> -> A
 
-internal fun <
-	NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity : UndefinedQuantityType,
-	NumeratorNumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity>,
-	NumeratorNumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity>,
-	NumeratorNumeratorUnit : UndefinedMultipliedUnit<
-		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-		NumeratorNumeratorLeftUnit,
-		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-		NumeratorNumeratorRightUnit,
-		>,
-	NumeratorDenominatorAndDenominatorDenominatorQuantity : UndefinedQuantityType,
-	NumeratorDenominatorUnit : AbstractUndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
-	NumeratorUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-			NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-			>,
-		NumeratorNumeratorUnit,
-		NumeratorDenominatorAndDenominatorDenominatorQuantity,
-		NumeratorDenominatorUnit,
-		>,
-	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity>,
-	DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<NumeratorDenominatorAndDenominatorDenominatorQuantity>,
-	DenominatorUnit : UndefinedDividedUnit<
-		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		NumeratorDenominatorAndDenominatorDenominatorQuantity,
-		DenominatorDenominatorUnit,
-		>,
-	NumeratorNumeratorLeftValue : UndefinedScientificValue<
-	NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-NumeratorNumeratorLeftUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-			NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-			>,
-		NumeratorDenominatorAndDenominatorDenominatorQuantity,
-		>,
-NumeratorUnit,
-	>.internalDividingWithSquaredNumeratorDividedByDividingUnitWithNumeratorRootAsNumeratorAndDenominatorAsDenominator(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
-		NumeratorDenominatorAndDenominatorDenominatorQuantity,
-		>,
-DenominatorUnit,
-	>,
-	factory: (Decimal, NumeratorNumeratorLeftUnit) -> NumeratorNumeratorLeftValue,
-) = unit.numerator.left.byDividing(this, right, factory)
-
-@JvmName("dividingWithSquaredNumeratorDividedByDividingUnitWithNumeratorRootAsNumeratorAndDenominatorAsDenominator")
 fun <
 	NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity : UndefinedQuantityType,
 	NumeratorNumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity>,
@@ -127,7 +73,7 @@ NumeratorNumeratorLeftUnit,
 		NumeratorDenominatorAndDenominatorDenominatorQuantity,
 		>,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividingWithSquaredNumeratorDividedByDividingUnitWithNumeratorRootAsNumeratorAndDenominatorAsDenominator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		NumeratorNumeratorLeftAndRightAndDenominatorNumeratorQuantity,
@@ -136,7 +82,4 @@ NumeratorUnit,
 DenominatorUnit,
 	>,
 	factory: (Decimal, NumeratorNumeratorLeftUnit) -> NumeratorNumeratorLeftValue,
-) = internalDividingWithSquaredNumeratorDividedByDividingUnitWithNumeratorRootAsNumeratorAndDenominatorAsDenominator(
-	right = right,
-	factory = factory,
-)
+) = unit.numerator.left.byDividing(this, right, factory)

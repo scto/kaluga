@@ -31,35 +31,10 @@ import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.jvm.JvmName
 
 // One / A -> Inv<A>
 
-internal fun <
-	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	DenominatorQuantity : UndefinedQuantityType,
-	DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
-	TargetUnit : UndefinedReciprocalUnit<
-		DenominatorQuantity,
-		DenominatorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		DenominatorQuantity,
-		>,
-TargetUnit,
-	>,
-	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.internalDimensionlessDividedByUndefinedUnit(
-	right: UndefinedScientificValue<
-	DenominatorQuantity,
-DenominatorUnit,
-	>,
-	reciprocalTargetUnit: DenominatorUnit.() -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = right.unit.reciprocalTargetUnit().byDividing(this, right, factory)
-
-@JvmName("dimensionlessDividedByUndefinedUnit")
 fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorQuantity : UndefinedQuantityType,
@@ -74,15 +49,11 @@ fun <
 		>,
 TargetUnit,
 	>,
-	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dimensionlessDividedByUndefinedUnit(
 	right: UndefinedScientificValue<
 	DenominatorQuantity,
 DenominatorUnit,
 	>,
 	reciprocalTargetUnit: DenominatorUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalDimensionlessDividedByUndefinedUnit(
-	right = right,
-	reciprocalTargetUnit = reciprocalTargetUnit,
-	factory = factory,
-)
+) = right.unit.reciprocalTargetUnit().byDividing(this, right, factory)

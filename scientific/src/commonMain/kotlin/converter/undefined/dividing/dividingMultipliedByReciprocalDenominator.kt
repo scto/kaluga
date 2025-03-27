@@ -28,76 +28,10 @@ import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.per
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // Div<A, B> * Inv<B> -> Div<A, Mul<B, B>>
 
-internal fun <
-	LeftNumeratorQuantity : UndefinedQuantityType,
-	LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
-	LeftDenominatorAndRightReciprocalQuantity : UndefinedQuantityType,
-	LeftDenominatorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightReciprocalQuantity>,
-	LeftUnit : UndefinedDividedUnit<
-		LeftNumeratorQuantity,
-		LeftNumeratorUnit,
-		LeftDenominatorAndRightReciprocalQuantity,
-		LeftDenominatorUnit,
-		>,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
-		LeftDenominatorAndRightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetDenominatorUnit : UndefinedMultipliedUnit<
-		LeftDenominatorAndRightReciprocalQuantity,
-		LeftDenominatorUnit,
-		LeftDenominatorAndRightReciprocalQuantity,
-		LeftDenominatorUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		LeftNumeratorQuantity,
-		LeftNumeratorUnit,
-		UndefinedQuantityType.Multiplying<
-			LeftDenominatorAndRightReciprocalQuantity,
-			LeftDenominatorAndRightReciprocalQuantity,
-			>,
-		TargetDenominatorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftNumeratorQuantity,
-		UndefinedQuantityType.Multiplying<
-			LeftDenominatorAndRightReciprocalQuantity,
-			LeftDenominatorAndRightReciprocalQuantity,
-			>,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftNumeratorQuantity,
-		LeftDenominatorAndRightReciprocalQuantity,
-		>,
-LeftUnit,
-	>.internalDividingMultipliedByReciprocalDenominator(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		LeftDenominatorAndRightReciprocalQuantity,
-		>,
-RightUnit,
-	>,
-	leftDenominatorUnitXLeftDenominatorUnit: LeftDenominatorUnit.(LeftDenominatorUnit) -> TargetDenominatorUnit,
-	leftNumeratorUnitPerTargetDenominatorUnit: LeftNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numerator.leftNumeratorUnitPerTargetDenominatorUnit(
-	unit.denominator.leftDenominatorUnitXLeftDenominatorUnit(
-	unit.denominator,
-),
-).byMultiplying(this, right, factory)
-
-@JvmName("dividingMultipliedByReciprocalDenominator")
 fun <
 	LeftNumeratorQuantity : UndefinedQuantityType,
 	LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorQuantity>,
@@ -145,7 +79,7 @@ TargetUnit,
 		LeftDenominatorAndRightReciprocalQuantity,
 		>,
 LeftUnit,
-	>.multipliedBy(
+	>.dividingMultipliedByReciprocalDenominator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		LeftDenominatorAndRightReciprocalQuantity,
@@ -155,9 +89,8 @@ RightUnit,
 	leftDenominatorUnitXLeftDenominatorUnit: LeftDenominatorUnit.(LeftDenominatorUnit) -> TargetDenominatorUnit,
 	leftNumeratorUnitPerTargetDenominatorUnit: LeftNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalDividingMultipliedByReciprocalDenominator(
-	right = right,
-	leftDenominatorUnitXLeftDenominatorUnit = leftDenominatorUnitXLeftDenominatorUnit,
-	leftNumeratorUnitPerTargetDenominatorUnit = leftNumeratorUnitPerTargetDenominatorUnit,
-	factory = factory,
-)
+) = unit.numerator.leftNumeratorUnitPerTargetDenominatorUnit(
+	unit.denominator.leftDenominatorUnitXLeftDenominatorUnit(
+	unit.denominator,
+),
+).byMultiplying(this, right, factory)

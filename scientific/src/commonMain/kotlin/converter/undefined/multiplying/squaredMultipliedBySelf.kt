@@ -26,75 +26,10 @@ import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // Mul<A, A> * Mul<A, A> -> Mul<Mul<A, A>, Mul<A, A>>
 
-internal fun <
-	LeftLeftAndRightAndRightLeftAndRightQuantity : UndefinedQuantityType,
-	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightLeftAndRightQuantity>,
-	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightLeftAndRightQuantity>,
-	LeftUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		LeftLeftUnit,
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		LeftRightUnit,
-		>,
-	RightLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightLeftAndRightQuantity>,
-	RightRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightLeftAndRightQuantity>,
-	RightUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		RightLeftUnit,
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		RightRightUnit,
-		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			>,
-		LeftUnit,
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			>,
-		LeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			>,
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			LeftLeftAndRightAndRightLeftAndRightQuantity,
-			>,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		>,
-LeftUnit,
-	>.internalSquaredMultipliedBySelf(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		LeftLeftAndRightAndRightLeftAndRightQuantity,
-		>,
-RightUnit,
-	>,
-	leftUnitXLeftUnit: LeftUnit.(LeftUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.leftUnitXLeftUnit(
-	unit,
-).byMultiplying(this, right, factory)
-
-@JvmName("squaredMultipliedBySelf")
 fun <
 	LeftLeftAndRightAndRightLeftAndRightQuantity : UndefinedQuantityType,
 	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightLeftAndRightQuantity>,
@@ -144,7 +79,7 @@ TargetUnit,
 		LeftLeftAndRightAndRightLeftAndRightQuantity,
 		>,
 LeftUnit,
-	>.multipliedBy(
+	>.squaredMultipliedBySelf(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Multiplying<
 		LeftLeftAndRightAndRightLeftAndRightQuantity,
@@ -154,8 +89,6 @@ RightUnit,
 	>,
 	leftUnitXLeftUnit: LeftUnit.(LeftUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalSquaredMultipliedBySelf(
-	right = right,
-	leftUnitXLeftUnit = leftUnitXLeftUnit,
-	factory = factory,
-)
+) = unit.leftUnitXLeftUnit(
+	unit,
+).byMultiplying(this, right, factory)

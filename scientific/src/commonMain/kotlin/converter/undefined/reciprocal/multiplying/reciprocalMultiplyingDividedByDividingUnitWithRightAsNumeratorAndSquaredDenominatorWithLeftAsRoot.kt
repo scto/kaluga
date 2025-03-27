@@ -28,102 +28,10 @@ import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.per
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // Inv<Mul<A, B>> / Div<B, Mul<A, A>> -> Div<A, Mul<B, B>>
 
-internal fun <
-	NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity : UndefinedQuantityType,
-	NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity>,
-	NumeratorReciprocalRightAndDenominatorNumeratorQuantity : UndefinedQuantityType,
-	NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorNumeratorQuantity>,
-	NumeratorReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-		NumeratorReciprocalLeftUnit,
-		NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-		NumeratorReciprocalRightUnit,
-		>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-			NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-			>,
-		NumeratorReciprocalUnit,
-		>,
-	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalRightAndDenominatorNumeratorQuantity>,
-	DenominatorDenominatorLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity>,
-	DenominatorDenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity>,
-	DenominatorDenominatorUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-		DenominatorDenominatorLeftUnit,
-		NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-		DenominatorDenominatorRightUnit,
-		>,
-	DenominatorUnit : UndefinedDividedUnit<
-		NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-			NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-			>,
-		DenominatorDenominatorUnit,
-		>,
-	TargetDenominatorUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-		NumeratorReciprocalRightUnit,
-		NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-		NumeratorReciprocalRightUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-		NumeratorReciprocalLeftUnit,
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-			NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-			>,
-		TargetDenominatorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-			NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-			>,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-			NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-			>,
-		>,
-NumeratorUnit,
-	>.internalReciprocalMultiplyingDividedByDividingUnitWithRightAsNumeratorAndSquaredDenominatorWithLeftAsRoot(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-			NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity,
-			>,
-		>,
-DenominatorUnit,
-	>,
-	numeratorReciprocalRightUnitXNumeratorReciprocalRightUnit: NumeratorReciprocalRightUnit.(NumeratorReciprocalRightUnit) -> TargetDenominatorUnit,
-	numeratorReciprocalLeftUnitPerTargetDenominatorUnit: NumeratorReciprocalLeftUnit.(TargetDenominatorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.inverse.left.numeratorReciprocalLeftUnitPerTargetDenominatorUnit(
-	unit.inverse.right.numeratorReciprocalRightUnitXNumeratorReciprocalRightUnit(
-	unit.inverse.right,
-),
-).byDividing(this, right, factory)
-
-@JvmName("reciprocalMultiplyingDividedByDividingUnitWithRightAsNumeratorAndSquaredDenominatorWithLeftAsRoot")
 fun <
 	NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity : UndefinedQuantityType,
 	NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndDenominatorDenominatorLeftAndRightQuantity>,
@@ -193,7 +101,7 @@ TargetUnit,
 			>,
 		>,
 NumeratorUnit,
-	>.dividedBy(
+	>.reciprocalMultiplyingDividedByDividingUnitWithRightAsNumeratorAndSquaredDenominatorWithLeftAsRoot(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		NumeratorReciprocalRightAndDenominatorNumeratorQuantity,
@@ -207,9 +115,8 @@ DenominatorUnit,
 	numeratorReciprocalRightUnitXNumeratorReciprocalRightUnit: NumeratorReciprocalRightUnit.(NumeratorReciprocalRightUnit) -> TargetDenominatorUnit,
 	numeratorReciprocalLeftUnitPerTargetDenominatorUnit: NumeratorReciprocalLeftUnit.(TargetDenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalReciprocalMultiplyingDividedByDividingUnitWithRightAsNumeratorAndSquaredDenominatorWithLeftAsRoot(
-	right = right,
-	numeratorReciprocalRightUnitXNumeratorReciprocalRightUnit = numeratorReciprocalRightUnitXNumeratorReciprocalRightUnit,
-	numeratorReciprocalLeftUnitPerTargetDenominatorUnit = numeratorReciprocalLeftUnitPerTargetDenominatorUnit,
-	factory = factory,
-)
+) = unit.inverse.left.numeratorReciprocalLeftUnitPerTargetDenominatorUnit(
+	unit.inverse.right.numeratorReciprocalRightUnitXNumeratorReciprocalRightUnit(
+	unit.inverse.right,
+),
+).byDividing(this, right, factory)

@@ -28,74 +28,10 @@ import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.per
 import kotlin.jvm.JvmName
 
 // Inv<A> / Div<B, Mul<C, A>> -> Div<C, B>
 
-internal fun <
-	NumeratorReciprocalAndDenominatorDenominatorRightQuantity : UndefinedQuantityType,
-	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorRightQuantity>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		NumeratorReciprocalAndDenominatorDenominatorRightQuantity,
-		NumeratorReciprocalUnit,
-		>,
-	DenominatorNumeratorQuantity : UndefinedQuantityType,
-	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorQuantity>,
-	DenominatorDenominatorLeftQuantity : UndefinedQuantityType,
-	DenominatorDenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorLeftQuantity>,
-	DenominatorDenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorRightQuantity>,
-	DenominatorDenominatorUnit : UndefinedMultipliedUnit<
-		DenominatorDenominatorLeftQuantity,
-		DenominatorDenominatorLeftUnit,
-		NumeratorReciprocalAndDenominatorDenominatorRightQuantity,
-		DenominatorDenominatorRightUnit,
-		>,
-	DenominatorUnit : UndefinedDividedUnit<
-		DenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		UndefinedQuantityType.Multiplying<
-			DenominatorDenominatorLeftQuantity,
-			NumeratorReciprocalAndDenominatorDenominatorRightQuantity,
-			>,
-		DenominatorDenominatorUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		DenominatorDenominatorLeftQuantity,
-		DenominatorDenominatorLeftUnit,
-		DenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		DenominatorDenominatorLeftQuantity,
-		DenominatorNumeratorQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorReciprocalAndDenominatorDenominatorRightQuantity,
-		>,
-NumeratorUnit,
-	>.internalReciprocalDividedByDividingUnitWithMultiplyingDenominatorWithSelfAsRight(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		DenominatorNumeratorQuantity,
-		UndefinedQuantityType.Multiplying<
-			DenominatorDenominatorLeftQuantity,
-			NumeratorReciprocalAndDenominatorDenominatorRightQuantity,
-			>,
-		>,
-DenominatorUnit,
-	>,
-	denominatorDenominatorLeftUnitPerDenominatorNumeratorUnit: DenominatorDenominatorLeftUnit.(DenominatorNumeratorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = right.unit.denominator.left.denominatorDenominatorLeftUnitPerDenominatorNumeratorUnit(
-	right.unit.numerator,
-).byDividing(this, right, factory)
-
-@JvmName("reciprocalDividedByDividingUnitWithMultiplyingDenominatorWithSelfAsRight")
 fun <
 	NumeratorReciprocalAndDenominatorDenominatorRightQuantity : UndefinedQuantityType,
 	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorDenominatorRightQuantity>,
@@ -141,7 +77,7 @@ TargetUnit,
 		NumeratorReciprocalAndDenominatorDenominatorRightQuantity,
 		>,
 NumeratorUnit,
-	>.dividedBy(
+	>.reciprocalDividedByDividingUnitWithMultiplyingDenominatorWithSelfAsRight(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		DenominatorNumeratorQuantity,
@@ -154,8 +90,6 @@ DenominatorUnit,
 	>,
 	denominatorDenominatorLeftUnitPerDenominatorNumeratorUnit: DenominatorDenominatorLeftUnit.(DenominatorNumeratorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalReciprocalDividedByDividingUnitWithMultiplyingDenominatorWithSelfAsRight(
-	right = right,
-	denominatorDenominatorLeftUnitPerDenominatorNumeratorUnit = denominatorDenominatorLeftUnitPerDenominatorNumeratorUnit,
-	factory = factory,
-)
+) = right.unit.denominator.left.denominatorDenominatorLeftUnitPerDenominatorNumeratorUnit(
+	right.unit.numerator,
+).byDividing(this, right, factory)

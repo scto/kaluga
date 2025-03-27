@@ -36,46 +36,6 @@ import kotlin.jvm.JvmName
 
 // One / Inv<Mul<A, B>> -> Mul<A, B>
 
-internal fun <
-	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	DenominatorReciprocalLeftQuantity : UndefinedQuantityType,
-	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalLeftQuantity>,
-	DenominatorReciprocalRightQuantity : UndefinedQuantityType,
-	DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalRightQuantity>,
-	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
-		DenominatorReciprocalLeftQuantity,
-		DenominatorReciprocalLeftUnit,
-		DenominatorReciprocalRightQuantity,
-		DenominatorReciprocalRightUnit,
-		>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			DenominatorReciprocalLeftQuantity,
-			DenominatorReciprocalRightQuantity,
-			>,
-		DenominatorReciprocalUnit,
-		>,
-	DenominatorReciprocalValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		DenominatorReciprocalLeftQuantity,
-		DenominatorReciprocalRightQuantity,
-		>,
-DenominatorReciprocalUnit,
-	>,
-	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.internalDimensionlessDividedByReciprocalMultiplyingUnit(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			DenominatorReciprocalLeftQuantity,
-			DenominatorReciprocalRightQuantity,
-			>,
-		>,
-DenominatorUnit,
-	>,
-	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
-) = right.unit.inverse.byDividing(this, right, factory)
-
-@JvmName("dimensionlessDividedByReciprocalMultiplyingUnit")
 fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorReciprocalLeftQuantity : UndefinedQuantityType,
@@ -102,7 +62,7 @@ fun <
 		>,
 DenominatorReciprocalUnit,
 	>,
-	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dimensionlessDividedByReciprocalMultiplyingUnit(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		UndefinedQuantityType.Multiplying<
@@ -113,7 +73,4 @@ DenominatorReciprocalUnit,
 DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
-) = internalDimensionlessDividedByReciprocalMultiplyingUnit(
-	right = right,
-	factory = factory,
-)
+) = right.unit.inverse.byDividing(this, right, factory)

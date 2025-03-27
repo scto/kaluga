@@ -31,42 +31,10 @@ import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.One
 import kotlin.jvm.JvmName
 
 // Inv<A> / Inv<A> -> One
 
-internal fun <
-	NumeratorReciprocalAndDenominatorReciprocalQuantity : UndefinedQuantityType,
-	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalQuantity>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		NumeratorReciprocalAndDenominatorReciprocalQuantity,
-		NumeratorReciprocalUnit,
-		>,
-	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalQuantity>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		NumeratorReciprocalAndDenominatorReciprocalQuantity,
-		DenominatorReciprocalUnit,
-		>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorReciprocalAndDenominatorReciprocalQuantity,
-		>,
-NumeratorUnit,
-	>.internalReciprocalDividedBySelf(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorReciprocalAndDenominatorReciprocalQuantity,
-		>,
-DenominatorUnit,
-	>,
-	getDimensionless: () -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = getDimensionless().byDividing(this, right, factory)
-
-@JvmName("reciprocalDividedBySelf")
 fun <
 	NumeratorReciprocalAndDenominatorReciprocalQuantity : UndefinedQuantityType,
 	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalQuantity>,
@@ -86,7 +54,7 @@ fun <
 		NumeratorReciprocalAndDenominatorReciprocalQuantity,
 		>,
 NumeratorUnit,
-	>.dividedBy(
+	>.reciprocalDividedBySelf(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		NumeratorReciprocalAndDenominatorReciprocalQuantity,
@@ -95,8 +63,4 @@ DenominatorUnit,
 	>,
 	getDimensionless: () -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalReciprocalDividedBySelf(
-	right = right,
-	getDimensionless = getDimensionless,
-	factory = factory,
-)
+) = getDimensionless().byDividing(this, right, factory)

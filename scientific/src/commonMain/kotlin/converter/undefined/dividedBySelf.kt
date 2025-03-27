@@ -27,49 +27,10 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // A / Inv<A> -> Mul<A, A>
 
-internal fun <
-	NumeratorAndDenominatorReciprocalQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorReciprocalQuantity>,
-	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorReciprocalQuantity>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		NumeratorAndDenominatorReciprocalQuantity,
-		DenominatorReciprocalUnit,
-		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		NumeratorAndDenominatorReciprocalQuantity,
-		NumeratorUnit,
-		NumeratorAndDenominatorReciprocalQuantity,
-		NumeratorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		NumeratorAndDenominatorReciprocalQuantity,
-		NumeratorAndDenominatorReciprocalQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorReciprocalQuantity,
-NumeratorUnit,
-	>.internalDividedBySelf(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorAndDenominatorReciprocalQuantity,
-		>,
-DenominatorUnit,
-	>,
-	numeratorUnitXNumeratorUnit: NumeratorUnit.(NumeratorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numeratorUnitXNumeratorUnit(
-	unit,
-).byDividing(this, right, factory)
-
-@JvmName("dividedBySelf")
 fun <
 	NumeratorAndDenominatorReciprocalQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorReciprocalQuantity>,
@@ -94,7 +55,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorReciprocalQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedBySelf(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		NumeratorAndDenominatorReciprocalQuantity,
@@ -103,8 +64,6 @@ DenominatorUnit,
 	>,
 	numeratorUnitXNumeratorUnit: NumeratorUnit.(NumeratorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalDividedBySelf(
-	right = right,
-	numeratorUnitXNumeratorUnit = numeratorUnitXNumeratorUnit,
-	factory = factory,
-)
+) = unit.numeratorUnitXNumeratorUnit(
+	unit,
+).byDividing(this, right, factory)

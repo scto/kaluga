@@ -31,53 +31,6 @@ import kotlin.jvm.JvmName
 
 // Div<Mul<A, A>, B> * B -> Mul<A, A>
 
-internal fun <
-	LeftNumeratorLeftAndRightQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
-	LeftNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorLeftUnit,
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorRightUnit,
-		>,
-	LeftDenominatorAndRightQuantity : UndefinedQuantityType,
-	LeftDenominatorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
-	LeftUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftNumeratorLeftAndRightQuantity,
-			LeftNumeratorLeftAndRightQuantity,
-			>,
-		LeftNumeratorUnit,
-		LeftDenominatorAndRightQuantity,
-		LeftDenominatorUnit,
-		>,
-	RightUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightQuantity>,
-	LeftNumeratorValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorLeftAndRightQuantity,
-		>,
-LeftNumeratorUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			LeftNumeratorLeftAndRightQuantity,
-			LeftNumeratorLeftAndRightQuantity,
-			>,
-		LeftDenominatorAndRightQuantity,
-		>,
-LeftUnit,
-	>.internalDividingWithSquaredNumeratorMultipliedByDenominator(
-	right: UndefinedScientificValue<
-	LeftDenominatorAndRightQuantity,
-RightUnit,
-	>,
-	factory: (Decimal, LeftNumeratorUnit) -> LeftNumeratorValue,
-) = unit.numerator.byMultiplying(this, right, factory)
-
-@JvmName("dividingWithSquaredNumeratorMultipliedByDenominator")
 fun <
 	LeftNumeratorLeftAndRightQuantity : UndefinedQuantityType,
 	LeftNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
@@ -116,13 +69,10 @@ LeftNumeratorUnit,
 		LeftDenominatorAndRightQuantity,
 		>,
 LeftUnit,
-	>.multipliedBy(
+	>.dividingWithSquaredNumeratorMultipliedByDenominator(
 	right: UndefinedScientificValue<
 	LeftDenominatorAndRightQuantity,
 RightUnit,
 	>,
 	factory: (Decimal, LeftNumeratorUnit) -> LeftNumeratorValue,
-) = internalDividingWithSquaredNumeratorMultipliedByDenominator(
-	right = right,
-	factory = factory,
-)
+) = unit.numerator.byMultiplying(this, right, factory)

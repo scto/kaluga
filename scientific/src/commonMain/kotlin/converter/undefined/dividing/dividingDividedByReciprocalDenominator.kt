@@ -31,43 +31,6 @@ import kotlin.jvm.JvmName
 
 // Div<A, B> / Inv<B> -> A
 
-internal fun <
-	NumeratorNumeratorQuantity : UndefinedQuantityType,
-	NumeratorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorQuantity>,
-	NumeratorDenominatorAndDenominatorReciprocalQuantity : UndefinedQuantityType,
-	NumeratorDenominatorUnit : AbstractUndefinedScientificUnit<NumeratorDenominatorAndDenominatorReciprocalQuantity>,
-	NumeratorUnit : UndefinedDividedUnit<
-		NumeratorNumeratorQuantity,
-		NumeratorNumeratorUnit,
-		NumeratorDenominatorAndDenominatorReciprocalQuantity,
-		NumeratorDenominatorUnit,
-		>,
-	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorDenominatorAndDenominatorReciprocalQuantity>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		NumeratorDenominatorAndDenominatorReciprocalQuantity,
-		DenominatorReciprocalUnit,
-		>,
-	NumeratorNumeratorValue : UndefinedScientificValue<
-	NumeratorNumeratorQuantity,
-NumeratorNumeratorUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorNumeratorQuantity,
-		NumeratorDenominatorAndDenominatorReciprocalQuantity,
-		>,
-NumeratorUnit,
-	>.internalDividingDividedByReciprocalDenominator(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorDenominatorAndDenominatorReciprocalQuantity,
-		>,
-DenominatorUnit,
-	>,
-	factory: (Decimal, NumeratorNumeratorUnit) -> NumeratorNumeratorValue,
-) = unit.numerator.byDividing(this, right, factory)
-
-@JvmName("dividingDividedByReciprocalDenominator")
 fun <
 	NumeratorNumeratorQuantity : UndefinedQuantityType,
 	NumeratorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorNumeratorQuantity>,
@@ -94,7 +57,7 @@ NumeratorNumeratorUnit,
 		NumeratorDenominatorAndDenominatorReciprocalQuantity,
 		>,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividingDividedByReciprocalDenominator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		NumeratorDenominatorAndDenominatorReciprocalQuantity,
@@ -102,7 +65,4 @@ NumeratorUnit,
 DenominatorUnit,
 	>,
 	factory: (Decimal, NumeratorNumeratorUnit) -> NumeratorNumeratorValue,
-) = internalDividingDividedByReciprocalDenominator(
-	right = right,
-	factory = factory,
-)
+) = unit.numerator.byDividing(this, right, factory)

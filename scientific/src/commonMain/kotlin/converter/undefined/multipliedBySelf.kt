@@ -31,36 +31,10 @@ import com.splendo.kaluga.scientific.unit.Dimensionless
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.One
 import kotlin.jvm.JvmName
 
 // A * Inv<A> -> One
 
-internal fun <
-	LeftAndRightReciprocalQuantity : UndefinedQuantityType,
-	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
-		LeftAndRightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-	> UndefinedScientificValue<
-	LeftAndRightReciprocalQuantity,
-LeftUnit,
-	>.internalMultipliedBySelf(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		LeftAndRightReciprocalQuantity,
-		>,
-RightUnit,
-	>,
-	getDimensionless: () -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = getDimensionless().byMultiplying(this, right, factory)
-
-@JvmName("multipliedBySelf")
 fun <
 	LeftAndRightReciprocalQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
@@ -74,7 +48,7 @@ fun <
 	> UndefinedScientificValue<
 	LeftAndRightReciprocalQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedBySelf(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		LeftAndRightReciprocalQuantity,
@@ -83,8 +57,4 @@ RightUnit,
 	>,
 	getDimensionless: () -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalMultipliedBySelf(
-	right = right,
-	getDimensionless = getDimensionless,
-	factory = factory,
-)
+) = getDimensionless().byMultiplying(this, right, factory)

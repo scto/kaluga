@@ -27,50 +27,10 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.per
 import kotlin.jvm.JvmName
 
 // A * Inv<B> -> Div<A, B>
 
-internal fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
-	RightReciprocalQuantity : UndefinedQuantityType,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<RightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
-		RightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		LeftQuantity,
-		LeftUnit,
-		RightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftQuantity,
-		RightReciprocalQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.internalMultipliedByReciprocalUndefinedUnit(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		RightReciprocalQuantity,
-		>,
-RightUnit,
-	>,
-	leftUnitPerRightReciprocalUnit: LeftUnit.(RightReciprocalUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.leftUnitPerRightReciprocalUnit(
-	right.unit.inverse,
-).byMultiplying(this, right, factory)
-
-@JvmName("multipliedByReciprocalUndefinedUnit")
 fun <
 	LeftQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
@@ -96,7 +56,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	LeftQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByReciprocalUndefinedUnit(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		RightReciprocalQuantity,
@@ -105,8 +65,6 @@ RightUnit,
 	>,
 	leftUnitPerRightReciprocalUnit: LeftUnit.(RightReciprocalUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalMultipliedByReciprocalUndefinedUnit(
-	right = right,
-	leftUnitPerRightReciprocalUnit = leftUnitPerRightReciprocalUnit,
-	factory = factory,
-)
+) = unit.leftUnitPerRightReciprocalUnit(
+	right.unit.inverse,
+).byMultiplying(this, right, factory)

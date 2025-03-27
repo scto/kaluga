@@ -31,42 +31,6 @@ import kotlin.jvm.JvmName
 
 // Mul<A, A> * Inv<A> -> A
 
-internal fun <
-	LeftLeftAndRightAndRightReciprocalQuantity : UndefinedQuantityType,
-	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalQuantity>,
-	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalQuantity>,
-	LeftUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightReciprocalQuantity,
-		LeftLeftUnit,
-		LeftLeftAndRightAndRightReciprocalQuantity,
-		LeftRightUnit,
-		>,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
-		LeftLeftAndRightAndRightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	LeftLeftValue : UndefinedScientificValue<
-	LeftLeftAndRightAndRightReciprocalQuantity,
-LeftLeftUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightReciprocalQuantity,
-		LeftLeftAndRightAndRightReciprocalQuantity,
-		>,
-LeftUnit,
-	>.internalSquaredMultipliedByReciprocalRoot(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		LeftLeftAndRightAndRightReciprocalQuantity,
-		>,
-RightUnit,
-	>,
-	factory: (Decimal, LeftLeftUnit) -> LeftLeftValue,
-) = unit.left.byMultiplying(this, right, factory)
-
-@JvmName("squaredMultipliedByReciprocalRoot")
 fun <
 	LeftLeftAndRightAndRightReciprocalQuantity : UndefinedQuantityType,
 	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalQuantity>,
@@ -92,7 +56,7 @@ LeftLeftUnit,
 		LeftLeftAndRightAndRightReciprocalQuantity,
 		>,
 LeftUnit,
-	>.multipliedBy(
+	>.squaredMultipliedByReciprocalRoot(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		LeftLeftAndRightAndRightReciprocalQuantity,
@@ -100,7 +64,4 @@ LeftUnit,
 RightUnit,
 	>,
 	factory: (Decimal, LeftLeftUnit) -> LeftLeftValue,
-) = internalSquaredMultipliedByReciprocalRoot(
-	right = right,
-	factory = factory,
-)
+) = unit.left.byMultiplying(this, right, factory)

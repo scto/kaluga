@@ -26,44 +26,10 @@ import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
-import com.splendo.kaluga.scientific.unit.per
 import kotlin.jvm.JvmName
 
 // A / B -> Div<A, B>
 
-internal fun <
-	NumeratorQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
-	DenominatorQuantity : UndefinedQuantityType,
-	DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
-	TargetUnit : UndefinedDividedUnit<
-		NumeratorQuantity,
-		NumeratorUnit,
-		DenominatorQuantity,
-		DenominatorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorQuantity,
-		DenominatorQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	NumeratorQuantity,
-NumeratorUnit,
-	>.internalDividedByUndefinedUnit(
-	right: UndefinedScientificValue<
-	DenominatorQuantity,
-DenominatorUnit,
-	>,
-	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.numeratorUnitPerDenominatorUnit(
-	right.unit,
-).byDividing(this, right, factory)
-
-@JvmName("dividedByUndefinedUnit")
 fun <
 	NumeratorQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
@@ -85,15 +51,13 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedByUndefinedUnit(
 	right: UndefinedScientificValue<
 	DenominatorQuantity,
 DenominatorUnit,
 	>,
 	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalDividedByUndefinedUnit(
-	right = right,
-	numeratorUnitPerDenominatorUnit = numeratorUnitPerDenominatorUnit,
-	factory = factory,
-)
+) = unit.numeratorUnitPerDenominatorUnit(
+	right.unit,
+).byDividing(this, right, factory)

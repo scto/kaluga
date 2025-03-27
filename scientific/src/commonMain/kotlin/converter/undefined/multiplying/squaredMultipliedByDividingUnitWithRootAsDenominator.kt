@@ -27,64 +27,10 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // Mul<A, A> * Div<B, A> -> Mul<A, B>
 
-internal fun <
-	LeftLeftAndRightAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightDenominatorQuantity>,
-	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightDenominatorQuantity>,
-	LeftUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		LeftLeftUnit,
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		LeftRightUnit,
-		>,
-	RightNumeratorQuantity : UndefinedQuantityType,
-	RightNumeratorUnit : AbstractUndefinedScientificUnit<RightNumeratorQuantity>,
-	RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightDenominatorQuantity>,
-	RightUnit : UndefinedDividedUnit<
-		RightNumeratorQuantity,
-		RightNumeratorUnit,
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		RightDenominatorUnit,
-		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		LeftLeftUnit,
-		RightNumeratorQuantity,
-		RightNumeratorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		RightNumeratorQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		>,
-LeftUnit,
-	>.internalSquaredMultipliedByDividingUnitWithRootAsDenominator(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		RightNumeratorQuantity,
-		LeftLeftAndRightAndRightDenominatorQuantity,
-		>,
-RightUnit,
-	>,
-	leftLeftUnitXRightNumeratorUnit: LeftLeftUnit.(RightNumeratorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.left.leftLeftUnitXRightNumeratorUnit(
-	right.unit.numerator,
-).byMultiplying(this, right, factory)
-
-@JvmName("squaredMultipliedByDividingUnitWithRootAsDenominator")
 fun <
 	LeftLeftAndRightAndRightDenominatorQuantity : UndefinedQuantityType,
 	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightDenominatorQuantity>,
@@ -123,7 +69,7 @@ TargetUnit,
 		LeftLeftAndRightAndRightDenominatorQuantity,
 		>,
 LeftUnit,
-	>.multipliedBy(
+	>.squaredMultipliedByDividingUnitWithRootAsDenominator(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Dividing<
 		RightNumeratorQuantity,
@@ -133,8 +79,6 @@ RightUnit,
 	>,
 	leftLeftUnitXRightNumeratorUnit: LeftLeftUnit.(RightNumeratorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalSquaredMultipliedByDividingUnitWithRootAsDenominator(
-	right = right,
-	leftLeftUnitXRightNumeratorUnit = leftLeftUnitXRightNumeratorUnit,
-	factory = factory,
-)
+) = unit.left.leftLeftUnitXRightNumeratorUnit(
+	right.unit.numerator,
+).byMultiplying(this, right, factory)

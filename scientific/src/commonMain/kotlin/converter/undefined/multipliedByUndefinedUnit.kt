@@ -26,44 +26,10 @@ import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // A * B -> Mul<A, B>
 
-internal fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
-	TargetUnit : UndefinedMultipliedUnit<
-		LeftQuantity,
-		LeftUnit,
-		RightQuantity,
-		RightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftQuantity,
-		RightQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	LeftQuantity,
-LeftUnit,
-	>.internalMultipliedByUndefinedUnit(
-	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
-	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.leftUnitXRightUnit(
-	right.unit,
-).byMultiplying(this, right, factory)
-
-@JvmName("multipliedByUndefinedUnit")
 fun <
 	LeftQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
@@ -85,15 +51,13 @@ TargetUnit,
 	> UndefinedScientificValue<
 	LeftQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByUndefinedUnit(
 	right: UndefinedScientificValue<
 	RightQuantity,
 RightUnit,
 	>,
 	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalMultipliedByUndefinedUnit(
-	right = right,
-	leftUnitXRightUnit = leftUnitXRightUnit,
-	factory = factory,
-)
+) = unit.leftUnitXRightUnit(
+	right.unit,
+).byMultiplying(this, right, factory)

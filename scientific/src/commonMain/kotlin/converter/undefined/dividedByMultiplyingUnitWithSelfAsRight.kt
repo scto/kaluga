@@ -27,49 +27,10 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.jvm.JvmName
 
 // A / Mul<B, A> -> Inv<B>
 
-internal fun <
-	NumeratorAndDenominatorRightQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
-	DenominatorLeftQuantity : UndefinedQuantityType,
-	DenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorLeftQuantity>,
-	DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
-	DenominatorUnit : UndefinedMultipliedUnit<
-		DenominatorLeftQuantity,
-		DenominatorLeftUnit,
-		NumeratorAndDenominatorRightQuantity,
-		DenominatorRightUnit,
-		>,
-	TargetUnit : UndefinedReciprocalUnit<
-		DenominatorLeftQuantity,
-		DenominatorLeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		DenominatorLeftQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorRightQuantity,
-NumeratorUnit,
-	>.internalDividedByMultiplyingUnitWithSelfAsRight(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		DenominatorLeftQuantity,
-		NumeratorAndDenominatorRightQuantity,
-		>,
-DenominatorUnit,
-	>,
-	reciprocalTargetUnit: DenominatorLeftUnit.() -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = right.unit.left.reciprocalTargetUnit().byDividing(this, right, factory)
-
-@JvmName("dividedByMultiplyingUnitWithSelfAsRight")
 fun <
 	NumeratorAndDenominatorRightQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
@@ -95,7 +56,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorRightQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedByMultiplyingUnitWithSelfAsRight(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Multiplying<
 		DenominatorLeftQuantity,
@@ -105,8 +66,4 @@ DenominatorUnit,
 	>,
 	reciprocalTargetUnit: DenominatorLeftUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalDividedByMultiplyingUnitWithSelfAsRight(
-	right = right,
-	reciprocalTargetUnit = reciprocalTargetUnit,
-	factory = factory,
-)
+) = right.unit.left.reciprocalTargetUnit().byDividing(this, right, factory)

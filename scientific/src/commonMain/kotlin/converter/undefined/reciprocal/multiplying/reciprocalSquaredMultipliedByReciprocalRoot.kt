@@ -27,88 +27,10 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.reciprocal
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // Inv<Mul<A, A>> * Inv<A> -> Inv<Mul<Mul<A, A>, A>>
 
-internal fun <
-	LeftReciprocalLeftAndRightAndRightReciprocalQuantity : UndefinedQuantityType,
-	LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightAndRightReciprocalQuantity>,
-	LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightAndRightReciprocalQuantity>,
-	LeftReciprocalUnit : UndefinedMultipliedUnit<
-		LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-		LeftReciprocalLeftUnit,
-		LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-		LeftReciprocalRightUnit,
-		>,
-	LeftUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			>,
-		LeftReciprocalUnit,
-		>,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightAndRightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
-		LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetReciprocalUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			>,
-		LeftReciprocalUnit,
-		LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-		LeftReciprocalLeftUnit,
-		>,
-	TargetUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Multiplying<
-				LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-				LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-				>,
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			>,
-		TargetReciprocalUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Multiplying<
-				LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-				LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-				>,
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			>,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-			>,
-		>,
-LeftUnit,
-	>.internalReciprocalSquaredMultipliedByReciprocalRoot(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
-		>,
-RightUnit,
-	>,
-	leftReciprocalUnitXLeftReciprocalLeftUnit: LeftReciprocalUnit.(LeftReciprocalLeftUnit) -> TargetReciprocalUnit,
-	reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.inverse.leftReciprocalUnitXLeftReciprocalLeftUnit(
-	unit.inverse.left,
-).reciprocalTargetUnit().byMultiplying(this, right, factory)
-
-@JvmName("reciprocalSquaredMultipliedByReciprocalRoot")
 fun <
 	LeftReciprocalLeftAndRightAndRightReciprocalQuantity : UndefinedQuantityType,
 	LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightAndRightReciprocalQuantity>,
@@ -170,7 +92,7 @@ TargetUnit,
 			>,
 		>,
 LeftUnit,
-	>.multipliedBy(
+	>.reciprocalSquaredMultipliedByReciprocalRoot(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		LeftReciprocalLeftAndRightAndRightReciprocalQuantity,
@@ -180,9 +102,6 @@ RightUnit,
 	leftReciprocalUnitXLeftReciprocalLeftUnit: LeftReciprocalUnit.(LeftReciprocalLeftUnit) -> TargetReciprocalUnit,
 	reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalReciprocalSquaredMultipliedByReciprocalRoot(
-	right = right,
-	leftReciprocalUnitXLeftReciprocalLeftUnit = leftReciprocalUnitXLeftReciprocalLeftUnit,
-	reciprocalTargetUnit = reciprocalTargetUnit,
-	factory = factory,
-)
+) = unit.inverse.leftReciprocalUnitXLeftReciprocalLeftUnit(
+	unit.inverse.left,
+).reciprocalTargetUnit().byMultiplying(this, right, factory)

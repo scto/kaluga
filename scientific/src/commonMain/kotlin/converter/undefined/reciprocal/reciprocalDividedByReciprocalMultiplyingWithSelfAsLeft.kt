@@ -31,52 +31,6 @@ import kotlin.jvm.JvmName
 
 // Inv<A> / Inv<Mul<A, B>> -> B
 
-internal fun <
-	NumeratorReciprocalAndDenominatorReciprocalLeftQuantity : UndefinedQuantityType,
-	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftQuantity>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		NumeratorReciprocalAndDenominatorReciprocalLeftQuantity,
-		NumeratorReciprocalUnit,
-		>,
-	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftQuantity>,
-	DenominatorReciprocalRightQuantity : UndefinedQuantityType,
-	DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalRightQuantity>,
-	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalAndDenominatorReciprocalLeftQuantity,
-		DenominatorReciprocalLeftUnit,
-		DenominatorReciprocalRightQuantity,
-		DenominatorReciprocalRightUnit,
-		>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalAndDenominatorReciprocalLeftQuantity,
-			DenominatorReciprocalRightQuantity,
-			>,
-		DenominatorReciprocalUnit,
-		>,
-	DenominatorReciprocalRightValue : UndefinedScientificValue<
-	DenominatorReciprocalRightQuantity,
-DenominatorReciprocalRightUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorReciprocalAndDenominatorReciprocalLeftQuantity,
-		>,
-NumeratorUnit,
-	>.internalReciprocalDividedByReciprocalMultiplyingWithSelfAsLeft(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalAndDenominatorReciprocalLeftQuantity,
-			DenominatorReciprocalRightQuantity,
-			>,
-		>,
-DenominatorUnit,
-	>,
-	factory: (Decimal, DenominatorReciprocalRightUnit) -> DenominatorReciprocalRightValue,
-) = right.unit.inverse.right.byDividing(this, right, factory)
-
-@JvmName("reciprocalDividedByReciprocalMultiplyingWithSelfAsLeft")
 fun <
 	NumeratorReciprocalAndDenominatorReciprocalLeftQuantity : UndefinedQuantityType,
 	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftQuantity>,
@@ -109,7 +63,7 @@ DenominatorReciprocalRightUnit,
 		NumeratorReciprocalAndDenominatorReciprocalLeftQuantity,
 		>,
 NumeratorUnit,
-	>.dividedBy(
+	>.reciprocalDividedByReciprocalMultiplyingWithSelfAsLeft(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		UndefinedQuantityType.Multiplying<
@@ -120,7 +74,4 @@ NumeratorUnit,
 DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorReciprocalRightUnit) -> DenominatorReciprocalRightValue,
-) = internalReciprocalDividedByReciprocalMultiplyingWithSelfAsLeft(
-	right = right,
-	factory = factory,
-)
+) = right.unit.inverse.right.byDividing(this, right, factory)

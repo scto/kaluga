@@ -26,69 +26,10 @@ import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import com.splendo.kaluga.scientific.unit.x
 import kotlin.jvm.JvmName
 
 // A * Mul<B, A> -> Mul<Mul<A, B>, A>
 
-internal fun <
-	LeftAndRightRightQuantity : UndefinedQuantityType,
-	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightRightQuantity>,
-	RightLeftQuantity : UndefinedQuantityType,
-	RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftQuantity>,
-	RightRightUnit : AbstractUndefinedScientificUnit<LeftAndRightRightQuantity>,
-	RightUnit : UndefinedMultipliedUnit<
-		RightLeftQuantity,
-		RightLeftUnit,
-		LeftAndRightRightQuantity,
-		RightRightUnit,
-		>,
-	TargetLeftUnit : UndefinedMultipliedUnit<
-		LeftAndRightRightQuantity,
-		LeftUnit,
-		RightLeftQuantity,
-		RightLeftUnit,
-		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftAndRightRightQuantity,
-			RightLeftQuantity,
-			>,
-		TargetLeftUnit,
-		LeftAndRightRightQuantity,
-		LeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		UndefinedQuantityType.Multiplying<
-			LeftAndRightRightQuantity,
-			RightLeftQuantity,
-			>,
-		LeftAndRightRightQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	LeftAndRightRightQuantity,
-LeftUnit,
-	>.internalMultipliedByMultiplyingUnitWithSelfAsRight(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		RightLeftQuantity,
-		LeftAndRightRightQuantity,
-		>,
-RightUnit,
-	>,
-	leftUnitXRightLeftUnit: LeftUnit.(RightLeftUnit) -> TargetLeftUnit,
-	targetLeftUnitXLeftUnit: TargetLeftUnit.(LeftUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.leftUnitXRightLeftUnit(
-	right.unit.left,
-).targetLeftUnitXLeftUnit(
-	unit,
-).byMultiplying(this, right, factory)
-
-@JvmName("multipliedByMultiplyingUnitWithSelfAsRight")
 fun <
 	LeftAndRightRightQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightRightQuantity>,
@@ -129,7 +70,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	LeftAndRightRightQuantity,
 LeftUnit,
-	>.multipliedBy(
+	>.multipliedByMultiplyingUnitWithSelfAsRight(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Multiplying<
 		RightLeftQuantity,
@@ -140,9 +81,8 @@ RightUnit,
 	leftUnitXRightLeftUnit: LeftUnit.(RightLeftUnit) -> TargetLeftUnit,
 	targetLeftUnitXLeftUnit: TargetLeftUnit.(LeftUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalMultipliedByMultiplyingUnitWithSelfAsRight(
-	right = right,
-	leftUnitXRightLeftUnit = leftUnitXRightLeftUnit,
-	targetLeftUnitXLeftUnit = targetLeftUnitXLeftUnit,
-	factory = factory,
-)
+) = unit.leftUnitXRightLeftUnit(
+	right.unit.left,
+).targetLeftUnitXLeftUnit(
+	unit,
+).byMultiplying(this, right, factory)

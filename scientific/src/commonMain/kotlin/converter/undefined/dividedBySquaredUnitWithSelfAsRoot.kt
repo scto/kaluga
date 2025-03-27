@@ -27,48 +27,10 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import com.splendo.kaluga.scientific.unit.reciprocal
 import kotlin.jvm.JvmName
 
 // A / Mul<A, A> -> Inv<A>
 
-internal fun <
-	NumeratorAndDenominatorLeftAndRightQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
-	DenominatorLeftUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
-	DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
-	DenominatorUnit : UndefinedMultipliedUnit<
-		NumeratorAndDenominatorLeftAndRightQuantity,
-		DenominatorLeftUnit,
-		NumeratorAndDenominatorLeftAndRightQuantity,
-		DenominatorRightUnit,
-		>,
-	TargetUnit : UndefinedReciprocalUnit<
-		NumeratorAndDenominatorLeftAndRightQuantity,
-		NumeratorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorAndDenominatorLeftAndRightQuantity,
-		>,
-TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorLeftAndRightQuantity,
-NumeratorUnit,
-	>.internalDividedBySquaredUnitWithSelfAsRoot(
-	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		NumeratorAndDenominatorLeftAndRightQuantity,
-		NumeratorAndDenominatorLeftAndRightQuantity,
-		>,
-DenominatorUnit,
-	>,
-	reciprocalTargetUnit: NumeratorUnit.() -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
-) = unit.reciprocalTargetUnit().byDividing(this, right, factory)
-
-@JvmName("dividedBySquaredUnitWithSelfAsRoot")
 fun <
 	NumeratorAndDenominatorLeftAndRightQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
@@ -93,7 +55,7 @@ TargetUnit,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorLeftAndRightQuantity,
 NumeratorUnit,
-	>.dividedBy(
+	>.dividedBySquaredUnitWithSelfAsRoot(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Multiplying<
 		NumeratorAndDenominatorLeftAndRightQuantity,
@@ -103,8 +65,4 @@ DenominatorUnit,
 	>,
 	reciprocalTargetUnit: NumeratorUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
-) = internalDividedBySquaredUnitWithSelfAsRoot(
-	right = right,
-	reciprocalTargetUnit = reciprocalTargetUnit,
-	factory = factory,
-)
+) = unit.reciprocalTargetUnit().byDividing(this, right, factory)
