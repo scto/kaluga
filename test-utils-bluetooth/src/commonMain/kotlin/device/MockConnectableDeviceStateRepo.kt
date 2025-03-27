@@ -31,14 +31,14 @@ class MockConnectableDeviceStateRepo(mockConnectableDeviceManager: MockConnectab
     )
 
 class MockConnectableDeviceManager {
-    val mockRequestMtu = this::requestMtu.mock()
-    suspend fun requestMtu(mtu: MTU): Unit = mockRequestMtu.call(mtu)
-
     val mockStartDisconnected = this::startDisconnected.mock()
     fun startDisconnected(): Unit = mockStartDisconnected.call()
 
     val mockReadRssi = this::readRssi.mock()
     suspend fun readRssi(): Unit = mockReadRssi.call()
+
+    val mockRequestMtu = this::requestMtu.mock()
+    suspend fun requestMtu(mtu: MTU): Unit = mockRequestMtu.call(mtu)
 
     val mockPair = this::pair.mock()
     suspend fun pair(): Unit = mockPair.call()
