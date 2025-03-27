@@ -472,7 +472,6 @@ public synthetic class com/splendo/kaluga/resources/HSLColor$$serializer : kotli
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/splendo/kaluga/resources/HSLColor;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/splendo/kaluga/resources/HSLColor$Companion {
