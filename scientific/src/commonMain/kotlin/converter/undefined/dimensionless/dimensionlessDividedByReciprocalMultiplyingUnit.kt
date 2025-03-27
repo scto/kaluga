@@ -36,8 +36,7 @@ import kotlin.jvm.JvmName
 
 // One / Inv<Mul<A, B>> -> Mul<A, B>
 
-@JvmName("dimensionlessDividedByReciprocalMultiplyingUnit")
-fun <
+internal fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorReciprocalLeftQuantity : UndefinedQuantityType,
 	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalLeftQuantity>,
@@ -75,3 +74,46 @@ DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
 ) = right.unit.inverse.byDividing(this, right, factory)
+
+@JvmName("dimensionlessDividedByReciprocalMultiplyingUnit")
+fun <
+	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	DenominatorReciprocalLeftQuantity : UndefinedQuantityType,
+	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalLeftQuantity>,
+	DenominatorReciprocalRightQuantity : UndefinedQuantityType,
+	DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalRightQuantity>,
+	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
+		DenominatorReciprocalLeftQuantity,
+		DenominatorReciprocalLeftUnit,
+		DenominatorReciprocalRightQuantity,
+		DenominatorReciprocalRightUnit,
+		>,
+	DenominatorUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			DenominatorReciprocalLeftQuantity,
+			DenominatorReciprocalRightQuantity,
+			>,
+		DenominatorReciprocalUnit,
+		>,
+	DenominatorReciprocalValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		DenominatorReciprocalLeftQuantity,
+		DenominatorReciprocalRightQuantity,
+		>,
+DenominatorReciprocalUnit,
+	>,
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			DenominatorReciprocalLeftQuantity,
+			DenominatorReciprocalRightQuantity,
+			>,
+		>,
+DenominatorUnit,
+	>,
+	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
+) = dividedByReciprocalMultiplyingUnit(
+	right = right,
+	factory = factory,
+)

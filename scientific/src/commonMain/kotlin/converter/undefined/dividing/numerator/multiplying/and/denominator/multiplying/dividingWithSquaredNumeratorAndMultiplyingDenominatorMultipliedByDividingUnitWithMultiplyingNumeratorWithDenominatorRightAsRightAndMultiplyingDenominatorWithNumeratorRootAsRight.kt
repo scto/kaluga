@@ -33,8 +33,7 @@ import kotlin.jvm.JvmName
 
 // Div<Mul<A, A>, Mul<B, C>> * Div<Mul<D, C>, Mul<E, A>> -> Div<Mul<A, D>, Mul<B, E>>
 
-@JvmName("dividingWithSquaredNumeratorAndMultiplyingDenominatorMultipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorRightAsRightAndMultiplyingDenominatorWithNumeratorRootAsRight")
-fun <
+internal fun <
 	LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity : UndefinedQuantityType,
 	LeftNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity>,
 	LeftNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity>,
@@ -170,3 +169,141 @@ RightUnit,
 	right.unit.denominator.left,
 ),
 ).byMultiplying(this, right, factory)
+
+@JvmName("dividingWithSquaredNumeratorAndMultiplyingDenominatorMultipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorRightAsRightAndMultiplyingDenominatorWithNumeratorRootAsRight")
+fun <
+	LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity : UndefinedQuantityType,
+	LeftNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity>,
+	LeftNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity>,
+	LeftNumeratorUnit : UndefinedMultipliedUnit<
+		LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+		LeftNumeratorLeftUnit,
+		LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+		LeftNumeratorRightUnit,
+		>,
+	LeftDenominatorLeftQuantity : UndefinedQuantityType,
+	LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftQuantity>,
+	LeftDenominatorRightAndRightNumeratorRightQuantity : UndefinedQuantityType,
+	LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightAndRightNumeratorRightQuantity>,
+	LeftDenominatorUnit : UndefinedMultipliedUnit<
+		LeftDenominatorLeftQuantity,
+		LeftDenominatorLeftUnit,
+		LeftDenominatorRightAndRightNumeratorRightQuantity,
+		LeftDenominatorRightUnit,
+		>,
+	LeftUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			>,
+		LeftNumeratorUnit,
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftQuantity,
+			LeftDenominatorRightAndRightNumeratorRightQuantity,
+			>,
+		LeftDenominatorUnit,
+		>,
+	RightNumeratorLeftQuantity : UndefinedQuantityType,
+	RightNumeratorLeftUnit : AbstractUndefinedScientificUnit<RightNumeratorLeftQuantity>,
+	RightNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightAndRightNumeratorRightQuantity>,
+	RightNumeratorUnit : UndefinedMultipliedUnit<
+		RightNumeratorLeftQuantity,
+		RightNumeratorLeftUnit,
+		LeftDenominatorRightAndRightNumeratorRightQuantity,
+		RightNumeratorRightUnit,
+		>,
+	RightDenominatorLeftQuantity : UndefinedQuantityType,
+	RightDenominatorLeftUnit : AbstractUndefinedScientificUnit<RightDenominatorLeftQuantity>,
+	RightDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity>,
+	RightDenominatorUnit : UndefinedMultipliedUnit<
+		RightDenominatorLeftQuantity,
+		RightDenominatorLeftUnit,
+		LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+		RightDenominatorRightUnit,
+		>,
+	RightUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			RightNumeratorLeftQuantity,
+			LeftDenominatorRightAndRightNumeratorRightQuantity,
+			>,
+		RightNumeratorUnit,
+		UndefinedQuantityType.Multiplying<
+			RightDenominatorLeftQuantity,
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			>,
+		RightDenominatorUnit,
+		>,
+	TargetNumeratorUnit : UndefinedMultipliedUnit<
+		LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+		LeftNumeratorLeftUnit,
+		RightNumeratorLeftQuantity,
+		RightNumeratorLeftUnit,
+		>,
+	TargetDenominatorUnit : UndefinedMultipliedUnit<
+		LeftDenominatorLeftQuantity,
+		LeftDenominatorLeftUnit,
+		RightDenominatorLeftQuantity,
+		RightDenominatorLeftUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			RightNumeratorLeftQuantity,
+			>,
+		TargetNumeratorUnit,
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftQuantity,
+			RightDenominatorLeftQuantity,
+			>,
+		TargetDenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			RightNumeratorLeftQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftQuantity,
+			RightDenominatorLeftQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftQuantity,
+			LeftDenominatorRightAndRightNumeratorRightQuantity,
+			>,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			RightNumeratorLeftQuantity,
+			LeftDenominatorRightAndRightNumeratorRightQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			RightDenominatorLeftQuantity,
+			LeftNumeratorLeftAndRightAndRightDenominatorRightQuantity,
+			>,
+		>,
+RightUnit,
+	>,
+	leftNumeratorLeftUnitXRightNumeratorLeftUnit: LeftNumeratorLeftUnit.(RightNumeratorLeftUnit) -> TargetNumeratorUnit,
+	leftDenominatorLeftUnitXRightDenominatorLeftUnit: LeftDenominatorLeftUnit.(RightDenominatorLeftUnit) -> TargetDenominatorUnit,
+	targetNumeratorUnitPerTargetDenominatorUnit: TargetNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByDividingUnitWithMultiplyingNumeratorWithDenominatorRightAsRightAndMultiplyingDenominatorWithNumeratorRootAsRight(
+	right = right,
+	leftNumeratorLeftUnitXRightNumeratorLeftUnit = leftNumeratorLeftUnitXRightNumeratorLeftUnit,
+	leftDenominatorLeftUnitXRightDenominatorLeftUnit = leftDenominatorLeftUnitXRightDenominatorLeftUnit,
+	targetNumeratorUnitPerTargetDenominatorUnit = targetNumeratorUnitPerTargetDenominatorUnit,
+	factory = factory,
+)

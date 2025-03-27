@@ -36,8 +36,7 @@ import kotlin.jvm.JvmName
 
 // A * Inv<A> -> One
 
-@JvmName("multipliedBySelf")
-fun <
+internal fun <
 	LeftAndRightReciprocalQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
 	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
@@ -60,3 +59,32 @@ RightUnit,
 	getDimensionless: () -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byMultiplying(this, right, factory)
+
+@JvmName("multipliedBySelf")
+fun <
+	LeftAndRightReciprocalQuantity : UndefinedQuantityType,
+	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
+	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalQuantity>,
+	RightUnit : UndefinedReciprocalUnit<
+		LeftAndRightReciprocalQuantity,
+		RightReciprocalUnit,
+		>,
+	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+	> UndefinedScientificValue<
+	LeftAndRightReciprocalQuantity,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		LeftAndRightReciprocalQuantity,
+		>,
+RightUnit,
+	>,
+	getDimensionless: () -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedBySelf(
+	right = right,
+	getDimensionless = getDimensionless,
+	factory = factory,
+)

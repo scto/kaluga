@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // A * Inv<Mul<A, A>> -> Inv<A>
 
-@JvmName("multipliedByReciprocalSquaredWithSelfAsRoot")
-fun <
+internal fun <
 	LeftAndRightReciprocalLeftAndRightQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalLeftAndRightQuantity>,
 	RightReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalLeftAndRightQuantity>,
@@ -77,3 +76,53 @@ RightUnit,
 	reciprocalTargetUnit: LeftUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.reciprocalTargetUnit().byMultiplying(this, right, factory)
+
+@JvmName("multipliedByReciprocalSquaredWithSelfAsRoot")
+fun <
+	LeftAndRightReciprocalLeftAndRightQuantity : UndefinedQuantityType,
+	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalLeftAndRightQuantity>,
+	RightReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalLeftAndRightQuantity>,
+	RightReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalLeftAndRightQuantity>,
+	RightReciprocalUnit : UndefinedMultipliedUnit<
+		LeftAndRightReciprocalLeftAndRightQuantity,
+		RightReciprocalLeftUnit,
+		LeftAndRightReciprocalLeftAndRightQuantity,
+		RightReciprocalRightUnit,
+		>,
+	RightUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightReciprocalLeftAndRightQuantity,
+			LeftAndRightReciprocalLeftAndRightQuantity,
+			>,
+		RightReciprocalUnit,
+		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		LeftAndRightReciprocalLeftAndRightQuantity,
+		LeftUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		LeftAndRightReciprocalLeftAndRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	LeftAndRightReciprocalLeftAndRightQuantity,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightReciprocalLeftAndRightQuantity,
+			LeftAndRightReciprocalLeftAndRightQuantity,
+			>,
+		>,
+RightUnit,
+	>,
+	reciprocalTargetUnit: LeftUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByReciprocalSquaredWithSelfAsRoot(
+	right = right,
+	reciprocalTargetUnit = reciprocalTargetUnit,
+	factory = factory,
+)

@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, B> * Mul<A, A> -> Mul<Mul<A, B>, Mul<A, A>>
 
-@JvmName("multiplyingMultipliedBySquaredUnitWithLeftAsRoot")
-fun <
+internal fun <
 	LeftLeftAndRightLeftAndRightQuantity : UndefinedQuantityType,
 	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightLeftAndRightQuantity>,
 	LeftRightQuantity : UndefinedQuantityType,
@@ -95,3 +94,70 @@ RightUnit,
 ) = unit.leftUnitXRightUnit(
 	right.unit,
 ).byMultiplying(this, right, factory)
+
+@JvmName("multiplyingMultipliedBySquaredUnitWithLeftAsRoot")
+fun <
+	LeftLeftAndRightLeftAndRightQuantity : UndefinedQuantityType,
+	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightLeftAndRightQuantity>,
+	LeftRightQuantity : UndefinedQuantityType,
+	LeftRightUnit : AbstractUndefinedScientificUnit<LeftRightQuantity>,
+	LeftUnit : UndefinedMultipliedUnit<
+		LeftLeftAndRightLeftAndRightQuantity,
+		LeftLeftUnit,
+		LeftRightQuantity,
+		LeftRightUnit,
+		>,
+	RightLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightLeftAndRightQuantity>,
+	RightRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightLeftAndRightQuantity>,
+	RightUnit : UndefinedMultipliedUnit<
+		LeftLeftAndRightLeftAndRightQuantity,
+		RightLeftUnit,
+		LeftLeftAndRightLeftAndRightQuantity,
+		RightRightUnit,
+		>,
+	TargetUnit : UndefinedMultipliedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightLeftAndRightQuantity,
+			LeftRightQuantity,
+			>,
+		LeftUnit,
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightLeftAndRightQuantity,
+			LeftLeftAndRightLeftAndRightQuantity,
+			>,
+		RightUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightLeftAndRightQuantity,
+			LeftRightQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightLeftAndRightQuantity,
+			LeftLeftAndRightLeftAndRightQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftLeftAndRightLeftAndRightQuantity,
+		LeftRightQuantity,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftLeftAndRightLeftAndRightQuantity,
+		LeftLeftAndRightLeftAndRightQuantity,
+		>,
+RightUnit,
+	>,
+	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedBySquaredUnitWithLeftAsRoot(
+	right = right,
+	leftUnitXRightUnit = leftUnitXRightUnit,
+	factory = factory,
+)

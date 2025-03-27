@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, B> * Mul<B, A> -> Mul<Mul<A, B>, Mul<B, A>>
 
-@JvmName("multiplyingMultipliedBySelfFlipped")
-fun <
+internal fun <
 	LeftLeftAndRightRightQuantity : UndefinedQuantityType,
 	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightRightQuantity>,
 	LeftRightAndRightLeftQuantity : UndefinedQuantityType,
@@ -95,3 +94,70 @@ RightUnit,
 ) = unit.leftUnitXRightUnit(
 	right.unit,
 ).byMultiplying(this, right, factory)
+
+@JvmName("multiplyingMultipliedBySelfFlipped")
+fun <
+	LeftLeftAndRightRightQuantity : UndefinedQuantityType,
+	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightRightQuantity>,
+	LeftRightAndRightLeftQuantity : UndefinedQuantityType,
+	LeftRightUnit : AbstractUndefinedScientificUnit<LeftRightAndRightLeftQuantity>,
+	LeftUnit : UndefinedMultipliedUnit<
+		LeftLeftAndRightRightQuantity,
+		LeftLeftUnit,
+		LeftRightAndRightLeftQuantity,
+		LeftRightUnit,
+		>,
+	RightLeftUnit : AbstractUndefinedScientificUnit<LeftRightAndRightLeftQuantity>,
+	RightRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightRightQuantity>,
+	RightUnit : UndefinedMultipliedUnit<
+		LeftRightAndRightLeftQuantity,
+		RightLeftUnit,
+		LeftLeftAndRightRightQuantity,
+		RightRightUnit,
+		>,
+	TargetUnit : UndefinedMultipliedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightRightQuantity,
+			LeftRightAndRightLeftQuantity,
+			>,
+		LeftUnit,
+		UndefinedQuantityType.Multiplying<
+			LeftRightAndRightLeftQuantity,
+			LeftLeftAndRightRightQuantity,
+			>,
+		RightUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightRightQuantity,
+			LeftRightAndRightLeftQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			LeftRightAndRightLeftQuantity,
+			LeftLeftAndRightRightQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftLeftAndRightRightQuantity,
+		LeftRightAndRightLeftQuantity,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftRightAndRightLeftQuantity,
+		LeftLeftAndRightRightQuantity,
+		>,
+RightUnit,
+	>,
+	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedBySelfFlipped(
+	right = right,
+	leftUnitXRightUnit = leftUnitXRightUnit,
+	factory = factory,
+)

@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // Inv<A> / Inv<B> -> Div<B, A>
 
-@JvmName("reciprocalDividedByReciprocalUndefinedUnit")
-fun <
+internal fun <
 	NumeratorReciprocalQuantity : UndefinedQuantityType,
 	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalQuantity>,
 	NumeratorUnit : UndefinedReciprocalUnit<
@@ -76,3 +75,50 @@ DenominatorUnit,
 ) = right.unit.inverse.denominatorReciprocalUnitPerNumeratorReciprocalUnit(
 	unit.inverse,
 ).byDividing(this, right, factory)
+
+@JvmName("reciprocalDividedByReciprocalUndefinedUnit")
+fun <
+	NumeratorReciprocalQuantity : UndefinedQuantityType,
+	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalQuantity>,
+	NumeratorUnit : UndefinedReciprocalUnit<
+		NumeratorReciprocalQuantity,
+		NumeratorReciprocalUnit,
+		>,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorUnit : UndefinedReciprocalUnit<
+		DenominatorReciprocalQuantity,
+		DenominatorReciprocalUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		DenominatorReciprocalQuantity,
+		DenominatorReciprocalUnit,
+		NumeratorReciprocalQuantity,
+		NumeratorReciprocalUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		DenominatorReciprocalQuantity,
+		NumeratorReciprocalQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		NumeratorReciprocalQuantity,
+		>,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		DenominatorReciprocalQuantity,
+		>,
+DenominatorUnit,
+	>,
+	denominatorReciprocalUnitPerNumeratorReciprocalUnit: DenominatorReciprocalUnit.(NumeratorReciprocalUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByReciprocalUndefinedUnit(
+	right = right,
+	denominatorReciprocalUnitPerNumeratorReciprocalUnit = denominatorReciprocalUnitPerNumeratorReciprocalUnit,
+	factory = factory,
+)

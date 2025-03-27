@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // Div<A, Mul<B, C>> * Div<Mul<B, B>, A> -> Div<B, C>
 
-@JvmName("dividingWithMultiplyingDenominatorMultipliedByDividingUnitWithSquaredNumeratorWithDenominatorLeftAsRootAndNumeratorAsDenominator")
-fun <
+internal fun <
 	LeftNumeratorAndRightDenominatorQuantity : UndefinedQuantityType,
 	LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
 	LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity : UndefinedQuantityType,
@@ -111,3 +110,85 @@ RightUnit,
 ) = unit.denominator.left.leftDenominatorLeftUnitPerLeftDenominatorRightUnit(
 	unit.denominator.right,
 ).byMultiplying(this, right, factory)
+
+@JvmName("dividingWithMultiplyingDenominatorMultipliedByDividingUnitWithSquaredNumeratorWithDenominatorLeftAsRootAndNumeratorAsDenominator")
+fun <
+	LeftNumeratorAndRightDenominatorQuantity : UndefinedQuantityType,
+	LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
+	LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity : UndefinedQuantityType,
+	LeftDenominatorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity>,
+	LeftDenominatorRightQuantity : UndefinedQuantityType,
+	LeftDenominatorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorRightQuantity>,
+	LeftDenominatorUnit : UndefinedMultipliedUnit<
+		LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+		LeftDenominatorLeftUnit,
+		LeftDenominatorRightQuantity,
+		LeftDenominatorRightUnit,
+		>,
+	LeftUnit : UndefinedDividedUnit<
+		LeftNumeratorAndRightDenominatorQuantity,
+		LeftNumeratorUnit,
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+			LeftDenominatorRightQuantity,
+			>,
+		LeftDenominatorUnit,
+		>,
+	RightNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity>,
+	RightNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity>,
+	RightNumeratorUnit : UndefinedMultipliedUnit<
+		LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+		RightNumeratorLeftUnit,
+		LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+		RightNumeratorRightUnit,
+		>,
+	RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
+	RightUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+			LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+			>,
+		RightNumeratorUnit,
+		LeftNumeratorAndRightDenominatorQuantity,
+		RightDenominatorUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+		LeftDenominatorLeftUnit,
+		LeftDenominatorRightQuantity,
+		LeftDenominatorRightUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+		LeftDenominatorRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		LeftNumeratorAndRightDenominatorQuantity,
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+			LeftDenominatorRightQuantity,
+			>,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+			LeftDenominatorLeftAndRightNumeratorLeftAndRightQuantity,
+			>,
+		LeftNumeratorAndRightDenominatorQuantity,
+		>,
+RightUnit,
+	>,
+	leftDenominatorLeftUnitPerLeftDenominatorRightUnit: LeftDenominatorLeftUnit.(LeftDenominatorRightUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByDividingUnitWithSquaredNumeratorWithDenominatorLeftAsRootAndNumeratorAsDenominator(
+	right = right,
+	leftDenominatorLeftUnitPerLeftDenominatorRightUnit = leftDenominatorLeftUnitPerLeftDenominatorRightUnit,
+	factory = factory,
+)

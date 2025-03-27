@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // A * B -> Mul<A, B>
 
-@JvmName("multipliedByUndefinedUnit")
-fun <
+internal fun <
 	LeftQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
 	RightQuantity : UndefinedQuantityType,
@@ -63,3 +62,38 @@ RightUnit,
 ) = unit.leftUnitXRightUnit(
 	right.unit,
 ).byMultiplying(this, right, factory)
+
+@JvmName("multipliedByUndefinedUnit")
+fun <
+	LeftQuantity : UndefinedQuantityType,
+	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
+	RightQuantity : UndefinedQuantityType,
+	RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
+	TargetUnit : UndefinedMultipliedUnit<
+		LeftQuantity,
+		LeftUnit,
+		RightQuantity,
+		RightUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftQuantity,
+		RightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	LeftQuantity,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	RightQuantity,
+RightUnit,
+	>,
+	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByUndefinedUnit(
+	right = right,
+	leftUnitXRightUnit = leftUnitXRightUnit,
+	factory = factory,
+)

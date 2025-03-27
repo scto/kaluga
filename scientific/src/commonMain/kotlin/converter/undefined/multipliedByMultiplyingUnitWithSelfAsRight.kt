@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // A * Mul<B, A> -> Mul<Mul<A, B>, A>
 
-@JvmName("multipliedByMultiplyingUnitWithSelfAsRight")
-fun <
+internal fun <
 	LeftAndRightRightQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightRightQuantity>,
 	RightLeftQuantity : UndefinedQuantityType,
@@ -88,3 +87,62 @@ RightUnit,
 ).targetLeftUnitXLeftUnit(
 	unit,
 ).byMultiplying(this, right, factory)
+
+@JvmName("multipliedByMultiplyingUnitWithSelfAsRight")
+fun <
+	LeftAndRightRightQuantity : UndefinedQuantityType,
+	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightRightQuantity>,
+	RightLeftQuantity : UndefinedQuantityType,
+	RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftQuantity>,
+	RightRightUnit : AbstractUndefinedScientificUnit<LeftAndRightRightQuantity>,
+	RightUnit : UndefinedMultipliedUnit<
+		RightLeftQuantity,
+		RightLeftUnit,
+		LeftAndRightRightQuantity,
+		RightRightUnit,
+		>,
+	TargetLeftUnit : UndefinedMultipliedUnit<
+		LeftAndRightRightQuantity,
+		LeftUnit,
+		RightLeftQuantity,
+		RightLeftUnit,
+		>,
+	TargetUnit : UndefinedMultipliedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightRightQuantity,
+			RightLeftQuantity,
+			>,
+		TargetLeftUnit,
+		LeftAndRightRightQuantity,
+		LeftUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightRightQuantity,
+			RightLeftQuantity,
+			>,
+		LeftAndRightRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	LeftAndRightRightQuantity,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		RightLeftQuantity,
+		LeftAndRightRightQuantity,
+		>,
+RightUnit,
+	>,
+	leftUnitXRightLeftUnit: LeftUnit.(RightLeftUnit) -> TargetLeftUnit,
+	targetLeftUnitXLeftUnit: TargetLeftUnit.(LeftUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByMultiplyingUnitWithSelfAsRight(
+	right = right,
+	leftUnitXRightLeftUnit = leftUnitXRightLeftUnit,
+	targetLeftUnitXLeftUnit = targetLeftUnitXLeftUnit,
+	factory = factory,
+)

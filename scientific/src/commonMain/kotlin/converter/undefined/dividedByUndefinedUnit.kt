@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // A / B -> Div<A, B>
 
-@JvmName("dividedByUndefinedUnit")
-fun <
+internal fun <
 	NumeratorQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
 	DenominatorQuantity : UndefinedQuantityType,
@@ -63,3 +62,38 @@ DenominatorUnit,
 ) = unit.numeratorUnitPerDenominatorUnit(
 	right.unit,
 ).byDividing(this, right, factory)
+
+@JvmName("dividedByUndefinedUnit")
+fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
+	DenominatorQuantity : UndefinedQuantityType,
+	DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
+	TargetUnit : UndefinedDividedUnit<
+		NumeratorQuantity,
+		NumeratorUnit,
+		DenominatorQuantity,
+		DenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		NumeratorQuantity,
+		DenominatorQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	NumeratorQuantity,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	DenominatorQuantity,
+DenominatorUnit,
+	>,
+	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByUndefinedUnit(
+	right = right,
+	numeratorUnitPerDenominatorUnit = numeratorUnitPerDenominatorUnit,
+	factory = factory,
+)

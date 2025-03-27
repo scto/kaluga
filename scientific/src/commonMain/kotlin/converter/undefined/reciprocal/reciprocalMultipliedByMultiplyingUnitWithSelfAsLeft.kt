@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // Inv<A> * Mul<A, B> -> B
 
-@JvmName("reciprocalMultipliedByMultiplyingUnitWithSelfAsLeft")
-fun <
+internal fun <
 	LeftReciprocalAndRightLeftQuantity : UndefinedQuantityType,
 	LeftReciprocalUnit : AbstractUndefinedScientificUnit<LeftReciprocalAndRightLeftQuantity>,
 	LeftUnit : UndefinedReciprocalUnit<
@@ -67,3 +66,43 @@ RightUnit,
 	>,
 	factory: (Decimal, RightRightUnit) -> RightRightValue,
 ) = right.unit.right.byMultiplying(this, right, factory)
+
+@JvmName("reciprocalMultipliedByMultiplyingUnitWithSelfAsLeft")
+fun <
+	LeftReciprocalAndRightLeftQuantity : UndefinedQuantityType,
+	LeftReciprocalUnit : AbstractUndefinedScientificUnit<LeftReciprocalAndRightLeftQuantity>,
+	LeftUnit : UndefinedReciprocalUnit<
+		LeftReciprocalAndRightLeftQuantity,
+		LeftReciprocalUnit,
+		>,
+	RightLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalAndRightLeftQuantity>,
+	RightRightQuantity : UndefinedQuantityType,
+	RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
+	RightUnit : UndefinedMultipliedUnit<
+		LeftReciprocalAndRightLeftQuantity,
+		RightLeftUnit,
+		RightRightQuantity,
+		RightRightUnit,
+		>,
+	RightRightValue : UndefinedScientificValue<
+	RightRightQuantity,
+RightRightUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		LeftReciprocalAndRightLeftQuantity,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftReciprocalAndRightLeftQuantity,
+		RightRightQuantity,
+		>,
+RightUnit,
+	>,
+	factory: (Decimal, RightRightUnit) -> RightRightValue,
+) = multipliedByMultiplyingUnitWithSelfAsLeft(
+	right = right,
+	factory = factory,
+)

@@ -36,8 +36,7 @@ import kotlin.jvm.JvmName
 
 // One / Div<A, B> -> Div<B, A>
 
-@JvmName("dimensionlessDividedByDividingUnit")
-fun <
+internal fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorNumeratorQuantity : UndefinedQuantityType,
 	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorQuantity>,
@@ -75,3 +74,45 @@ DenominatorUnit,
 ) = right.unit.denominator.denominatorDenominatorUnitPerDenominatorNumeratorUnit(
 	right.unit.numerator,
 ).byDividing(this, right, factory)
+
+@JvmName("dimensionlessDividedByDividingUnit")
+fun <
+	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	DenominatorNumeratorQuantity : UndefinedQuantityType,
+	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorQuantity>,
+	DenominatorDenominatorQuantity : UndefinedQuantityType,
+	DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
+	DenominatorUnit : UndefinedDividedUnit<
+		DenominatorNumeratorQuantity,
+		DenominatorNumeratorUnit,
+		DenominatorDenominatorQuantity,
+		DenominatorDenominatorUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		DenominatorDenominatorQuantity,
+		DenominatorDenominatorUnit,
+		DenominatorNumeratorQuantity,
+		DenominatorNumeratorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		DenominatorDenominatorQuantity,
+		DenominatorNumeratorQuantity,
+		>,
+TargetUnit,
+	>,
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		DenominatorNumeratorQuantity,
+		DenominatorDenominatorQuantity,
+		>,
+DenominatorUnit,
+	>,
+	denominatorDenominatorUnitPerDenominatorNumeratorUnit: DenominatorDenominatorUnit.(DenominatorNumeratorUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByDividingUnit(
+	right = right,
+	denominatorDenominatorUnitPerDenominatorNumeratorUnit = denominatorDenominatorUnitPerDenominatorNumeratorUnit,
+	factory = factory,
+)

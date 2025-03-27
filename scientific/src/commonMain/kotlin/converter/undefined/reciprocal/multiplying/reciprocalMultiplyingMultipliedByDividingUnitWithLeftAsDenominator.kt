@@ -34,8 +34,7 @@ import kotlin.jvm.JvmName
 
 // Inv<Mul<A, B>> * Div<C, A> -> Div<C, Mul<Mul<A, B>, A>>
 
-@JvmName("reciprocalMultiplyingMultipliedByDividingUnitWithLeftAsDenominator")
-fun <
+internal fun <
 	LeftReciprocalLeftAndRightDenominatorQuantity : UndefinedQuantityType,
 	LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightDenominatorQuantity>,
 	LeftReciprocalRightQuantity : UndefinedQuantityType,
@@ -120,3 +119,91 @@ RightUnit,
 	unit.inverse.left,
 ),
 ).byMultiplying(this, right, factory)
+
+@JvmName("reciprocalMultiplyingMultipliedByDividingUnitWithLeftAsDenominator")
+fun <
+	LeftReciprocalLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+	LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightDenominatorQuantity>,
+	LeftReciprocalRightQuantity : UndefinedQuantityType,
+	LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalRightQuantity>,
+	LeftReciprocalUnit : UndefinedMultipliedUnit<
+		LeftReciprocalLeftAndRightDenominatorQuantity,
+		LeftReciprocalLeftUnit,
+		LeftReciprocalRightQuantity,
+		LeftReciprocalRightUnit,
+		>,
+	LeftUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightDenominatorQuantity,
+			LeftReciprocalRightQuantity,
+			>,
+		LeftReciprocalUnit,
+		>,
+	RightNumeratorQuantity : UndefinedQuantityType,
+	RightNumeratorUnit : AbstractUndefinedScientificUnit<RightNumeratorQuantity>,
+	RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightDenominatorQuantity>,
+	RightUnit : UndefinedDividedUnit<
+		RightNumeratorQuantity,
+		RightNumeratorUnit,
+		LeftReciprocalLeftAndRightDenominatorQuantity,
+		RightDenominatorUnit,
+		>,
+	TargetDenominatorUnit : UndefinedMultipliedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightDenominatorQuantity,
+			LeftReciprocalRightQuantity,
+			>,
+		LeftReciprocalUnit,
+		LeftReciprocalLeftAndRightDenominatorQuantity,
+		LeftReciprocalLeftUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		RightNumeratorQuantity,
+		RightNumeratorUnit,
+		UndefinedQuantityType.Multiplying<
+			UndefinedQuantityType.Multiplying<
+				LeftReciprocalLeftAndRightDenominatorQuantity,
+				LeftReciprocalRightQuantity,
+				>,
+			LeftReciprocalLeftAndRightDenominatorQuantity,
+			>,
+		TargetDenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		RightNumeratorQuantity,
+		UndefinedQuantityType.Multiplying<
+			UndefinedQuantityType.Multiplying<
+				LeftReciprocalLeftAndRightDenominatorQuantity,
+				LeftReciprocalRightQuantity,
+				>,
+			LeftReciprocalLeftAndRightDenominatorQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightDenominatorQuantity,
+			LeftReciprocalRightQuantity,
+			>,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		RightNumeratorQuantity,
+		LeftReciprocalLeftAndRightDenominatorQuantity,
+		>,
+RightUnit,
+	>,
+	leftReciprocalUnitXLeftReciprocalLeftUnit: LeftReciprocalUnit.(LeftReciprocalLeftUnit) -> TargetDenominatorUnit,
+	rightNumeratorUnitPerTargetDenominatorUnit: RightNumeratorUnit.(TargetDenominatorUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByDividingUnitWithLeftAsDenominator(
+	right = right,
+	leftReciprocalUnitXLeftReciprocalLeftUnit = leftReciprocalUnitXLeftReciprocalLeftUnit,
+	rightNumeratorUnitPerTargetDenominatorUnit = rightNumeratorUnitPerTargetDenominatorUnit,
+	factory = factory,
+)

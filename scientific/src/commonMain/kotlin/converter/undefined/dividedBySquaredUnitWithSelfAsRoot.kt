@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // A / Mul<A, A> -> Inv<A>
 
-@JvmName("dividedBySquaredUnitWithSelfAsRoot")
-fun <
+internal fun <
 	NumeratorAndDenominatorLeftAndRightQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
 	DenominatorLeftUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
@@ -68,3 +67,44 @@ DenominatorUnit,
 	reciprocalTargetUnit: NumeratorUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.reciprocalTargetUnit().byDividing(this, right, factory)
+
+@JvmName("dividedBySquaredUnitWithSelfAsRoot")
+fun <
+	NumeratorAndDenominatorLeftAndRightQuantity : UndefinedQuantityType,
+	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
+	DenominatorLeftUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
+	DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorLeftAndRightQuantity>,
+	DenominatorUnit : UndefinedMultipliedUnit<
+		NumeratorAndDenominatorLeftAndRightQuantity,
+		DenominatorLeftUnit,
+		NumeratorAndDenominatorLeftAndRightQuantity,
+		DenominatorRightUnit,
+		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		NumeratorAndDenominatorLeftAndRightQuantity,
+		NumeratorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		NumeratorAndDenominatorLeftAndRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	NumeratorAndDenominatorLeftAndRightQuantity,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorAndDenominatorLeftAndRightQuantity,
+		NumeratorAndDenominatorLeftAndRightQuantity,
+		>,
+DenominatorUnit,
+	>,
+	reciprocalTargetUnit: NumeratorUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedBySquaredUnitWithSelfAsRoot(
+	right = right,
+	reciprocalTargetUnit = reciprocalTargetUnit,
+	factory = factory,
+)

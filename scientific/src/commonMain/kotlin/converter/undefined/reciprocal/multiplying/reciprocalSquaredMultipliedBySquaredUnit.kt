@@ -33,8 +33,7 @@ import kotlin.jvm.JvmName
 
 // Inv<Mul<A, A>> * Mul<B, B> -> Div<Mul<B, B>, Mul<A, A>>
 
-@JvmName("reciprocalSquaredMultipliedBySquaredUnit")
-fun <
+internal fun <
 	LeftReciprocalLeftAndRightQuantity : UndefinedQuantityType,
 	LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightQuantity>,
 	LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightQuantity>,
@@ -106,3 +105,79 @@ RightUnit,
 ) = right.unit.rightUnitPerLeftReciprocalUnit(
 	unit.inverse,
 ).byMultiplying(this, right, factory)
+
+@JvmName("reciprocalSquaredMultipliedBySquaredUnit")
+fun <
+	LeftReciprocalLeftAndRightQuantity : UndefinedQuantityType,
+	LeftReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightQuantity>,
+	LeftReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftReciprocalLeftAndRightQuantity>,
+	LeftReciprocalUnit : UndefinedMultipliedUnit<
+		LeftReciprocalLeftAndRightQuantity,
+		LeftReciprocalLeftUnit,
+		LeftReciprocalLeftAndRightQuantity,
+		LeftReciprocalRightUnit,
+		>,
+	LeftUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightQuantity,
+			LeftReciprocalLeftAndRightQuantity,
+			>,
+		LeftReciprocalUnit,
+		>,
+	RightLeftAndRightQuantity : UndefinedQuantityType,
+	RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftAndRightQuantity>,
+	RightRightUnit : AbstractUndefinedScientificUnit<RightLeftAndRightQuantity>,
+	RightUnit : UndefinedMultipliedUnit<
+		RightLeftAndRightQuantity,
+		RightLeftUnit,
+		RightLeftAndRightQuantity,
+		RightRightUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			RightLeftAndRightQuantity,
+			RightLeftAndRightQuantity,
+			>,
+		RightUnit,
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightQuantity,
+			LeftReciprocalLeftAndRightQuantity,
+			>,
+		LeftReciprocalUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			RightLeftAndRightQuantity,
+			RightLeftAndRightQuantity,
+			>,
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightQuantity,
+			LeftReciprocalLeftAndRightQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			LeftReciprocalLeftAndRightQuantity,
+			LeftReciprocalLeftAndRightQuantity,
+			>,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		RightLeftAndRightQuantity,
+		RightLeftAndRightQuantity,
+		>,
+RightUnit,
+	>,
+	rightUnitPerLeftReciprocalUnit: RightUnit.(LeftReciprocalUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedBySquaredUnit(
+	right = right,
+	rightUnitPerLeftReciprocalUnit = rightUnitPerLeftReciprocalUnit,
+	factory = factory,
+)

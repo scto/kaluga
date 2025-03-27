@@ -35,8 +35,7 @@ import kotlin.jvm.JvmName
 
 // One / Inv<A> -> A
 
-@JvmName("dimensionlessDividedByReciprocalUndefinedUnit")
-fun <
+internal fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorReciprocalQuantity : UndefinedQuantityType,
 	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalQuantity>,
@@ -57,3 +56,29 @@ DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
 ) = right.unit.inverse.byDividing(this, right, factory)
+
+@JvmName("dimensionlessDividedByReciprocalUndefinedUnit")
+fun <
+	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	DenominatorReciprocalQuantity : UndefinedQuantityType,
+	DenominatorReciprocalUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalQuantity>,
+	DenominatorUnit : UndefinedReciprocalUnit<
+		DenominatorReciprocalQuantity,
+		DenominatorReciprocalUnit,
+		>,
+	DenominatorReciprocalValue : UndefinedScientificValue<
+	DenominatorReciprocalQuantity,
+DenominatorReciprocalUnit,
+	>,
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		DenominatorReciprocalQuantity,
+		>,
+DenominatorUnit,
+	>,
+	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
+) = dividedByReciprocalUndefinedUnit(
+	right = right,
+	factory = factory,
+)

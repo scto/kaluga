@@ -37,8 +37,7 @@ import kotlin.jvm.JvmName
 
 // One / Mul<A, B> -> Inv<Mul<A, B>>
 
-@JvmName("dimensionlessDividedByMultiplyingUnit")
-fun <
+internal fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorLeftQuantity : UndefinedQuantityType,
 	DenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorLeftQuantity>,
@@ -77,3 +76,48 @@ DenominatorUnit,
 	reciprocalTargetUnit: DenominatorUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.reciprocalTargetUnit().byDividing(this, right, factory)
+
+@JvmName("dimensionlessDividedByMultiplyingUnit")
+fun <
+	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	DenominatorLeftQuantity : UndefinedQuantityType,
+	DenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorLeftQuantity>,
+	DenominatorRightQuantity : UndefinedQuantityType,
+	DenominatorRightUnit : AbstractUndefinedScientificUnit<DenominatorRightQuantity>,
+	DenominatorUnit : UndefinedMultipliedUnit<
+		DenominatorLeftQuantity,
+		DenominatorLeftUnit,
+		DenominatorRightQuantity,
+		DenominatorRightUnit,
+		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			DenominatorLeftQuantity,
+			DenominatorRightQuantity,
+			>,
+		DenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			DenominatorLeftQuantity,
+			DenominatorRightQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		DenominatorLeftQuantity,
+		DenominatorRightQuantity,
+		>,
+DenominatorUnit,
+	>,
+	reciprocalTargetUnit: DenominatorUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByMultiplyingUnit(
+	right = right,
+	reciprocalTargetUnit = reciprocalTargetUnit,
+	factory = factory,
+)

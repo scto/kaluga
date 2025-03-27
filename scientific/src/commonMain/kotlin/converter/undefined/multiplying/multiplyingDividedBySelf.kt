@@ -36,8 +36,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, B> / Mul<A, B> -> One
 
-@JvmName("multiplyingDividedBySelf")
-fun <
+internal fun <
 	NumeratorLeftAndDenominatorLeftQuantity : UndefinedQuantityType,
 	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftQuantity>,
 	NumeratorRightAndDenominatorRightQuantity : UndefinedQuantityType,
@@ -75,3 +74,47 @@ DenominatorUnit,
 	getDimensionless: () -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byDividing(this, right, factory)
+
+@JvmName("multiplyingDividedBySelf")
+fun <
+	NumeratorLeftAndDenominatorLeftQuantity : UndefinedQuantityType,
+	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftQuantity>,
+	NumeratorRightAndDenominatorRightQuantity : UndefinedQuantityType,
+	NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorRightQuantity>,
+	NumeratorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndDenominatorLeftQuantity,
+		NumeratorLeftUnit,
+		NumeratorRightAndDenominatorRightQuantity,
+		NumeratorRightUnit,
+		>,
+	DenominatorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftQuantity>,
+	DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorRightQuantity>,
+	DenominatorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndDenominatorLeftQuantity,
+		DenominatorLeftUnit,
+		NumeratorRightAndDenominatorRightQuantity,
+		DenominatorRightUnit,
+		>,
+	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorLeftAndDenominatorLeftQuantity,
+		NumeratorRightAndDenominatorRightQuantity,
+		>,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorLeftAndDenominatorLeftQuantity,
+		NumeratorRightAndDenominatorRightQuantity,
+		>,
+DenominatorUnit,
+	>,
+	getDimensionless: () -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedBySelf(
+	right = right,
+	getDimensionless = getDimensionless,
+	factory = factory,
+)

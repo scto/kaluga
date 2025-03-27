@@ -33,8 +33,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, B> / Div<Mul<A, A>, B> -> Div<Mul<B, B>, A>
 
-@JvmName("multiplyingDividedByDividingUnitWithSquaredNumeratorWithLeftAsRootAndRightAsDenominator")
-fun <
+internal fun <
 	NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity : UndefinedQuantityType,
 	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity>,
 	NumeratorRightAndDenominatorDenominatorQuantity : UndefinedQuantityType,
@@ -113,3 +112,85 @@ DenominatorUnit,
 ).targetNumeratorUnitPerNumeratorLeftUnit(
 	unit.left,
 ).byDividing(this, right, factory)
+
+@JvmName("multiplyingDividedByDividingUnitWithSquaredNumeratorWithLeftAsRootAndRightAsDenominator")
+fun <
+	NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity : UndefinedQuantityType,
+	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity>,
+	NumeratorRightAndDenominatorDenominatorQuantity : UndefinedQuantityType,
+	NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorDenominatorQuantity>,
+	NumeratorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+		NumeratorLeftUnit,
+		NumeratorRightAndDenominatorDenominatorQuantity,
+		NumeratorRightUnit,
+		>,
+	DenominatorNumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity>,
+	DenominatorNumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity>,
+	DenominatorNumeratorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+		DenominatorNumeratorLeftUnit,
+		NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+		DenominatorNumeratorRightUnit,
+		>,
+	DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorDenominatorQuantity>,
+	DenominatorUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+			NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+			>,
+		DenominatorNumeratorUnit,
+		NumeratorRightAndDenominatorDenominatorQuantity,
+		DenominatorDenominatorUnit,
+		>,
+	TargetNumeratorUnit : UndefinedMultipliedUnit<
+		NumeratorRightAndDenominatorDenominatorQuantity,
+		NumeratorRightUnit,
+		NumeratorRightAndDenominatorDenominatorQuantity,
+		NumeratorRightUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			NumeratorRightAndDenominatorDenominatorQuantity,
+			NumeratorRightAndDenominatorDenominatorQuantity,
+			>,
+		TargetNumeratorUnit,
+		NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+		NumeratorLeftUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			NumeratorRightAndDenominatorDenominatorQuantity,
+			NumeratorRightAndDenominatorDenominatorQuantity,
+			>,
+		NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+		NumeratorRightAndDenominatorDenominatorQuantity,
+		>,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+			NumeratorLeftAndDenominatorNumeratorLeftAndRightQuantity,
+			>,
+		NumeratorRightAndDenominatorDenominatorQuantity,
+		>,
+DenominatorUnit,
+	>,
+	numeratorRightUnitXNumeratorRightUnit: NumeratorRightUnit.(NumeratorRightUnit) -> TargetNumeratorUnit,
+	targetNumeratorUnitPerNumeratorLeftUnit: TargetNumeratorUnit.(NumeratorLeftUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByDividingUnitWithSquaredNumeratorWithLeftAsRootAndRightAsDenominator(
+	right = right,
+	numeratorRightUnitXNumeratorRightUnit = numeratorRightUnitXNumeratorRightUnit,
+	targetNumeratorUnitPerNumeratorLeftUnit = targetNumeratorUnitPerNumeratorLeftUnit,
+	factory = factory,
+)

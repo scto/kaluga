@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, A> / B -> Div<Mul<A, A>, B>
 
-@JvmName("squaredDividedByUndefinedUnit")
-fun <
+internal fun <
 	NumeratorLeftAndRightQuantity : UndefinedQuantityType,
 	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndRightQuantity>,
 	NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndRightQuantity>,
@@ -80,3 +79,54 @@ DenominatorUnit,
 ) = unit.numeratorUnitPerDenominatorUnit(
 	right.unit,
 ).byDividing(this, right, factory)
+
+@JvmName("squaredDividedByUndefinedUnit")
+fun <
+	NumeratorLeftAndRightQuantity : UndefinedQuantityType,
+	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndRightQuantity>,
+	NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndRightQuantity>,
+	NumeratorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndRightQuantity,
+		NumeratorLeftUnit,
+		NumeratorLeftAndRightQuantity,
+		NumeratorRightUnit,
+		>,
+	DenominatorQuantity : UndefinedQuantityType,
+	DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
+	TargetUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			NumeratorLeftAndRightQuantity,
+			NumeratorLeftAndRightQuantity,
+			>,
+		NumeratorUnit,
+		DenominatorQuantity,
+		DenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			NumeratorLeftAndRightQuantity,
+			NumeratorLeftAndRightQuantity,
+			>,
+		DenominatorQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorLeftAndRightQuantity,
+		NumeratorLeftAndRightQuantity,
+		>,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	DenominatorQuantity,
+DenominatorUnit,
+	>,
+	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByUndefinedUnit(
+	right = right,
+	numeratorUnitPerDenominatorUnit = numeratorUnitPerDenominatorUnit,
+	factory = factory,
+)

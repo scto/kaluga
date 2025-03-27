@@ -36,8 +36,7 @@ import kotlin.jvm.JvmName
 
 // One / Inv<Mul<A, A>> -> Mul<A, A>
 
-@JvmName("dimensionlessDividedByReciprocalSquaredUnit")
-fun <
+internal fun <
 	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
 	DenominatorReciprocalLeftAndRightQuantity : UndefinedQuantityType,
 	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalLeftAndRightQuantity>,
@@ -74,3 +73,45 @@ DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
 ) = right.unit.inverse.byDividing(this, right, factory)
+
+@JvmName("dimensionlessDividedByReciprocalSquaredUnit")
+fun <
+	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+	DenominatorReciprocalLeftAndRightQuantity : UndefinedQuantityType,
+	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalLeftAndRightQuantity>,
+	DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<DenominatorReciprocalLeftAndRightQuantity>,
+	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
+		DenominatorReciprocalLeftAndRightQuantity,
+		DenominatorReciprocalLeftUnit,
+		DenominatorReciprocalLeftAndRightQuantity,
+		DenominatorReciprocalRightUnit,
+		>,
+	DenominatorUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			DenominatorReciprocalLeftAndRightQuantity,
+			DenominatorReciprocalLeftAndRightQuantity,
+			>,
+		DenominatorReciprocalUnit,
+		>,
+	DenominatorReciprocalValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		DenominatorReciprocalLeftAndRightQuantity,
+		DenominatorReciprocalLeftAndRightQuantity,
+		>,
+DenominatorReciprocalUnit,
+	>,
+	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			DenominatorReciprocalLeftAndRightQuantity,
+			DenominatorReciprocalLeftAndRightQuantity,
+			>,
+		>,
+DenominatorUnit,
+	>,
+	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
+) = dividedByReciprocalSquaredUnit(
+	right = right,
+	factory = factory,
+)

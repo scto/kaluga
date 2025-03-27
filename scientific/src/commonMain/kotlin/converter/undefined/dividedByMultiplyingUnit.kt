@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // A / Mul<B, C> -> Div<A, Mul<B, C>>
 
-@JvmName("dividedByMultiplyingUnit")
-fun <
+internal fun <
 	NumeratorQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
 	DenominatorLeftQuantity : UndefinedQuantityType,
@@ -81,3 +80,55 @@ DenominatorUnit,
 ) = unit.numeratorUnitPerDenominatorUnit(
 	right.unit,
 ).byDividing(this, right, factory)
+
+@JvmName("dividedByMultiplyingUnit")
+fun <
+	NumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorQuantity>,
+	DenominatorLeftQuantity : UndefinedQuantityType,
+	DenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorLeftQuantity>,
+	DenominatorRightQuantity : UndefinedQuantityType,
+	DenominatorRightUnit : AbstractUndefinedScientificUnit<DenominatorRightQuantity>,
+	DenominatorUnit : UndefinedMultipliedUnit<
+		DenominatorLeftQuantity,
+		DenominatorLeftUnit,
+		DenominatorRightQuantity,
+		DenominatorRightUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		NumeratorQuantity,
+		NumeratorUnit,
+		UndefinedQuantityType.Multiplying<
+			DenominatorLeftQuantity,
+			DenominatorRightQuantity,
+			>,
+		DenominatorUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		NumeratorQuantity,
+		UndefinedQuantityType.Multiplying<
+			DenominatorLeftQuantity,
+			DenominatorRightQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	NumeratorQuantity,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		DenominatorLeftQuantity,
+		DenominatorRightQuantity,
+		>,
+DenominatorUnit,
+	>,
+	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByMultiplyingUnit(
+	right = right,
+	numeratorUnitPerDenominatorUnit = numeratorUnitPerDenominatorUnit,
+	factory = factory,
+)

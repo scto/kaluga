@@ -33,8 +33,7 @@ import kotlin.jvm.JvmName
 
 // Inv<A> / B -> Inv<Mul<A, B>>
 
-@JvmName("reciprocalDividedByUndefinedUnit")
-fun <
+internal fun <
 	NumeratorReciprocalQuantity : UndefinedQuantityType,
 	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalQuantity>,
 	NumeratorUnit : UndefinedReciprocalUnit<
@@ -81,3 +80,55 @@ DenominatorUnit,
 ) = unit.inverse.numeratorReciprocalUnitXDenominatorUnit(
 	right.unit,
 ).reciprocalTargetUnit().byDividing(this, right, factory)
+
+@JvmName("reciprocalDividedByUndefinedUnit")
+fun <
+	NumeratorReciprocalQuantity : UndefinedQuantityType,
+	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalQuantity>,
+	NumeratorUnit : UndefinedReciprocalUnit<
+		NumeratorReciprocalQuantity,
+		NumeratorReciprocalUnit,
+		>,
+	DenominatorQuantity : UndefinedQuantityType,
+	DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
+	TargetReciprocalUnit : UndefinedMultipliedUnit<
+		NumeratorReciprocalQuantity,
+		NumeratorReciprocalUnit,
+		DenominatorQuantity,
+		DenominatorUnit,
+		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			NumeratorReciprocalQuantity,
+			DenominatorQuantity,
+			>,
+		TargetReciprocalUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			NumeratorReciprocalQuantity,
+			DenominatorQuantity,
+			>,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		NumeratorReciprocalQuantity,
+		>,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	DenominatorQuantity,
+DenominatorUnit,
+	>,
+	numeratorReciprocalUnitXDenominatorUnit: NumeratorReciprocalUnit.(DenominatorUnit) -> TargetReciprocalUnit,
+	reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedByUndefinedUnit(
+	right = right,
+	numeratorReciprocalUnitXDenominatorUnit = numeratorReciprocalUnitXDenominatorUnit,
+	reciprocalTargetUnit = reciprocalTargetUnit,
+	factory = factory,
+)

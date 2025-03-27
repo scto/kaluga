@@ -30,8 +30,7 @@ import kotlin.jvm.JvmName
 
 // A / Div<A, B> -> B
 
-@JvmName("dividedByDividingUnitWithSelfAsNumerator")
-fun <
+internal fun <
 	NumeratorAndDenominatorNumeratorQuantity : UndefinedQuantityType,
 	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
 	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
@@ -60,3 +59,37 @@ DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorDenominatorUnit) -> DenominatorDenominatorValue,
 ) = right.unit.denominator.byDividing(this, right, factory)
+
+@JvmName("dividedByDividingUnitWithSelfAsNumerator")
+fun <
+	NumeratorAndDenominatorNumeratorQuantity : UndefinedQuantityType,
+	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+	DenominatorDenominatorQuantity : UndefinedQuantityType,
+	DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
+	DenominatorUnit : UndefinedDividedUnit<
+		NumeratorAndDenominatorNumeratorQuantity,
+		DenominatorNumeratorUnit,
+		DenominatorDenominatorQuantity,
+		DenominatorDenominatorUnit,
+		>,
+	DenominatorDenominatorValue : UndefinedScientificValue<
+	DenominatorDenominatorQuantity,
+DenominatorDenominatorUnit,
+	>,
+	> UndefinedScientificValue<
+	NumeratorAndDenominatorNumeratorQuantity,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		NumeratorAndDenominatorNumeratorQuantity,
+		DenominatorDenominatorQuantity,
+		>,
+DenominatorUnit,
+	>,
+	factory: (Decimal, DenominatorDenominatorUnit) -> DenominatorDenominatorValue,
+) = dividedByDividingUnitWithSelfAsNumerator(
+	right = right,
+	factory = factory,
+)

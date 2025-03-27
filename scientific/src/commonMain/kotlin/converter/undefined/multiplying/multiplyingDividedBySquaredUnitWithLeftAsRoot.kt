@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, B> / Mul<A, A> -> Div<B, A>
 
-@JvmName("multiplyingDividedBySquaredUnitWithLeftAsRoot")
-fun <
+internal fun <
 	NumeratorLeftAndDenominatorLeftAndRightQuantity : UndefinedQuantityType,
 	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftAndRightQuantity>,
 	NumeratorRightQuantity : UndefinedQuantityType,
@@ -84,3 +83,58 @@ DenominatorUnit,
 ) = unit.right.numeratorRightUnitPerNumeratorLeftUnit(
 	unit.left,
 ).byDividing(this, right, factory)
+
+@JvmName("multiplyingDividedBySquaredUnitWithLeftAsRoot")
+fun <
+	NumeratorLeftAndDenominatorLeftAndRightQuantity : UndefinedQuantityType,
+	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftAndRightQuantity>,
+	NumeratorRightQuantity : UndefinedQuantityType,
+	NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorRightQuantity>,
+	NumeratorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		NumeratorLeftUnit,
+		NumeratorRightQuantity,
+		NumeratorRightUnit,
+		>,
+	DenominatorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftAndRightQuantity>,
+	DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorLeftAndDenominatorLeftAndRightQuantity>,
+	DenominatorUnit : UndefinedMultipliedUnit<
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		DenominatorLeftUnit,
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		DenominatorRightUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		NumeratorRightQuantity,
+		NumeratorRightUnit,
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		NumeratorLeftUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		NumeratorRightQuantity,
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		NumeratorRightQuantity,
+		>,
+NumeratorUnit,
+	>.dividedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		NumeratorLeftAndDenominatorLeftAndRightQuantity,
+		>,
+DenominatorUnit,
+	>,
+	numeratorRightUnitPerNumeratorLeftUnit: NumeratorRightUnit.(NumeratorLeftUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = dividedBySquaredUnitWithLeftAsRoot(
+	right = right,
+	numeratorRightUnitPerNumeratorLeftUnit = numeratorRightUnitPerNumeratorLeftUnit,
+	factory = factory,
+)

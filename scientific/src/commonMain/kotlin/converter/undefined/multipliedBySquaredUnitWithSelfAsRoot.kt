@@ -31,8 +31,7 @@ import kotlin.jvm.JvmName
 
 // A * Mul<A, A> -> Mul<Mul<A, A>, A>
 
-@JvmName("multipliedBySquaredUnitWithSelfAsRoot")
-fun <
+internal fun <
 	LeftAndRightLeftAndRightQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightLeftAndRightQuantity>,
 	RightLeftUnit : AbstractUndefinedScientificUnit<LeftAndRightLeftAndRightQuantity>,
@@ -78,3 +77,53 @@ RightUnit,
 ) = right.unit.rightUnitXLeftUnit(
 	unit,
 ).byMultiplying(this, right, factory)
+
+@JvmName("multipliedBySquaredUnitWithSelfAsRoot")
+fun <
+	LeftAndRightLeftAndRightQuantity : UndefinedQuantityType,
+	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightLeftAndRightQuantity>,
+	RightLeftUnit : AbstractUndefinedScientificUnit<LeftAndRightLeftAndRightQuantity>,
+	RightRightUnit : AbstractUndefinedScientificUnit<LeftAndRightLeftAndRightQuantity>,
+	RightUnit : UndefinedMultipliedUnit<
+		LeftAndRightLeftAndRightQuantity,
+		RightLeftUnit,
+		LeftAndRightLeftAndRightQuantity,
+		RightRightUnit,
+		>,
+	TargetUnit : UndefinedMultipliedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightLeftAndRightQuantity,
+			LeftAndRightLeftAndRightQuantity,
+			>,
+		RightUnit,
+		LeftAndRightLeftAndRightQuantity,
+		LeftUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightLeftAndRightQuantity,
+			LeftAndRightLeftAndRightQuantity,
+			>,
+		LeftAndRightLeftAndRightQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	LeftAndRightLeftAndRightQuantity,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftAndRightLeftAndRightQuantity,
+		LeftAndRightLeftAndRightQuantity,
+		>,
+RightUnit,
+	>,
+	rightUnitXLeftUnit: RightUnit.(LeftUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedBySquaredUnitWithSelfAsRoot(
+	right = right,
+	rightUnitXLeftUnit = rightUnitXLeftUnit,
+	factory = factory,
+)

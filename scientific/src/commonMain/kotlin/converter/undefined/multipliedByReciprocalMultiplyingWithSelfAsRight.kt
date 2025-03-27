@@ -32,8 +32,7 @@ import kotlin.jvm.JvmName
 
 // A * Inv<Mul<B, A>> -> Inv<B>
 
-@JvmName("multipliedByReciprocalMultiplyingWithSelfAsRight")
-fun <
+internal fun <
 	LeftAndRightReciprocalRightQuantity : UndefinedQuantityType,
 	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalRightQuantity>,
 	RightReciprocalLeftQuantity : UndefinedQuantityType,
@@ -78,3 +77,54 @@ RightUnit,
 	reciprocalTargetUnit: RightReciprocalLeftUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.inverse.left.reciprocalTargetUnit().byMultiplying(this, right, factory)
+
+@JvmName("multipliedByReciprocalMultiplyingWithSelfAsRight")
+fun <
+	LeftAndRightReciprocalRightQuantity : UndefinedQuantityType,
+	LeftUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalRightQuantity>,
+	RightReciprocalLeftQuantity : UndefinedQuantityType,
+	RightReciprocalLeftUnit : AbstractUndefinedScientificUnit<RightReciprocalLeftQuantity>,
+	RightReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalRightQuantity>,
+	RightReciprocalUnit : UndefinedMultipliedUnit<
+		RightReciprocalLeftQuantity,
+		RightReciprocalLeftUnit,
+		LeftAndRightReciprocalRightQuantity,
+		RightReciprocalRightUnit,
+		>,
+	RightUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Multiplying<
+			RightReciprocalLeftQuantity,
+			LeftAndRightReciprocalRightQuantity,
+			>,
+		RightReciprocalUnit,
+		>,
+	TargetUnit : UndefinedReciprocalUnit<
+		RightReciprocalLeftQuantity,
+		RightReciprocalLeftUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		RightReciprocalLeftQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	LeftAndRightReciprocalRightQuantity,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		UndefinedQuantityType.Multiplying<
+			RightReciprocalLeftQuantity,
+			LeftAndRightReciprocalRightQuantity,
+			>,
+		>,
+RightUnit,
+	>,
+	reciprocalTargetUnit: RightReciprocalLeftUnit.() -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByReciprocalMultiplyingWithSelfAsRight(
+	right = right,
+	reciprocalTargetUnit = reciprocalTargetUnit,
+	factory = factory,
+)

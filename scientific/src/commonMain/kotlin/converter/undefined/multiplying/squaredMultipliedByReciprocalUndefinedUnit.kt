@@ -33,8 +33,7 @@ import kotlin.jvm.JvmName
 
 // Mul<A, A> * Inv<B> -> Div<Mul<A, A>, B>
 
-@JvmName("squaredMultipliedByReciprocalUndefinedUnit")
-fun <
+internal fun <
 	LeftLeftAndRightQuantity : UndefinedQuantityType,
 	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightQuantity>,
 	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightQuantity>,
@@ -87,3 +86,60 @@ RightUnit,
 ) = unit.leftUnitPerRightReciprocalUnit(
 	right.unit.inverse,
 ).byMultiplying(this, right, factory)
+
+@JvmName("squaredMultipliedByReciprocalUndefinedUnit")
+fun <
+	LeftLeftAndRightQuantity : UndefinedQuantityType,
+	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightQuantity>,
+	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightQuantity>,
+	LeftUnit : UndefinedMultipliedUnit<
+		LeftLeftAndRightQuantity,
+		LeftLeftUnit,
+		LeftLeftAndRightQuantity,
+		LeftRightUnit,
+		>,
+	RightReciprocalQuantity : UndefinedQuantityType,
+	RightReciprocalUnit : AbstractUndefinedScientificUnit<RightReciprocalQuantity>,
+	RightUnit : UndefinedReciprocalUnit<
+		RightReciprocalQuantity,
+		RightReciprocalUnit,
+		>,
+	TargetUnit : UndefinedDividedUnit<
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightQuantity,
+			LeftLeftAndRightQuantity,
+			>,
+		LeftUnit,
+		RightReciprocalQuantity,
+		RightReciprocalUnit,
+		>,
+	TargetValue : UndefinedScientificValue<
+	UndefinedQuantityType.Dividing<
+		UndefinedQuantityType.Multiplying<
+			LeftLeftAndRightQuantity,
+			LeftLeftAndRightQuantity,
+			>,
+		RightReciprocalQuantity,
+		>,
+TargetUnit,
+	>,
+	> UndefinedScientificValue<
+	UndefinedQuantityType.Multiplying<
+		LeftLeftAndRightQuantity,
+		LeftLeftAndRightQuantity,
+		>,
+LeftUnit,
+	>.multipliedBy(
+	right: UndefinedScientificValue<
+	UndefinedQuantityType.Reciprocal<
+		RightReciprocalQuantity,
+		>,
+RightUnit,
+	>,
+	leftUnitPerRightReciprocalUnit: LeftUnit.(RightReciprocalUnit) -> TargetUnit,
+	factory: (Decimal, TargetUnit) -> TargetValue,
+) = multipliedByReciprocalUndefinedUnit(
+	right = right,
+	leftUnitPerRightReciprocalUnit = leftUnitPerRightReciprocalUnit,
+	factory = factory,
+)
