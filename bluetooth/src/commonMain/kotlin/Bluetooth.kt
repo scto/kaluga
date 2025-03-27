@@ -39,7 +39,6 @@ import com.splendo.kaluga.permissions.base.Permissions
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -48,6 +47,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -471,17 +471,11 @@ suspend fun Flow<Device?>.updateRssi() {
 
 /**
  * Attempts to request a [MTU] size for the [Device] from a [Flow] of [Device]
- * When this method completes, the devices should have had [ConnectableDeviceState.Connected.requestMtu] called
  * @param mtu the [MTU] size to request
  */
-suspend fun Flow<Device?>.requestMtu(mtu: MTU): Deferred<Boolean> = state().transformLatest { deviceState ->
-    when (deviceState) {
-        is ConnectableDeviceState.Connected.MtuHolder -> {
-            emit(deviceState.requestMtu(mtu))
-        }
-        else -> {}
-    }
-}.first()
+suspend fun Flow<Device?>.requestMtu(mtu: MTU) = state()
+    .filterIsInstance<ConnectableDeviceState.Connected.MtuHolder>()
+    .first().requestMtu(mtu)
 
 /**
  * Gets a ([Flow] of) [Service] of a given [UUID] from a [Flow] of a list of [Service]

@@ -25,7 +25,6 @@ import com.splendo.kaluga.bluetooth.device.ConnectableDeviceState
 import com.splendo.kaluga.bluetooth.device.ConnectionSettings
 import com.splendo.kaluga.bluetooth.device.DeviceAction
 import com.splendo.kaluga.bluetooth.device.NotConnectableDeviceState
-import kotlinx.coroutines.Deferred
 
 sealed class MockDeviceState : KalugaState {
     data object NotConnectable : MockDeviceState(), NotConnectableDeviceState
@@ -105,10 +104,8 @@ sealed class MockDeviceState : KalugaState {
             }
 
             override val reconnect: suspend () -> ConnectableDeviceState.Connecting = { Connecting(reconnectionSettings, mockConnectableDeviceManager) }
-            override suspend fun requestMtu(mtu: MTU): Deferred<Boolean> {
-                val action = DeviceAction.RequestMtu(mtu)
-                mockConnectableDeviceManager.performAction(action)
-                return action.completedSuccessfully
+            override suspend fun requestMtu(mtu: MTU) {
+                mockConnectableDeviceManager.requestMtu(mtu)
             }
             override val asDeviceState: ConnectableDeviceState = this
         }
@@ -143,10 +140,8 @@ sealed class MockDeviceState : KalugaState {
 
             override val reconnect: suspend () -> ConnectableDeviceState.Connecting = { Connecting(reconnectionSettings, mockConnectableDeviceManager) }
 
-            override suspend fun requestMtu(mtu: MTU): Deferred<Boolean> {
-                val action = DeviceAction.RequestMtu(mtu)
-                mockConnectableDeviceManager.performAction(action)
-                return action.completedSuccessfully
+            override suspend fun requestMtu(mtu: MTU) {
+                mockConnectableDeviceManager.requestMtu(mtu)
             }
 
             override val asDeviceState: ConnectableDeviceState = this

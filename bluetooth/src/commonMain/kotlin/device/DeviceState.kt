@@ -22,7 +22,6 @@ import com.splendo.kaluga.base.state.KalugaState
 import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.Service
 import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
 
 /**
  * An action a [Device] can execute on one of its [com.splendo.kaluga.bluetooth.Attribute]
@@ -180,9 +179,8 @@ sealed interface ConnectableDeviceState :
             /**
              * Requests an update to the [MTU] size of the device
              * @param mtu the new [MTU] size to request
-             * @return whether call was successful
              */
-            suspend fun requestMtu(mtu: MTU): Deferred<Boolean>
+            suspend fun requestMtu(mtu: MTU)
 
             /**
              * The current [MTU] size of the device
@@ -385,10 +383,8 @@ internal sealed class ConnectableDeviceStateImpl {
             override fun updateReconnectionSettings(reconnectionSettings: ConnectionSettings.ReconnectionSettings) = suspend {
                 copy(reconnectionSettings = reconnectionSettings)
             }
-            override suspend fun requestMtu(mtu: MTU): Deferred<Boolean> {
-                val action = DeviceAction.RequestMtu(mtu)
-                deviceConnectionManager.performAction(action)
-                return action.completedSuccessfully
+            override suspend fun requestMtu(mtu: MTU) {
+                deviceConnectionManager.requestMtu(mtu)
             }
         }
 
@@ -438,10 +434,8 @@ internal sealed class ConnectableDeviceStateImpl {
                 deviceConnectionManager.performAction(action)
             }
 
-            override suspend fun requestMtu(mtu: MTU): Deferred<Boolean> {
-                val action = DeviceAction.RequestMtu(mtu)
-                deviceConnectionManager.performAction(action)
-                return action.completedSuccessfully
+            override suspend fun requestMtu(mtu: MTU) {
+                deviceConnectionManager.requestMtu(mtu)
             }
         }
 

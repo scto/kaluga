@@ -58,18 +58,11 @@ class MockDevice(
 
     init {
         if (setupMocks) {
-            mockConnectableDeviceManager.mockPerformAction.on().doExecuteSuspended { (action) ->
-                when (action) {
-                    is DeviceAction.RequestMtu -> {
-                        connectableDeviceStateRepo.takeAndChangeState(MockDeviceState.Connected.Idle::class) { state ->
-                            suspend {
-                                action.mtuResponse = action.mtu
-                                action.completedSuccessfully.complete(true)
-                                MockDeviceState.Connected.Idle(state.reconnectionSettings, action.mtu, state.services, state.mockConnectableDeviceManager)
-                            }
-                        }
+            mockConnectableDeviceManager.mockRequestMtu.on().doExecuteSuspended { (mtu) ->
+                connectableDeviceStateRepo.takeAndChangeState(MockDeviceState.Connected.Idle::class) { state ->
+                    suspend {
+                        MockDeviceState.Connected.Idle(state.reconnectionSettings, mtu, state.services, state.mockConnectableDeviceManager)
                     }
-                    else -> { }
                 }
             }
             mockConnectableDeviceManager.mockStartDisconnected.on().doExecute {

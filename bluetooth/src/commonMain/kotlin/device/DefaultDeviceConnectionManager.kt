@@ -215,6 +215,11 @@ interface DeviceConnectionManager {
     fun handleDisconnect(onDisconnect: (suspend () -> Unit)? = null)
 
     /**
+     * Fires an [Event.AddAction] with [DeviceAction.RequestMtu]
+     */
+    fun requestMtu(mtu: MTU)
+
+    /**
      * Resets all actions and disconnects the device
      */
     suspend fun reset()
@@ -331,6 +336,10 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
         emitEvent(DeviceConnectionManager.Event.Disconnected(clean))
     }
 
+    override fun requestMtu(mtu: MTU) {
+        emitEvent(DeviceConnectionManager.Event.AddAction(DeviceAction.RequestMtu(mtu)))
+    }
+
     final override fun startDiscovering() {
         logger.info { "Start Discovering Services" }
         emitEvent(DeviceConnectionManager.Event.Discovering)
@@ -346,6 +355,7 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
 
     protected open fun handleCurrentActionCompleted(succeeded: Boolean) {
         val currentAction = this.currentAction
+        println("handleCurrentActionCompleted $currentAction")
         this.currentAction = null
         if (currentAction != null) {
             if (succeeded) {

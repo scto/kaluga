@@ -301,8 +301,8 @@ public final class com/splendo/kaluga/test/bluetooth/device/MockConnectableDevic
 	public final fun getMockHandleCancelConnecting ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
 	public final fun getMockHandleCancelReconnecting ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
 	public final fun getMockPair ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
-	public final fun getMockPerformAction ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
 	public final fun getMockReadRssi ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
+	public final fun getMockRequestMtu ()Lcom/splendo/kaluga/test/base/mock/SuspendMethodMock;
 	public final fun getMockStartConnecting ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
 	public final fun getMockStartDisconnected ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
 	public final fun getMockStartDiscovering ()Lcom/splendo/kaluga/test/base/mock/MethodMock;
@@ -310,8 +310,8 @@ public final class com/splendo/kaluga/test/bluetooth/device/MockConnectableDevic
 	public final fun handleCancelConnecting ()V
 	public final fun handleCancelReconnecting ()V
 	public final fun pair (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public final fun performAction (Lcom/splendo/kaluga/bluetooth/device/DeviceAction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun readRssi (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun requestMtu (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun startConnecting (Lcom/splendo/kaluga/bluetooth/device/ConnectionSettings$ReconnectionSettings;)V
 	public final fun startDisconnected ()V
 	public final fun startDiscovering ()V
