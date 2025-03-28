@@ -19,76 +19,73 @@
 package com.splendo.kaluga.scientific.converter.undefined.multiplying.squared
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import kotlin.jvm.JvmName
 
 // Mul<A, A> * Inv<Mul<A, B>> -> Div<A, B>
 
 fun <
-	LeftLeftAndRightAndRightReciprocalLeftQuantity : UndefinedQuantityType,
-	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalLeftQuantity>,
-	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalLeftQuantity>,
-	LeftUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		LeftLeftUnit,
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		LeftRightUnit,
-		>,
-	RightReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalLeftQuantity>,
-	RightReciprocalRightQuantity : UndefinedQuantityType,
-	RightReciprocalRightUnit : AbstractUndefinedScientificUnit<RightReciprocalRightQuantity>,
-	RightReciprocalUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		RightReciprocalLeftUnit,
-		RightReciprocalRightQuantity,
-		RightReciprocalRightUnit,
-		>,
-	RightUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightReciprocalLeftQuantity,
-			RightReciprocalRightQuantity,
-			>,
-		RightReciprocalUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		LeftLeftUnit,
-		RightReciprocalRightQuantity,
-		RightReciprocalRightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		RightReciprocalRightQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		LeftLeftAndRightAndRightReciprocalLeftQuantity,
-		>,
-	LeftUnit,
-	>.multipliedByReciprocalMultiplyingWithRootAsLeft(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Reciprocal<
-			UndefinedQuantityType.Multiplying<
-				LeftLeftAndRightAndRightReciprocalLeftQuantity,
-				RightReciprocalRightQuantity,
-				>,
-			>,
-		RightUnit,
-		>,
-	leftLeftUnitPerRightReciprocalRightUnit: LeftLeftUnit.(RightReciprocalRightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftLeftAndRightAndRightReciprocalLeftQuantity : UndefinedQuantityType,
+    LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalLeftQuantity>,
+    LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalLeftQuantity>,
+    LeftUnit : UndefinedMultipliedUnit<
+        LeftLeftAndRightAndRightReciprocalLeftQuantity,
+        LeftLeftUnit,
+        LeftLeftAndRightAndRightReciprocalLeftQuantity,
+        LeftRightUnit,
+        >,
+    RightReciprocalLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalLeftQuantity>,
+    RightReciprocalRightQuantity : UndefinedQuantityType,
+    RightReciprocalRightUnit : AbstractUndefinedScientificUnit<RightReciprocalRightQuantity>,
+    RightReciprocalUnit : UndefinedMultipliedUnit<
+        LeftLeftAndRightAndRightReciprocalLeftQuantity,
+        RightReciprocalLeftUnit,
+        RightReciprocalRightQuantity,
+        RightReciprocalRightUnit,
+        >,
+    RightUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            LeftLeftAndRightAndRightReciprocalLeftQuantity,
+            RightReciprocalRightQuantity,
+            >,
+        RightReciprocalUnit,
+        >,
+    TargetUnit : UndefinedDividedUnit<
+        LeftLeftAndRightAndRightReciprocalLeftQuantity,
+        LeftLeftUnit,
+        RightReciprocalRightQuantity,
+        RightReciprocalRightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            LeftLeftAndRightAndRightReciprocalLeftQuantity,
+            RightReciprocalRightQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Multiplying<
+        LeftLeftAndRightAndRightReciprocalLeftQuantity,
+        LeftLeftAndRightAndRightReciprocalLeftQuantity,
+        >,
+    LeftUnit,
+    >.multipliedByReciprocalMultiplyingWithRootAsLeft(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Multiplying<
+                LeftLeftAndRightAndRightReciprocalLeftQuantity,
+                RightReciprocalRightQuantity,
+                >,
+            >,
+        RightUnit,
+        >,
+    leftLeftUnitPerRightReciprocalRightUnit: LeftLeftUnit.(RightReciprocalRightUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.left.leftLeftUnitPerRightReciprocalRightUnit(
-	right.unit.inverse.right,
+    right.unit.inverse.right,
 ).byMultiplying(this, right, factory)

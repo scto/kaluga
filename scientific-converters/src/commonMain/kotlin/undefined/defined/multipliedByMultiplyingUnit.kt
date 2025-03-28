@@ -19,84 +19,80 @@
 package com.splendo.kaluga.scientific.converter.undefined.defined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // A! * Mul<B, C> -> Mul<Mul<Wr<A>, B>, C>
 
 fun <
-	LeftQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftUnit : ScientificUnit<LeftQuantity>,
-	RightLeftQuantity : UndefinedQuantityType,
-	RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftQuantity>,
-	RightRightQuantity : UndefinedQuantityType,
-	RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
-	RightUnit : UndefinedMultipliedUnit<
-		RightLeftQuantity,
-		RightLeftUnit,
-		RightRightQuantity,
-		RightRightUnit,
-		>,
-	WrappedLeftUnit : WrappedUndefinedExtendedUnit<
-	LeftQuantity,
-	LeftUnit,
-		>,
-	TargetLeftUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Extended<
-			LeftQuantity,
-			>,
-		WrappedLeftUnit,
-		RightLeftQuantity,
-		RightLeftUnit,
-		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				LeftQuantity,
-				>,
-			RightLeftQuantity,
-			>,
-		TargetLeftUnit,
-		RightRightQuantity,
-		RightRightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				LeftQuantity,
-				>,
-			RightLeftQuantity,
-			>,
-		RightRightQuantity,
-		>,
-	TargetUnit,
-	>,
-	> ScientificValue<LeftQuantity, LeftUnit>.multipliedByMultiplyingUnit(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Multiplying<
-			RightLeftQuantity,
-			RightRightQuantity,
-			>,
-		RightUnit,
-		>,
-	leftAsUndefined: LeftUnit.() -> WrappedLeftUnit,
-	wrappedLeftUnitXRightLeftUnit: WrappedLeftUnit.(RightLeftUnit) -> TargetLeftUnit,
-	targetLeftUnitXRightRightUnit: TargetLeftUnit.(RightRightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftUnit : ScientificUnit<LeftQuantity>,
+    RightLeftQuantity : UndefinedQuantityType,
+    RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftQuantity>,
+    RightRightQuantity : UndefinedQuantityType,
+    RightRightUnit : AbstractUndefinedScientificUnit<RightRightQuantity>,
+    RightUnit : UndefinedMultipliedUnit<
+        RightLeftQuantity,
+        RightLeftUnit,
+        RightRightQuantity,
+        RightRightUnit,
+        >,
+    WrappedLeftUnit : WrappedUndefinedExtendedUnit<
+        LeftQuantity,
+        LeftUnit,
+        >,
+    TargetLeftUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Extended<
+            LeftQuantity,
+            >,
+        WrappedLeftUnit,
+        RightLeftQuantity,
+        RightLeftUnit,
+        >,
+    TargetUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Extended<
+                LeftQuantity,
+                >,
+            RightLeftQuantity,
+            >,
+        TargetLeftUnit,
+        RightRightQuantity,
+        RightRightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Multiplying<
+                UndefinedQuantityType.Extended<
+                    LeftQuantity,
+                    >,
+                RightLeftQuantity,
+                >,
+            RightRightQuantity,
+            >,
+        TargetUnit,
+        >,
+    > ScientificValue<LeftQuantity, LeftUnit>.multipliedByMultiplyingUnit(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            RightLeftQuantity,
+            RightRightQuantity,
+            >,
+        RightUnit,
+        >,
+    leftAsUndefined: LeftUnit.() -> WrappedLeftUnit,
+    wrappedLeftUnitXRightLeftUnit: WrappedLeftUnit.(RightLeftUnit) -> TargetLeftUnit,
+    targetLeftUnitXRightRightUnit: TargetLeftUnit.(RightRightUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftAsUndefined().wrappedLeftUnitXRightLeftUnit(
-	right.unit.left,
+    right.unit.left,
 ).targetLeftUnitXRightRightUnit(
-	right.unit.right,
+    right.unit.right,
 ).byMultiplying(this, right, factory)

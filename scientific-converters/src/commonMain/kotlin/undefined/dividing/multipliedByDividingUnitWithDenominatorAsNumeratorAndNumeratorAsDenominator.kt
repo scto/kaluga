@@ -19,57 +19,53 @@
 package com.splendo.kaluga.scientific.converter.undefined.dividing
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
-import kotlin.jvm.JvmName
 
 // Div<A, B> * Div<B, A> -> One
 
 fun <
-	LeftNumeratorAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
-	LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftDenominatorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	LeftUnit : UndefinedDividedUnit<
-		LeftNumeratorAndRightDenominatorQuantity,
-		LeftNumeratorUnit,
-		LeftDenominatorAndRightNumeratorQuantity,
-		LeftDenominatorUnit,
-		>,
-	RightNumeratorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
-	RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
-	RightUnit : UndefinedDividedUnit<
-		LeftDenominatorAndRightNumeratorQuantity,
-		RightNumeratorUnit,
-		LeftNumeratorAndRightDenominatorQuantity,
-		RightDenominatorUnit,
-		>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftNumeratorAndRightDenominatorQuantity,
-		LeftDenominatorAndRightNumeratorQuantity,
-		>,
-	LeftUnit,
-	>.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorAsDenominator(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Dividing<
-			LeftDenominatorAndRightNumeratorQuantity,
-			LeftNumeratorAndRightDenominatorQuantity,
-			>,
-		RightUnit,
-		>,
-	getDimensionless: () -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftNumeratorAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
+    LeftDenominatorAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftDenominatorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+    LeftUnit : UndefinedDividedUnit<
+        LeftNumeratorAndRightDenominatorQuantity,
+        LeftNumeratorUnit,
+        LeftDenominatorAndRightNumeratorQuantity,
+        LeftDenominatorUnit,
+        >,
+    RightNumeratorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorQuantity>,
+    RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
+    RightUnit : UndefinedDividedUnit<
+        LeftDenominatorAndRightNumeratorQuantity,
+        RightNumeratorUnit,
+        LeftNumeratorAndRightDenominatorQuantity,
+        RightDenominatorUnit,
+        >,
+    TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+    TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Dividing<
+        LeftNumeratorAndRightDenominatorQuantity,
+        LeftDenominatorAndRightNumeratorQuantity,
+        >,
+    LeftUnit,
+    >.multipliedByDividingUnitWithDenominatorAsNumeratorAndNumeratorAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            LeftDenominatorAndRightNumeratorQuantity,
+            LeftNumeratorAndRightDenominatorQuantity,
+            >,
+        RightUnit,
+        >,
+    getDimensionless: () -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byMultiplying(this, right, factory)

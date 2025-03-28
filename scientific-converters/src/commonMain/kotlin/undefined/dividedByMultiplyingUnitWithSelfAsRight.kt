@@ -19,51 +19,48 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import kotlin.jvm.JvmName
 
 // A / Mul<B, A> -> Inv<B>
 
 fun <
-	NumeratorAndDenominatorRightQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
-	DenominatorLeftQuantity : UndefinedQuantityType,
-	DenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorLeftQuantity>,
-	DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
-	DenominatorUnit : UndefinedMultipliedUnit<
-		DenominatorLeftQuantity,
-		DenominatorLeftUnit,
-		NumeratorAndDenominatorRightQuantity,
-		DenominatorRightUnit,
-		>,
-	TargetUnit : UndefinedReciprocalUnit<
-		DenominatorLeftQuantity,
-		DenominatorLeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		DenominatorLeftQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorRightQuantity,
-	NumeratorUnit,
-	>.dividedByMultiplyingUnitWithSelfAsRight(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Multiplying<
-			DenominatorLeftQuantity,
-			NumeratorAndDenominatorRightQuantity,
-			>,
-		DenominatorUnit,
-		>,
-	reciprocalTargetUnit: DenominatorLeftUnit.() -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    NumeratorAndDenominatorRightQuantity : UndefinedQuantityType,
+    NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
+    DenominatorLeftQuantity : UndefinedQuantityType,
+    DenominatorLeftUnit : AbstractUndefinedScientificUnit<DenominatorLeftQuantity>,
+    DenominatorRightUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorRightQuantity>,
+    DenominatorUnit : UndefinedMultipliedUnit<
+        DenominatorLeftQuantity,
+        DenominatorLeftUnit,
+        NumeratorAndDenominatorRightQuantity,
+        DenominatorRightUnit,
+        >,
+    TargetUnit : UndefinedReciprocalUnit<
+        DenominatorLeftQuantity,
+        DenominatorLeftUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            DenominatorLeftQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorRightQuantity,
+    NumeratorUnit,
+    >.dividedByMultiplyingUnitWithSelfAsRight(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            DenominatorLeftQuantity,
+            NumeratorAndDenominatorRightQuantity,
+            >,
+        DenominatorUnit,
+        >,
+    reciprocalTargetUnit: DenominatorLeftUnit.() -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.left.reciprocalTargetUnit().byDividing(this, right, factory)

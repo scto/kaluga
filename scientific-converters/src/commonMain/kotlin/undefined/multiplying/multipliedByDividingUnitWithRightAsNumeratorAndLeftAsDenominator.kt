@@ -19,66 +19,63 @@
 package com.splendo.kaluga.scientific.converter.undefined.multiplying
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import kotlin.jvm.JvmName
 
 // Mul<A, B> * Div<B, A> -> Mul<B, B>
 
 fun <
-	LeftLeftAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightDenominatorQuantity>,
-	LeftRightAndRightNumeratorQuantity : UndefinedQuantityType,
-	LeftRightUnit : AbstractUndefinedScientificUnit<LeftRightAndRightNumeratorQuantity>,
-	LeftUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightDenominatorQuantity,
-		LeftLeftUnit,
-		LeftRightAndRightNumeratorQuantity,
-		LeftRightUnit,
-		>,
-	RightNumeratorUnit : AbstractUndefinedScientificUnit<LeftRightAndRightNumeratorQuantity>,
-	RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightDenominatorQuantity>,
-	RightUnit : UndefinedDividedUnit<
-		LeftRightAndRightNumeratorQuantity,
-		RightNumeratorUnit,
-		LeftLeftAndRightDenominatorQuantity,
-		RightDenominatorUnit,
-		>,
-	TargetUnit : UndefinedMultipliedUnit<
-		LeftRightAndRightNumeratorQuantity,
-		LeftRightUnit,
-		LeftRightAndRightNumeratorQuantity,
-		LeftRightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftRightAndRightNumeratorQuantity,
-		LeftRightAndRightNumeratorQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightDenominatorQuantity,
-		LeftRightAndRightNumeratorQuantity,
-		>,
-	LeftUnit,
-	>.multipliedByDividingUnitWithRightAsNumeratorAndLeftAsDenominator(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Dividing<
-			LeftRightAndRightNumeratorQuantity,
-			LeftLeftAndRightDenominatorQuantity,
-			>,
-		RightUnit,
-		>,
-	leftRightUnitXLeftRightUnit: LeftRightUnit.(LeftRightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftLeftAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightDenominatorQuantity>,
+    LeftRightAndRightNumeratorQuantity : UndefinedQuantityType,
+    LeftRightUnit : AbstractUndefinedScientificUnit<LeftRightAndRightNumeratorQuantity>,
+    LeftUnit : UndefinedMultipliedUnit<
+        LeftLeftAndRightDenominatorQuantity,
+        LeftLeftUnit,
+        LeftRightAndRightNumeratorQuantity,
+        LeftRightUnit,
+        >,
+    RightNumeratorUnit : AbstractUndefinedScientificUnit<LeftRightAndRightNumeratorQuantity>,
+    RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightDenominatorQuantity>,
+    RightUnit : UndefinedDividedUnit<
+        LeftRightAndRightNumeratorQuantity,
+        RightNumeratorUnit,
+        LeftLeftAndRightDenominatorQuantity,
+        RightDenominatorUnit,
+        >,
+    TargetUnit : UndefinedMultipliedUnit<
+        LeftRightAndRightNumeratorQuantity,
+        LeftRightUnit,
+        LeftRightAndRightNumeratorQuantity,
+        LeftRightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            LeftRightAndRightNumeratorQuantity,
+            LeftRightAndRightNumeratorQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Multiplying<
+        LeftLeftAndRightDenominatorQuantity,
+        LeftRightAndRightNumeratorQuantity,
+        >,
+    LeftUnit,
+    >.multipliedByDividingUnitWithRightAsNumeratorAndLeftAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            LeftRightAndRightNumeratorQuantity,
+            LeftLeftAndRightDenominatorQuantity,
+            >,
+        RightUnit,
+        >,
+    leftRightUnitXLeftRightUnit: LeftRightUnit.(LeftRightUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.right.leftRightUnitXLeftRightUnit(
-	unit.right,
+    unit.right,
 ).byMultiplying(this, right, factory)

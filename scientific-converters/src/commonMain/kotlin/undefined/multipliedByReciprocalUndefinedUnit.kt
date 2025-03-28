@@ -19,52 +19,49 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import kotlin.jvm.JvmName
 
 // A * Inv<B> -> Div<A, B>
 
 fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
-	RightReciprocalQuantity : UndefinedQuantityType,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<RightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
-		RightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		LeftQuantity,
-		LeftUnit,
-		RightReciprocalQuantity,
-		RightReciprocalUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftQuantity,
-		RightReciprocalQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	LeftQuantity,
-	LeftUnit,
-	>.multipliedByReciprocalUndefinedUnit(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Reciprocal<
-			RightReciprocalQuantity,
-			>,
-		RightUnit,
-		>,
-	leftUnitPerRightReciprocalUnit: LeftUnit.(RightReciprocalUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
+    RightReciprocalQuantity : UndefinedQuantityType,
+    RightReciprocalUnit : AbstractUndefinedScientificUnit<RightReciprocalQuantity>,
+    RightUnit : UndefinedReciprocalUnit<
+        RightReciprocalQuantity,
+        RightReciprocalUnit,
+        >,
+    TargetUnit : UndefinedDividedUnit<
+        LeftQuantity,
+        LeftUnit,
+        RightReciprocalQuantity,
+        RightReciprocalUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            LeftQuantity,
+            RightReciprocalQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByReciprocalUndefinedUnit(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            RightReciprocalQuantity,
+            >,
+        RightUnit,
+        >,
+    leftUnitPerRightReciprocalUnit: LeftUnit.(RightReciprocalUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitPerRightReciprocalUnit(
-	right.unit.inverse,
+    right.unit.inverse,
 ).byMultiplying(this, right, factory)

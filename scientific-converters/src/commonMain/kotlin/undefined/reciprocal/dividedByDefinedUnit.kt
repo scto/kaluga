@@ -19,75 +19,71 @@
 package com.splendo.kaluga.scientific.converter.undefined.reciprocal
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // Inv<A> / B! -> Inv<Mul<A, Wr<B>>>
 
 fun <
-	NumeratorReciprocalQuantity : UndefinedQuantityType,
-	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalQuantity>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		NumeratorReciprocalQuantity,
-		NumeratorReciprocalUnit,
-		>,
-	DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	DenominatorUnit : ScientificUnit<DenominatorQuantity>,
-	WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
-	DenominatorQuantity,
-	DenominatorUnit,
-		>,
-	TargetReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalQuantity,
-		NumeratorReciprocalUnit,
-		UndefinedQuantityType.Extended<
-			DenominatorQuantity,
-			>,
-		WrappedDenominatorUnit,
-		>,
-	TargetUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalQuantity,
-			UndefinedQuantityType.Extended<
-				DenominatorQuantity,
-				>,
-			>,
-		TargetReciprocalUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalQuantity,
-			UndefinedQuantityType.Extended<
-				DenominatorQuantity,
-				>,
-			>,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		NumeratorReciprocalQuantity,
-		>,
-	NumeratorUnit,
-	>.dividedByDefinedUnit(
-	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
-	denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
-	numeratorReciprocalUnitXWrappedDenominatorUnit: NumeratorReciprocalUnit.(WrappedDenominatorUnit) -> TargetReciprocalUnit,
-	reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    NumeratorReciprocalQuantity : UndefinedQuantityType,
+    NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalQuantity>,
+    NumeratorUnit : UndefinedReciprocalUnit<
+        NumeratorReciprocalQuantity,
+        NumeratorReciprocalUnit,
+        >,
+    DenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    DenominatorUnit : ScientificUnit<DenominatorQuantity>,
+    WrappedDenominatorUnit : WrappedUndefinedExtendedUnit<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetReciprocalUnit : UndefinedMultipliedUnit<
+        NumeratorReciprocalQuantity,
+        NumeratorReciprocalUnit,
+        UndefinedQuantityType.Extended<
+            DenominatorQuantity,
+            >,
+        WrappedDenominatorUnit,
+        >,
+    TargetUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            NumeratorReciprocalQuantity,
+            UndefinedQuantityType.Extended<
+                DenominatorQuantity,
+                >,
+            >,
+        TargetReciprocalUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Multiplying<
+                NumeratorReciprocalQuantity,
+                UndefinedQuantityType.Extended<
+                    DenominatorQuantity,
+                    >,
+                >,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        NumeratorReciprocalQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByDefinedUnit(
+    right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
+    denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,
+    numeratorReciprocalUnitXWrappedDenominatorUnit: NumeratorReciprocalUnit.(WrappedDenominatorUnit) -> TargetReciprocalUnit,
+    reciprocalTargetUnit: TargetReciprocalUnit.() -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.inverse.numeratorReciprocalUnitXWrappedDenominatorUnit(
-	right.unit.denominatorAsUndefined(),
+    right.unit.denominatorAsUndefined(),
 ).reciprocalTargetUnit().byDividing(this, right, factory)

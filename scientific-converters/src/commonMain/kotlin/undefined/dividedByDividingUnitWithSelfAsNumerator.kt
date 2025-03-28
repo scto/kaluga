@@ -19,43 +19,40 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
-import kotlin.jvm.JvmName
 
 // A / Div<A, B> -> B
 
 fun <
-	NumeratorAndDenominatorNumeratorQuantity : UndefinedQuantityType,
-	NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
-	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
-	DenominatorDenominatorQuantity : UndefinedQuantityType,
-	DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
-	DenominatorUnit : UndefinedDividedUnit<
-		NumeratorAndDenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		DenominatorDenominatorQuantity,
-		DenominatorDenominatorUnit,
-		>,
-	DenominatorDenominatorValue : UndefinedScientificValue<
-	DenominatorDenominatorQuantity,
-	DenominatorDenominatorUnit,
-	>,
-	> UndefinedScientificValue<
-	NumeratorAndDenominatorNumeratorQuantity,
-	NumeratorUnit,
-	>.dividedByDividingUnitWithSelfAsNumerator(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Dividing<
-			NumeratorAndDenominatorNumeratorQuantity,
-			DenominatorDenominatorQuantity,
-			>,
-		DenominatorUnit,
-		>,
-	factory: (Decimal, DenominatorDenominatorUnit) -> DenominatorDenominatorValue,
+    NumeratorAndDenominatorNumeratorQuantity : UndefinedQuantityType,
+    NumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+    DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<NumeratorAndDenominatorNumeratorQuantity>,
+    DenominatorDenominatorQuantity : UndefinedQuantityType,
+    DenominatorDenominatorUnit : AbstractUndefinedScientificUnit<DenominatorDenominatorQuantity>,
+    DenominatorUnit : UndefinedDividedUnit<
+        NumeratorAndDenominatorNumeratorQuantity,
+        DenominatorNumeratorUnit,
+        DenominatorDenominatorQuantity,
+        DenominatorDenominatorUnit,
+        >,
+    DenominatorDenominatorValue : UndefinedScientificValue<
+        DenominatorDenominatorQuantity,
+        DenominatorDenominatorUnit,
+        >,
+    > UndefinedScientificValue<
+    NumeratorAndDenominatorNumeratorQuantity,
+    NumeratorUnit,
+    >.dividedByDividingUnitWithSelfAsNumerator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            NumeratorAndDenominatorNumeratorQuantity,
+            DenominatorDenominatorQuantity,
+            >,
+        DenominatorUnit,
+        >,
+    factory: (Decimal, DenominatorDenominatorUnit) -> DenominatorDenominatorValue,
 ) = right.unit.denominator.byDividing(this, right, factory)

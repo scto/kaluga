@@ -19,45 +19,41 @@
 package com.splendo.kaluga.scientific.converter.undefined.dimensionless
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // One / Inv<Wr<A>> -> A!
 
 fun <
-	NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	DenominatorReciprocalQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	DenominatorReciprocalUnit : ScientificUnit<DenominatorReciprocalQuantity>,
-	WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
-	DenominatorReciprocalQuantity,
-	DenominatorReciprocalUnit,
-		>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Extended<
-			DenominatorReciprocalQuantity,
-			>,
-		WrappedDenominatorReciprocalUnit,
-		>,
-	DenominatorReciprocalValue : ScientificValue<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
-	> ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Reciprocal<
-			UndefinedQuantityType.Extended<
-				DenominatorReciprocalQuantity,
-				>,
-			>,
-		DenominatorUnit,
-		>,
-	factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
+    NumeratorUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+    DenominatorReciprocalQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    DenominatorReciprocalUnit : ScientificUnit<DenominatorReciprocalQuantity>,
+    WrappedDenominatorReciprocalUnit : WrappedUndefinedExtendedUnit<
+        DenominatorReciprocalQuantity,
+        DenominatorReciprocalUnit,
+        >,
+    DenominatorUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Extended<
+            DenominatorReciprocalQuantity,
+            >,
+        WrappedDenominatorReciprocalUnit,
+        >,
+    DenominatorReciprocalValue : ScientificValue<DenominatorReciprocalQuantity, DenominatorReciprocalUnit>,
+    > ScientificValue<PhysicalQuantity.Dimensionless, NumeratorUnit>.dividedByReciprocalDefined(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Extended<
+                DenominatorReciprocalQuantity,
+                >,
+            >,
+        DenominatorUnit,
+        >,
+    factory: (Decimal, DenominatorReciprocalUnit) -> DenominatorReciprocalValue,
 ) = right.unit.inverse.wrapped.byDividing(this, right, factory)

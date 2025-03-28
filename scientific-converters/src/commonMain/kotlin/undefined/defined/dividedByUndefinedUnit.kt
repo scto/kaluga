@@ -19,56 +19,52 @@
 package com.splendo.kaluga.scientific.converter.undefined.defined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // A! / B -> Div<Wr<A>, B>
 
 fun <
-	NumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorUnit : ScientificUnit<NumeratorQuantity>,
-	DenominatorQuantity : UndefinedQuantityType,
-	DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
-	WrappedNumeratorUnit : WrappedUndefinedExtendedUnit<
-	NumeratorQuantity,
-	NumeratorUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Extended<
-			NumeratorQuantity,
-			>,
-		WrappedNumeratorUnit,
-		DenominatorQuantity,
-		DenominatorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Extended<
-			NumeratorQuantity,
-			>,
-		DenominatorQuantity,
-		>,
-	TargetUnit,
-	>,
-	> ScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
-	right: UndefinedScientificValue<
-		DenominatorQuantity,
-		DenominatorUnit,
-		>,
-	numeratorAsUndefined: NumeratorUnit.() -> WrappedNumeratorUnit,
-	wrappedNumeratorUnitPerDenominatorUnit: WrappedNumeratorUnit.(DenominatorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    NumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorUnit : ScientificUnit<NumeratorQuantity>,
+    DenominatorQuantity : UndefinedQuantityType,
+    DenominatorUnit : AbstractUndefinedScientificUnit<DenominatorQuantity>,
+    WrappedNumeratorUnit : WrappedUndefinedExtendedUnit<
+        NumeratorQuantity,
+        NumeratorUnit,
+        >,
+    TargetUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Extended<
+            NumeratorQuantity,
+            >,
+        WrappedNumeratorUnit,
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            UndefinedQuantityType.Extended<
+                NumeratorQuantity,
+                >,
+            DenominatorQuantity,
+            >,
+        TargetUnit,
+        >,
+    > ScientificValue<NumeratorQuantity, NumeratorUnit>.dividedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        DenominatorQuantity,
+        DenominatorUnit,
+        >,
+    numeratorAsUndefined: NumeratorUnit.() -> WrappedNumeratorUnit,
+    wrappedNumeratorUnitPerDenominatorUnit: WrappedNumeratorUnit.(DenominatorUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.numeratorAsUndefined().wrappedNumeratorUnitPerDenominatorUnit(
-	right.unit,
+    right.unit,
 ).byDividing(this, right, factory)

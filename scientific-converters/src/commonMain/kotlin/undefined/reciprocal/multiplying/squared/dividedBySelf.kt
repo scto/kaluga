@@ -19,75 +19,71 @@
 package com.splendo.kaluga.scientific.converter.undefined.reciprocal.multiplying.squared
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import kotlin.jvm.JvmName
 
 // Inv<Mul<A, A>> / Inv<Mul<A, A>> -> One
 
 fun <
-	NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity : UndefinedQuantityType,
-	NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
-	NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
-	NumeratorReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-		NumeratorReciprocalLeftUnit,
-		NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-		NumeratorReciprocalRightUnit,
-		>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-			NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		NumeratorReciprocalUnit,
-		>,
-	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
-	DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
-	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-		DenominatorReciprocalLeftUnit,
-		NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-		DenominatorReciprocalRightUnit,
-		>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-			NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		DenominatorReciprocalUnit,
-		>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-			NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		>,
-	NumeratorUnit,
-	>.dividedBySelf(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Reciprocal<
-			UndefinedQuantityType.Multiplying<
-				NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-				NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
-				>,
-			>,
-		DenominatorUnit,
-		>,
-	getDimensionless: () -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity : UndefinedQuantityType,
+    NumeratorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
+    NumeratorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
+    NumeratorReciprocalUnit : UndefinedMultipliedUnit<
+        NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+        NumeratorReciprocalLeftUnit,
+        NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+        NumeratorReciprocalRightUnit,
+        >,
+    NumeratorUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+            NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        NumeratorReciprocalUnit,
+        >,
+    DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
+    DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity>,
+    DenominatorReciprocalUnit : UndefinedMultipliedUnit<
+        NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+        DenominatorReciprocalLeftUnit,
+        NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+        DenominatorReciprocalRightUnit,
+        >,
+    DenominatorUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+            NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        DenominatorReciprocalUnit,
+        >,
+    TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+    TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Multiplying<
+            NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+            NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        >,
+    NumeratorUnit,
+    >.dividedBySelf(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Multiplying<
+                NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+                NumeratorReciprocalLeftAndRightAndDenominatorReciprocalLeftAndRightQuantity,
+                >,
+            >,
+        DenominatorUnit,
+        >,
+    getDimensionless: () -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byDividing(this, right, factory)

@@ -19,80 +19,76 @@
 package com.splendo.kaluga.scientific.converter.undefined.dividing
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // Div<A, B> * Div<Mul<Wr<C>, B>, A> -> C!
 
 fun <
-	LeftNumeratorAndRightDenominatorQuantity : UndefinedQuantityType,
-	LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
-	LeftDenominatorAndRightNumeratorRightQuantity : UndefinedQuantityType,
-	LeftDenominatorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorRightQuantity>,
-	LeftUnit : UndefinedDividedUnit<
-		LeftNumeratorAndRightDenominatorQuantity,
-		LeftNumeratorUnit,
-		LeftDenominatorAndRightNumeratorRightQuantity,
-		LeftDenominatorUnit,
-		>,
-	RightNumeratorLeftQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightNumeratorLeftUnit : ScientificUnit<RightNumeratorLeftQuantity>,
-	WrappedRightNumeratorLeftUnit : WrappedUndefinedExtendedUnit<
-	RightNumeratorLeftQuantity,
-	RightNumeratorLeftUnit,
-		>,
-	RightNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorRightQuantity>,
-	RightNumeratorUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Extended<
-			RightNumeratorLeftQuantity,
-			>,
-		WrappedRightNumeratorLeftUnit,
-		LeftDenominatorAndRightNumeratorRightQuantity,
-		RightNumeratorRightUnit,
-		>,
-	RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
-	RightUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				RightNumeratorLeftQuantity,
-				>,
-			LeftDenominatorAndRightNumeratorRightQuantity,
-			>,
-		RightNumeratorUnit,
-		LeftNumeratorAndRightDenominatorQuantity,
-		RightDenominatorUnit,
-		>,
-	RightNumeratorLeftValue : ScientificValue<RightNumeratorLeftQuantity, RightNumeratorLeftUnit>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		LeftNumeratorAndRightDenominatorQuantity,
-		LeftDenominatorAndRightNumeratorRightQuantity,
-		>,
-	LeftUnit,
-	>.multipliedByDividingUnitWithMultiplyingNumeratorWithDefinedLeftAndDenominatorAsRightAndNumeratorAsDenominator(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Dividing<
-			UndefinedQuantityType.Multiplying<
-				UndefinedQuantityType.Extended<
-					RightNumeratorLeftQuantity,
-					>,
-				LeftDenominatorAndRightNumeratorRightQuantity,
-				>,
-			LeftNumeratorAndRightDenominatorQuantity,
-			>,
-		RightUnit,
-		>,
-	factory: (Decimal, RightNumeratorLeftUnit) -> RightNumeratorLeftValue,
+    LeftNumeratorAndRightDenominatorQuantity : UndefinedQuantityType,
+    LeftNumeratorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
+    LeftDenominatorAndRightNumeratorRightQuantity : UndefinedQuantityType,
+    LeftDenominatorUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorRightQuantity>,
+    LeftUnit : UndefinedDividedUnit<
+        LeftNumeratorAndRightDenominatorQuantity,
+        LeftNumeratorUnit,
+        LeftDenominatorAndRightNumeratorRightQuantity,
+        LeftDenominatorUnit,
+        >,
+    RightNumeratorLeftQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightNumeratorLeftUnit : ScientificUnit<RightNumeratorLeftQuantity>,
+    WrappedRightNumeratorLeftUnit : WrappedUndefinedExtendedUnit<
+        RightNumeratorLeftQuantity,
+        RightNumeratorLeftUnit,
+        >,
+    RightNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftDenominatorAndRightNumeratorRightQuantity>,
+    RightNumeratorUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Extended<
+            RightNumeratorLeftQuantity,
+            >,
+        WrappedRightNumeratorLeftUnit,
+        LeftDenominatorAndRightNumeratorRightQuantity,
+        RightNumeratorRightUnit,
+        >,
+    RightDenominatorUnit : AbstractUndefinedScientificUnit<LeftNumeratorAndRightDenominatorQuantity>,
+    RightUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Extended<
+                RightNumeratorLeftQuantity,
+                >,
+            LeftDenominatorAndRightNumeratorRightQuantity,
+            >,
+        RightNumeratorUnit,
+        LeftNumeratorAndRightDenominatorQuantity,
+        RightDenominatorUnit,
+        >,
+    RightNumeratorLeftValue : ScientificValue<RightNumeratorLeftQuantity, RightNumeratorLeftUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Dividing<
+        LeftNumeratorAndRightDenominatorQuantity,
+        LeftDenominatorAndRightNumeratorRightQuantity,
+        >,
+    LeftUnit,
+    >.multipliedByDividingUnitWithMultiplyingNumeratorWithDefinedLeftAndDenominatorAsRightAndNumeratorAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            UndefinedQuantityType.Multiplying<
+                UndefinedQuantityType.Extended<
+                    RightNumeratorLeftQuantity,
+                    >,
+                LeftDenominatorAndRightNumeratorRightQuantity,
+                >,
+            LeftNumeratorAndRightDenominatorQuantity,
+            >,
+        RightUnit,
+        >,
+    factory: (Decimal, RightNumeratorLeftUnit) -> RightNumeratorLeftValue,
 ) = right.unit.numerator.left.wrapped.byMultiplying(this, right, factory)

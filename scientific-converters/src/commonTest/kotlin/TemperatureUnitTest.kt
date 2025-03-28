@@ -25,7 +25,6 @@ import com.splendo.kaluga.scientific.converter.thermalResistance.times
 import com.splendo.kaluga.scientific.invoke
 import com.splendo.kaluga.scientific.unit.*
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class TemperatureUnitTest {
 

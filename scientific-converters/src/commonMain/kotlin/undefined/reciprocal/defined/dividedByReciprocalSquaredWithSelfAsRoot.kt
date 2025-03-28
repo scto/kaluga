@@ -19,85 +19,80 @@
 package com.splendo.kaluga.scientific.converter.undefined.reciprocal.defined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
-import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // Inv<Wr<A>> / Inv<Mul<Ex<A>, Ex<A>>> -> A!
 
 fun <
-	NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorReciprocalUnit : ScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity>,
-	WrappedNumeratorReciprocalUnit : WrappedUndefinedExtendedUnit<
-	NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-	NumeratorReciprocalUnit,
-		>,
-	NumeratorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Extended<
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		WrappedNumeratorReciprocalUnit,
-		>,
-	ExtendedDenominatorReciprocalLeftUnit : UndefinedExtendedUnit<
-		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-		>,
-	ExtendedDenominatorReciprocalRightUnit : UndefinedExtendedUnit<
-		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-		>,
-	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Extended<
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		ExtendedDenominatorReciprocalLeftUnit,
-		UndefinedQuantityType.Extended<
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		ExtendedDenominatorReciprocalRightUnit,
-		>,
-	DenominatorUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-				>,
-			>,
-		DenominatorReciprocalUnit,
-		>,
-	NumeratorReciprocalValue : ScientificValue<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity, NumeratorReciprocalUnit>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Extended<
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-			>,
-		>,
-	NumeratorUnit,
-	>.dividedByReciprocalSquaredWithSelfAsRoot(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Reciprocal<
-			UndefinedQuantityType.Multiplying<
-				UndefinedQuantityType.Extended<
-					NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-					>,
-				UndefinedQuantityType.Extended<
-					NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-					>,
-				>,
-			>,
-		DenominatorUnit,
-		>,
-	factory: (Decimal, NumeratorReciprocalUnit) -> NumeratorReciprocalValue,
+    NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorReciprocalUnit : ScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity>,
+    WrappedNumeratorReciprocalUnit : WrappedUndefinedExtendedUnit<
+        NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+        NumeratorReciprocalUnit,
+        >,
+    NumeratorUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Extended<
+            NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        WrappedNumeratorReciprocalUnit,
+        >,
+    ExtendedDenominatorReciprocalLeftUnit : UndefinedExtendedUnit<
+        NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+        >,
+    ExtendedDenominatorReciprocalRightUnit : UndefinedExtendedUnit<
+        NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+        >,
+    DenominatorReciprocalUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Extended<
+            NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        ExtendedDenominatorReciprocalLeftUnit,
+        UndefinedQuantityType.Extended<
+            NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        ExtendedDenominatorReciprocalRightUnit,
+        >,
+    DenominatorUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Extended<
+                NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+                >,
+            UndefinedQuantityType.Extended<
+                NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+                >,
+            >,
+        DenominatorReciprocalUnit,
+        >,
+    NumeratorReciprocalValue : ScientificValue<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity, NumeratorReciprocalUnit>,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        UndefinedQuantityType.Extended<
+            NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+            >,
+        >,
+    NumeratorUnit,
+    >.dividedByReciprocalSquaredWithSelfAsRoot(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Multiplying<
+                UndefinedQuantityType.Extended<
+                    NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+                    >,
+                UndefinedQuantityType.Extended<
+                    NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+                    >,
+                >,
+            >,
+        DenominatorUnit,
+        >,
+    factory: (Decimal, NumeratorReciprocalUnit) -> NumeratorReciprocalValue,
 ) = unit.inverse.wrapped.byDividing(this, right, factory)

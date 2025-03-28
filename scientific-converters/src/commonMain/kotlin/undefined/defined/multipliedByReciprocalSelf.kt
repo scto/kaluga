@@ -19,46 +19,41 @@
 package com.splendo.kaluga.scientific.converter.undefined.defined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
-import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.Dimensionless
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import kotlin.jvm.JvmName
 
 // A! * Inv<Ex<A>> -> One
 
 fun <
-	LeftAndRightReciprocalQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftUnit : ScientificUnit<LeftAndRightReciprocalQuantity>,
-	ExtendedRightReciprocalUnit : UndefinedExtendedUnit<
-		LeftAndRightReciprocalQuantity,
-		>,
-	RightUnit : UndefinedReciprocalUnit<
-		UndefinedQuantityType.Extended<
-			LeftAndRightReciprocalQuantity,
-			>,
-		ExtendedRightReciprocalUnit,
-		>,
-	TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
-	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
-	> ScientificValue<LeftAndRightReciprocalQuantity, LeftUnit>.multipliedByReciprocalSelf(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Reciprocal<
-			UndefinedQuantityType.Extended<
-				LeftAndRightReciprocalQuantity,
-				>,
-			>,
-		RightUnit,
-		>,
-	getDimensionless: () -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftAndRightReciprocalQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftUnit : ScientificUnit<LeftAndRightReciprocalQuantity>,
+    ExtendedRightReciprocalUnit : UndefinedExtendedUnit<
+        LeftAndRightReciprocalQuantity,
+        >,
+    RightUnit : UndefinedReciprocalUnit<
+        UndefinedQuantityType.Extended<
+            LeftAndRightReciprocalQuantity,
+            >,
+        ExtendedRightReciprocalUnit,
+        >,
+    TargetUnit : ScientificUnit<PhysicalQuantity.Dimensionless>,
+    TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
+    > ScientificValue<LeftAndRightReciprocalQuantity, LeftUnit>.multipliedByReciprocalSelf(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Reciprocal<
+            UndefinedQuantityType.Extended<
+                LeftAndRightReciprocalQuantity,
+                >,
+            >,
+        RightUnit,
+        >,
+    getDimensionless: () -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byMultiplying(this, right, factory)

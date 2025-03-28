@@ -19,60 +19,57 @@
 package com.splendo.kaluga.scientific.converter.undefined.multiplying.squared
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import kotlin.jvm.JvmName
 
 // Mul<A, A> * A -> Mul<Mul<A, A>, A>
 
 fun <
-	LeftLeftAndRightAndRightQuantity : UndefinedQuantityType,
-	LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightQuantity>,
-	LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightQuantity>,
-	LeftUnit : UndefinedMultipliedUnit<
-		LeftLeftAndRightAndRightQuantity,
-		LeftLeftUnit,
-		LeftLeftAndRightAndRightQuantity,
-		LeftRightUnit,
-		>,
-	RightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightQuantity>,
-	TargetUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightQuantity,
-			LeftLeftAndRightAndRightQuantity,
-			>,
-		LeftUnit,
-		LeftLeftAndRightAndRightQuantity,
-		LeftLeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		UndefinedQuantityType.Multiplying<
-			LeftLeftAndRightAndRightQuantity,
-			LeftLeftAndRightAndRightQuantity,
-			>,
-		LeftLeftAndRightAndRightQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftLeftAndRightAndRightQuantity,
-		LeftLeftAndRightAndRightQuantity,
-		>,
-	LeftUnit,
-	>.multipliedByRoot(
-	right: UndefinedScientificValue<
-		LeftLeftAndRightAndRightQuantity,
-		RightUnit,
-		>,
-	leftUnitXLeftLeftUnit: LeftUnit.(LeftLeftUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftLeftAndRightAndRightQuantity : UndefinedQuantityType,
+    LeftLeftUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightQuantity>,
+    LeftRightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightQuantity>,
+    LeftUnit : UndefinedMultipliedUnit<
+        LeftLeftAndRightAndRightQuantity,
+        LeftLeftUnit,
+        LeftLeftAndRightAndRightQuantity,
+        LeftRightUnit,
+        >,
+    RightUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightQuantity>,
+    TargetUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Multiplying<
+            LeftLeftAndRightAndRightQuantity,
+            LeftLeftAndRightAndRightQuantity,
+            >,
+        LeftUnit,
+        LeftLeftAndRightAndRightQuantity,
+        LeftLeftUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Multiplying<
+                LeftLeftAndRightAndRightQuantity,
+                LeftLeftAndRightAndRightQuantity,
+                >,
+            LeftLeftAndRightAndRightQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Multiplying<
+        LeftLeftAndRightAndRightQuantity,
+        LeftLeftAndRightAndRightQuantity,
+        >,
+    LeftUnit,
+    >.multipliedByRoot(
+    right: UndefinedScientificValue<
+        LeftLeftAndRightAndRightQuantity,
+        RightUnit,
+        >,
+    leftUnitXLeftLeftUnit: LeftUnit.(LeftLeftUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitXLeftLeftUnit(
-	unit.left,
+    unit.left,
 ).byMultiplying(this, right, factory)

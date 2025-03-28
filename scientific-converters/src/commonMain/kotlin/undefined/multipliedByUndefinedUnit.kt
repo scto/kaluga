@@ -19,45 +19,42 @@
 package com.splendo.kaluga.scientific.converter.undefined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import kotlin.jvm.JvmName
 
 // A * B -> Mul<A, B>
 
 fun <
-	LeftQuantity : UndefinedQuantityType,
-	LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
-	RightQuantity : UndefinedQuantityType,
-	RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
-	TargetUnit : UndefinedMultipliedUnit<
-		LeftQuantity,
-		LeftUnit,
-		RightQuantity,
-		RightUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftQuantity,
-		RightQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	LeftQuantity,
-	LeftUnit,
-	>.multipliedByUndefinedUnit(
-	right: UndefinedScientificValue<
-		RightQuantity,
-		RightUnit,
-		>,
-	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftQuantity : UndefinedQuantityType,
+    LeftUnit : AbstractUndefinedScientificUnit<LeftQuantity>,
+    RightQuantity : UndefinedQuantityType,
+    RightUnit : AbstractUndefinedScientificUnit<RightQuantity>,
+    TargetUnit : UndefinedMultipliedUnit<
+        LeftQuantity,
+        LeftUnit,
+        RightQuantity,
+        RightUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            LeftQuantity,
+            RightQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    LeftQuantity,
+    LeftUnit,
+    >.multipliedByUndefinedUnit(
+    right: UndefinedScientificValue<
+        RightQuantity,
+        RightUnit,
+        >,
+    leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitXRightUnit(
-	right.unit,
+    right.unit,
 ).byMultiplying(this, right, factory)

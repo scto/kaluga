@@ -19,57 +19,52 @@
 package com.splendo.kaluga.scientific.converter.undefined.defined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
-import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // A! * Div<Wr<B>, Ex<A>> -> B!
 
 fun <
-	LeftAndRightDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	LeftUnit : ScientificUnit<LeftAndRightDenominatorQuantity>,
-	RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightNumeratorUnit : ScientificUnit<RightNumeratorQuantity>,
-	WrappedRightNumeratorUnit : WrappedUndefinedExtendedUnit<
-	RightNumeratorQuantity,
-	RightNumeratorUnit,
-		>,
-	ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
-		LeftAndRightDenominatorQuantity,
-		>,
-	RightUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Extended<
-			RightNumeratorQuantity,
-			>,
-		WrappedRightNumeratorUnit,
-		UndefinedQuantityType.Extended<
-			LeftAndRightDenominatorQuantity,
-			>,
-		ExtendedRightDenominatorUnit,
-		>,
-	RightNumeratorValue : ScientificValue<RightNumeratorQuantity, RightNumeratorUnit>,
-	> ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.multipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominator(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Dividing<
-			UndefinedQuantityType.Extended<
-				RightNumeratorQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				LeftAndRightDenominatorQuantity,
-				>,
-			>,
-		RightUnit,
-		>,
-	factory: (Decimal, RightNumeratorUnit) -> RightNumeratorValue,
+    LeftAndRightDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    LeftUnit : ScientificUnit<LeftAndRightDenominatorQuantity>,
+    RightNumeratorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightNumeratorUnit : ScientificUnit<RightNumeratorQuantity>,
+    WrappedRightNumeratorUnit : WrappedUndefinedExtendedUnit<
+        RightNumeratorQuantity,
+        RightNumeratorUnit,
+        >,
+    ExtendedRightDenominatorUnit : UndefinedExtendedUnit<
+        LeftAndRightDenominatorQuantity,
+        >,
+    RightUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Extended<
+            RightNumeratorQuantity,
+            >,
+        WrappedRightNumeratorUnit,
+        UndefinedQuantityType.Extended<
+            LeftAndRightDenominatorQuantity,
+            >,
+        ExtendedRightDenominatorUnit,
+        >,
+    RightNumeratorValue : ScientificValue<RightNumeratorQuantity, RightNumeratorUnit>,
+    > ScientificValue<LeftAndRightDenominatorQuantity, LeftUnit>.multipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            UndefinedQuantityType.Extended<
+                RightNumeratorQuantity,
+                >,
+            UndefinedQuantityType.Extended<
+                LeftAndRightDenominatorQuantity,
+                >,
+            >,
+        RightUnit,
+        >,
+    factory: (Decimal, RightNumeratorUnit) -> RightNumeratorValue,
 ) = right.unit.numerator.wrapped.byMultiplying(this, right, factory)

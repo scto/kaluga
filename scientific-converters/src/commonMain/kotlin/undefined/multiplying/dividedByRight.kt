@@ -19,43 +19,40 @@
 package com.splendo.kaluga.scientific.converter.undefined.multiplying
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import kotlin.jvm.JvmName
 
 // Mul<A, B> / B -> A
 
 fun <
-	NumeratorLeftQuantity : UndefinedQuantityType,
-	NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftQuantity>,
-	NumeratorRightAndDenominatorQuantity : UndefinedQuantityType,
-	NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorQuantity>,
-	NumeratorUnit : UndefinedMultipliedUnit<
-		NumeratorLeftQuantity,
-		NumeratorLeftUnit,
-		NumeratorRightAndDenominatorQuantity,
-		NumeratorRightUnit,
-		>,
-	DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorQuantity>,
-	NumeratorLeftValue : UndefinedScientificValue<
-	NumeratorLeftQuantity,
-	NumeratorLeftUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		NumeratorLeftQuantity,
-		NumeratorRightAndDenominatorQuantity,
-		>,
-	NumeratorUnit,
-	>.dividedByRight(
-	right: UndefinedScientificValue<
-		NumeratorRightAndDenominatorQuantity,
-		DenominatorUnit,
-		>,
-	factory: (Decimal, NumeratorLeftUnit) -> NumeratorLeftValue,
+    NumeratorLeftQuantity : UndefinedQuantityType,
+    NumeratorLeftUnit : AbstractUndefinedScientificUnit<NumeratorLeftQuantity>,
+    NumeratorRightAndDenominatorQuantity : UndefinedQuantityType,
+    NumeratorRightUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorQuantity>,
+    NumeratorUnit : UndefinedMultipliedUnit<
+        NumeratorLeftQuantity,
+        NumeratorLeftUnit,
+        NumeratorRightAndDenominatorQuantity,
+        NumeratorRightUnit,
+        >,
+    DenominatorUnit : AbstractUndefinedScientificUnit<NumeratorRightAndDenominatorQuantity>,
+    NumeratorLeftValue : UndefinedScientificValue<
+        NumeratorLeftQuantity,
+        NumeratorLeftUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Multiplying<
+        NumeratorLeftQuantity,
+        NumeratorRightAndDenominatorQuantity,
+        >,
+    NumeratorUnit,
+    >.dividedByRight(
+    right: UndefinedScientificValue<
+        NumeratorRightAndDenominatorQuantity,
+        DenominatorUnit,
+        >,
+    factory: (Decimal, NumeratorLeftUnit) -> NumeratorLeftValue,
 ) = unit.left.byDividing(this, right, factory)

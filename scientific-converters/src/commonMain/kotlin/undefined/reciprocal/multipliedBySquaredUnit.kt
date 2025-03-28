@@ -19,69 +19,66 @@
 package com.splendo.kaluga.scientific.converter.undefined.reciprocal
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
-import kotlin.jvm.JvmName
 
 // Inv<A> * Mul<B, B> -> Div<Mul<B, B>, A>
 
 fun <
-	LeftReciprocalQuantity : UndefinedQuantityType,
-	LeftReciprocalUnit : AbstractUndefinedScientificUnit<LeftReciprocalQuantity>,
-	LeftUnit : UndefinedReciprocalUnit<
-		LeftReciprocalQuantity,
-		LeftReciprocalUnit,
-		>,
-	RightLeftAndRightQuantity : UndefinedQuantityType,
-	RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftAndRightQuantity>,
-	RightRightUnit : AbstractUndefinedScientificUnit<RightLeftAndRightQuantity>,
-	RightUnit : UndefinedMultipliedUnit<
-		RightLeftAndRightQuantity,
-		RightLeftUnit,
-		RightLeftAndRightQuantity,
-		RightRightUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			RightLeftAndRightQuantity,
-			RightLeftAndRightQuantity,
-			>,
-		RightUnit,
-		LeftReciprocalQuantity,
-		LeftReciprocalUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			RightLeftAndRightQuantity,
-			RightLeftAndRightQuantity,
-			>,
-		LeftReciprocalQuantity,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		LeftReciprocalQuantity,
-		>,
-	LeftUnit,
-	>.multipliedBySquaredUnit(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Multiplying<
-			RightLeftAndRightQuantity,
-			RightLeftAndRightQuantity,
-			>,
-		RightUnit,
-		>,
-	rightUnitPerLeftReciprocalUnit: RightUnit.(LeftReciprocalUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftReciprocalQuantity : UndefinedQuantityType,
+    LeftReciprocalUnit : AbstractUndefinedScientificUnit<LeftReciprocalQuantity>,
+    LeftUnit : UndefinedReciprocalUnit<
+        LeftReciprocalQuantity,
+        LeftReciprocalUnit,
+        >,
+    RightLeftAndRightQuantity : UndefinedQuantityType,
+    RightLeftUnit : AbstractUndefinedScientificUnit<RightLeftAndRightQuantity>,
+    RightRightUnit : AbstractUndefinedScientificUnit<RightLeftAndRightQuantity>,
+    RightUnit : UndefinedMultipliedUnit<
+        RightLeftAndRightQuantity,
+        RightLeftUnit,
+        RightLeftAndRightQuantity,
+        RightRightUnit,
+        >,
+    TargetUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Multiplying<
+            RightLeftAndRightQuantity,
+            RightLeftAndRightQuantity,
+            >,
+        RightUnit,
+        LeftReciprocalQuantity,
+        LeftReciprocalUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            UndefinedQuantityType.Multiplying<
+                RightLeftAndRightQuantity,
+                RightLeftAndRightQuantity,
+                >,
+            LeftReciprocalQuantity,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Reciprocal<
+        LeftReciprocalQuantity,
+        >,
+    LeftUnit,
+    >.multipliedBySquaredUnit(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Multiplying<
+            RightLeftAndRightQuantity,
+            RightLeftAndRightQuantity,
+            >,
+        RightUnit,
+        >,
+    rightUnitPerLeftReciprocalUnit: RightUnit.(LeftReciprocalUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.rightUnitPerLeftReciprocalUnit(
-	unit.inverse,
+    unit.inverse,
 ).byMultiplying(this, right, factory)

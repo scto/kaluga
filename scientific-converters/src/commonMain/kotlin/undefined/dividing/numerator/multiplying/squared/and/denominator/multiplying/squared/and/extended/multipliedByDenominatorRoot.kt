@@ -19,110 +19,106 @@
 package com.splendo.kaluga.scientific.converter.undefined.dividing.numerator.multiplying.squared.and.denominator.multiplying.squared.and.extended
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byMultiplying
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
-import kotlin.jvm.JvmName
 
 // Div<Mul<A, A>, Mul<Ex<B>, Ex<B>>> * B! -> Div<Mul<A, A>, Ex<B>>
 
 fun <
-	LeftNumeratorLeftAndRightQuantity : UndefinedQuantityType,
-	LeftNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
-	LeftNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
-	LeftNumeratorUnit : UndefinedMultipliedUnit<
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorLeftUnit,
-		LeftNumeratorLeftAndRightQuantity,
-		LeftNumeratorRightUnit,
-		>,
-	ExtendedLeftDenominatorLeftUnit : UndefinedExtendedUnit<
-		LeftDenominatorLeftAndRightAndRightQuantity,
-		>,
-	ExtendedLeftDenominatorRightUnit : UndefinedExtendedUnit<
-		LeftDenominatorLeftAndRightAndRightQuantity,
-		>,
-	LeftDenominatorUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Extended<
-			LeftDenominatorLeftAndRightAndRightQuantity,
-			>,
-		ExtendedLeftDenominatorLeftUnit,
-		UndefinedQuantityType.Extended<
-			LeftDenominatorLeftAndRightAndRightQuantity,
-			>,
-		ExtendedLeftDenominatorRightUnit,
-		>,
-	LeftUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftNumeratorLeftAndRightQuantity,
-			LeftNumeratorLeftAndRightQuantity,
-			>,
-		LeftNumeratorUnit,
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				LeftDenominatorLeftAndRightAndRightQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				LeftDenominatorLeftAndRightAndRightQuantity,
-				>,
-			>,
-		LeftDenominatorUnit,
-		>,
-	LeftDenominatorLeftAndRightAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	RightUnit : ScientificUnit<LeftDenominatorLeftAndRightAndRightQuantity>,
-	TargetUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			LeftNumeratorLeftAndRightQuantity,
-			LeftNumeratorLeftAndRightQuantity,
-			>,
-		LeftNumeratorUnit,
-		UndefinedQuantityType.Extended<
-			LeftDenominatorLeftAndRightAndRightQuantity,
-			>,
-		ExtendedLeftDenominatorLeftUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			LeftNumeratorLeftAndRightQuantity,
-			LeftNumeratorLeftAndRightQuantity,
-			>,
-		UndefinedQuantityType.Extended<
-			LeftDenominatorLeftAndRightAndRightQuantity,
-			>,
-		>,
-	TargetUnit,
-	>,
-	> UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			LeftNumeratorLeftAndRightQuantity,
-			LeftNumeratorLeftAndRightQuantity,
-			>,
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				LeftDenominatorLeftAndRightAndRightQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				LeftDenominatorLeftAndRightAndRightQuantity,
-				>,
-			>,
-		>,
-	LeftUnit,
-	>.multipliedByDenominatorRoot(
-	right: ScientificValue<LeftDenominatorLeftAndRightAndRightQuantity, RightUnit>,
-	leftNumeratorUnitPerExtendedLeftDenominatorLeftUnit: LeftNumeratorUnit.(ExtendedLeftDenominatorLeftUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    LeftNumeratorLeftAndRightQuantity : UndefinedQuantityType,
+    LeftNumeratorLeftUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
+    LeftNumeratorRightUnit : AbstractUndefinedScientificUnit<LeftNumeratorLeftAndRightQuantity>,
+    LeftNumeratorUnit : UndefinedMultipliedUnit<
+        LeftNumeratorLeftAndRightQuantity,
+        LeftNumeratorLeftUnit,
+        LeftNumeratorLeftAndRightQuantity,
+        LeftNumeratorRightUnit,
+        >,
+    ExtendedLeftDenominatorLeftUnit : UndefinedExtendedUnit<
+        LeftDenominatorLeftAndRightAndRightQuantity,
+        >,
+    ExtendedLeftDenominatorRightUnit : UndefinedExtendedUnit<
+        LeftDenominatorLeftAndRightAndRightQuantity,
+        >,
+    LeftDenominatorUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Extended<
+            LeftDenominatorLeftAndRightAndRightQuantity,
+            >,
+        ExtendedLeftDenominatorLeftUnit,
+        UndefinedQuantityType.Extended<
+            LeftDenominatorLeftAndRightAndRightQuantity,
+            >,
+        ExtendedLeftDenominatorRightUnit,
+        >,
+    LeftUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Multiplying<
+            LeftNumeratorLeftAndRightQuantity,
+            LeftNumeratorLeftAndRightQuantity,
+            >,
+        LeftNumeratorUnit,
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Extended<
+                LeftDenominatorLeftAndRightAndRightQuantity,
+                >,
+            UndefinedQuantityType.Extended<
+                LeftDenominatorLeftAndRightAndRightQuantity,
+                >,
+            >,
+        LeftDenominatorUnit,
+        >,
+    LeftDenominatorLeftAndRightAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    RightUnit : ScientificUnit<LeftDenominatorLeftAndRightAndRightQuantity>,
+    TargetUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Multiplying<
+            LeftNumeratorLeftAndRightQuantity,
+            LeftNumeratorLeftAndRightQuantity,
+            >,
+        LeftNumeratorUnit,
+        UndefinedQuantityType.Extended<
+            LeftDenominatorLeftAndRightAndRightQuantity,
+            >,
+        ExtendedLeftDenominatorLeftUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            UndefinedQuantityType.Multiplying<
+                LeftNumeratorLeftAndRightQuantity,
+                LeftNumeratorLeftAndRightQuantity,
+                >,
+            UndefinedQuantityType.Extended<
+                LeftDenominatorLeftAndRightAndRightQuantity,
+                >,
+            >,
+        TargetUnit,
+        >,
+    > UndefinedScientificValue<
+    UndefinedQuantityType.Dividing<
+        UndefinedQuantityType.Multiplying<
+            LeftNumeratorLeftAndRightQuantity,
+            LeftNumeratorLeftAndRightQuantity,
+            >,
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Extended<
+                LeftDenominatorLeftAndRightAndRightQuantity,
+                >,
+            UndefinedQuantityType.Extended<
+                LeftDenominatorLeftAndRightAndRightQuantity,
+                >,
+            >,
+        >,
+    LeftUnit,
+    >.multipliedByDenominatorRoot(
+    right: ScientificValue<LeftDenominatorLeftAndRightAndRightQuantity, RightUnit>,
+    leftNumeratorUnitPerExtendedLeftDenominatorLeftUnit: LeftNumeratorUnit.(ExtendedLeftDenominatorLeftUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.numerator.leftNumeratorUnitPerExtendedLeftDenominatorLeftUnit(
-	unit.denominator.left,
+    unit.denominator.left,
 ).byMultiplying(this, right, factory)

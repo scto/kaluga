@@ -19,97 +19,93 @@
 package com.splendo.kaluga.scientific.converter.undefined.defined
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.scientific.DefaultScientificValue
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.ScientificValue
 import com.splendo.kaluga.scientific.UndefinedQuantityType
 import com.splendo.kaluga.scientific.UndefinedScientificValue
 import com.splendo.kaluga.scientific.byDividing
 import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
-import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
 import com.splendo.kaluga.scientific.unit.UndefinedDividedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
-import kotlin.jvm.JvmName
 
 // A! / Div<B, Ex<A>> -> Div<Mul<Wr<A>, Ex<A>>, B>
 
 fun <
-	NumeratorAndDenominatorDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
-	NumeratorUnit : ScientificUnit<NumeratorAndDenominatorDenominatorQuantity>,
-	DenominatorNumeratorQuantity : UndefinedQuantityType,
-	DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorQuantity>,
-	ExtendedDenominatorDenominatorUnit : UndefinedExtendedUnit<
-		NumeratorAndDenominatorDenominatorQuantity,
-		>,
-	DenominatorUnit : UndefinedDividedUnit<
-		DenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		UndefinedQuantityType.Extended<
-			NumeratorAndDenominatorDenominatorQuantity,
-			>,
-		ExtendedDenominatorDenominatorUnit,
-		>,
-	WrappedNumeratorUnit : WrappedUndefinedExtendedUnit<
-	NumeratorAndDenominatorDenominatorQuantity,
-	NumeratorUnit,
-		>,
-	TargetNumeratorUnit : UndefinedMultipliedUnit<
-		UndefinedQuantityType.Extended<
-			NumeratorAndDenominatorDenominatorQuantity,
-			>,
-		WrappedNumeratorUnit,
-		UndefinedQuantityType.Extended<
-			NumeratorAndDenominatorDenominatorQuantity,
-			>,
-		ExtendedDenominatorDenominatorUnit,
-		>,
-	TargetUnit : UndefinedDividedUnit<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				NumeratorAndDenominatorDenominatorQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				NumeratorAndDenominatorDenominatorQuantity,
-				>,
-			>,
-		TargetNumeratorUnit,
-		DenominatorNumeratorQuantity,
-		DenominatorNumeratorUnit,
-		>,
-	TargetValue : UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			UndefinedQuantityType.Extended<
-				NumeratorAndDenominatorDenominatorQuantity,
-				>,
-			UndefinedQuantityType.Extended<
-				NumeratorAndDenominatorDenominatorQuantity,
-				>,
-			>,
-		DenominatorNumeratorQuantity,
-		>,
-	TargetUnit,
-	>,
-	> ScientificValue<NumeratorAndDenominatorDenominatorQuantity, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
-	right: UndefinedScientificValue<
-		UndefinedQuantityType.Dividing<
-			DenominatorNumeratorQuantity,
-			UndefinedQuantityType.Extended<
-				NumeratorAndDenominatorDenominatorQuantity,
-				>,
-			>,
-		DenominatorUnit,
-		>,
-	numeratorAsUndefined: NumeratorUnit.() -> WrappedNumeratorUnit,
-	wrappedNumeratorUnitXExtendedDenominatorDenominatorUnit: WrappedNumeratorUnit.(ExtendedDenominatorDenominatorUnit) -> TargetNumeratorUnit,
-	targetNumeratorUnitPerDenominatorNumeratorUnit: TargetNumeratorUnit.(DenominatorNumeratorUnit) -> TargetUnit,
-	factory: (Decimal, TargetUnit) -> TargetValue,
+    NumeratorAndDenominatorDenominatorQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
+    NumeratorUnit : ScientificUnit<NumeratorAndDenominatorDenominatorQuantity>,
+    DenominatorNumeratorQuantity : UndefinedQuantityType,
+    DenominatorNumeratorUnit : AbstractUndefinedScientificUnit<DenominatorNumeratorQuantity>,
+    ExtendedDenominatorDenominatorUnit : UndefinedExtendedUnit<
+        NumeratorAndDenominatorDenominatorQuantity,
+        >,
+    DenominatorUnit : UndefinedDividedUnit<
+        DenominatorNumeratorQuantity,
+        DenominatorNumeratorUnit,
+        UndefinedQuantityType.Extended<
+            NumeratorAndDenominatorDenominatorQuantity,
+            >,
+        ExtendedDenominatorDenominatorUnit,
+        >,
+    WrappedNumeratorUnit : WrappedUndefinedExtendedUnit<
+        NumeratorAndDenominatorDenominatorQuantity,
+        NumeratorUnit,
+        >,
+    TargetNumeratorUnit : UndefinedMultipliedUnit<
+        UndefinedQuantityType.Extended<
+            NumeratorAndDenominatorDenominatorQuantity,
+            >,
+        WrappedNumeratorUnit,
+        UndefinedQuantityType.Extended<
+            NumeratorAndDenominatorDenominatorQuantity,
+            >,
+        ExtendedDenominatorDenominatorUnit,
+        >,
+    TargetUnit : UndefinedDividedUnit<
+        UndefinedQuantityType.Multiplying<
+            UndefinedQuantityType.Extended<
+                NumeratorAndDenominatorDenominatorQuantity,
+                >,
+            UndefinedQuantityType.Extended<
+                NumeratorAndDenominatorDenominatorQuantity,
+                >,
+            >,
+        TargetNumeratorUnit,
+        DenominatorNumeratorQuantity,
+        DenominatorNumeratorUnit,
+        >,
+    TargetValue : UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            UndefinedQuantityType.Multiplying<
+                UndefinedQuantityType.Extended<
+                    NumeratorAndDenominatorDenominatorQuantity,
+                    >,
+                UndefinedQuantityType.Extended<
+                    NumeratorAndDenominatorDenominatorQuantity,
+                    >,
+                >,
+            DenominatorNumeratorQuantity,
+            >,
+        TargetUnit,
+        >,
+    > ScientificValue<NumeratorAndDenominatorDenominatorQuantity, NumeratorUnit>.dividedByDividingUnitWithSelfAsDenominator(
+    right: UndefinedScientificValue<
+        UndefinedQuantityType.Dividing<
+            DenominatorNumeratorQuantity,
+            UndefinedQuantityType.Extended<
+                NumeratorAndDenominatorDenominatorQuantity,
+                >,
+            >,
+        DenominatorUnit,
+        >,
+    numeratorAsUndefined: NumeratorUnit.() -> WrappedNumeratorUnit,
+    wrappedNumeratorUnitXExtendedDenominatorDenominatorUnit: WrappedNumeratorUnit.(ExtendedDenominatorDenominatorUnit) -> TargetNumeratorUnit,
+    targetNumeratorUnitPerDenominatorNumeratorUnit: TargetNumeratorUnit.(DenominatorNumeratorUnit) -> TargetUnit,
+    factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.numeratorAsUndefined().wrappedNumeratorUnitXExtendedDenominatorDenominatorUnit(
-	right.unit.denominator,
+    right.unit.denominator,
 ).targetNumeratorUnitPerDenominatorNumeratorUnit(
-	right.unit.numerator,
+    right.unit.numerator,
 ).byDividing(this, right, factory)
