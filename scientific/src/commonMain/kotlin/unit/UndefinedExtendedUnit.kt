@@ -553,6 +553,8 @@ internal fun PolymorphicModuleBuilder<CustomUndefinedExtendedUnit<*>>.registerCu
         CustomUndefinedExtendedUnit.MetricAndUSCustomary.serializer(definedQuantitySerializer) as KSerializer<CustomUndefinedExtendedUnit.MetricAndUSCustomary<*>>,
     )
 }
+
+@Suppress("UNCHECKED_CAST")
 internal fun PolymorphicModuleBuilder<WrappedUndefinedExtendedUnit<*, *>>.registerWrappedUndefinedUnitClasses() {
     val definedQuantitySerializer = PhysicalQuantity.DefinedPhysicalQuantityWithDimension.serializer()
     val definedUnitSerializer = DefinedScientificUnit.serializer(definedQuantitySerializer)

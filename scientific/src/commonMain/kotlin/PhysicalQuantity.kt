@@ -503,6 +503,7 @@ internal fun PolymorphicModuleBuilder<PhysicalQuantity.Defined>.registerDefinedP
     registerDefinedPhysicalQuantityWithDimensionClasses()
 }
 
+@Suppress("UNCHECKED_CAST")
 internal fun PolymorphicModuleBuilder<PhysicalQuantity>.registerPhysicalQuantityClasses() {
     subclass(PhysicalQuantity.Dimensionless::class, PhysicalQuantity.Dimensionless.serializer())
     registerDefinedPhysicalQuantityWithDimensionClasses()
