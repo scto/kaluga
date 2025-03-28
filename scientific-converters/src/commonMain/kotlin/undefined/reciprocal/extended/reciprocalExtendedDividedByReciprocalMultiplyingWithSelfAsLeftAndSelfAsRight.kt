@@ -16,7 +16,7 @@
 
  */
 
-package com.splendo.kaluga.scientific.converter.undefined.reciprocal
+package com.splendo.kaluga.scientific.converter.undefined.reciprocal.extended
 
 import com.splendo.kaluga.base.utils.Decimal
 import com.splendo.kaluga.scientific.DefaultScientificValue
@@ -35,14 +35,17 @@ import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// Inv<A> / Inv<Mul<Wr<A>, Ex<A>>> -> A!
+// Inv<Ex<A>> / Inv<Mul<Wr<A>, Ex<A>>> -> A!
 
 fun <
-	NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity : UndefinedQuantityType,
-	NumeratorReciprocalUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity>,
-	NumeratorUnit : UndefinedReciprocalUnit<
+	ExtendedNumeratorReciprocalUnit : UndefinedExtendedUnit<
 		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-		NumeratorReciprocalUnit,
+		>,
+	NumeratorUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Extended<
+			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+			>,
+		ExtendedNumeratorReciprocalUnit,
 		>,
 	NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	DenominatorReciprocalLeftUnit : ScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity>,
@@ -77,10 +80,12 @@ fun <
 	DenominatorReciprocalLeftValue : ScientificValue<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity, DenominatorReciprocalLeftUnit>,
 	> UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
-		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+		UndefinedQuantityType.Extended<
+			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+			>,
 		>,
 NumeratorUnit,
-	>.reciprocalDividedByReciprocalMultiplyingWithSelfAsLeftAndSelfAsRight(
+	>.reciprocalExtendedDividedByReciprocalMultiplyingWithSelfAsLeftAndSelfAsRight(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		UndefinedQuantityType.Multiplying<
@@ -95,4 +100,4 @@ NumeratorUnit,
 DenominatorUnit,
 	>,
 	factory: (Decimal, DenominatorReciprocalLeftUnit) -> DenominatorReciprocalLeftValue,
-) = right.unit.inverse.left.wrapped.byDividing(this, right, factory)
+) = unit.inverse.extended.byDividing(this, right, factory)

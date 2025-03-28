@@ -35,7 +35,7 @@ import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// Mul<Ex<A>, Wr<A>> * Inv<A> -> A!
+// Mul<Ex<A>, Wr<A>> * Inv<Ex<A>> -> A!
 
 fun <
 	ExtendedLeftLeftUnit : UndefinedExtendedUnit<
@@ -57,11 +57,14 @@ fun <
 			>,
 		WrappedLeftRightUnit,
 		>,
-	LeftLeftAndRightAndRightReciprocalQuantity : UndefinedQuantityType,
-	RightReciprocalUnit : AbstractUndefinedScientificUnit<LeftLeftAndRightAndRightReciprocalQuantity>,
-	RightUnit : UndefinedReciprocalUnit<
+	ExtendedRightReciprocalUnit : UndefinedExtendedUnit<
 		LeftLeftAndRightAndRightReciprocalQuantity,
-		RightReciprocalUnit,
+		>,
+	RightUnit : UndefinedReciprocalUnit<
+		UndefinedQuantityType.Extended<
+			LeftLeftAndRightAndRightReciprocalQuantity,
+			>,
+		ExtendedRightReciprocalUnit,
 		>,
 	LeftRightValue : ScientificValue<LeftLeftAndRightAndRightReciprocalQuantity, LeftRightUnit>,
 	> UndefinedScientificValue<
@@ -77,7 +80,9 @@ LeftUnit,
 	>.multiplyingWithExtendedLeftAndDefinedRightMultipliedByReciprocalLeft(
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
-		LeftLeftAndRightAndRightReciprocalQuantity,
+		UndefinedQuantityType.Extended<
+			LeftLeftAndRightAndRightReciprocalQuantity,
+			>,
 		>,
 RightUnit,
 	>,

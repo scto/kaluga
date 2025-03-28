@@ -29,12 +29,13 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
+import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import com.splendo.kaluga.scientific.unit.WrappedUndefinedExtendedUnit
 import kotlin.jvm.JvmName
 
-// Inv<Wr<A>> / Inv<Mul<A, A>> -> A!
+// Inv<Wr<A>> / Inv<Mul<Ex<A>, Ex<A>>> -> A!
 
 fun <
 	NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
@@ -49,19 +50,30 @@ fun <
 			>,
 		WrappedNumeratorReciprocalUnit,
 		>,
-	NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity : UndefinedQuantityType,
-	DenominatorReciprocalLeftUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity>,
-	DenominatorReciprocalRightUnit : AbstractUndefinedScientificUnit<NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity>,
+	ExtendedDenominatorReciprocalLeftUnit : UndefinedExtendedUnit<
+		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+		>,
+	ExtendedDenominatorReciprocalRightUnit : UndefinedExtendedUnit<
+		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+		>,
 	DenominatorReciprocalUnit : UndefinedMultipliedUnit<
-		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-		DenominatorReciprocalLeftUnit,
-		NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-		DenominatorReciprocalRightUnit,
+		UndefinedQuantityType.Extended<
+			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+			>,
+		ExtendedDenominatorReciprocalLeftUnit,
+		UndefinedQuantityType.Extended<
+			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+			>,
+		ExtendedDenominatorReciprocalRightUnit,
 		>,
 	DenominatorUnit : UndefinedReciprocalUnit<
 		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+			UndefinedQuantityType.Extended<
+				NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+				>,
+			UndefinedQuantityType.Extended<
+				NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+				>,
 			>,
 		DenominatorReciprocalUnit,
 		>,
@@ -77,8 +89,12 @@ NumeratorUnit,
 	right: UndefinedScientificValue<
 	UndefinedQuantityType.Reciprocal<
 		UndefinedQuantityType.Multiplying<
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
-			NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+			UndefinedQuantityType.Extended<
+				NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+				>,
+			UndefinedQuantityType.Extended<
+				NumeratorReciprocalAndDenominatorReciprocalLeftAndRightQuantity,
+				>,
 			>,
 		>,
 DenominatorUnit,

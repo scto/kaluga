@@ -29,29 +29,35 @@ import com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.DefinedScientificUnit
 import com.splendo.kaluga.scientific.unit.MeasurementUsage
 import com.splendo.kaluga.scientific.unit.ScientificUnit
+import com.splendo.kaluga.scientific.unit.UndefinedExtendedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedMultipliedUnit
 import com.splendo.kaluga.scientific.unit.UndefinedReciprocalUnit
 import kotlin.jvm.JvmName
 
-// A! * Inv<Mul<B, A>> -> Inv<B>
+// A! * Inv<Mul<B, Ex<A>>> -> Inv<B>
 
 fun <
 	LeftAndRightReciprocalRightQuantity : PhysicalQuantity.DefinedPhysicalQuantityWithDimension,
 	LeftUnit : ScientificUnit<LeftAndRightReciprocalRightQuantity>,
 	RightReciprocalLeftQuantity : UndefinedQuantityType,
 	RightReciprocalLeftUnit : AbstractUndefinedScientificUnit<RightReciprocalLeftQuantity>,
-	LeftAndRightReciprocalRightQuantity : UndefinedQuantityType,
-	RightReciprocalRightUnit : AbstractUndefinedScientificUnit<LeftAndRightReciprocalRightQuantity>,
+	ExtendedRightReciprocalRightUnit : UndefinedExtendedUnit<
+		LeftAndRightReciprocalRightQuantity,
+		>,
 	RightReciprocalUnit : UndefinedMultipliedUnit<
 		RightReciprocalLeftQuantity,
 		RightReciprocalLeftUnit,
-		LeftAndRightReciprocalRightQuantity,
-		RightReciprocalRightUnit,
+		UndefinedQuantityType.Extended<
+			LeftAndRightReciprocalRightQuantity,
+			>,
+		ExtendedRightReciprocalRightUnit,
 		>,
 	RightUnit : UndefinedReciprocalUnit<
 		UndefinedQuantityType.Multiplying<
 			RightReciprocalLeftQuantity,
-			LeftAndRightReciprocalRightQuantity,
+			UndefinedQuantityType.Extended<
+				LeftAndRightReciprocalRightQuantity,
+				>,
 			>,
 		RightReciprocalUnit,
 		>,
@@ -70,7 +76,9 @@ TargetUnit,
 	UndefinedQuantityType.Reciprocal<
 		UndefinedQuantityType.Multiplying<
 			RightReciprocalLeftQuantity,
-			LeftAndRightReciprocalRightQuantity,
+			UndefinedQuantityType.Extended<
+				LeftAndRightReciprocalRightQuantity,
+				>,
 			>,
 		>,
 RightUnit,
