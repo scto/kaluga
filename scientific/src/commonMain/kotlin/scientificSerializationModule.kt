@@ -20,6 +20,9 @@ package com.splendo.kaluga.scientific
 import com.splendo.kaluga.scientific.unit.setupForScientificUnit
 import kotlinx.serialization.modules.SerializersModule
 
+/**
+ * A [SerializersModule] that enabled Serialization of [com.splendo.kaluga.scientific.unit.AbstractUndefinedScientificUnit] / [PhysicalQuantity.Undefined] .
+ */
 val scientificSerializationModule = SerializersModule {
     setupPhysicalQuantity()
     setupForScientificUnit()
