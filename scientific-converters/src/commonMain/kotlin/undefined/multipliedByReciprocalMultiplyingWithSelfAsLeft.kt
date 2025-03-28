@@ -58,21 +58,21 @@ fun <
 	UndefinedQuantityType.Reciprocal<
 		RightReciprocalRightQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftAndRightReciprocalLeftQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByReciprocalMultiplyingWithSelfAsLeft(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			LeftAndRightReciprocalLeftQuantity,
-			RightReciprocalRightQuantity,
+		UndefinedQuantityType.Reciprocal<
+			UndefinedQuantityType.Multiplying<
+				LeftAndRightReciprocalLeftQuantity,
+				RightReciprocalRightQuantity,
+				>,
 			>,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	reciprocalTargetUnit: RightReciprocalRightUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.inverse.right.reciprocalTargetUnit().byMultiplying(this, right, factory)

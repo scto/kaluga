@@ -59,11 +59,11 @@ fun <
 			DenominatorQuantity,
 			>,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByDefinedUnit(
 	right: ScientificValue<DenominatorQuantity, DenominatorUnit>,
 	denominatorAsUndefined: DenominatorUnit.() -> WrappedDenominatorUnit,

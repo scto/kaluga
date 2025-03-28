@@ -68,21 +68,21 @@ fun <
 			RightReciprocalLeftAndRightQuantity,
 			>,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByReciprocalSquaredUnit(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		UndefinedQuantityType.Multiplying<
-			RightReciprocalLeftAndRightQuantity,
-			RightReciprocalLeftAndRightQuantity,
+		UndefinedQuantityType.Reciprocal<
+			UndefinedQuantityType.Multiplying<
+				RightReciprocalLeftAndRightQuantity,
+				RightReciprocalLeftAndRightQuantity,
+				>,
 			>,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	leftUnitPerRightReciprocalUnit: LeftUnit.(RightReciprocalUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitPerRightReciprocalUnit(

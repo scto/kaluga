@@ -44,18 +44,18 @@ fun <
 		>,
 	RightNumeratorValue : UndefinedScientificValue<
 	RightNumeratorQuantity,
-RightNumeratorUnit,
+	RightNumeratorUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftAndRightDenominatorQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByDividingUnitWithSelfAsDenominator(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		RightNumeratorQuantity,
-		LeftAndRightDenominatorQuantity,
+		UndefinedQuantityType.Dividing<
+			RightNumeratorQuantity,
+			LeftAndRightDenominatorQuantity,
+			>,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	factory: (Decimal, RightNumeratorUnit) -> RightNumeratorValue,
 ) = right.unit.numerator.byMultiplying(this, right, factory)

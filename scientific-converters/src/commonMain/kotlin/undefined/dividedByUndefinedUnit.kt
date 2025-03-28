@@ -46,16 +46,16 @@ fun <
 		NumeratorQuantity,
 		DenominatorQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByUndefinedUnit(
 	right: UndefinedScientificValue<
-	DenominatorQuantity,
-DenominatorUnit,
-	>,
+		DenominatorQuantity,
+		DenominatorUnit,
+		>,
 	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.numeratorUnitPerDenominatorUnit(

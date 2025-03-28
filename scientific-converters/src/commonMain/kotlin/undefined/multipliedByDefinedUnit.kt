@@ -59,11 +59,11 @@ fun <
 			RightQuantity,
 			>,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByDefinedUnit(
 	right: ScientificValue<RightQuantity, RightUnit>,
 	rightAsUndefined: RightUnit.() -> WrappedRightUnit,

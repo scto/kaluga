@@ -58,19 +58,19 @@ fun <
 			>,
 		LeftAndRightLeftAndRightQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftAndRightLeftAndRightQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedBySquaredUnitWithSelfAsRoot(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		LeftAndRightLeftAndRightQuantity,
-		LeftAndRightLeftAndRightQuantity,
+		UndefinedQuantityType.Multiplying<
+			LeftAndRightLeftAndRightQuantity,
+			LeftAndRightLeftAndRightQuantity,
+			>,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	rightUnitXLeftUnit: RightUnit.(LeftUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.rightUnitXLeftUnit(

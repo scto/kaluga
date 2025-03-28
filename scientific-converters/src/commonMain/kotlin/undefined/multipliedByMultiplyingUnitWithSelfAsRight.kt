@@ -65,19 +65,19 @@ fun <
 			>,
 		LeftAndRightRightQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftAndRightRightQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByMultiplyingUnitWithSelfAsRight(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		RightLeftQuantity,
-		LeftAndRightRightQuantity,
+		UndefinedQuantityType.Multiplying<
+			RightLeftQuantity,
+			LeftAndRightRightQuantity,
+			>,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	leftUnitXRightLeftUnit: LeftUnit.(RightLeftUnit) -> TargetLeftUnit,
 	targetLeftUnitXLeftUnit: TargetLeftUnit.(LeftUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,

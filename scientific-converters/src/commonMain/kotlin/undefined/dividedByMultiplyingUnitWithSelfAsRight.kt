@@ -51,19 +51,19 @@ fun <
 	UndefinedQuantityType.Reciprocal<
 		DenominatorLeftQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorRightQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByMultiplyingUnitWithSelfAsRight(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		DenominatorLeftQuantity,
-		NumeratorAndDenominatorRightQuantity,
+		UndefinedQuantityType.Multiplying<
+			DenominatorLeftQuantity,
+			NumeratorAndDenominatorRightQuantity,
+			>,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	reciprocalTargetUnit: DenominatorLeftUnit.() -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.left.reciprocalTargetUnit().byDividing(this, right, factory)

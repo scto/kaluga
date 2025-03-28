@@ -61,19 +61,19 @@ fun <
 			DenominatorRightQuantity,
 			>,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByMultiplyingUnit(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Multiplying<
-		DenominatorLeftQuantity,
-		DenominatorRightQuantity,
+		UndefinedQuantityType.Multiplying<
+			DenominatorLeftQuantity,
+			DenominatorRightQuantity,
+			>,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	numeratorUnitPerDenominatorUnit: NumeratorUnit.(DenominatorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.numeratorUnitPerDenominatorUnit(

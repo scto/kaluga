@@ -56,16 +56,16 @@ fun <
 	DenominatorDenominatorValue : ScientificValue<DenominatorDenominatorQuantity, DenominatorDenominatorUnit>,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorNumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByDividingUnitWithSelfAsNumeratorAndDefinedDenominator(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorAndDenominatorNumeratorQuantity,
-		UndefinedQuantityType.Extended<
-			DenominatorDenominatorQuantity,
+		UndefinedQuantityType.Dividing<
+			NumeratorAndDenominatorNumeratorQuantity,
+			UndefinedQuantityType.Extended<
+				DenominatorDenominatorQuantity,
+				>,
 			>,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	factory: (Decimal, DenominatorDenominatorUnit) -> DenominatorDenominatorValue,
 ) = right.unit.denominator.wrapped.byDividing(this, right, factory)

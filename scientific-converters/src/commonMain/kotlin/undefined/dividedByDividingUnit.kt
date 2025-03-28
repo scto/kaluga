@@ -67,19 +67,19 @@ fun <
 			>,
 		DenominatorNumeratorQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByDividingUnit(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		DenominatorNumeratorQuantity,
-		DenominatorDenominatorQuantity,
+		UndefinedQuantityType.Dividing<
+			DenominatorNumeratorQuantity,
+			DenominatorDenominatorQuantity,
+			>,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	numeratorUnitXDenominatorDenominatorUnit: NumeratorUnit.(DenominatorDenominatorUnit) -> TargetNumeratorUnit,
 	targetNumeratorUnitPerDenominatorNumeratorUnit: TargetNumeratorUnit.(DenominatorNumeratorUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,

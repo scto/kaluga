@@ -44,18 +44,18 @@ fun <
 		>,
 	DenominatorDenominatorValue : UndefinedScientificValue<
 	DenominatorDenominatorQuantity,
-DenominatorDenominatorUnit,
+	DenominatorDenominatorUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorNumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByDividingUnitWithSelfAsNumerator(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		NumeratorAndDenominatorNumeratorQuantity,
-		DenominatorDenominatorQuantity,
+		UndefinedQuantityType.Dividing<
+			NumeratorAndDenominatorNumeratorQuantity,
+			DenominatorDenominatorQuantity,
+			>,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	factory: (Decimal, DenominatorDenominatorUnit) -> DenominatorDenominatorValue,
 ) = right.unit.denominator.byDividing(this, right, factory)

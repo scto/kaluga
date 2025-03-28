@@ -47,14 +47,14 @@ fun <
 	TargetValue : ScientificValue<PhysicalQuantity.Dimensionless, TargetUnit>,
 	> UndefinedScientificValue<
 	LeftAndRightReciprocalQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedBySelf(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		LeftAndRightReciprocalQuantity,
+		UndefinedQuantityType.Reciprocal<
+			LeftAndRightReciprocalQuantity,
+			>,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	getDimensionless: () -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = getDimensionless().byMultiplying(this, right, factory)

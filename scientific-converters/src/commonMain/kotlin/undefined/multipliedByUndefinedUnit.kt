@@ -46,16 +46,16 @@ fun <
 		LeftQuantity,
 		RightQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByUndefinedUnit(
 	right: UndefinedScientificValue<
-	RightQuantity,
-RightUnit,
-	>,
+		RightQuantity,
+		RightUnit,
+		>,
 	leftUnitXRightUnit: LeftUnit.(RightUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.leftUnitXRightUnit(

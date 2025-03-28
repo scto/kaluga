@@ -92,22 +92,22 @@ fun <
 			>,
 		RightDenominatorQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	LeftAndRightNumeratorRightQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByDividingUnitWithMultiplyingNumeratorWithSelfAsRight(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			RightNumeratorLeftQuantity,
-			LeftAndRightNumeratorRightQuantity,
+		UndefinedQuantityType.Dividing<
+			UndefinedQuantityType.Multiplying<
+				RightNumeratorLeftQuantity,
+				LeftAndRightNumeratorRightQuantity,
+				>,
+			RightDenominatorQuantity,
 			>,
-		RightDenominatorQuantity,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	leftUnitXRightNumeratorLeftUnit: LeftUnit.(RightNumeratorLeftUnit) -> TargetNumeratorLeftUnit,
 	targetNumeratorLeftUnitXLeftUnit: TargetNumeratorLeftUnit.(LeftUnit) -> TargetNumeratorUnit,
 	targetNumeratorUnitPerRightDenominatorUnit: TargetNumeratorUnit.(RightDenominatorUnit) -> TargetUnit,

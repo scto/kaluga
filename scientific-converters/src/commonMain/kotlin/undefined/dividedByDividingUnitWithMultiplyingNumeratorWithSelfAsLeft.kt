@@ -65,22 +65,22 @@ fun <
 		DenominatorDenominatorQuantity,
 		DenominatorNumeratorRightQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorAndDenominatorNumeratorLeftQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByDividingUnitWithMultiplyingNumeratorWithSelfAsLeft(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Multiplying<
-			NumeratorAndDenominatorNumeratorLeftQuantity,
-			DenominatorNumeratorRightQuantity,
+		UndefinedQuantityType.Dividing<
+			UndefinedQuantityType.Multiplying<
+				NumeratorAndDenominatorNumeratorLeftQuantity,
+				DenominatorNumeratorRightQuantity,
+				>,
+			DenominatorDenominatorQuantity,
 			>,
-		DenominatorDenominatorQuantity,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	denominatorDenominatorUnitPerDenominatorNumeratorRightUnit: DenominatorDenominatorUnit.(DenominatorNumeratorRightUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = right.unit.denominator.denominatorDenominatorUnitPerDenominatorNumeratorRightUnit(

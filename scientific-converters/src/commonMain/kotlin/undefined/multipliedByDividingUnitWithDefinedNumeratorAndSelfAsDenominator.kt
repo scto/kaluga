@@ -56,16 +56,16 @@ fun <
 	RightNumeratorValue : ScientificValue<RightNumeratorQuantity, RightNumeratorUnit>,
 	> UndefinedScientificValue<
 	LeftAndRightDenominatorQuantity,
-LeftUnit,
+	LeftUnit,
 	>.multipliedByDividingUnitWithDefinedNumeratorAndSelfAsDenominator(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Dividing<
-		UndefinedQuantityType.Extended<
-			RightNumeratorQuantity,
+		UndefinedQuantityType.Dividing<
+			UndefinedQuantityType.Extended<
+				RightNumeratorQuantity,
+				>,
+			LeftAndRightDenominatorQuantity,
 			>,
-		LeftAndRightDenominatorQuantity,
+		RightUnit,
 		>,
-RightUnit,
-	>,
 	factory: (Decimal, RightNumeratorUnit) -> RightNumeratorValue,
 ) = right.unit.numerator.wrapped.byMultiplying(this, right, factory)

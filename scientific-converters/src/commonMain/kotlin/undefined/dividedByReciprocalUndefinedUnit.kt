@@ -51,18 +51,18 @@ fun <
 		NumeratorQuantity,
 		DenominatorReciprocalQuantity,
 		>,
-TargetUnit,
+	TargetUnit,
 	>,
 	> UndefinedScientificValue<
 	NumeratorQuantity,
-NumeratorUnit,
+	NumeratorUnit,
 	>.dividedByReciprocalUndefinedUnit(
 	right: UndefinedScientificValue<
-	UndefinedQuantityType.Reciprocal<
-		DenominatorReciprocalQuantity,
+		UndefinedQuantityType.Reciprocal<
+			DenominatorReciprocalQuantity,
+			>,
+		DenominatorUnit,
 		>,
-DenominatorUnit,
-	>,
 	numeratorUnitXDenominatorReciprocalUnit: NumeratorUnit.(DenominatorReciprocalUnit) -> TargetUnit,
 	factory: (Decimal, TargetUnit) -> TargetValue,
 ) = unit.numeratorUnitXDenominatorReciprocalUnit(
