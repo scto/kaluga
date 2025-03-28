@@ -111,6 +111,11 @@ sealed class BaseKalugaSubprojectExtension(
                 targetCompatibility = javaVersion
             }
 
+            publishing {
+                singleVariant("release")
+                singleVariant("debug")
+            }
+
             configure()
         }
     }
