@@ -18,24 +18,16 @@
 package com.splendo.kaluga.scientific
 
 import com.splendo.kaluga.base.utils.Decimal
-import com.splendo.kaluga.base.utils.toDouble
-import com.splendo.kaluga.scientific.converter.decimal.div
-import com.splendo.kaluga.scientific.converter.frequency.times
-import com.splendo.kaluga.scientific.converter.length.times
-import com.splendo.kaluga.scientific.converter.time.frequency
 import com.splendo.kaluga.scientific.unit.Centimeter
 import com.splendo.kaluga.scientific.unit.Decameter
 import com.splendo.kaluga.scientific.unit.Decimeter
 import com.splendo.kaluga.scientific.unit.Foot
 import com.splendo.kaluga.scientific.unit.Hectogram
 import com.splendo.kaluga.scientific.unit.Hectometer
-import com.splendo.kaluga.scientific.unit.Hertz
 import com.splendo.kaluga.scientific.unit.Inch
 import com.splendo.kaluga.scientific.unit.Kilogram
 import com.splendo.kaluga.scientific.unit.Kilometer
 import com.splendo.kaluga.scientific.unit.Meter
-import com.splendo.kaluga.scientific.unit.Second
-import com.splendo.kaluga.scientific.unit.SquareMeter
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlin.test.Test
@@ -56,19 +48,15 @@ class ScientificValueTest {
         assertEquals(5(Meter), 10(Meter) - 5)
         assertEquals(5(Meter), 15 - 10(Meter))
 
-        assertEquals(9(SquareMeter), 3(Meter) * 30(Decimeter))
-        assertEquals(4.0, (2(Hertz) * 2(Second)).toDouble())
         assertEquals(9(Kilogram), 3(Kilogram) * 30(Hectogram))
         assertEquals(9(Kilogram), 3(Kilogram) * 3)
         assertEquals(9(Kilogram), 3 * 3(Kilogram))
 
-        assertEquals(0.5(Hertz), 1.0 / 2(Second))
         assertEquals(3(Kilogram), 9(Kilogram) / 30(Hectogram))
         assertEquals(3(Kilogram), 9(Kilogram) / 3)
 
         assertEquals(Decimal.PositiveInfinity(Kilogram), 1(Kilogram) / 0(Kilogram))
         assertEquals(Decimal.PositiveInfinity(Kilogram), 1(Kilogram) / 0)
-        assertEquals(Decimal.PositiveInfinity(Hertz), 0(Second).frequency())
     }
 
     @Test

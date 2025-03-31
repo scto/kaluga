@@ -17,6 +17,7 @@
 
 package com.splendo.kaluga.media
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
@@ -62,6 +63,7 @@ actual class DefaultSoundPlayer(source: MediaSource.Local, private val context: 
         soundPool.release()
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun SoundPool.load(source: MediaSource.Local): Int = when (source) {
         is MediaSource.Asset -> load(source.descriptor, 1)
         is MediaSource.File -> load(source.descriptor, source.offset, source.length, 1)
@@ -70,6 +72,5 @@ actual class DefaultSoundPlayer(source: MediaSource.Local, private val context: 
             context.resources.getIdentifier(source.fileName, source.defType, context.packageName),
             1,
         )
-        else -> throw MediaSoundError.UnexpectedMediaSourceShouldBeLocal
     }
 }

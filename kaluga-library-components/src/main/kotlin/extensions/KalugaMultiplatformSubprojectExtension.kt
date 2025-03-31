@@ -29,8 +29,8 @@ import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.newInstance
+import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
@@ -81,7 +81,7 @@ open class KalugaMultiplatformSubprojectExtension @Inject constructor(
     override fun Project.setupSubproject() {
         // Android Target must be setup before project is evaluated as publishing will break otherwise
         extensions.configure(KotlinMultiplatformExtension::class) {
-            androidTarget() {
+            androidTarget {
                 instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
                 unitTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
                 publishAllLibraryVariants()
@@ -93,7 +93,7 @@ open class KalugaMultiplatformSubprojectExtension @Inject constructor(
         extensions.configure(KotlinMultiplatformExtension::class) {
             configureMultiplatform(this@configureSubproject)
         }
-        task("printConfigurations") {
+        tasks.register("printConfigurations") {
             doLast {
                 configurations.all { println(this) }
             }
@@ -109,7 +109,7 @@ open class KalugaMultiplatformSubprojectExtension @Inject constructor(
                 val targetName = target.sourceSetName
                 if (tasks.names.contains("linkDebugTest${targetName.replaceFirstChar { it.titlecase() } }")) {
                     // creating copy task for the target
-                    val copyTask = tasks.create("copy${targetName.replaceFirstChar { it.titlecase() } }TestResources", Copy::class) {
+                    val copyTask = tasks.register("copy${targetName.replaceFirstChar { it.titlecase() } }TestResources", Copy::class) {
                         from("src/iosTest/resources/.")
                         into("${layout.buildDirectory.get().asFile}/bin/$targetName/debugTest")
                     }
