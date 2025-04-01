@@ -59,8 +59,12 @@ class MockDevice(
     init {
         if (setupMocks) {
             mockConnectableDeviceManager.mockRequestMtu.on().doExecuteSuspended { (mtu) ->
-                connectableDeviceStateRepo.takeAndChangeState(ConnectableDeviceState.Connected::class) { it.didUpdateMtu(mtu) }
-                true
+                connectableDeviceStateRepo.takeAndChangeState(MockDeviceState.Connected.Idle::class) { state ->
+                    suspend {
+                        MockDeviceState.Connected.Idle(state.reconnectionSettings, mtu, state.services, state.mockConnectableDeviceManager)
+                    }
+                }
+                DeviceAction.RequestMtu(mtu)
             }
             mockConnectableDeviceManager.mockStartDisconnected.on().doExecute {
                 handleDisconnecting()

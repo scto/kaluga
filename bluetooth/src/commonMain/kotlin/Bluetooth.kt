@@ -47,6 +47,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
@@ -370,20 +371,18 @@ fun Flow<Device?>.services(): Flow<List<Service>> = state().transformLatest { de
  * @param reconnectionSettings the [ConnectionSettings.ReconnectionSettings] to use if the [Device] disconnects after connecting. If `null` the default will be used.
  * @return `true` if connection was successful
  */
-suspend fun Flow<Device?>.connect(reconnectionSettings: ConnectionSettings.ReconnectionSettings? = null) {
-    transformLatest { device ->
-        device?.let {
-            try {
-                emit(it.connect(reconnectionSettings))
-            } catch (e: CancellationException) {
-                withContext(NonCancellable) {
-                    it.disconnect()
-                }
-                throw e
+suspend fun Flow<Device?>.connect(reconnectionSettings: ConnectionSettings.ReconnectionSettings? = null): Boolean = transformLatest { device ->
+    device?.let {
+        try {
+            emit(it.connect(reconnectionSettings))
+        } catch (e: CancellationException) {
+            withContext(NonCancellable) {
+                it.disconnect()
             }
+            throw e
         }
-    }.first()
-}
+    }
+}.first()
 
 /**
  * Attempts to disconnect to the [Device] from a [Flow] of [Device]
@@ -423,7 +422,7 @@ fun Flow<Device?>.rssi(): Flow<RSSI> = info().map { it.rssi }.distinctUntilChang
  * @return the [Flow] of [MTU] associated with the [Device] in the given [Flow]
  */
 fun Flow<Device?>.mtu() = state().map { state ->
-    if (state is ConnectableDeviceState.Connected) {
+    if (state is ConnectableDeviceState.Connected.MtuHolder) {
         state.mtu
     } else {
         null
@@ -470,18 +469,11 @@ suspend fun Flow<Device?>.updateRssi() {
 
 /**
  * Attempts to request a [MTU] size for the [Device] from a [Flow] of [Device]
- * When this method completes, the devices should have had [ConnectableDeviceState.Connected.requestMtu] called
  * @param mtu the [MTU] size to request
- * @return if `true` the new MTU value has been requested successfully
  */
-suspend fun Flow<Device?>.requestMtu(mtu: MTU): Boolean = state().transformLatest { deviceState ->
-    when (deviceState) {
-        is ConnectableDeviceState.Connected -> {
-            emit(deviceState.requestMtu(mtu))
-        }
-        else -> {}
-    }
-}.first()
+suspend fun Flow<Device?>.requestMtu(mtu: MTU) = state()
+    .filterIsInstance<ConnectableDeviceState.Connected.MtuHolder>()
+    .first().requestMtu(mtu)
 
 /**
  * Gets a ([Flow] of) [Service] of a given [UUID] from a [Flow] of a list of [Service]

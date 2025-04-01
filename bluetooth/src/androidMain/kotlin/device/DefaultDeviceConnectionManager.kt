@@ -38,13 +38,11 @@ import android.bluetooth.BluetoothGattCharacteristic.PROPERTY_NOTIFY
 import android.bluetooth.BluetoothGattDescriptor
 import android.bluetooth.BluetoothProfile
 import android.content.Context
-import android.os.Build
 import com.splendo.kaluga.base.ApplicationHolder
 import com.splendo.kaluga.base.utils.getCompletedOrNull
 import com.splendo.kaluga.bluetooth.Characteristic
 import com.splendo.kaluga.bluetooth.DefaultGattServiceWrapper
 import com.splendo.kaluga.bluetooth.Descriptor
-import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.UUID
 import com.splendo.kaluga.bluetooth.containsAnyOf
 import com.splendo.kaluga.bluetooth.extensions.printableString
@@ -54,9 +52,7 @@ import com.splendo.kaluga.logging.error
 import com.splendo.kaluga.logging.info
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 internal actual class DefaultDeviceConnectionManager(
@@ -91,9 +87,7 @@ internal actual class DefaultDeviceConnectionManager(
 
         override fun onMtuChanged(gatt: BluetoothGatt?, mtu: Int, status: Int) {
             log { "onMtuChanged mtu $mtu status ${status.gattStatusAsString}" }
-            if (status == GATT_SUCCESS) {
-                handleNewMtu(mtu)
-            }
+            handleNewMtu(mtu, status == GATT_SUCCESS)
         }
 
         @Suppress("OVERRIDE_DEPRECATION")
@@ -201,20 +195,7 @@ internal actual class DefaultDeviceConnectionManager(
     }
 
     actual override suspend fun discoverServices() {
-        fun useSamsung12Workaround(): Boolean {
-            // Note: an issue is discovered on a samsung device running os 12. when `discoverServices` called on non main thread, the command returns `true`
-            // but nothing is sent to the bluetooth device. not reproducible on samsung running os 14.
-            // Note2: including os 13 as it's not clear whether issue exists there as well
-            return Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
-        }
-
-        if (useSamsung12Workaround()) {
-            withContext(Dispatchers.Main) {
-                gatt.await().discoverServices()
-            }
-        } else {
-            gatt.await().discoverServices()
-        }
+        gatt.await().discoverServices()
     }
 
     actual override fun disconnect() {
@@ -237,8 +218,6 @@ internal actual class DefaultDeviceConnectionManager(
         gatt.await().readRemoteRssi()
     }
 
-    actual override suspend fun requestMtu(mtu: MTU): Boolean = gatt.await().requestMtu(mtu)
-
     actual override suspend fun didStartPerformingAction(action: DeviceAction) {
         currentAction = action
         val readyGatt = gatt.await()
@@ -249,6 +228,7 @@ internal actual class DefaultDeviceConnectionManager(
             is DeviceAction.Write.Descriptor -> readyGatt.writeDescriptor(action.descriptor, action.newValue)
             is DeviceAction.Notification.Enable -> readyGatt.setNotification(action.characteristic, true)
             is DeviceAction.Notification.Disable -> readyGatt.setNotification(action.characteristic, false)
+            is DeviceAction.RequestMtu -> readyGatt.requestMtu(action.mtu)
         }
 
         // Action Failed

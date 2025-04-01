@@ -140,12 +140,6 @@ interface DeviceConnectionManager {
          * @property succeeded if `true`, [action] completed successfully
          */
         data class CompletedAction(val action: DeviceAction?, val succeeded: Boolean) : Event()
-
-        /**
-         * [Event] indicating the device has updated its [MTU] size
-         * @property newMtu the new [MTU] size
-         */
-        data class MtuUpdated(val newMtu: MTU) : Event()
     }
 
     /**
@@ -184,13 +178,6 @@ interface DeviceConnectionManager {
     suspend fun readRssi()
 
     /**
-     * Requests an update to the [MTU] size of the device
-     * @param mtu the size of the [MTU] to request
-     * @return `true` if the request was successful
-     */
-    suspend fun requestMtu(mtu: MTU): Boolean
-
-    /**
      * Starts performing a [DeviceAction]
      * @param action the [DeviceAction] to perform
      */
@@ -226,6 +213,11 @@ interface DeviceConnectionManager {
      * Fires an [Event.Disconnected]
      */
     fun handleDisconnect(onDisconnect: (suspend () -> Unit)? = null)
+
+    /**
+     * Fires an [Event.AddAction] with [DeviceAction.RequestMtu]
+     */
+    fun requestMtu(mtu: MTU): DeviceAction.RequestMtu
 
     /**
      * Resets all actions and disconnects the device
@@ -278,9 +270,13 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
         sharedRssi.tryEmit(rssi)
     }
 
-    protected fun handleNewMtu(mtu: MTU) {
+    protected fun handleNewMtu(mtu: MTU, succeeded: Boolean) {
         logger.debug { "Updated Mtu $mtu" }
-        emitEvent(DeviceConnectionManager.Event.MtuUpdated(mtu))
+        val action = currentAction
+        if (action is DeviceAction.RequestMtu) {
+            action.mtuResponse = mtu
+            handleCurrentActionCompleted(succeeded)
+        }
     }
 
     final override fun startConnecting(reconnectionSettings: ConnectionSettings.ReconnectionSettings?) {
@@ -340,6 +336,12 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
         emitEvent(DeviceConnectionManager.Event.Disconnected(clean))
     }
 
+    override fun requestMtu(mtu: MTU): DeviceAction.RequestMtu {
+        val action = DeviceAction.RequestMtu(mtu)
+        emitEvent(DeviceConnectionManager.Event.AddAction(action))
+        return action
+    }
+
     final override fun startDiscovering() {
         logger.info { "Start Discovering Services" }
         emitEvent(DeviceConnectionManager.Event.Discovering)
@@ -355,6 +357,7 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
 
     protected open fun handleCurrentActionCompleted(succeeded: Boolean) {
         val currentAction = this.currentAction
+        println("handleCurrentActionCompleted $currentAction")
         this.currentAction = null
         if (currentAction != null) {
             if (succeeded) {
@@ -443,6 +446,5 @@ internal expect class DefaultDeviceConnectionManager : BaseDeviceConnectionManag
     override suspend fun discoverServices()
     override suspend fun didStartPerformingAction(action: DeviceAction)
     override suspend fun requestStartPairing()
-    override suspend fun requestMtu(mtu: MTU): Boolean
     override suspend fun requestStartUnpairing()
 }

@@ -20,7 +20,6 @@ package com.splendo.kaluga.bluetooth.device
 import com.splendo.kaluga.base.utils.toNSData
 import com.splendo.kaluga.base.utils.typedList
 import com.splendo.kaluga.bluetooth.DefaultServiceWrapper
-import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.uuidString
 import com.splendo.kaluga.logging.debug
 import kotlinx.cinterop.ObjCSignatureOverride
@@ -159,17 +158,6 @@ internal actual class DefaultDeviceConnectionManager(
         peripheral.readRSSI()
     }
 
-    actual override suspend fun requestMtu(mtu: MTU): Boolean {
-        val max = peripheral.maximumWriteValueLengthForType(CBCharacteristicWriteWithResponse)
-        debug(TAG) {
-            "maximumWriteValueLengthForType(CBCharacteristicWriteWithResponse) = $max"
-        }
-        // Update MTU to current known value
-        handleNewMtu(max.toInt())
-        // Return false, because we can't request MTU change from iOS
-        return false
-    }
-
     actual override suspend fun didStartPerformingAction(action: DeviceAction) {
         currentAction = action
         when (action) {
@@ -190,6 +178,12 @@ internal actual class DefaultDeviceConnectionManager(
                 val uuid = action.characteristic.uuid.uuidString
                 notifyingCharacteristics.remove(uuid)
                 action.characteristic.wrapper.setNotificationValue(false, peripheral)
+            }
+            is DeviceAction.RequestMtu -> {
+                val max = peripheral.maximumWriteValueLengthForType(CBCharacteristicWriteWithResponse)
+                debug(TAG) { "maximumWriteValueLengthForType(CBCharacteristicWriteWithResponse) = $max" }
+                // Update MTU to current known value, set succeeded to false, because we can't request MTU change from iOS
+                handleNewMtu(max.toInt(), false)
             }
         }
     }
