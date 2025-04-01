@@ -357,7 +357,6 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
 
     protected open fun handleCurrentActionCompleted(succeeded: Boolean) {
         val currentAction = this.currentAction
-        println("handleCurrentActionCompleted $currentAction")
         this.currentAction = null
         if (currentAction != null) {
             if (succeeded) {
