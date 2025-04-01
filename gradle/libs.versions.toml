@@ -73,6 +73,7 @@ kaluga-notifications-permissions = { module = "com.splendo.kaluga:notifications-
 kaluga-resources = { module = "com.splendo.kaluga:resources", version.ref = "kaluga" }
 kaluga-review = { module = "com.splendo.kaluga:review", version.ref = "kaluga" }
 kaluga-scientific = { module = "com.splendo.kaluga:scientific", version.ref = "kaluga" }
+kaluga-scientific-converters = { module = "com.splendo.kaluga:scientific-converters", version.ref = "kaluga" }
 kaluga-service = { module = "com.splendo.kaluga:service", version.ref = "kaluga" }
 kaluga-storage-permissions = { module = "com.splendo.kaluga:storage-permissions", version.ref = "kaluga" }
 kaluga-system = { module = "com.splendo.kaluga:system", version.ref = "kaluga" }
