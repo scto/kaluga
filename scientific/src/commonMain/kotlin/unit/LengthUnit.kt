@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricLength]
@@ -58,11 +61,11 @@ val ImperialLengthUnits: Set<ImperialLength> get() = setOf(
 val LengthUnits: Set<Length> get() = MetricLengthUnits + ImperialLengthUnits
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Length]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Length]
  * SI unit is [Meter]
  */
 @Serializable
-sealed class Length : AbstractScientificUnit<PhysicalQuantity.Length>()
+sealed class Length : DefinedScientificUnit<PhysicalQuantity.Length>()
 
 /**
  * A [Length] for [MeasurementSystem.Metric]
@@ -169,4 +172,43 @@ data object Mile : ImperialLength() {
     override val symbol: String = "mi"
     override fun toSIUnit(value: Decimal): Decimal = Yard.toSIUnit(value * YARDS_IN_MILE.toDecimal())
     override fun fromSIUnit(value: Decimal): Decimal = Yard.fromSIUnit(value) / YARDS_IN_MILE.toDecimal()
+}
+
+internal fun SerializersModuleBuilder.setupForLength() {
+    polymorphic(Length::class) {
+        registerLengthClasses()
+    }
+    polymorphic(MetricLength::class) {
+        registerMetricLengthClasses()
+    }
+    polymorphic(ImperialLength::class) {
+        registerImperialLengthClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Length>.registerLengthClasses() {
+    registerMetricLengthClasses()
+    registerImperialLengthClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricLength>.registerMetricLengthClasses() {
+    subclass(Meter::class, Meter.serializer())
+    subclass(Centimeter::class, Centimeter.serializer())
+    subclass(Decameter::class, Decameter.serializer())
+    subclass(Decimeter::class, Decimeter.serializer())
+    subclass(Gigameter::class, Gigameter.serializer())
+    subclass(Hectometer::class, Hectometer.serializer())
+    subclass(Kilometer::class, Kilometer.serializer())
+    subclass(Megameter::class, Megameter.serializer())
+    subclass(Micrometer::class, Micrometer.serializer())
+    subclass(Millimeter::class, Millimeter.serializer())
+    subclass(Nanometer::class, Nanometer.serializer())
+    subclass(NauticalMile::class, NauticalMile.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialLength>.registerImperialLengthClasses() {
+    subclass(Foot::class, Foot.serializer())
+    subclass(Inch::class, Inch.serializer())
+    subclass(Mile::class, Mile.serializer())
+    subclass(Yard::class, Yard.serializer())
 }

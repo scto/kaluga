@@ -17,14 +17,7 @@
 
 package com.splendo.kaluga.scientific.unit
 
-import com.splendo.kaluga.scientific.assertEqualScientificValue
-import com.splendo.kaluga.scientific.convert
-import com.splendo.kaluga.scientific.converter.illuminance.div
-import com.splendo.kaluga.scientific.converter.luminousIntensity.div
-import com.splendo.kaluga.scientific.invoke
-import kotlin.math.PI
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class LuminanceUnitTest {
 
@@ -46,22 +39,5 @@ class LuminanceUnitTest {
         assertScientificConversion(1, Nit, 3141.5927, Skot, 4)
         assertScientificConversion(1, Nit, 31415926.536, Bril, 3)
         assertScientificConversion(1, Nit, 0.2918635, FootLambert, 7)
-    }
-
-    @Test
-    fun luminanceFromIlluminanceAndSolidAngleTest() {
-        assertEquals(1(Stilb), 2(Phot) / 2(Steradian))
-        assertEquals(1(Stilb), 20(Deciphot) / 2(Steradian))
-        assertEquals(1(Nit), 2(Lux) / 2(Steradian))
-        assertEqualScientificValue(PI(FootLambert), 2(FootCandle) / 2(Steradian), 8)
-        assertEquals(1(Nit), 2(Lux).convert(FootCandle as Illuminance) / 2(Steradian))
-    }
-
-    @Test
-    fun luminanceFromLuminousIntensityAndAreaTest() {
-        assertEquals(1(Stilb), 2(Candela) / 2(SquareCentimeter))
-        assertEquals(1(Nit), 2(Candela) / 2(SquareMeter))
-        assertEqualScientificValue(PI(FootLambert), (2(Candela) / 2(SquareFoot)), 8)
-        assertEquals(1(Nit), 2(Candela) / 2(SquareMeter).convert(SquareFoot as Area))
     }
 }

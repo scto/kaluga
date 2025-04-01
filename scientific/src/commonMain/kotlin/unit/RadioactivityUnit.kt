@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [Radioactivity]
@@ -54,12 +57,12 @@ val RadioactivityUnits: Set<Radioactivity> get() = setOf(
 )
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Radioactivity]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Radioactivity]
  * SI unit is [Becquerel]
  */
 @Serializable
 sealed class Radioactivity :
-    AbstractScientificUnit<PhysicalQuantity.Radioactivity>(),
+    DefinedScientificUnit<PhysicalQuantity.Radioactivity>(),
     MetricAndImperialScientificUnit<PhysicalQuantity.Radioactivity>
 
 @Serializable
@@ -160,3 +163,35 @@ data object Megacurie : CurieMultiple(), MetricMultipleUnit<MeasurementSystem.Me
 
 @Serializable
 data object Gigacurie : CurieMultiple(), MetricMultipleUnit<MeasurementSystem.MetricAndImperial, PhysicalQuantity.Radioactivity, Curie> by Giga(Curie)
+
+internal fun SerializersModuleBuilder.setupForRadioactivity() {
+    polymorphic(Radioactivity::class) {
+        registerRadioactivityClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Radioactivity>.registerRadioactivityClasses() {
+    subclass(Becquerel::class, Becquerel.serializer())
+    subclass(Centibecquerel::class, Centibecquerel.serializer())
+    subclass(Decabecquerel::class, Decabecquerel.serializer())
+    subclass(Decibecquerel::class, Decibecquerel.serializer())
+    subclass(Gigabecquerel::class, Gigabecquerel.serializer())
+    subclass(Hectobecquerel::class, Hectobecquerel.serializer())
+    subclass(Kilobecquerel::class, Kilobecquerel.serializer())
+    subclass(Megabecquerel::class, Megabecquerel.serializer())
+    subclass(Microbecquerel::class, Microbecquerel.serializer())
+    subclass(Millibecquerel::class, Millibecquerel.serializer())
+    subclass(Nanobecquerel::class, Nanobecquerel.serializer())
+    subclass(Curie::class, Curie.serializer())
+    subclass(Centicurie::class, Centicurie.serializer())
+    subclass(Decacurie::class, Decacurie.serializer())
+    subclass(Decicurie::class, Decicurie.serializer())
+    subclass(Gigacurie::class, Gigacurie.serializer())
+    subclass(Hectocurie::class, Hectocurie.serializer())
+    subclass(Kilocurie::class, Kilocurie.serializer())
+    subclass(Megacurie::class, Megacurie.serializer())
+    subclass(Microcurie::class, Microcurie.serializer())
+    subclass(Millicurie::class, Millicurie.serializer())
+    subclass(Nanocurie::class, Nanocurie.serializer())
+    subclass(Rutherford::class, Rutherford.serializer())
+}

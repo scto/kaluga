@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricNamedEnergyUnit]
@@ -126,11 +129,11 @@ val EnergyUnits: Set<Energy> get() = MetricAndImperialEnergyUnits +
     ImperialEnergyUnits.filter { it !is ImperialMetricAndImperialEnergyWrapper }.toSet()
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Energy]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Energy]
  * SI unit is [Joule]
  */
 @Serializable
-sealed class Energy : AbstractScientificUnit<PhysicalQuantity.Energy>()
+sealed class Energy : DefinedScientificUnit<PhysicalQuantity.Energy>()
 
 /**
  * An [Energy] for [MeasurementSystem.Metric]
@@ -509,3 +512,94 @@ data class ImperialMetricAndImperialEnergyWrapper(val metricAndImperialEnergy: M
  * @param EnergyUnit the type of [MetricAndImperialEnergy] to convert
  */
 val <EnergyUnit : MetricAndImperialEnergy> EnergyUnit.imperial get() = ImperialMetricAndImperialEnergyWrapper(this)
+
+internal fun SerializersModuleBuilder.setupForEnergy() {
+    polymorphic(Energy::class) {
+        registerEnergyClasses()
+    }
+    polymorphic(MetricAndImperialEnergy::class) {
+        registerMetricAndImperialEnergy()
+    }
+    polymorphic(MetricEnergy::class) {
+        registerMetricEnergyClasses()
+    }
+    polymorphic(ImperialEnergy::class) {
+        registerImperialEnergyClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Energy>.registerEnergyClasses() {
+    registerMetricAndImperialEnergy()
+    registerMetricEnergyClasses()
+    registerImperialEnergyClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricAndImperialEnergy>.registerMetricAndImperialEnergy() {
+    subclass(Calorie::class, Calorie.serializer())
+    subclass(Calorie.IT::class, Calorie.IT.serializer())
+    subclass(Kilocalorie::class, Kilocalorie.serializer())
+    subclass(Megacalorie::class, Megacalorie.serializer())
+    subclass(Millicalorie::class, Millicalorie.serializer())
+    subclass(Kilocalorie.IT::class, Kilocalorie.IT.serializer())
+    subclass(Megacalorie.IT::class, Megacalorie.IT.serializer())
+    subclass(Millicalorie.IT::class, Millicalorie.IT.serializer())
+    subclass(WattHour::class, WattHour.serializer())
+    subclass(CentiwattHour::class, CentiwattHour.serializer())
+    subclass(DecawattHour::class, DecawattHour.serializer())
+    subclass(DeciwattHour::class, DeciwattHour.serializer())
+    subclass(GigawattHour::class, GigawattHour.serializer())
+    subclass(HectowattHour::class, HectowattHour.serializer())
+    subclass(KilowattHour::class, KilowattHour.serializer())
+    subclass(MegawattHour::class, MegawattHour.serializer())
+    subclass(MicrowattHour::class, MicrowattHour.serializer())
+    subclass(MilliwattHour::class, MilliwattHour.serializer())
+    subclass(NanowattHour::class, NanowattHour.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<MetricEnergy>.registerMetricEnergyClasses() {
+    subclass(MetricMetricAndImperialEnergyWrapper::class, MetricMetricAndImperialEnergyWrapper.serializer())
+    subclass(Electronvolt::class, Electronvolt.serializer())
+    subclass(Centielectronvolt::class, Centielectronvolt.serializer())
+    subclass(Decaelectronvolt::class, Decaelectronvolt.serializer())
+    subclass(Decielectronvolt::class, Decielectronvolt.serializer())
+    subclass(Gigaelectronvolt::class, Gigaelectronvolt.serializer())
+    subclass(Hectoelectronvolt::class, Hectoelectronvolt.serializer())
+    subclass(Kiloelectronvolt::class, Kiloelectronvolt.serializer())
+    subclass(Megaelectronvolt::class, Megaelectronvolt.serializer())
+    subclass(Microelectronvolt::class, Microelectronvolt.serializer())
+    subclass(Millielectronvolt::class, Millielectronvolt.serializer())
+    subclass(Nanoelectronvolt::class, Nanoelectronvolt.serializer())
+    subclass(Erg::class, Erg.serializer())
+    subclass(Centierg::class, Centierg.serializer())
+    subclass(Decaerg::class, Decaerg.serializer())
+    subclass(Decierg::class, Decierg.serializer())
+    subclass(Gigaerg::class, Gigaerg.serializer())
+    subclass(Hectoerg::class, Hectoerg.serializer())
+    subclass(Kiloerg::class, Kiloerg.serializer())
+    subclass(Megaerg::class, Megaerg.serializer())
+    subclass(Microerg::class, Microerg.serializer())
+    subclass(Millierg::class, Millierg.serializer())
+    subclass(Nanoerg::class, Nanoerg.serializer())
+    subclass(Joule::class, Joule.serializer())
+    subclass(Centijoule::class, Centijoule.serializer())
+    subclass(Decajoule::class, Decajoule.serializer())
+    subclass(Decijoule::class, Decijoule.serializer())
+    subclass(Gigajoule::class, Gigajoule.serializer())
+    subclass(Hectojoule::class, Hectojoule.serializer())
+    subclass(Kilojoule::class, Kilojoule.serializer())
+    subclass(Megajoule::class, Megajoule.serializer())
+    subclass(Microjoule::class, Microjoule.serializer())
+    subclass(Millijoule::class, Millijoule.serializer())
+    subclass(Nanojoule::class, Nanojoule.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialEnergy>.registerImperialEnergyClasses() {
+    subclass(HorsepowerHour::class, HorsepowerHour.serializer())
+    subclass(ImperialMetricAndImperialEnergyWrapper::class, ImperialMetricAndImperialEnergyWrapper.serializer())
+    subclass(BritishThermalUnit::class, BritishThermalUnit.serializer())
+    subclass(BritishThermalUnit.Thermal::class, BritishThermalUnit.Thermal.serializer())
+    subclass(FootPoundForce::class, FootPoundForce.serializer())
+    subclass(FootPoundal::class, FootPoundal.serializer())
+    subclass(InchOunceForce::class, InchOunceForce.serializer())
+    subclass(InchPoundForce::class, InchPoundForce.serializer())
+}

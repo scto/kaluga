@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricAndImperialPower]
@@ -73,11 +76,11 @@ val PowerUnits: Set<Power> get() = MetricAndImperialPowerUnits +
     ImperialPowerUnits.filter { it !is ImperialMetricAndImperialPowerWrapper }.toSet()
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Power]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Power]
  * SI unit is [Watt]
  */
 @Serializable
-sealed class Power : AbstractScientificUnit<PhysicalQuantity.Power>()
+sealed class Power : DefinedScientificUnit<PhysicalQuantity.Power>()
 
 /**
  * A [Power] for [MeasurementSystem.MetricAndImperial]
@@ -268,3 +271,51 @@ data class ImperialMetricAndImperialPowerWrapper(val metricAndImperialPower: Met
  * @param PowerUnit the type of [MetricAndImperialPower] to convert
  */
 val <PowerUnit : MetricAndImperialPower> PowerUnit.imperial get() = ImperialMetricAndImperialPowerWrapper(this)
+
+internal fun SerializersModuleBuilder.setupForPower() {
+    polymorphic(Power::class) {
+        registerPowerClasses()
+    }
+    polymorphic(MetricAndImperialPower::class) {
+        registerMetricAndImperialPowerClasses()
+    }
+    polymorphic(MetricPower::class) {
+        registerMetricPowerClasses()
+    }
+    polymorphic(ImperialPower::class) {
+        registerImperialPowerClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Power>.registerPowerClasses() {
+    registerMetricAndImperialPowerClasses()
+    registerMetricPowerClasses()
+    registerImperialPowerClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricAndImperialPower>.registerMetricAndImperialPowerClasses() {
+    subclass(MetricAndImperialCombinedPower::class, MetricAndImperialCombinedPower.serializer())
+    subclass(Watt::class, Watt.serializer())
+    subclass(Centiwatt::class, Centiwatt.serializer())
+    subclass(Decawatt::class, Decawatt.serializer())
+    subclass(Deciwatt::class, Deciwatt.serializer())
+    subclass(Gigawatt::class, Gigawatt.serializer())
+    subclass(Hectowatt::class, Hectowatt.serializer())
+    subclass(Kilowatt::class, Kilowatt.serializer())
+    subclass(Megawatt::class, Megawatt.serializer())
+    subclass(Microwatt::class, Microwatt.serializer())
+    subclass(Milliwatt::class, Milliwatt.serializer())
+    subclass(Nanowatt::class, Nanowatt.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<MetricPower>.registerMetricPowerClasses() {
+    subclass(MetricCombinedPower::class, MetricCombinedPower.serializer())
+    subclass(MetricHorsepower::class, MetricHorsepower.serializer())
+    subclass(MetricMetricAndImperialPowerWrapper::class, MetricMetricAndImperialPowerWrapper.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialPower>.registerImperialPowerClasses() {
+    subclass(Horsepower::class, Horsepower.serializer())
+    subclass(ImperialCombinedPower::class, ImperialCombinedPower.serializer())
+    subclass(ImperialMetricAndImperialPowerWrapper::class, ImperialMetricAndImperialPowerWrapper.serializer())
+}

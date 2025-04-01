@@ -76,18 +76,18 @@ open class KalugaRootExtension @Inject constructor(
             val configuration = configurations.create("dummy")
 
             DependencyCheckExtension(this).apply {
-                analyzers(
+                analyzers {
                     closureOf<AnalyzerExtension> {
                         assemblyEnabled = false
-                    },
-                )
+                    }
+                }
                 scanConfigurations = listOf(configuration.name)
             }
         }
     }
 
     private fun Project.generateNonDependentProjectsFileTask() {
-        task("generateNonDependentProjectsFile") {
+        tasks.register("generateNonDependentProjectsFile") {
             outputs.upToDateWhen { false }
 
             val file = project.file("non_dependent_projects.properties")

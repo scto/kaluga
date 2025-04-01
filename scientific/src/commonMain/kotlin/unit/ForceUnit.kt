@@ -25,6 +25,9 @@ import com.splendo.kaluga.scientific.PhysicalQuantity
 import com.splendo.kaluga.scientific.convertValue
 import com.splendo.kaluga.scientific.invoke
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricForce]
@@ -92,11 +95,11 @@ val ForceUnits: Set<Force> get() = MetricForceUnits +
     USCustomaryForceUnits.filter { it !is USCustomaryImperialForceWrapper }
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Force]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Force]
  * SI unit is [Newton]
  */
 @Serializable
-sealed class Force : AbstractScientificUnit<PhysicalQuantity.Force>()
+sealed class Force : DefinedScientificUnit<PhysicalQuantity.Force>()
 
 /**
  * A [Force] for [MeasurementSystem.Metric]
@@ -347,3 +350,75 @@ data class UKImperialImperialForceWrapper(val imperial: ImperialForce) : UKImper
  * @param ForceUnit the type of [ImperialForce] to convert
  */
 val <ForceUnit : ImperialForce> ForceUnit.ukImperial get() = UKImperialImperialForceWrapper(this)
+
+internal fun SerializersModuleBuilder.setupForForce() {
+    polymorphic(Force::class) {
+        registerForceClasses()
+    }
+    polymorphic(MetricForce::class) {
+        registerMetricForceClasses()
+    }
+    polymorphic(ImperialForce::class) {
+        registerImperialForceClasses()
+    }
+    polymorphic(UKImperialForce::class) {
+        registerUKImperialForceClasses()
+    }
+    polymorphic(USCustomaryForce::class) {
+        registerUSCustomaryForceClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Force>.registerForceClasses() {
+    registerMetricForceClasses()
+    registerImperialForceClasses()
+    registerUKImperialForceClasses()
+    registerUSCustomaryForceClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricForce>.registerMetricForceClasses() {
+    subclass(Dyne::class, Dyne.serializer())
+    subclass(Centidyne::class, Centidyne.serializer())
+    subclass(Decadyne::class, Decadyne.serializer())
+    subclass(Decidyne::class, Decidyne.serializer())
+    subclass(Gigadyne::class, Gigadyne.serializer())
+    subclass(Hectodyne::class, Hectodyne.serializer())
+    subclass(Kilodyne::class, Kilodyne.serializer())
+    subclass(Megadyne::class, Megadyne.serializer())
+    subclass(Microdyne::class, Microdyne.serializer())
+    subclass(Millidyne::class, Millidyne.serializer())
+    subclass(Nanodyne::class, Nanodyne.serializer())
+    subclass(GramForce::class, GramForce.serializer())
+    subclass(KilogramForce::class, KilogramForce.serializer())
+    subclass(MilligramForce::class, MilligramForce.serializer())
+    subclass(Newton::class, Newton.serializer())
+    subclass(Centinewton::class, Centinewton.serializer())
+    subclass(Decanewton::class, Decanewton.serializer())
+    subclass(Decinewton::class, Decinewton.serializer())
+    subclass(Giganewton::class, Giganewton.serializer())
+    subclass(Hectonewton::class, Hectonewton.serializer())
+    subclass(Kilonewton::class, Kilonewton.serializer())
+    subclass(Meganewton::class, Meganewton.serializer())
+    subclass(Micronewton::class, Micronewton.serializer())
+    subclass(Millinewton::class, Millinewton.serializer())
+    subclass(Nanonewton::class, Nanonewton.serializer())
+    subclass(TonneForce::class, TonneForce.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialForce>.registerImperialForceClasses() {
+    subclass(GrainForce::class, GrainForce.serializer())
+    subclass(OunceForce::class, OunceForce.serializer())
+    subclass(PoundForce::class, PoundForce.serializer())
+    subclass(Poundal::class, Poundal.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<UKImperialForce>.registerUKImperialForceClasses() {
+    subclass(ImperialTonForce::class, ImperialTonForce.serializer())
+    subclass(UKImperialImperialForceWrapper::class, UKImperialImperialForceWrapper.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<USCustomaryForce>.registerUSCustomaryForceClasses() {
+    subclass(Kip::class, Kip.serializer())
+    subclass(USCustomaryImperialForceWrapper::class, USCustomaryImperialForceWrapper.serializer())
+    subclass(UsTonForce::class, UsTonForce.serializer())
+}

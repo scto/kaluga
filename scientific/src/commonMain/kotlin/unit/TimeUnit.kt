@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [Time]
@@ -39,12 +42,12 @@ val TimeUnits: Set<Time> get() = setOf(
 )
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Time]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Time]
  * SI unit is [Second]
  */
 @Serializable
 sealed class Time :
-    AbstractScientificUnit<PhysicalQuantity.Time>(),
+    DefinedScientificUnit<PhysicalQuantity.Time>(),
     MetricAndImperialScientificUnit<PhysicalQuantity.Time>
 
 @Serializable
@@ -94,4 +97,21 @@ data object Hour : Time() {
     override val quantity = PhysicalQuantity.Time
     override fun fromSIUnit(value: Decimal): Decimal = value / SECOND_PER_HOUR.toDecimal()
     override fun toSIUnit(value: Decimal): Decimal = value * SECOND_PER_HOUR.toDecimal()
+}
+
+internal fun SerializersModuleBuilder.setupForTime() {
+    polymorphic(Time::class) {
+        registerTimeClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Time>.registerTimeClasses() {
+    subclass(Hour::class, Hour.serializer())
+    subclass(Minute::class, Minute.serializer())
+    subclass(Second::class, Second.serializer())
+    subclass(Centisecond::class, Centisecond.serializer())
+    subclass(Decisecond::class, Decisecond.serializer())
+    subclass(Microsecond::class, Microsecond.serializer())
+    subclass(Millisecond::class, Millisecond.serializer())
+    subclass(Nanosecond::class, Nanosecond.serializer())
 }

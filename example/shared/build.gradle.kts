@@ -20,6 +20,7 @@ val modules = listOf(
     "resources" to true,
     "review" to true,
     "scientific" to false,
+    "scientific-converters" to false,
     "system" to true,
     "permissions" to true
 )

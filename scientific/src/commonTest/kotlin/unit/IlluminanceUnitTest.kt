@@ -17,16 +17,7 @@
 
 package com.splendo.kaluga.scientific.unit
 
-import com.splendo.kaluga.scientific.assertEqualScientificValue
-import com.splendo.kaluga.scientific.convert
-import com.splendo.kaluga.scientific.converter.luminance.times
-import com.splendo.kaluga.scientific.converter.luminousExposure.div
-import com.splendo.kaluga.scientific.converter.luminousFlux.div
-import com.splendo.kaluga.scientific.converter.solidAngle.times
-import com.splendo.kaluga.scientific.invoke
-import kotlin.math.PI
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class IlluminanceUnitTest {
 
@@ -56,34 +47,5 @@ class IlluminanceUnitTest {
         assertScientificConversion(1, Phot, 0.001, Kilophot)
         assertScientificConversion(1, Phot, 1e-6, Megaphot)
         assertScientificConversion(1, Phot, 1e-9, Gigaphot)
-    }
-
-    @Test
-    fun illuminanceFromLuminanceAndSolidAngleTest() {
-        assertEquals(4(Lux), 2(Nit) * 2(Steradian))
-        assertEquals(4(Lux), 2(Steradian) * 2(Nit))
-        assertEquals(4(Phot), 2(Stilb) * 2(Steradian))
-        assertEquals(4(Phot), 2(Steradian) * 2(Stilb))
-        assertEquals((4 / PI)(Phot), 2(Lambert) * 2(Steradian))
-        assertEquals((4 / PI)(Phot), 2(Steradian) * 2(Lambert))
-        assertEquals((4 / PI)(FootCandle), 2(FootLambert) * 2(Steradian))
-        assertEquals((4 / PI)(FootCandle), 2(Steradian) * 2(FootLambert))
-        assertEquals(4(Lux), 2(Nit).convert(FootLambert as Luminance) * 2(Steradian))
-        assertEquals(4(Lux), 2(Steradian) * 2(Nit).convert(FootLambert as Luminance))
-    }
-
-    @Test
-    fun illuminanceFromLuminousExposureAndTimeTest() {
-        assertEqualScientificValue(1(Lux), 2(Lux x Second) / 2(Second))
-        assertEqualScientificValue(1(FootCandle), 2(FootCandle x Second) / 2(Second))
-        assertEqualScientificValue(1(Lux), 2((Lux x Second) as LuminousExposure) / 2(Second))
-    }
-
-    @Test
-    fun illuminanceFromLuminousFluxAndAreaTest() {
-        assertEquals(1(Phot), 2(Lumen) / 2(SquareCentimeter))
-        assertEquals(1(Lux), 2(Lumen) / 2(SquareMeter))
-        assertEquals(1(FootCandle), 2(Lumen) / 2(SquareFoot))
-        assertEquals(1(Lux), 2(Lumen) / 2(SquareMeter).convert(SquareFoot as Area))
     }
 }

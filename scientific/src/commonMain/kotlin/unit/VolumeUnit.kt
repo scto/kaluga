@@ -23,6 +23,9 @@ import com.splendo.kaluga.base.utils.times
 import com.splendo.kaluga.base.utils.toDecimal
 import com.splendo.kaluga.scientific.PhysicalQuantity
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.PolymorphicModuleBuilder
+import kotlinx.serialization.modules.SerializersModuleBuilder
+import kotlinx.serialization.modules.polymorphic
 
 /**
  * Set of all [MetricVolume]
@@ -100,11 +103,11 @@ val VolumeUnits: Set<Volume> get() = MetricVolumeUnits +
     UKImperialVolumeUnits.filter { it !is UKImperialImperialVolumeWrapper }.toSet()
 
 /**
- * An [AbstractScientificUnit] for [PhysicalQuantity.Volume]
+ * An [DefinedScientificUnit] for [PhysicalQuantity.Volume]
  * SI unit is [CubicMeter]
  */
 @Serializable
-sealed class Volume : AbstractScientificUnit<PhysicalQuantity.Volume>()
+sealed class Volume : DefinedScientificUnit<PhysicalQuantity.Volume>()
 
 /**
  * A [Volume] for [MeasurementSystem.Metric]
@@ -408,4 +411,84 @@ data object ImperialGallon : UKImperialVolume() {
     private const val LITER_PER_GALLON = 4.54609
     override fun toSIUnit(value: Decimal): Decimal = Liter.toSIUnit(value * LITER_PER_GALLON.toDecimal())
     override fun fromSIUnit(value: Decimal): Decimal = Liter.fromSIUnit(value) / LITER_PER_GALLON.toDecimal()
+}
+
+internal fun SerializersModuleBuilder.setupForVolume() {
+    polymorphic(Volume::class) {
+        registerVolumeClasses()
+    }
+    polymorphic(MetricVolume::class) {
+        registerMetricVolumeClasses()
+    }
+    polymorphic(ImperialVolume::class) {
+        registerImperialVolumeClasses()
+    }
+    polymorphic(UKImperialVolume::class) {
+        registerUKImperialVolumeClasses()
+    }
+    polymorphic(USCustomaryVolume::class) {
+        registerUSCustomaryVolumeClasses()
+    }
+}
+
+internal fun PolymorphicModuleBuilder<Volume>.registerVolumeClasses() {
+    registerMetricVolumeClasses()
+    registerImperialVolumeClasses()
+    registerUKImperialVolumeClasses()
+    registerUSCustomaryVolumeClasses()
+}
+
+internal fun PolymorphicModuleBuilder<MetricVolume>.registerMetricVolumeClasses() {
+    subclass(CubicCentimeter::class, CubicCentimeter.serializer())
+    subclass(CubicDecameter::class, CubicDecameter.serializer())
+    subclass(CubicDecimeter::class, CubicDecimeter.serializer())
+    subclass(CubicGigameter::class, CubicGigameter.serializer())
+    subclass(CubicHectometer::class, CubicHectometer.serializer())
+    subclass(CubicKilometer::class, CubicKilometer.serializer())
+    subclass(CubicMegameter::class, CubicMegameter.serializer())
+    subclass(CubicMeter::class, CubicMeter.serializer())
+    subclass(CubicMicrometer::class, CubicMicrometer.serializer())
+    subclass(CubicMillimeter::class, CubicMillimeter.serializer())
+    subclass(CubicNanometer::class, CubicNanometer.serializer())
+    subclass(Liter::class, Liter.serializer())
+    subclass(Centiliter::class, Centiliter.serializer())
+    subclass(Decaliter::class, Decaliter.serializer())
+    subclass(Deciliter::class, Deciliter.serializer())
+    subclass(Gigaliter::class, Gigaliter.serializer())
+    subclass(Hectoliter::class, Hectoliter.serializer())
+    subclass(Kiloliter::class, Kiloliter.serializer())
+    subclass(Megaliter::class, Megaliter.serializer())
+    subclass(Microliter::class, Microliter.serializer())
+    subclass(Milliliter::class, Milliliter.serializer())
+    subclass(Nanoliter::class, Nanoliter.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<ImperialVolume>.registerImperialVolumeClasses() {
+    subclass(CubicFoot::class, CubicFoot.serializer())
+    subclass(CubicInch::class, CubicInch.serializer())
+    subclass(CubicMile::class, CubicMile.serializer())
+    subclass(CubicYard::class, CubicYard.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<UKImperialVolume>.registerUKImperialVolumeClasses() {
+    subclass(ImperialFluidDram::class, ImperialFluidDram.serializer())
+    subclass(ImperialFluidOunce::class, ImperialFluidOunce.serializer())
+    subclass(ImperialGallon::class, ImperialGallon.serializer())
+    subclass(ImperialPint::class, ImperialPint.serializer())
+    subclass(ImperialQuart::class, ImperialQuart.serializer())
+    subclass(MetricCup::class, MetricCup.serializer())
+    subclass(UKImperialImperialVolumeWrapper::class, UKImperialImperialVolumeWrapper.serializer())
+}
+
+internal fun PolymorphicModuleBuilder<USCustomaryVolume>.registerUSCustomaryVolumeClasses() {
+    subclass(AcreFoot::class, AcreFoot.serializer())
+    subclass(AcreInch::class, AcreInch.serializer())
+    subclass(USCustomaryImperialVolumeWrapper::class, USCustomaryImperialVolumeWrapper.serializer())
+    subclass(UsCustomaryCup::class, UsCustomaryCup.serializer())
+    subclass(UsFluidDram::class, UsFluidDram.serializer())
+    subclass(UsFluidOunce::class, UsFluidOunce.serializer())
+    subclass(UsLegalCup::class, UsLegalCup.serializer())
+    subclass(UsLiquidGallon::class, UsLiquidGallon.serializer())
+    subclass(UsLiquidPint::class, UsLiquidPint.serializer())
+    subclass(UsLiquidQuart::class, UsLiquidQuart.serializer())
 }
