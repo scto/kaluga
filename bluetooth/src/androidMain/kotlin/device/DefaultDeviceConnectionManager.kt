@@ -219,7 +219,6 @@ internal actual class DefaultDeviceConnectionManager(
     }
 
     actual override suspend fun didStartPerformingAction(action: DeviceAction) {
-        println("didStartPerformingAction $action")
         currentAction = action
         val readyGatt = gatt.await()
         val succeeded = when (action) {

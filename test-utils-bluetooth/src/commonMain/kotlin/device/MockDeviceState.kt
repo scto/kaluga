@@ -104,9 +104,7 @@ sealed class MockDeviceState : KalugaState {
             }
 
             override val reconnect: suspend () -> ConnectableDeviceState.Connecting = { Connecting(reconnectionSettings, mockConnectableDeviceManager) }
-            override suspend fun requestMtu(mtu: MTU) {
-                mockConnectableDeviceManager.requestMtu(mtu)
-            }
+            override suspend fun requestMtu(mtu: MTU) = mockConnectableDeviceManager.requestMtu(mtu)
             override val asDeviceState: ConnectableDeviceState = this
         }
         data class HandlingAction(
@@ -140,9 +138,7 @@ sealed class MockDeviceState : KalugaState {
 
             override val reconnect: suspend () -> ConnectableDeviceState.Connecting = { Connecting(reconnectionSettings, mockConnectableDeviceManager) }
 
-            override suspend fun requestMtu(mtu: MTU) {
-                mockConnectableDeviceManager.requestMtu(mtu)
-            }
+            override suspend fun requestMtu(mtu: MTU) = mockConnectableDeviceManager.requestMtu(mtu)
 
             override val asDeviceState: ConnectableDeviceState = this
         }

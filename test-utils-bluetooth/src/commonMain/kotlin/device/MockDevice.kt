@@ -64,6 +64,7 @@ class MockDevice(
                         MockDeviceState.Connected.Idle(state.reconnectionSettings, mtu, state.services, state.mockConnectableDeviceManager)
                     }
                 }
+                DeviceAction.RequestMtu(mtu)
             }
             mockConnectableDeviceManager.mockStartDisconnected.on().doExecute {
                 handleDisconnecting()

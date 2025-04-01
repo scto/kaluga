@@ -356,7 +356,7 @@ public abstract class com/splendo/kaluga/bluetooth/device/BaseDeviceConnectionMa
 	public final fun pair (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun performAction (Lcom/splendo/kaluga/bluetooth/device/DeviceAction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun readRssi (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun requestMtu (I)V
+	public fun requestMtu (I)Lcom/splendo/kaluga/bluetooth/device/DeviceAction$RequestMtu;
 	protected abstract fun requestStartPairing (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	protected abstract fun requestStartUnpairing (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -518,7 +518,7 @@ public abstract interface class com/splendo/kaluga/bluetooth/device/Device {
 }
 
 public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction {
-	public final fun getCompletedSuccessfully ()Lkotlinx/coroutines/CompletableDeferred;
+	public final fun getCompletedSuccessfully ()Lkotlinx/coroutines/Deferred;
 }
 
 public abstract class com/splendo/kaluga/bluetooth/device/DeviceAction$Notification : com/splendo/kaluga/bluetooth/device/DeviceAction {
@@ -560,7 +560,6 @@ public final class com/splendo/kaluga/bluetooth/device/DeviceAction$RequestMtu :
 	public final fun getMtu ()I
 	public final fun getMtuResponse ()Ljava/lang/Integer;
 	public fun hashCode ()I
-	public final fun setMtuResponse (Ljava/lang/Integer;)V
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -595,7 +594,7 @@ public abstract interface class com/splendo/kaluga/bluetooth/device/DeviceConnec
 	public abstract fun pair (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun performAction (Lcom/splendo/kaluga/bluetooth/device/DeviceAction;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun readRssi (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun requestMtu (I)V
+	public abstract fun requestMtu (I)Lcom/splendo/kaluga/bluetooth/device/DeviceAction$RequestMtu;
 	public abstract fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun startConnecting (Lcom/splendo/kaluga/bluetooth/device/ConnectionSettings$ReconnectionSettings;)V
 	public static synthetic fun startConnecting$default (Lcom/splendo/kaluga/bluetooth/device/DeviceConnectionManager;Lcom/splendo/kaluga/bluetooth/device/ConnectionSettings$ReconnectionSettings;ILjava/lang/Object;)V

@@ -217,7 +217,7 @@ interface DeviceConnectionManager {
     /**
      * Fires an [Event.AddAction] with [DeviceAction.RequestMtu]
      */
-    fun requestMtu(mtu: MTU)
+    fun requestMtu(mtu: MTU): DeviceAction.RequestMtu
 
     /**
      * Resets all actions and disconnects the device
@@ -336,8 +336,10 @@ abstract class BaseDeviceConnectionManager(protected val deviceWrapper: DeviceWr
         emitEvent(DeviceConnectionManager.Event.Disconnected(clean))
     }
 
-    override fun requestMtu(mtu: MTU) {
-        emitEvent(DeviceConnectionManager.Event.AddAction(DeviceAction.RequestMtu(mtu)))
+    override fun requestMtu(mtu: MTU): DeviceAction.RequestMtu {
+        val action = DeviceAction.RequestMtu(mtu)
+        emitEvent(DeviceConnectionManager.Event.AddAction(action))
+        return action
     }
 
     final override fun startDiscovering() {

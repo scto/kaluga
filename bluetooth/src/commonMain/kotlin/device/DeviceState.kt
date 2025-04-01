@@ -22,18 +22,24 @@ import com.splendo.kaluga.base.state.KalugaState
 import com.splendo.kaluga.bluetooth.MTU
 import com.splendo.kaluga.bluetooth.Service
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
 
 /**
  * An action a [Device] can execute on one of its [com.splendo.kaluga.bluetooth.Attribute]
  */
 sealed class DeviceAction {
 
+    private val _completedSuccessfully = CompletableDeferred<Boolean>()
+    internal fun complete(succeeded: Boolean) {
+        _completedSuccessfully.complete(succeeded)
+    }
+
     /**
      * A Deferred that will be completed with
      * `true` if [DeviceAction] was completed successfully, or
      * `false` if [DeviceAction] failed
      * */
-    val completedSuccessfully = CompletableDeferred<Boolean>()
+    val completedSuccessfully: Deferred<Boolean> by ::_completedSuccessfully
 
     /**
      * A [DeviceAction] that attempts to read an [com.splendo.kaluga.bluetooth.Attribute]
@@ -107,6 +113,7 @@ sealed class DeviceAction {
     /** Requests MTU. */
     data class RequestMtu(val mtu: MTU) : DeviceAction() {
         var mtuResponse: MTU? = null
+            internal set
     }
 }
 
@@ -180,7 +187,7 @@ sealed interface ConnectableDeviceState :
              * Requests an update to the [MTU] size of the device
              * @param mtu the new [MTU] size to request
              */
-            suspend fun requestMtu(mtu: MTU)
+            suspend fun requestMtu(mtu: MTU): DeviceAction.RequestMtu
 
             /**
              * The current [MTU] size of the device
@@ -383,9 +390,7 @@ internal sealed class ConnectableDeviceStateImpl {
             override fun updateReconnectionSettings(reconnectionSettings: ConnectionSettings.ReconnectionSettings) = suspend {
                 copy(reconnectionSettings = reconnectionSettings)
             }
-            override suspend fun requestMtu(mtu: MTU) {
-                deviceConnectionManager.requestMtu(mtu)
-            }
+            override suspend fun requestMtu(mtu: MTU) = deviceConnectionManager.requestMtu(mtu)
         }
 
         data class HandlingAction constructor(
@@ -434,9 +439,7 @@ internal sealed class ConnectableDeviceStateImpl {
                 deviceConnectionManager.performAction(action)
             }
 
-            override suspend fun requestMtu(mtu: MTU) {
-                deviceConnectionManager.requestMtu(mtu)
-            }
+            override suspend fun requestMtu(mtu: MTU) = deviceConnectionManager.requestMtu(mtu)
         }
 
         fun startDisconnected() = deviceConnectionManager.startDisconnecting()

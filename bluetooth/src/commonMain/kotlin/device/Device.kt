@@ -318,7 +318,7 @@ class DeviceImpl(
 
     private fun DeviceConnectionManager.Event.CompletedAction.stateTransition(state: ConnectableDeviceState) =
         if (state is ConnectableDeviceState.Connected.HandlingAction && state.action === action) {
-            state.action.completedSuccessfully.complete(succeeded)
+            state.action.complete(succeeded)
             debug(TAG) { "Action $action has been succeeded: $succeeded" }
             state.actionCompleted
         } else {
