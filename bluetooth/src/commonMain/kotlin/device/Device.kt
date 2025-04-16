@@ -25,6 +25,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -56,9 +57,9 @@ interface Device {
     val identifier: Identifier
 
     /**
-     * A [Flow] of the latest [DeviceInfo] of the device
+     * A [StateFlow] of the latest [DeviceInfo] of the device
      */
-    val info: Flow<DeviceInfo>
+    val info: StateFlow<DeviceInfo>
 
     /**
      * A [Flow] of the latest [DeviceState] of the device
@@ -160,7 +161,7 @@ class DeviceImpl(
             // Once device is connectable we keep that state
             operation = Boolean::or,
         )
-    override val info: Flow<DeviceInfo> = sharedInfo.asStateFlow()
+    override val info: StateFlow<DeviceInfo> = sharedInfo.asStateFlow()
     override val state: Flow<DeviceState> = combine(
         isConnectable,
         deviceStateRepo,
