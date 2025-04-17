@@ -19,6 +19,8 @@ package com.splendo.kaluga.bluetooth.device
 
 import com.splendo.kaluga.base.utils.toNSData
 import com.splendo.kaluga.base.utils.typedList
+import com.splendo.kaluga.bluetooth.Characteristic
+import com.splendo.kaluga.bluetooth.CharacteristicProperties
 import com.splendo.kaluga.bluetooth.DefaultServiceWrapper
 import com.splendo.kaluga.bluetooth.uuidString
 import com.splendo.kaluga.logging.debug
@@ -164,7 +166,12 @@ internal actual class DefaultDeviceConnectionManager(
             is DeviceAction.Read.Characteristic -> action.characteristic.wrapper.readValue(peripheral)
             is DeviceAction.Read.Descriptor -> action.descriptor.wrapper.readValue(peripheral)
             is DeviceAction.Write.Characteristic -> {
-                action.characteristic.wrapper.writeValue(action.newValue.toNSData(), peripheral)
+                val withResponse = action.characteristic.hasProperty(CharacteristicProperties.Write) ||
+                    !action.characteristic.hasProperty(CharacteristicProperties.WriteWithoutResponse)
+                action.characteristic.wrapper.writeValue(action.newValue.toNSData(), peripheral, withResponse)
+                if (!withResponse) {
+                    handleCurrentActionCompleted(succeeded = true)
+                }
             }
             is DeviceAction.Write.Descriptor -> {
                 action.descriptor.wrapper.writeValue(action.newValue.toNSData(), peripheral)

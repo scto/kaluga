@@ -508,7 +508,7 @@ public abstract interface class com/splendo/kaluga/bluetooth/device/Device {
 	public static synthetic fun connect$default (Lcom/splendo/kaluga/bluetooth/device/Device;Lcom/splendo/kaluga/bluetooth/device/ConnectionSettings$ReconnectionSettings;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public fun disconnect (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getIdentifier ()Ljava/lang/String;
-	public abstract fun getInfo ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getInfo ()Lkotlinx/coroutines/flow/StateFlow;
 	public abstract fun getState ()Lkotlinx/coroutines/flow/Flow;
 	public abstract fun handleConnected ()V
 	public abstract fun handleDisconnected ()V
@@ -711,7 +711,7 @@ public final class com/splendo/kaluga/bluetooth/device/DeviceImpl : com/splendo/
 	public fun advertisementDataDidUpdate (Lcom/splendo/kaluga/bluetooth/device/BaseAdvertisementData;)V
 	public fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
 	public fun getIdentifier ()Ljava/lang/String;
-	public fun getInfo ()Lkotlinx/coroutines/flow/Flow;
+	public fun getInfo ()Lkotlinx/coroutines/flow/StateFlow;
 	public fun getState ()Lkotlinx/coroutines/flow/Flow;
 	public fun handleConnected ()V
 	public fun handleDisconnected ()V

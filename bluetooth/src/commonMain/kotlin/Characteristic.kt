@@ -169,7 +169,7 @@ expect interface CharacteristicWrapper {
 /**
  * Checks whether [CharacteristicWrapper.properties] contains any properties in [property]
  * @param property the list of properties to check
- * @return `tre` if [CharacteristicWrapper.properties] contains at least one of [property]
+ * @return `true` if [CharacteristicWrapper.properties] contains at least one of [property]
  */
 fun CharacteristicWrapper.containsAnyOf(vararg property: Int) = if (property.isNotEmpty()) {
     properties and property.reduce { acc, i -> acc.or(i) } != 0
