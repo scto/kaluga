@@ -46,7 +46,7 @@ class IOSMockCharacteristicWrapper(override val uuid: CBUUID = CBUUID(), overrid
         isNotificationCompleted.complete(enabled)
     }
 
-    override fun writeValue(value: NSData, peripheral: CBPeripheral) {
+    override fun writeValue(value: NSData, peripheral: CBPeripheral, withResponse: Boolean) {
         this.value = value
         isWriteCompleted.complete(value)
     }

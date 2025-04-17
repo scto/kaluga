@@ -329,8 +329,8 @@ public final class com/splendo/kaluga/test/bluetooth/device/MockDevice : com/spl
 	public fun advertisementDataDidUpdate (Lcom/splendo/kaluga/bluetooth/device/BaseAdvertisementData;)V
 	public final fun completeAction ()V
 	public fun getIdentifier ()Ljava/lang/String;
-	public synthetic fun getInfo ()Lkotlinx/coroutines/flow/Flow;
 	public fun getInfo ()Lkotlinx/coroutines/flow/MutableStateFlow;
+	public synthetic fun getInfo ()Lkotlinx/coroutines/flow/StateFlow;
 	public final fun getMockConnectableDeviceManager ()Lcom/splendo/kaluga/test/bluetooth/device/MockConnectableDeviceManager;
 	public fun getState ()Lkotlinx/coroutines/flow/Flow;
 	public final fun handleCancelConnecting ()V
