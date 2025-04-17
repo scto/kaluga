@@ -44,7 +44,7 @@ import kotlin.time.Duration.Companion.seconds
 
 class MockDevice(
     override val identifier: Identifier = randomIdentifier(),
-    override val info: MutableStateFlow<MockDeviceInfo> = MutableStateFlow(MockDeviceInfo()),
+    override val info: MutableStateFlow<MockDeviceInfo> = MutableStateFlow(MockDeviceInfo(identifier)),
     private val connectionSettings: ConnectionSettings = ConnectionSettings(),
     private val coroutineContext: CoroutineContext,
     setupMocks: Boolean = true,
